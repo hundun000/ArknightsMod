@@ -3,6 +3,9 @@ package arknights.util;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+
+import arknights.DefaultMod;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +23,7 @@ public class TextureLoader {
 
     /**
      * @param textureString - String path to the texture you want to load relative to resources,
-     *                      Example: "theDefaultResources/images/ui/missing_texture.png"
+     *                      Example: "DefaultMod.IMAGES_FOLDER + "/ui/missing_texture.png"
      * @return <b>com.badlogic.gdx.graphics.Texture</b> - The texture from the path provided
      */
     public static Texture getTexture(final String textureString) {
@@ -29,7 +32,7 @@ public class TextureLoader {
                 loadTexture(textureString);
             } catch (GdxRuntimeException e) {
                 logger.error("Could not find texture: " + textureString);
-                return getTexture("theDefaultResources/images/ui/missing_texture.png");
+                return getTexture(DefaultMod.IMAGES_FOLDER + "/ui/missing_texture.png");
             }
         }
         return textures.get(textureString);

@@ -86,17 +86,17 @@ public class Doctor extends CustomPlayer {
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-            "theDefaultResources/images/char/defaultCharacter/orb/layer1.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer2.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer3.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer4.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer5.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer6.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer1d.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer2d.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer3d.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer4d.png",
-            "theDefaultResources/images/char/defaultCharacter/orb/layer5d.png",};
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer1.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer2.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer3.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer4.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer5.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer6.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer1d.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer2d.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer3d.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer4d.png",
+            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer5d.png",};
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
 
@@ -104,9 +104,9 @@ public class Doctor extends CustomPlayer {
 
     public Doctor(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
-                "theDefaultResources/images/char/defaultCharacter/orb/vfx.png", null,
+                DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/vfx.png", null,
                 new SpriterAnimation(
-                        "theDefaultResources/images/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
+                        DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
 
 
         // =============== TEXTURES, ENERGY, LOADOUT =================  
