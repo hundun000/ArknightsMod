@@ -422,7 +422,7 @@ public class DefaultMod implements
         // The ID for this function isn't actually your modid as used for prefixes/by the getModID() method.
         // It's the mod id you give MTS in ModTheSpire.json - by default your artifact ID in your pom.xml
 
-        new AutoAdd("YourNameHere:ArknightsMod")
+        new AutoAdd("hundun:ArknightsMod")
             .packageFilter("arknights.cards")
             .setDefaultSeen(true)
             .cards();
@@ -439,38 +439,65 @@ public class DefaultMod implements
     
     // ================ LOAD THE TEXT ===================
     
+    private String getLanguageFolder() {
+        String languageFolder;
+        switch (Settings.language) {
+            case KOR:
+                languageFolder = "/kor";
+                break;
+            case ZHS:
+                languageFolder = "/zhs";
+                break;
+            case ZHT:
+                languageFolder = "/zht";
+                break;
+            case FRA:
+                languageFolder = "/fra";
+                break;
+            case JPN:
+                languageFolder = "/jpn";
+                break;
+            default:
+                languageFolder = "/zhs";
+        }
+        return languageFolder;
+    }
+    
+    
     @Override
     public void receiveEditStrings() {
-        logger.info("You seeing this?");
+        
+        String languageFolder = getLanguageFolder();
+        
         logger.info("Beginning to edit strings for mod with ID: " + getModID());
         
         // CardStrings
         BaseMod.loadCustomStringsFile(CardStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Card-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Card-Strings.json");
         
         // PowerStrings
         BaseMod.loadCustomStringsFile(PowerStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Power-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Power-Strings.json");
         
         // RelicStrings
         BaseMod.loadCustomStringsFile(RelicStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Relic-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Relic-Strings.json");
         
         // Event Strings
         BaseMod.loadCustomStringsFile(EventStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Event-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Event-Strings.json");
         
         // PotionStrings
         BaseMod.loadCustomStringsFile(PotionStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Potion-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Potion-Strings.json");
         
         // CharacterStrings
         BaseMod.loadCustomStringsFile(CharacterStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Character-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Character-Strings.json");
         
         // OrbStrings
         BaseMod.loadCustomStringsFile(OrbStrings.class,
-                LOCALIZATION_FOLDER + "/eng/DefaultMod-Orb-Strings.json");
+                LOCALIZATION_FOLDER + languageFolder + "/Orb-Strings.json");
         
         logger.info("Done edittting strings");
     }
@@ -488,9 +515,9 @@ public class DefaultMod implements
         // If you're using multiword keywords, the first element in your NAMES array in your keywords-strings.json has to be the same as the PROPER_NAME.
         // That is, in Card-Strings.json you would have #yA_Long_Keyword (#y highlights the keyword in yellow).
         // In Keyword-Strings.json you would have PROPER_NAME as A Long Keyword and the first element in NAMES be a long keyword, and the second element be a_long_keyword
-        
+        String languageFolder = getLanguageFolder();
         Gson gson = new Gson();
-        String json = Gdx.files.internal(LOCALIZATION_FOLDER + "/eng/DefaultMod-Keyword-Strings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        String json = Gdx.files.internal(LOCALIZATION_FOLDER + languageFolder + "/Keyword-Strings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
         
         if (keywords != null) {

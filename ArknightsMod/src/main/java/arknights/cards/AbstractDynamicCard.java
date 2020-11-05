@@ -3,17 +3,15 @@ import basemod.AutoAdd;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
+/**
+ * 游戏设计模式/子类沙箱模式 https://gpp.tkchu.me/subclass-sandbox.html
+ */
 public abstract class AbstractDynamicCard extends AbstractDefaultCard {
 
-    // "How come DefaultCommonAttack extends CustomCard and not DynamicCard like all the rest?"
-
-    // Well every card, at the end of the day, extends CustomCard.
-    // Abstract Default Card extends CustomCard and builds up on it, adding a second magic number. Your card can extend it and
-    // bam - you can have a second magic number in that card (Learn Java inheritance if you want to know how that works).
-    // Abstract Dynamic Card builds up on Abstract Default Card even more and makes it so that you don't need to add
-    // the NAME and the DESCRIPTION into your card - it'll get it automatically. Of course, this functionality could have easily
-    // Been added to the default card rather than creating a new Dynamic one, but was done so to deliberately.
-
+    protected Integer upgradePlusDamage;
+    protected Integer upgradePlusBlock;
+    protected Integer upgradedCost;
+    
     public AbstractDynamicCard(final String id,
                                final String img,
                                final int cost,
@@ -24,5 +22,43 @@ public abstract class AbstractDynamicCard extends AbstractDefaultCard {
 
         super(id, languagePack.getCardStrings(id).NAME, img, cost, languagePack.getCardStrings(id).DESCRIPTION, type, color, rarity, target);
 
+    }
+    
+    protected void setBaseDamageAndBlock(Integer baseDamage, Integer baseBlock) {
+        if (baseDamage != null) {
+            this.baseDamage = baseDamage;
+        }
+        if (baseBlock != null) {
+            this.baseBlock = baseBlock;
+        }
+    }
+    
+    protected void setUpgradeInfo(Integer upgradePlusDamage, Integer upgradePlusBlock, Integer upgradedCost) {
+        if (upgradePlusDamage != null) {
+            this.upgradePlusDamage = upgradePlusDamage;
+        }
+        if (upgradePlusBlock != null) {
+            this.upgradePlusBlock = upgradePlusBlock;
+        }
+        if (upgradedCost != null) {
+            this.upgradedCost = upgradedCost;
+        }
+    }
+    
+    @Override
+    public void upgrade() {
+        if (!upgraded) {
+            upgradeName();
+            if (upgradePlusDamage != null) {
+                upgradeDamage(upgradePlusDamage);
+            }
+            if (upgradedCost != null) {
+                upgradeBaseCost(upgradedCost);
+            }
+            if (upgradePlusBlock != null) {
+                upgradeBlock(upgradePlusBlock);
+            }
+            initializeDescription();
+        }
     }
 }

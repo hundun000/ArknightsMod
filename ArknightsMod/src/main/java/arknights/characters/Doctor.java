@@ -54,7 +54,7 @@ public class Doctor extends CustomPlayer {
         public static AbstractPlayer.PlayerClass THE_DEFAULT;
         @SpireEnum(name = "DEFAULT_GRAY_COLOR") // These two HAVE to have the same absolutely identical name.
         public static AbstractCard.CardColor COLOR_GRAY;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR") @SuppressWarnings("unused")
+        @SpireEnum(name = "DEFAULT_GRAY_COLOR") 
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
@@ -159,17 +159,21 @@ public class Doctor extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
+        retVal.add(FourStarVanguardDeploy.ID);
+        retVal.add(FiveStarVanguardDeploy.ID);
+        retVal.add(FourStarSingleTargetMedicDeploy.ID);
+        
         retVal.add(DefaultCommonAttack.ID);
         retVal.add(DefaultUncommonAttack.ID);
         retVal.add(DefaultRareAttack.ID);
 
-        retVal.add(DefaultCommonSkill.ID);
-        retVal.add(DefaultUncommonSkill.ID);
-        retVal.add(DefaultRareSkill.ID);
-
-        retVal.add(DefaultCommonPower.ID);
-        retVal.add(DefaultUncommonPower.ID);
-        retVal.add(DefaultRarePower.ID);
+//        retVal.add(DefaultCommonSkill.ID);
+//        retVal.add(DefaultUncommonSkill.ID);
+//        retVal.add(DefaultRareSkill.ID);
+//
+//        retVal.add(DefaultCommonPower.ID);
+//        retVal.add(DefaultUncommonPower.ID);
+//        retVal.add(DefaultRarePower.ID);
 
         retVal.add(DefaultAttackWithVariable.ID);
         retVal.add(DefaultSecondMagicNumberSkill.ID);
