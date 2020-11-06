@@ -8,9 +8,7 @@ import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
  */
 public abstract class AbstractDynamicCard extends AbstractDefaultCard {
 
-    protected Integer upgradePlusDamage;
-    protected Integer upgradePlusBlock;
-    protected Integer upgradedCost;
+    protected UpgradeInfo upgradeInfo = new UpgradeInfo();
     
     public AbstractDynamicCard(final String id,
                                final String img,
@@ -24,39 +22,103 @@ public abstract class AbstractDynamicCard extends AbstractDefaultCard {
 
     }
     
-    protected void setBaseDamageAndBlock(Integer baseDamage, Integer baseBlock) {
-        if (baseDamage != null) {
-            this.baseDamage = baseDamage;
+    protected void setBasicInfo(BasicInfo basicInfo) {
+        if (basicInfo.getDamage() != null) {
+            this.baseDamage = basicInfo.getDamage();
         }
-        if (baseBlock != null) {
-            this.baseBlock = baseBlock;
+        if (basicInfo.getBlock() != null) {
+            this.baseBlock = basicInfo.getBlock();
+        }
+        if (basicInfo.getMagicNumber() != null) {
+            this.baseMagicNumber = basicInfo.getMagicNumber();
+            this.magicNumber = basicInfo.getMagicNumber();
         }
     }
     
-    protected void setUpgradeInfo(Integer upgradePlusDamage, Integer upgradePlusBlock, Integer upgradedCost) {
-        if (upgradePlusDamage != null) {
-            this.upgradePlusDamage = upgradePlusDamage;
+    public class BasicInfo {
+        private Integer damage;
+        private Integer block;
+        private Integer magicNumber;
+        public Integer getDamage() {
+            return damage;
         }
-        if (upgradePlusBlock != null) {
-            this.upgradePlusBlock = upgradePlusBlock;
+        public BasicInfo setDamage(Integer damage) {
+            this.damage = damage;
+            return this;
         }
-        if (upgradedCost != null) {
-            this.upgradedCost = upgradedCost;
+        public Integer getBlock() {
+            return block;
         }
+        public BasicInfo setBlock(Integer block) {
+            this.block = block;
+            return this;
+        }
+        public Integer getMagicNumber() {
+            return magicNumber;
+        }
+        public BasicInfo setMagicNumber(Integer magicNumber) {
+            this.magicNumber = magicNumber;
+            return this;
+        }
+    }
+    
+    
+    public class UpgradeInfo {
+        private Integer plusDamage;
+        private Integer plusBlock;
+        private Integer newCost;
+        private Integer newMagicNumber;
+        public Integer getPlusDamage() {
+            return plusDamage;
+        }
+        public UpgradeInfo setPlusDamage(Integer upgradePlusDamage) {
+            this.plusDamage = upgradePlusDamage;
+            return this;
+        }
+        public Integer getPlusBlock() {
+            return plusBlock;
+        }
+        public UpgradeInfo setPlusBlock(Integer upgradePlusBlock) {
+            this.plusBlock = upgradePlusBlock;
+            return this;
+        }
+        public Integer getNewCost() {
+            return newCost;
+        }
+        public UpgradeInfo setNewCost(Integer upgradedCost) {
+            this.newCost = upgradedCost;
+            return this;
+        }
+        public Integer getNewMagicNumber() {
+            return newMagicNumber;
+        }
+        public UpgradeInfo setNewMagicNumber(Integer newMagicNumber) {
+            this.newMagicNumber = newMagicNumber;
+            return this;
+        }
+        
+        
+    }
+    
+    protected void setUpgradeInfo(UpgradeInfo upgradeInfo) {
+        this.upgradeInfo = upgradeInfo;
     }
     
     @Override
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
-            if (upgradePlusDamage != null) {
-                upgradeDamage(upgradePlusDamage);
+            if (upgradeInfo.getPlusDamage() != null) {
+                upgradeDamage(upgradeInfo.getPlusDamage());
             }
-            if (upgradedCost != null) {
-                upgradeBaseCost(upgradedCost);
+            if (upgradeInfo.getNewCost() != null) {
+                upgradeBaseCost(upgradeInfo.getNewCost());
             }
-            if (upgradePlusBlock != null) {
-                upgradeBlock(upgradePlusBlock);
+            if (upgradeInfo.getPlusBlock() != null) {
+                upgradeBlock(upgradeInfo.getPlusBlock());
+            }
+            if (upgradeInfo.getNewMagicNumber() != null) {
+                upgradeMagicNumber(upgradeInfo.getNewMagicNumber());
             }
             initializeDescription();
         }

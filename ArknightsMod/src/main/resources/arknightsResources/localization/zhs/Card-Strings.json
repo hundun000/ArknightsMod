@@ -1,11 +1,15 @@
 {
   "arknights:FourStarVanguardDeploy": {
     "NAME": "四星先锋部署",
-    "DESCRIPTION": "造成 !D! 点 物理伤害。 NL 在下一回合获得 [G] 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [G] 。"
   },
   "arknights:FiveStarVanguardDeploy": {
     "NAME": "五星型先锋部署",
-    "DESCRIPTION": "造成 !D! 点 物理伤害。 NL 在下一回合获得 [G] [G] 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [G] [G] 。"
+  },
+  "arknights:DkssDeploy": {
+    "NAME": "德克萨斯部署",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [G] [G] 。NL 给予所有敌人一层眩晕。"
   },
   "arknights:FourStarSingleTargetMedicDeploy": {
     "NAME": "四星单体医疗部署",
@@ -17,16 +21,30 @@
   },
   "arknights:GuardDeploy": {
     "NAME": "近卫部署",
-    "DESCRIPTION": "造成 !D! 点 物理伤害 。"
+    "DESCRIPTION": "造成 !D! 点伤害 。"
   },
   "arknights:SingleTargetCasterDeploy": {
     "NAME": "单体术士部署",
-    "DESCRIPTION": "造成 !D! 点 法术伤害。"
+    "DESCRIPTION": "造成 !D! 点伤害。"
   },
   "arknights:AreaTargetCasterDeploy": {
     "NAME": "群体术士部署",
-    "DESCRIPTION": "对所有敌人造成 !D! 点 法术伤害。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。"
   },
+  "arknights:IfritScorchedEarth": {
+    "NAME": "伊芙利特-焦土",
+    "DESCRIPTION": "造成 !D! 点伤害，将 !M! 张 灼伤 加入手牌。",
+    "UPGRADE_DESCRIPTION": "WWWWWWWWWWW"
+  },
+  "arknights:SingleTargetSniperDeploy": {
+    "NAME": "单体狙击部署",
+    "DESCRIPTION": "造成 !D! 点伤害 !M! 次。"
+  },
+  "arknights:AreaTargetSniperDeploy": {
+    "NAME": "群体狙击部署",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
+  },
+  
   "arknights:DefaultCommonAttack": {
     "NAME": "攻击",
     "DESCRIPTION": "造成 !D! 点伤害. NL [#0000ff]This[] [#ff0000]Is[] [#ffff00]How[] [#88888]color[] [#ff00ff]works.[]"

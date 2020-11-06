@@ -1,4 +1,18 @@
 {
+  "arknights:UrsusBreadRelic": {
+    "NAME": "乌萨斯列巴",
+    "FLAVOR": "一种来自乌萨斯的食物，吃起来有一股子浓烈的发酵味儿。就是酸。",
+    "DESCRIPTIONS": [
+      "每场战斗开始时，额外抽1张牌。"
+    ]
+  },
+  "arknights:StereoProjectorRelic": {
+    "NAME": "个人避难所",
+    "FLAVOR": "哥伦比亚的科技公司“约翰老妈”提供给拓荒者的个人防护掩体，然而拓荒者要是有钱买这个就不会去当拓荒者了......",
+    "DESCRIPTIONS": [
+      "拾取时，获得6点 #y最大生命值 。"
+    ]
+  },
   "arknights:PlaceholderRelic": {
     "NAME": "Placeholder Energy Relic",
     "FLAVOR": "The snake is a friend.",

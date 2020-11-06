@@ -14,13 +14,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.DefaultMod;
+import arknights.cards.AbstractDynamicCard.UpgradeInfo;
 import arknights.characters.Doctor;
 
 public class FourStarSingleTargetMedicDeploy extends AbstractDynamicCard {
 
     public static final String ID = DefaultMod.makeID(FourStarSingleTargetMedicDeploy.class.getSimpleName());
-    public static final String IMG = makeCardPath(FourStarSingleTargetMedicDeploy.class.getSimpleName() + ".png");	
-
+    public static final String IMG = makeCardPath("Skill.png");
+    
     private static final CardRarity RARITY = CardRarity.BASIC;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.SKILL;
@@ -32,8 +33,13 @@ public class FourStarSingleTargetMedicDeploy extends AbstractDynamicCard {
 
     public FourStarSingleTargetMedicDeploy() {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBaseDamageAndBlock(null, 5);
-        setUpgradeInfo(null, 3, COST);
+        setBasicInfo(new BasicInfo()
+                .setBlock(5)
+                );
+        
+        setUpgradeInfo(new UpgradeInfo()
+                .setPlusBlock(3)
+                );
         this.tags.add(CardTags.STARTER_DEFEND); 
     }
 

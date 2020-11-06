@@ -44,10 +44,13 @@ public class FiveStarVanguardDeploy extends AbstractDynamicCard {
     
     public FiveStarVanguardDeploy() { 
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBaseDamageAndBlock(7, null);
-        setUpgradeInfo(3, null, COST);
-        this.magicNumber = GIVE_ENERGY_NUM;
-        this.baseMagicNumber = GIVE_ENERGY_NUM;
+        setBasicInfo(new BasicInfo()
+                .setDamage(7)
+                .setMagicNumber(GIVE_ENERGY_NUM)
+                );
+        setUpgradeInfo(new UpgradeInfo()
+                .setPlusDamage(3)
+                );
     }
 
     @Override

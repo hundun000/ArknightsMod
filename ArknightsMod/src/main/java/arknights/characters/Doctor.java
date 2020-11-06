@@ -26,6 +26,8 @@ import arknights.cards.*;
 import arknights.relics.DefaultClickableRelic;
 import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
+import arknights.relics.StereoProjectorRelic;
+import arknights.relics.UrsusBreadRelic;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -188,11 +190,12 @@ public class Doctor extends CustomPlayer {
         retVal.add(PlaceholderRelic.ID);
         retVal.add(PlaceholderRelic2.ID);
         retVal.add(DefaultClickableRelic.ID);
-
+        retVal.add(UrsusBreadRelic.ID);
+        
         UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
         UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
         UnlockTracker.markRelicAsSeen(DefaultClickableRelic.ID);
-
+        UnlockTracker.markRelicAsSeen(UrsusBreadRelic.ID);
         return retVal;
     }
 

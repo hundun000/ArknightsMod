@@ -27,6 +27,8 @@ import arknights.relics.BottledPlaceholderRelic;
 import arknights.relics.DefaultClickableRelic;
 import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
+import arknights.relics.StereoProjectorRelic;
+import arknights.relics.UrsusBreadRelic;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
 import arknights.variables.DefaultCustomVariable;
@@ -385,6 +387,8 @@ public class DefaultMod implements
         BaseMod.addRelicToCustomPool(new PlaceholderRelic(), Doctor.Enums.COLOR_GRAY);
         BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), Doctor.Enums.COLOR_GRAY);
         BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), Doctor.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new UrsusBreadRelic(), Doctor.Enums.COLOR_GRAY);
         
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
@@ -534,5 +538,9 @@ public class DefaultMod implements
     // in order to avoid conflicts if any other mod uses the same ID.
     public static String makeID(String idText) {
         return getModID() + ":" + idText;
+    }
+    
+    public static String makeID(Class<?> clazz) {
+        return makeID(clazz.getSimpleName());
     }
 }
