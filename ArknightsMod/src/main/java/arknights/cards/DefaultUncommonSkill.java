@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import arknights.DefaultMod;
 import arknights.characters.Doctor;
 
-public class DefaultUncommonSkill extends AbstractDynamicCard {
+public class DefaultUncommonSkill extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

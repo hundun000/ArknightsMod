@@ -18,7 +18,7 @@ import arknights.characters.Doctor;
 
 // public class ${NAME} extends AbstractDynamicCard
 @AutoAdd.Ignore // Remove this line when you make a template. Refer to https://github.com/daviscook477/BaseMod/wiki/AutoAdd if you want to know what it does.
-public class CardTemplate extends AbstractDynamicCard {
+public class CardTemplate extends AbstractModCard {
 
     /*
      * "Hey, I wanna make a bunch of cards now." - You, probably.

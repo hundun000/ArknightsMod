@@ -6,7 +6,7 @@ import static arknights.DefaultMod.makeID;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
-import arknights.cards.AbstractDefaultCard;
+import arknights.cards.HasSecondMagicNumberAbstractCard;
 
 public class DefaultSecondMagicNumber extends DynamicVariable {
 
@@ -22,22 +22,21 @@ public class DefaultSecondMagicNumber extends DynamicVariable {
 
     @Override
     public boolean isModified(AbstractCard card) {
-        return ((AbstractDefaultCard) card).isDefaultSecondMagicNumberModified;
-
+        return ((HasSecondMagicNumberAbstractCard) card).secondMagicNumberModified;
     }
 
     @Override
     public int value(AbstractCard card) {
-        return ((AbstractDefaultCard) card).defaultSecondMagicNumber;
+        return ((HasSecondMagicNumberAbstractCard) card).secondMagicNumber;
     }
 
     @Override
     public int baseValue(AbstractCard card) {
-        return ((AbstractDefaultCard) card).defaultBaseSecondMagicNumber;
+        return ((HasSecondMagicNumberAbstractCard) card).baseSecondMagicNumber;
     }
 
     @Override
     public boolean upgraded(AbstractCard card) {
-        return ((AbstractDefaultCard) card).upgradedDefaultSecondMagicNumber;
+        return ((HasSecondMagicNumberAbstractCard) card).upgradedSecondMagicNumber;
     }
 }

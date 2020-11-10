@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import arknights.DefaultMod;
 import arknights.characters.Doctor;
 
-public class DefaultCommonSkill extends AbstractDynamicCard {
+public class DefaultCommonSkill extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

@@ -15,7 +15,7 @@ import arknights.DefaultMod;
 import arknights.actions.UncommonPowerAction;
 import arknights.characters.Doctor;
 
-public class DefaultUncommonPower extends AbstractDynamicCard {
+public class DefaultUncommonPower extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

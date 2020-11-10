@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 import arknights.DefaultMod;
 import arknights.characters.Doctor;
 
-public class DefaultRareAttack extends AbstractDynamicCard {
+public class DefaultRareAttack extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

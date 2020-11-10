@@ -15,7 +15,7 @@ import arknights.DefaultMod;
 import arknights.characters.Doctor;
 import arknights.orbs.DefaultOrb;
 
-public class OrbSkill extends AbstractDynamicCard {
+public class OrbSkill extends AbstractModCard {
 
     /*
      * Orb time.

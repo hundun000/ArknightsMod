@@ -149,6 +149,10 @@ public class DefaultMod implements
         return IMAGES_FOLDER + "/cards/" + resourcePath;
     }
     
+    public static String makeCardPngPath(Class<?> clazz) {
+        return makeCardPath(clazz.getSimpleName() + ".png");
+    }
+    
     public static String makeRelicPath(String resourcePath) {
         return IMAGES_FOLDER + "/relics/" + resourcePath;
     }

@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractDynamicCard.UpgradeInfo;
+import arknights.cards.AbstractModCard.UpgradeSetting;
 import arknights.characters.Doctor;
 import basemod.AutoAdd;
 
@@ -27,7 +27,7 @@ import basemod.AutoAdd;
  * Created on 2020/11/05
  */
 @AutoAdd.Ignore
-public class IfritScorchedEarth extends AbstractDynamicCard {
+public class IfritScorchedEarth extends AbstractModCard {
 
  // TEXT DECLARATION
 
@@ -48,11 +48,11 @@ public class IfritScorchedEarth extends AbstractDynamicCard {
     
     public IfritScorchedEarth() { 
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBasicInfo(new BasicInfo()
+        setBasicInfo(new BasicSetting()
                 .setDamage(15)
                 .setMagicNumber(GIVE_BURNS_CARD_NUM)
                 );
-        setUpgradeInfo(new UpgradeInfo()
+        setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(5)
                 .setNewMagicNumber(UPGRADED_GIVE_BURNS_CARD_NUM)
                 );

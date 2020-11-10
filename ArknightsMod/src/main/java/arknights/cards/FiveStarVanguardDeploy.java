@@ -24,7 +24,7 @@ import arknights.characters.Doctor;
  * @author hundun
  * Created on 2020/11/05
  */
-public class FiveStarVanguardDeploy extends AbstractDynamicCard {
+public class FiveStarVanguardDeploy extends AbstractModCard {
 
  // TEXT DECLARATION
 
@@ -44,20 +44,20 @@ public class FiveStarVanguardDeploy extends AbstractDynamicCard {
     
     public FiveStarVanguardDeploy() { 
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBasicInfo(new BasicInfo()
+        setBasicInfo(new BasicSetting()
                 .setDamage(7)
                 .setMagicNumber(GIVE_ENERGY_NUM)
                 );
-        setUpgradeInfo(new UpgradeInfo()
+        setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
                 );
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(
+        addToBot(
                 new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-        AbstractDungeon.actionManager.addToBottom(
+        addToBot(
                 new ApplyPowerAction(
                     p,
                     p,

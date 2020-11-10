@@ -14,30 +14,30 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractDynamicCard.UpgradeInfo;
+import arknights.cards.AbstractModCard.UpgradeSetting;
 import arknights.characters.Doctor;
 
-public class FourStarSingleTargetMedicDeploy extends AbstractDynamicCard {
+public class FourStarSingleTargetMedicDeploy extends AbstractModCard {
+    
+    public static final String ID = DefaultMod.makeID(FourStarSingleTargetMedicDeploy.class);
+    public static final String IMG = makeCardPath(FourStarSingleTargetMedicDeploy.class.getSimpleName() + ".png");
 
-    public static final String ID = DefaultMod.makeID(FourStarSingleTargetMedicDeploy.class.getSimpleName());
-    public static final String IMG = makeCardPath("Skill.png");
     
     private static final CardRarity RARITY = CardRarity.BASIC;
     private static final CardTarget TARGET = CardTarget.SELF;
     private static final CardType TYPE = CardType.SKILL;
-    public static final CardColor COLOR = Doctor.Enums.COLOR_GRAY;
 
     private static final int COST = 1;
 
 
 
     public FourStarSingleTargetMedicDeploy() {
-        super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBasicInfo(new BasicInfo()
+        super(ID, IMG, COST, TYPE, RARITY, TARGET);
+        setBasicInfo(new BasicSetting()
                 .setBlock(5)
                 );
         
-        setUpgradeInfo(new UpgradeInfo()
+        setUpgradeInfo(new UpgradeSetting()
                 .setPlusBlock(3)
                 );
         this.tags.add(CardTags.STARTER_DEFEND); 
@@ -46,7 +46,7 @@ public class FourStarSingleTargetMedicDeploy extends AbstractDynamicCard {
     // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, block));
+        addToBot(new GainBlockAction(p, p, block));
     }
 
 }

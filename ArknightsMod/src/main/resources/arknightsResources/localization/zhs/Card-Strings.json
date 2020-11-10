@@ -1,4 +1,8 @@
 {
+  "arknights:MeebooAttackTypeSummon": {
+    "NAME": "攻击型咪波召唤",
+    "DESCRIPTION": "召唤 !M! 只 攻击型咪波 。"
+  },
   "arknights:FourStarVanguardDeploy": {
     "NAME": "四星先锋部署",
     "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [G] 。"

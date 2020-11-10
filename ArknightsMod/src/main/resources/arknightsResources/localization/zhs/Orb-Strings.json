@@ -1,4 +1,21 @@
 {
+  "arknights:MeeBooAttackTypeOrb": {
+    "NAME": "咪波-攻击型",
+    "DESCRIPTION": [
+      "#y被动： 在你的回合结束时，对一名随机敌人造成 #b",
+      " 点伤害。 NL #y激发： 对一名随机敌人造成 #b",
+      " 点伤害。"
+    ]
+  },
+  
+  "arknights:MeeBooDefendTypeOrb": {
+    "NAME": "咪波-防御型",
+    "DESCRIPTION": [
+      "#y被动： 在你的回合结束时，获得 #b",
+      " 点 #y格挡 。 NL #y激发： 获得 #b",
+      " 点 #y格挡 。"
+    ]
+  },
   "arknights:DefaultOrb": {
     "NAME": "Default Orb",
     "DESCRIPTION": [

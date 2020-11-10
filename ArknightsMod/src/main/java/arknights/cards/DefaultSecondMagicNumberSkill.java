@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.powers.VulnerablePower;
 import arknights.DefaultMod;
 import arknights.characters.Doctor;
 
-public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
+public class DefaultSecondMagicNumberSkill extends HasSecondMagicNumberAbstractCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
@@ -59,7 +59,7 @@ public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
 
         magicNumber = baseMagicNumber = VULNERABLE;
-        defaultSecondMagicNumber = defaultBaseSecondMagicNumber = POISON;
+        secondMagicNumber = baseSecondMagicNumber = POISON;
 
     }
 
@@ -70,7 +70,7 @@ public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
                 new ApplyPowerAction(m, p, new VulnerablePower(m, magicNumber, false), this.magicNumber));
 
         AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(m, p, new PoisonPower(m, p, this.defaultSecondMagicNumber), this.defaultSecondMagicNumber));
+                new ApplyPowerAction(m, p, new PoisonPower(m, p, this.secondMagicNumber), this.secondMagicNumber));
 
     }
 
@@ -80,7 +80,7 @@ public class DefaultSecondMagicNumberSkill extends AbstractDynamicCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_PLUS_VULNERABLE);
-            this.upgradeDefaultSecondMagicNumber(UPGRADE_PLUS_POISON);
+            this.upgradeBaseSecondMagicNumber(UPGRADE_PLUS_POISON);
             this.initializeDescription();
         }
     }

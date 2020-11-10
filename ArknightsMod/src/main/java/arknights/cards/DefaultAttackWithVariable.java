@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import arknights.DefaultMod;
 import arknights.characters.Doctor;
 
-public class DefaultAttackWithVariable extends AbstractDynamicCard {
+public class DefaultAttackWithVariable extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

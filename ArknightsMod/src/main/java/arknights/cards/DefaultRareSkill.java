@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.powers.VulnerablePower;
 import arknights.DefaultMod;
 import arknights.characters.Doctor;
 
-public class DefaultRareSkill extends AbstractDynamicCard {
+public class DefaultRareSkill extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards

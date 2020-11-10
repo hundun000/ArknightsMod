@@ -164,6 +164,7 @@ public class Doctor extends CustomPlayer {
         retVal.add(FourStarVanguardDeploy.ID);
         retVal.add(FiveStarVanguardDeploy.ID);
         retVal.add(FourStarSingleTargetMedicDeploy.ID);
+        retVal.add(MeebooAttackTypeSummon.ID);
         
         retVal.add(DefaultCommonAttack.ID);
         retVal.add(DefaultUncommonAttack.ID);
@@ -177,9 +178,9 @@ public class Doctor extends CustomPlayer {
 //        retVal.add(DefaultUncommonPower.ID);
 //        retVal.add(DefaultRarePower.ID);
 
-        retVal.add(DefaultAttackWithVariable.ID);
-        retVal.add(DefaultSecondMagicNumberSkill.ID);
-        retVal.add(OrbSkill.ID);
+//        retVal.add(DefaultAttackWithVariable.ID);
+//        retVal.add(DefaultSecondMagicNumberSkill.ID);
+//        retVal.add(OrbSkill.ID);
         return retVal;
     }
 
