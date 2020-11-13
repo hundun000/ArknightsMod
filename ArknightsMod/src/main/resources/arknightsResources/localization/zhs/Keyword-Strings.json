@@ -8,6 +8,12 @@
   },
   {
     "NAMES": [
+      "剑雨"
+    ],
+    "DESCRIPTION":"剑雨是费用为 #b0 并且会 消耗 的攻击牌"
+  },
+  {
+    "NAMES": [
       "keyword",
       "keywords"
     ],

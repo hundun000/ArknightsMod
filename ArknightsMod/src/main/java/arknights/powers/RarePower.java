@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import arknights.DefaultMod;
-import arknights.cards.DefaultRareAttack;
+import arknights.cards.demo.DefaultRareAttack;
 import arknights.util.TextureLoader;
 
 public class RarePower extends AbstractPower implements CloneablePowerInterface {

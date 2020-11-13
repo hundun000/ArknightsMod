@@ -1,4 +1,4 @@
-package arknights.cards;
+package arknights.cards.demo;
 
 import basemod.abstracts.CustomCard;
 
@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 
 import arknights.DefaultMod;
+import arknights.cards.AbstractModCard;
 import arknights.characters.Doctor;
 
 public class DefaultRareSkill extends AbstractModCard {

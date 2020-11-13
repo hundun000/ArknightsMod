@@ -1,4 +1,4 @@
-package arknights.cards;
+package arknights.cards.demo;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;

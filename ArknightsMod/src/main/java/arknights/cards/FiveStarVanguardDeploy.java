@@ -6,7 +6,9 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTags;
@@ -18,6 +20,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
 import arknights.DefaultMod;
+import arknights.cards.derivations.SwordRain;
 import arknights.characters.Doctor;
 
 /**
@@ -26,12 +29,8 @@ import arknights.characters.Doctor;
  */
 public class FiveStarVanguardDeploy extends AbstractModCard {
 
- // TEXT DECLARATION
-
     public static final String ID = DefaultMod.makeID(FiveStarVanguardDeploy.class.getSimpleName()); // DELETE THIS ONE.
     public static final String IMG = makeCardPath(FiveStarVanguardDeploy.class.getSimpleName() + ".png");// "public static final String IMG = makeCardPath("${NAME}.png");
-
-    // STAT DECLARATION
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ENEMY;  
@@ -65,5 +64,10 @@ public class FiveStarVanguardDeploy extends AbstractModCard {
                     this.magicNumber
                 )
             );
+        AbstractCard giveCard = new SwordRain();
+        if (this.upgraded) {
+            giveCard.upgrade();
+        }
+        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(giveCard, 1));
     }
 }

@@ -23,6 +23,9 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import arknights.DefaultMod;
 import arknights.cards.*;
+import arknights.cards.demo.DefaultCommonAttack;
+import arknights.cards.demo.DefaultRareAttack;
+import arknights.cards.demo.DefaultUncommonAttack;
 import arknights.relics.DefaultClickableRelic;
 import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;

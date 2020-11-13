@@ -1,4 +1,4 @@
-package arknights.cards;
+package arknights.cards.demo;
 
 import basemod.abstracts.CustomCard;
 
@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import arknights.DefaultMod;
 import arknights.actions.UncommonPowerAction;
+import arknights.cards.AbstractModCard;
 import arknights.characters.Doctor;
 
 public class DefaultUncommonPower extends AbstractModCard {

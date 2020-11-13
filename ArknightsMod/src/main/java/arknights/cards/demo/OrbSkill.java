@@ -1,4 +1,4 @@
-package arknights.cards;
+package arknights.cards.demo;
 
 import basemod.abstracts.CustomCard;
 
@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.DefaultMod;
+import arknights.cards.AbstractModCard;
 import arknights.characters.Doctor;
 import arknights.orbs.DefaultOrb;
 

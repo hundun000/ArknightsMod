@@ -1,4 +1,4 @@
-package arknights.cards;
+package arknights.cards.demo;
 
 import static arknights.DefaultMod.makeCardPath;
 
@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.powers.PoisonPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 
 import arknights.DefaultMod;
+import arknights.cards.HasSecondMagicNumberAbstractCard;
 import arknights.characters.Doctor;
 
 public class DefaultSecondMagicNumberSkill extends HasSecondMagicNumberAbstractCard {

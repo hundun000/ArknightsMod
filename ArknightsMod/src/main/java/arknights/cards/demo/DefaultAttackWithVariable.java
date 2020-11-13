@@ -1,6 +1,4 @@
-package arknights.cards;
-
-import basemod.abstracts.CustomCard;
+package arknights.cards.demo;
 
 import static arknights.DefaultMod.makeCardPath;
 
@@ -12,57 +10,65 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import arknights.DefaultMod;
+import arknights.cards.AbstractModCard;
 import arknights.characters.Doctor;
 
-public class DefaultUncommonAttack extends AbstractModCard {
+public class DefaultAttackWithVariable extends AbstractModCard {
 
     /*
      * Wiki-page: https://github.com/daviscook477/BaseMod/wiki/Custom-Cards
      *
-     * Big Slap Deal 10(15)) damage.
+     * Special Strike: Deal 7 (*) damage times the energy you currently have.
      */
 
-    // TEXT DECLARATION 
+    // TEXT DECLARATION
 
-    public static final String ID = DefaultMod.makeID(DefaultUncommonAttack.class.getSimpleName());
+    public static final String ID = DefaultMod.makeID(DefaultAttackWithVariable.class.getSimpleName());
     public static final String IMG = makeCardPath("Attack.png");
 
     // /TEXT DECLARATION/
 
 
-    // STAT DECLARATION 	
+    // STAT DECLARATION
 
-    private static final CardRarity RARITY = CardRarity.UNCOMMON;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.ATTACK;
     public static final CardColor COLOR = Doctor.Enums.COLOR_GRAY;
 
     private static final int COST = 1;
-    private static final int DAMAGE = 10;
-    private static final int UPGRADE_PLUS_DMG = 5;
+    private static final int DAMAGE = 7;
+    private static final int UPGRADE_PLUS_DMG = 1;
+
+    public int specialDamage;
 
     // /STAT DECLARATION/
 
-
-    public DefaultUncommonAttack() {
+    public DefaultAttackWithVariable() {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
         baseDamage = DAMAGE;
+
+        isMultiDamage = true;
     }
 
     // Actions the card should do.
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        // Create an int which equals to your current energy.
+        int effect = EnergyPanel.totalCount;
 
-
-        AbstractDungeon.actionManager.addToBottom(
-                new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
-                        AbstractGameAction.AttackEffect.BLUNT_LIGHT));
-
+        // For each energy, create 1 damage action.
+        for (int i = 0; i < effect; i++) {
+            AbstractDungeon.actionManager.addToBottom(
+                    new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn),
+                            AbstractGameAction.AttackEffect.FIRE));
+        }
     }
 
-    //Upgraded stats.
+    // Upgraded stats.
     @Override
     public void upgrade() {
         if (!upgraded) {

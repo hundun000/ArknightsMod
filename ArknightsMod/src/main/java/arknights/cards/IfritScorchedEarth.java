@@ -60,9 +60,9 @@ public class IfritScorchedEarth extends AbstractModCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(
+        addToBot(
                 new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-        AbstractDungeon.actionManager.addToBottom(
+        addToBot(
                 new ApplyPowerAction(
                     p,
                     p,
