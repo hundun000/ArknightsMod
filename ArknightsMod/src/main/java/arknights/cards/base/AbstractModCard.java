@@ -1,10 +1,12 @@
-package arknights.cards;
+package arknights.cards.base;
 import basemod.AutoAdd;
 import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
 import arknights.DefaultMod;
+import arknights.cards.base.component.BasicSetting;
+import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
 
 /**
@@ -13,6 +15,13 @@ import arknights.characters.Doctor;
 public abstract class AbstractModCard extends CustomCard {
 
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
+
+    public static final int EXTRA_MAGIC_NUMBER_SIZE = 1;
+    public int[] extraMagicNumbers = new int[EXTRA_MAGIC_NUMBER_SIZE];        
+    public int[] baseExtraMagicNumbers = new int[EXTRA_MAGIC_NUMBER_SIZE];
+    public boolean[] upgradedExtraMagicNumbers = new boolean[EXTRA_MAGIC_NUMBER_SIZE];
+    public boolean[] extraMagicNumberModifieds = new boolean[EXTRA_MAGIC_NUMBER_SIZE];
+
     
     /**
      * auto generate fields which always same or similar
@@ -55,78 +64,26 @@ public abstract class AbstractModCard extends CustomCard {
         }
         if (basicSetting.getMagicNumber() != null) {
             this.baseMagicNumber = basicSetting.getMagicNumber();
-            this.magicNumber = basicSetting.getMagicNumber();
-        }
-    }
-    
-    public class BasicSetting {
-        private Integer damage;
-        private Integer block;
-        private Integer magicNumber;
-        public Integer getDamage() {
-            return damage;
-        }
-        public BasicSetting setDamage(Integer damage) {
-            this.damage = damage;
-            return this;
-        }
-        public Integer getBlock() {
-            return block;
-        }
-        public BasicSetting setBlock(Integer block) {
-            this.block = block;
-            return this;
-        }
-        public Integer getMagicNumber() {
-            return magicNumber;
-        }
-        public BasicSetting setMagicNumber(Integer magicNumber) {
-            this.magicNumber = magicNumber;
-            return this;
-        }
-    }
-    
-    
-    public class UpgradeSetting {
-        private Integer plusDamage;
-        private Integer plusBlock;
-        private Integer newCost;
-        private Integer newMagicNumber;
-        public Integer getPlusDamage() {
-            return plusDamage;
-        }
-        public UpgradeSetting setPlusDamage(Integer upgradePlusDamage) {
-            this.plusDamage = upgradePlusDamage;
-            return this;
-        }
-        public Integer getPlusBlock() {
-            return plusBlock;
-        }
-        public UpgradeSetting setPlusBlock(Integer upgradePlusBlock) {
-            this.plusBlock = upgradePlusBlock;
-            return this;
-        }
-        public Integer getNewCost() {
-            return newCost;
-        }
-        public UpgradeSetting setNewCost(Integer upgradedCost) {
-            this.newCost = upgradedCost;
-            return this;
-        }
-        public Integer getNewMagicNumber() {
-            return newMagicNumber;
-        }
-        public UpgradeSetting setNewMagicNumber(Integer newMagicNumber) {
-            this.newMagicNumber = newMagicNumber;
-            return this;
+            this.magicNumber = this.baseMagicNumber;
         }
         
-        
+        for (int i = 0; i < EXTRA_MAGIC_NUMBER_SIZE; i++) {
+            if (basicSetting.getExtraMagicNumber(i) != null) {
+                this.baseExtraMagicNumbers[i] = basicSetting.getExtraMagicNumber(i);
+                this.extraMagicNumbers[i] =  this.baseExtraMagicNumbers[i];
+            }
+        }
     }
+
+    
+    
+    
     
     protected void setUpgradeInfo(UpgradeSetting upgradeSetting) {
         this.upgradeSetting = upgradeSetting;
     }
+    
+    
     
     @Override
     public void upgrade() {
@@ -141,10 +98,24 @@ public abstract class AbstractModCard extends CustomCard {
             if (upgradeSetting.getPlusBlock() != null) {
                 upgradeBlock(upgradeSetting.getPlusBlock());
             }
-            if (upgradeSetting.getNewMagicNumber() != null) {
-                upgradeMagicNumber(upgradeSetting.getNewMagicNumber());
+            if (upgradeSetting.getPlusMagicNumber() != null) {
+                upgradeMagicNumber(upgradeSetting.getPlusMagicNumber());
             }
+            
+            for (int i = 0; i < EXTRA_MAGIC_NUMBER_SIZE; i++) {
+                if (upgradeSetting.getPlusExtraMagicNumber(i) != null) {
+                    upgradeExtraMagicNumber(i, upgradeSetting.getPlusExtraMagicNumber(i));
+                }
+            }
+            
+            
             initializeDescription();
         }
+    }
+
+    protected void upgradeExtraMagicNumber(int index, int amount) {
+        baseExtraMagicNumbers[index] += amount; 
+        extraMagicNumbers[index] = baseExtraMagicNumbers[index];
+        upgradedExtraMagicNumbers[index] = true;
     }
 }

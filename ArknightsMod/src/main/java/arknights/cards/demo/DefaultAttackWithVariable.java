@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractModCard;
+import arknights.cards.base.AbstractModCard;
 import arknights.characters.Doctor;
 
 public class DefaultAttackWithVariable extends AbstractModCard {

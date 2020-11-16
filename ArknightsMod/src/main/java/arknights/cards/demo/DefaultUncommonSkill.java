@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractModCard;
+import arknights.cards.base.AbstractModCard;
 import arknights.characters.Doctor;
 
 public class DefaultUncommonSkill extends AbstractModCard {

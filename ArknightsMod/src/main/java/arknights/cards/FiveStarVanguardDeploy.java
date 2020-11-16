@@ -15,11 +15,18 @@ import com.megacrit.cardcrawl.cards.AbstractCard.CardTags;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
+import com.megacrit.cardcrawl.powers.NightmarePower;
 
 import arknights.DefaultMod;
+import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.BaseVanguardDeploy;
+import arknights.cards.base.component.BasicSetting;
+import arknights.cards.base.component.UpgradeSetting;
 import arknights.cards.derivations.SwordRain;
 import arknights.characters.Doctor;
 
@@ -27,47 +34,25 @@ import arknights.characters.Doctor;
  * @author hundun
  * Created on 2020/11/05
  */
-public class FiveStarVanguardDeploy extends AbstractModCard {
+public class FiveStarVanguardDeploy extends BaseVanguardDeploy {
 
     public static final String ID = DefaultMod.makeID(FiveStarVanguardDeploy.class.getSimpleName()); // DELETE THIS ONE.
-    public static final String IMG = makeCardPath(FiveStarVanguardDeploy.class.getSimpleName() + ".png");// "public static final String IMG = makeCardPath("${NAME}.png");
+    public static final String IMG = DefaultMod.makeCardPngPath(BaseVanguardDeploy.class);
 
-    private static final CardRarity RARITY = CardRarity.COMMON; 
-    private static final CardTarget TARGET = CardTarget.ENEMY;  
-    private static final CardType TYPE = CardType.ATTACK;       
-    public static final CardColor COLOR = Doctor.Enums.COLOR_GRAY;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;      
     private static final int COST = 1;  
-    
-    // special const
-    private static final int GIVE_ENERGY_NUM = 2;  
+  
+    private static final AbstractCard giveCard = new SwordRain();
     
     public FiveStarVanguardDeploy() { 
-        super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
+        super(ID, IMG, COST, RARITY);
         setBasicInfo(new BasicSetting()
                 .setDamage(7)
-                .setMagicNumber(GIVE_ENERGY_NUM)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
                 );
+        setGiveCardPrototype(giveCard);
     }
 
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(
-                new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-        addToBot(
-                new ApplyPowerAction(
-                    p,
-                    p,
-                    new EnergizedBluePower(p, this.magicNumber),
-                    this.magicNumber
-                )
-            );
-        AbstractCard giveCard = new SwordRain();
-        if (this.upgraded) {
-            giveCard.upgrade();
-        }
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(giveCard, 1));
-    }
 }

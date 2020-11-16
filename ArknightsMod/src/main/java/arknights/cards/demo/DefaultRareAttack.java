@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractModCard;
+import arknights.cards.base.AbstractModCard;
 import arknights.characters.Doctor;
 
 public class DefaultRareAttack extends AbstractModCard {

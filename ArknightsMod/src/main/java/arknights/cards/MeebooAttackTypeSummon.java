@@ -18,9 +18,9 @@ import com.megacrit.cardcrawl.orbs.Lightning;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractModCard.BasicSetting;
-import arknights.cards.AbstractModCard.UpgradeSetting;
-import arknights.cards.base.BaseSummonCard;
+import arknights.cards.base.BaseSummonDeploy;
+import arknights.cards.base.component.BasicSetting;
+import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
 import arknights.orbs.MeeBooAttackTypeOrb;
 
@@ -28,7 +28,7 @@ import arknights.orbs.MeeBooAttackTypeOrb;
  * @author hundun
  * Created on 2020/11/10
  */
-public class MeebooAttackTypeSummon extends BaseSummonCard {
+public class MeebooAttackTypeSummon extends BaseSummonDeploy {
 
     public static final String ID = DefaultMod.makeID(MeebooAttackTypeSummon.class);
     public static final String IMG = DefaultMod.makeCardPngPath(MeebooAttackTypeSummon.class);
@@ -47,16 +47,9 @@ public class MeebooAttackTypeSummon extends BaseSummonCard {
                 .setMagicNumber(SUMMON_NUM)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setNewMagicNumber(UPGRADED_SUMMON_NUM)
+                .setPlusMagicNumber(UPGRADED_SUMMON_NUM)
                 );
+        setSummonOrb(new MeeBooAttackTypeOrb());
     }
-
-    @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        for (int i = 0; i < this.magicNumber; i++) {
-            addToBot(new ChannelAction(new MeeBooAttackTypeOrb()));
-        }
-    }
-
 
 }

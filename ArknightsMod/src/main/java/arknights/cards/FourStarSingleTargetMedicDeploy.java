@@ -14,13 +14,16 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractModCard.UpgradeSetting;
+import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.component.BasicSetting;
+import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
 
 public class FourStarSingleTargetMedicDeploy extends AbstractModCard {
     
     public static final String ID = DefaultMod.makeID(FourStarSingleTargetMedicDeploy.class);
-    public static final String IMG = makeCardPath(FourStarSingleTargetMedicDeploy.class.getSimpleName() + ".png");
+    public static final String IMG = DefaultMod.makeCardPngPath(AbstractModCard.class);
+
 
     
     private static final CardRarity RARITY = CardRarity.BASIC;

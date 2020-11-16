@@ -25,6 +25,7 @@ import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 
 import arknights.DefaultMod;
 import arknights.cards.FourStarSingleTargetMedicDeploy;
+import arknights.util.LocalizationUtils;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomOrb;
 
@@ -60,8 +61,6 @@ public class MeeBooAttackTypeOrb extends AbstractModOrb {
         super.angle = 0; //MathUtils.random(360.0f); // More Animation-related Numbers
         super.channelAnimTimer = 0.5f;
         
-        updateDescription();
-
     }
     
     @Override
@@ -101,7 +100,7 @@ public class MeeBooAttackTypeOrb extends AbstractModOrb {
     @Override
     public void updateDescription() {
         applyFocus(); 
-        super.description = orbString.DESCRIPTION[0] + this.passiveAmount + orbString.DESCRIPTION[1] + this.evokeAmount + orbString.DESCRIPTION[2];
+        super.description = LocalizationUtils.formatDescription(orbString.DESCRIPTION[0], this.passiveAmount, this.evokeAmount);
     }
     
     @Override

@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.DefaultMod;
-import arknights.cards.AbstractModCard;
+import arknights.cards.base.AbstractModCard;
 import arknights.characters.Doctor;
 
 // public class ${NAME} extends AbstractDynamicCard

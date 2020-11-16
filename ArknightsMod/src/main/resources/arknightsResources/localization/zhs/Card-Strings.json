@@ -1,7 +1,11 @@
 {
   "arknights:SwordRain": {
     "NAME": "剑雨",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 消耗 。 "
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 虚弱 和 1 层 缓慢 。 获得 !arknights:2ndM! 点 [G] 。 消耗 。 "
+  },
+  "arknights:ChargeAlpha": {
+    "NAME": "冲锋号令·α型",
+    "DESCRIPTION": "获得 !M! 点 [G] 。 消耗 。 "
   },
   "arknights:MeebooAttackTypeSummon": {
     "NAME": "攻击型咪波召唤",
@@ -9,12 +13,13 @@
   },
   "arknights:FourStarVanguardDeploy": {
     "NAME": "四星先锋部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [G] 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张 冲锋号令·α型 加入手牌。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张已 升级 的 冲锋号令·α型 加入手牌。"
   },
   "arknights:FiveStarVanguardDeploy": {
     "NAME": "五星型先锋部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 在下一回合获得 [G] [G] 。 将一张 剑雨 加入手牌。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合获得 [G] [G] 。 将一张已 升级 的 剑雨 加入手牌。"
+    "DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张 剑雨 加入手牌。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张已 升级 的 剑雨 加入手牌。"
   },
   "arknights:DkssDeploy": {
     "NAME": "德克萨斯部署",

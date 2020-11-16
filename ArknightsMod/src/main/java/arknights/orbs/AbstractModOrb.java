@@ -20,7 +20,7 @@ public abstract class AbstractModOrb extends CustomOrb {
             String passiveDescription,
             String evokeDescription, 
             String imgPath) {
-        super(id, languagePack.getCardStrings(id).NAME, basePassiveAmount, baseEvokeAmount, passiveDescription, evokeDescription, imgPath);
+        super(id, languagePack.getOrbString(id).NAME, basePassiveAmount, baseEvokeAmount, passiveDescription, evokeDescription, imgPath);
         
     }
     
@@ -30,6 +30,12 @@ public abstract class AbstractModOrb extends CustomOrb {
   
     protected void addToTop(AbstractGameAction action) {
         AbstractDungeon.actionManager.addToTop(action);
+    }
+    
+    @Override
+    public void applyFocus() {
+        passiveAmount = basePassiveAmount;
+        evokeAmount = baseEvokeAmount;
     }
 
 }
