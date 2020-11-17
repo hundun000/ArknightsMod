@@ -55,7 +55,7 @@ public class SwordRain extends AbstractModCard {
     
     public SwordRain() {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBasicInfo(new BasicSetting()
+        initBaseFields(new BasicSetting()
                 .setDamage(7)
                 .setMagicNumber(GIVE_ENERGY_NUM)
                 .setExtraMagicNumber(0, WEAK_STACK_NUM)

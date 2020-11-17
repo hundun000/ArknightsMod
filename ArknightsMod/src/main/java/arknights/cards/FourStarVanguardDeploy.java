@@ -42,7 +42,7 @@ public class FourStarVanguardDeploy extends BaseVanguardDeploy {
     
     public FourStarVanguardDeploy() { 
         super(ID, IMG, COST, RARITY);
-        setBasicInfo(new BasicSetting()
+        initBaseFields(new BasicSetting()
                 .setDamage(3)
                 );
         setUpgradeInfo(new UpgradeSetting()

@@ -4,6 +4,9 @@ import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.CardStrings;
+
 import arknights.DefaultMod;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
@@ -13,7 +16,8 @@ import arknights.characters.Doctor;
  * 游戏设计模式/子类沙箱模式 https://gpp.tkchu.me/subclass-sandbox.html
  */
 public abstract class AbstractModCard extends CustomCard {
-
+    private final CardStrings cardStrings;
+    
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
 
     public static final int EXTRA_MAGIC_NUMBER_SIZE = 1;
@@ -53,9 +57,11 @@ public abstract class AbstractModCard extends CustomCard {
         super.isDamageModified = false;
         super.isBlockModified = false;
         super.isMagicNumberModified = false;
+        
+        this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
     }
     
-    protected void setBasicInfo(BasicSetting basicSetting) {
+    protected void initBaseFields(BasicSetting basicSetting) {
         if (basicSetting.getDamage() != null) {
             this.baseDamage = basicSetting.getDamage();
         }
@@ -108,7 +114,9 @@ public abstract class AbstractModCard extends CustomCard {
                 }
             }
             
-            
+            if (cardStrings.UPGRADE_DESCRIPTION != null) {
+                this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            }
             initializeDescription();
         }
     }

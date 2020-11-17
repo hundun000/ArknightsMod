@@ -36,7 +36,7 @@ public class FourStarSingleTargetMedicDeploy extends AbstractModCard {
 
     public FourStarSingleTargetMedicDeploy() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
-        setBasicInfo(new BasicSetting()
+        initBaseFields(new BasicSetting()
                 .setBlock(5)
                 );
         

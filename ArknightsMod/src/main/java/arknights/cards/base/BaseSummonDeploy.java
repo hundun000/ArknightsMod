@@ -15,21 +15,17 @@ import arknights.orbs.MeeBooAttackTypeOrb;
  */
 public abstract class BaseSummonDeploy extends AbstractModCard {
 
-    AbstractOrb summonOrb;
-    
     public BaseSummonDeploy(String id, String img, int cost, CardRarity rarity) {
         super(id, img, cost, CardType.SKILL, rarity, CardTarget.SELF);        
-    }
-    
-    public void setSummonOrb(AbstractOrb orb) {
-        this.summonOrb = orb;
     }
     
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (int i = 0; i < this.magicNumber; i++) {
-            addToBot(new ChannelAction(summonOrb.makeCopy()));
+            addToBot(new ChannelAction(getSummonOrb()));
         }
     }
+    
+    protected abstract AbstractOrb getSummonOrb();
 
 }

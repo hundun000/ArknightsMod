@@ -1,11 +1,11 @@
 {
   "arknights:SwordRain": {
     "NAME": "剑雨",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 虚弱 和 1 层 缓慢 。 获得 !arknights:2ndM! 点 [G] 。 消耗 。 "
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 虚弱 和 1 层 缓慢 。 获得 !arknights:2ndM! 点 [E] 。 消耗 。 "
   },
   "arknights:ChargeAlpha": {
     "NAME": "冲锋号令·α型",
-    "DESCRIPTION": "获得 !M! 点 [G] 。 消耗 。 "
+    "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
   },
   "arknights:MeebooAttackTypeSummon": {
     "NAME": "攻击型咪波召唤",
@@ -23,7 +23,7 @@
   },
   "arknights:DkssDeploy": {
     "NAME": "德克萨斯部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [G] [G] 。NL 给予所有敌人一层眩晕。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [E] [E] 。NL 给予所有敌人一层眩晕。"
   },
   "arknights:FourStarSingleTargetMedicDeploy": {
     "NAME": "四星单体医疗部署",

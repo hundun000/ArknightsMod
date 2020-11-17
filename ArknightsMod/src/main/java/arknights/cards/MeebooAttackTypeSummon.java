@@ -43,13 +43,17 @@ public class MeebooAttackTypeSummon extends BaseSummonDeploy {
     
     public MeebooAttackTypeSummon() { 
         super(ID, IMG, COST, RARITY);
-        setBasicInfo(new BasicSetting()
+        initBaseFields(new BasicSetting()
                 .setMagicNumber(SUMMON_NUM)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusMagicNumber(UPGRADED_SUMMON_NUM)
                 );
-        setSummonOrb(new MeeBooAttackTypeOrb());
+    }
+
+    @Override
+    protected AbstractOrb getSummonOrb() {
+        return new MeeBooAttackTypeOrb();
     }
 
 }

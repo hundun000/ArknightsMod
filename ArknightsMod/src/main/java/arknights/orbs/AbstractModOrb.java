@@ -4,6 +4,8 @@ import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.orbs.Plasma;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import basemod.abstracts.CustomOrb;
 
@@ -32,10 +34,19 @@ public abstract class AbstractModOrb extends CustomOrb {
         AbstractDungeon.actionManager.addToTop(action);
     }
     
-    @Override
-    public void applyFocus() {
-        passiveAmount = basePassiveAmount;
-        evokeAmount = baseEvokeAmount;
-    }
+//    /**
+//     * copy from the game-source-code, add null-pointer check.(why the game-source-code hasn't?)
+//     */
+//    @Override
+//    public void applyFocus() {
+//        AbstractPower power = AbstractDungeon.player != null ? AbstractDungeon.player.getPower("Focus") : null;
+//        if (power != null && !this.ID.equals(Plasma.ORB_ID)) {
+//            this.passiveAmount = Math.max(0, this.basePassiveAmount + power.amount);
+//            this.evokeAmount = Math.max(0, this.baseEvokeAmount + power.amount);
+//        } else {
+//            this.passiveAmount = this.basePassiveAmount;
+//            this.evokeAmount = this.baseEvokeAmount;
+//        }
+//    }
 
 }

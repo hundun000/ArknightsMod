@@ -46,7 +46,7 @@ public class FiveStarVanguardDeploy extends BaseVanguardDeploy {
     
     public FiveStarVanguardDeploy() { 
         super(ID, IMG, COST, RARITY);
-        setBasicInfo(new BasicSetting()
+        initBaseFields(new BasicSetting()
                 .setDamage(7)
                 );
         setUpgradeInfo(new UpgradeSetting()

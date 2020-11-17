@@ -46,7 +46,7 @@ public class ChargeAlpha extends AbstractModCard {
     
     public ChargeAlpha() {
         super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
-        setBasicInfo(new BasicSetting()
+        initBaseFields(new BasicSetting()
                 .setMagicNumber(GIVE_ENERGY_NUM)
                 );
         setUpgradeInfo(new UpgradeSetting()
