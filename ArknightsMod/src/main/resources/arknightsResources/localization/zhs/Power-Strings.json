@@ -1,10 +1,17 @@
 {
-"arknights:CommonPower": {
-        "NAME": "Placeholder Power",
-        "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
-},
-"arknights:RarePower": {
-        "NAME": "Placeholder Power",
-        "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
-}
+  "arknights:MagicStrengthPower": {
+    "NAME": "魔法增幅",
+    "DESCRIPTIONS": [
+      "魔法伤害提升 #b{} 。",
+      "魔法伤害降低 #b{} 。"
+    ]
+  },     
+  "arknights:CommonPower": {
+    "NAME": "Placeholder Power",
+    "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
+  },
+  "arknights:RarePower": {
+    "NAME": "Placeholder Power",
+    "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
+  }
 }

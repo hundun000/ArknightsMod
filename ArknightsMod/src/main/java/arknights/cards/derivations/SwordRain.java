@@ -1,11 +1,12 @@
 package arknights.cards.derivations;
 
-import static arknights.DefaultMod.makeCardPath;
+import static arknights.ArknightsMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardColor;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
@@ -22,13 +23,13 @@ import com.megacrit.cardcrawl.powers.SlowPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.combat.IntimidateEffect;
 
-import arknights.DefaultMod;
-import arknights.cards.FiveStarVanguardDeploy;
+import arknights.ArknightsMod;
+import arknights.cards.TexasDeploy;
 import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
-import arknights.cards.demo.DefaultCommonAttack;
 import arknights.characters.Doctor;
+import arknights.variables.ExtraVariable;
 import basemod.abstracts.CustomCard;
 
 /**
@@ -37,13 +38,13 @@ import basemod.abstracts.CustomCard;
  */
 public class SwordRain extends AbstractModCard {
     
-    public static final String ID = DefaultMod.makeID(SwordRain.class.getSimpleName()); 
-    public static final String IMG = DefaultMod.makeCardPngPath(AbstractModCard.class);
+    public static final String ID = ArknightsMod.makeID(SwordRain.class.getSimpleName()); 
+    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.SPECIAL; 
-    private static final CardTarget TARGET = CardTarget.ENEMY;  
+    private static final CardRarity RARITY = CardRarity.COMMON; 
+    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
-    public static final CardColor COLOR = Doctor.Enums.COLOR_GRAY;
+
     private static final int COST = 0;
     
     private static final int WEAK_STACK_NUM = 1;
@@ -54,29 +55,32 @@ public class SwordRain extends AbstractModCard {
     
     
     public SwordRain() {
-        super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
+        super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(7)
                 .setMagicNumber(GIVE_ENERGY_NUM)
-                .setExtraMagicNumber(0, WEAK_STACK_NUM)
+                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, WEAK_STACK_NUM)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
                 .setPlusMagicNumber(PLUS_GIVE_ENERGY_NUM)
-                .setPlusExtraMagicNumber(0, PLUS_WEAK_STACK_NUM)
+                .setPlusExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, PLUS_WEAK_STACK_NUM)
                 );
         this.exhaust = true;
+        this.isMultiDamage = true;
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        addToBot(new DamageAllEnemiesAction(player, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         addToBot(new ApplyPowerAction(player, player, new EnergizedPower(player, magicNumber), magicNumber));
         
-        addToBot(new VFXAction(player, new IntimidateEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 1.0F));
+        
+        
+        //addToBot(new VFXAction(player, new IntimidateEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 1.0F));
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
             addToBot(new ApplyPowerAction(mo, player, new WeakPower(mo, this.extraMagicNumbers[0], false)));
-            addToBot(new ApplyPowerAction(mo, player, new SlowPower(mo, 1)));
+            //addToBot(new ApplyPowerAction(mo, player, new SlowPower(mo, 1)));
         }
     }
 

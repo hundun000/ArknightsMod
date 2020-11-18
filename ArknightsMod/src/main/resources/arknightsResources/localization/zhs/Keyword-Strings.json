@@ -1,9 +1,20 @@
 [
   {
     "NAMES": [
+      "Deprecated魔法伤害"
+    ],
+    "DESCRIPTION": "魔法伤害在结算时，不受 力量 或 虚弱 等状态影响，受 arknights:魔法增幅 等状态影响"
+  },
+  {
+    "NAMES": [
+      "Deprecated魔法增幅"
+    ],
+    "DESCRIPTION": "魔法增幅会让魔法攻击获得额外的伤害。"
+  },
+  {
+    "NAMES": [
       "攻击型咪波"
     ],
-    "PROPERNAME": "攻击型咪波",
     "DESCRIPTION": "咪波！"
   },
   {
@@ -11,6 +22,12 @@
       "剑雨"
     ],
     "DESCRIPTION":"剑雨是费用为 #b0 并且会 消耗 的攻击牌"
+  },
+  {
+    "NAMES": [
+      "冲锋号令·α型"
+    ],
+    "DESCRIPTION":"冲锋号令·α型是回复费用并且会 消耗 的技能牌"
   },
   {
     "NAMES": [

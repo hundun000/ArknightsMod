@@ -1,6 +1,6 @@
 package arknights.cards;
 
-import static arknights.DefaultMod.makeCardPath;
+import static arknights.ArknightsMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -17,8 +17,8 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.Lightning;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
-import arknights.DefaultMod;
-import arknights.cards.base.BaseSummonDeploy;
+import arknights.ArknightsMod;
+import arknights.cards.base.BaseSummon;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
@@ -28,10 +28,10 @@ import arknights.orbs.MeeBooAttackTypeOrb;
  * @author hundun
  * Created on 2020/11/10
  */
-public class MeebooAttackTypeSummon extends BaseSummonDeploy {
+public class MeebooAttackTypeSummon extends BaseSummon {
 
-    public static final String ID = DefaultMod.makeID(MeebooAttackTypeSummon.class);
-    public static final String IMG = DefaultMod.makeCardPngPath(MeebooAttackTypeSummon.class);
+    public static final String ID = ArknightsMod.makeID(MeebooAttackTypeSummon.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(MeebooAttackTypeSummon.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     

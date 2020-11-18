@@ -23,6 +23,7 @@ import arknights.cards.*;
 import arknights.characters.Doctor;
 import arknights.events.IdentityCrisisEvent;
 import arknights.potions.PlaceholderPotion;
+import arknights.powers.MagicStrengthPower;
 import arknights.relics.BottledPlaceholderRelic;
 import arknights.relics.DefaultClickableRelic;
 import arknights.relics.PlaceholderRelic;
@@ -32,7 +33,8 @@ import arknights.relics.UrsusBreadRelic;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
 import arknights.variables.DefaultCustomVariable;
-import arknights.variables.DefaultSecondMagicNumber;
+import arknights.variables.SecondMagicNumberVariable;
+import arknights.variables.MagicDamageVariable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +73,7 @@ import java.util.Properties;
  */
 
 @SpireInitializer
-public class DefaultMod implements
+public class ArknightsMod implements
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditStringsSubscriber,
@@ -80,7 +82,7 @@ public class DefaultMod implements
         PostInitializeSubscriber {
     // Make sure to implement the subscribers *you* are using (read basemod wiki). Editing cards? EditCardsSubscriber.
     // Making relics? EditRelicsSubscriber. etc., etc., for a full list and how to make your own, visit the basemod wiki.
-    public static final Logger logger = LogManager.getLogger(DefaultMod.class.getName());
+    public static final Logger logger = LogManager.getLogger(ArknightsMod.class.getName());
     private static String modID = "arknights";
 
     // Mod-settings settings. This is if you want an on/off savable button
@@ -169,6 +171,10 @@ public class DefaultMod implements
         return IMAGES_FOLDER + "/powers/" + resourcePath;
     }
     
+    public static String makePowerPngPath(Class<?> clazz, int iconSize) {
+        return makeCardPath(clazz.getSimpleName() + iconSize +".png");
+    }
+    
     public static String makeEventPath(String resourcePath) {
         return IMAGES_FOLDER + "/events/" + resourcePath;
     }
@@ -180,7 +186,7 @@ public class DefaultMod implements
     
     // =============== SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE =================
     
-    public DefaultMod() {
+    public ArknightsMod() {
         logger.info("Subscribe to BaseMod hooks");
         
         BaseMod.subscribe(this);
@@ -245,7 +251,7 @@ public class DefaultMod implements
     public static void setModID(String ID) { // DON'T EDIT
         Gson coolG = new Gson(); // EY DON'T EDIT THIS
         //   String IDjson = Gdx.files.internal("IDCheckStringsDONT-EDIT-AT-ALL.json").readString(String.valueOf(StandardCharsets.UTF_8)); // i hate u Gdx.files
-        InputStream in = DefaultMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THIS ETHER
+        InputStream in = ArknightsMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THIS ETHER
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class); // OR THIS, DON'T EDIT IT
         logger.info("You are attempting to set your mod ID as: " + ID); // NO WHY
         if (ID.equals(EXCEPTION_STRINGS.DEFAULTID)) { // DO *NOT* CHANGE THIS ESPECIALLY, TO EDIT YOUR MOD ID, SCROLL UP JUST A LITTLE, IT'S JUST ABOVE
@@ -265,9 +271,9 @@ public class DefaultMod implements
     private static void pathCheck() { // ALSO NO
         Gson coolG = new Gson(); // NOPE DON'T EDIT THIS
         //   String IDjson = Gdx.files.internal("IDCheckStringsDONT-EDIT-AT-ALL.json").readString(String.valueOf(StandardCharsets.UTF_8)); // i still hate u btw Gdx.files
-        InputStream in = DefaultMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THISSSSS
+        InputStream in = ArknightsMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json"); // DON'T EDIT THISSSSS
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class); // NAH, NO EDIT
-        String packageName = DefaultMod.class.getPackage().getName(); // STILL NO EDIT ZONE
+        String packageName = ArknightsMod.class.getPackage().getName(); // STILL NO EDIT ZONE
         FileHandle resourcePathExists = Gdx.files.internal(RESOURCES_FOLDER); // PLEASE DON'T EDIT THINGS HERE, THANKS
         if (!modID.equals(EXCEPTION_STRINGS.DEVID)) { // LEAVE THIS EDIT-LESS
             if (!packageName.equals(getModID())) { // NOT HERE ETHER
@@ -284,7 +290,7 @@ public class DefaultMod implements
     
     public static void initialize() {
         logger.info("========================= Initializing Default Mod. Hi. =========================");
-        DefaultMod defaultmod = new DefaultMod();
+        ArknightsMod defaultmod = new ArknightsMod();
         logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
     }
     
@@ -416,7 +422,7 @@ public class DefaultMod implements
         logger.info("Add variables");
         // Add the Custom Dynamic variables
         BaseMod.addDynamicVariable(new DefaultCustomVariable());
-        BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
+        BaseMod.addDynamicVariable(new SecondMagicNumberVariable());
         
         logger.info("Adding cards");
         // Add the cards
@@ -530,9 +536,12 @@ public class DefaultMod implements
         
         if (keywords != null) {
             for (Keyword keyword : keywords) {
-                BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword(keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
             }
+            logger.info("load {} keywords.", keywords.length);
+        } else {
+            logger.warn("not load keywords!");
         }
     }
     
@@ -547,4 +556,6 @@ public class DefaultMod implements
     public static String makeID(Class<?> clazz) {
         return makeID(clazz.getSimpleName());
     }
+
+    
 }

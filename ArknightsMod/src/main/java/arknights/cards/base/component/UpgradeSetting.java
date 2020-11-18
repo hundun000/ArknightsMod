@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import arknights.cards.base.AbstractModCard;
+import arknights.variables.ExtraVariable;
 
 /**
  * @author hundun
@@ -14,7 +15,7 @@ public class UpgradeSetting {
     private Integer plusBlock;
     private Integer newCost;
     private Integer plusMagicNumber;
-    private Map<Integer, Integer> plusExtraMagicNumbers = new HashMap<>(AbstractModCard.EXTRA_MAGIC_NUMBER_SIZE);
+    private Map<Integer, Integer> plusExtraMagicNumbers = new HashMap<>(ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE);
     
     public Integer getPlusDamage() {
         return plusDamage;

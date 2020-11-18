@@ -1,6 +1,6 @@
 package arknights.cards.derivations;
 
-import static arknights.DefaultMod.makeCardPath;
+import static arknights.ArknightsMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.combat.IntimidateEffect;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
@@ -30,13 +30,13 @@ import arknights.characters.Doctor;
  */
 public class ChargeAlpha extends AbstractModCard {
 
-    public static final String ID = DefaultMod.makeID(ChargeAlpha.class.getSimpleName()); 
-    public static final String IMG = DefaultMod.makeCardPngPath(AbstractModCard.class);
+    public static final String ID = ArknightsMod.makeID(ChargeAlpha.class.getSimpleName()); 
+    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.SPECIAL; 
+    private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.SELF;  
     private static final CardType TYPE = CardType.SKILL;       
-    public static final CardColor COLOR = Doctor.Enums.COLOR_GRAY;
+    
     private static final int COST = 0;
     
     private static final int GIVE_ENERGY_NUM = 1;
@@ -45,7 +45,7 @@ public class ChargeAlpha extends AbstractModCard {
     
     
     public ChargeAlpha() {
-        super(ID, IMG, COST, TYPE, COLOR, RARITY, TARGET);
+        super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setMagicNumber(GIVE_ENERGY_NUM)
                 );

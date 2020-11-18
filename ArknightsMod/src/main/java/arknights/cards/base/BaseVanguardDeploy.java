@@ -21,29 +21,26 @@ import arknights.cards.derivations.SwordRain;
  */
 public abstract class BaseVanguardDeploy extends AbstractModCard {
 
-    private AbstractCard giveCardPrototype;
-    
     public BaseVanguardDeploy(String id, String img, int cost, CardRarity rarity) {
         super(id, img, cost, CardType.ATTACK, rarity, CardTarget.ENEMY);
     }
-    
-    public void setGiveCardPrototype(AbstractCard giveCard) {
-        this.giveCardPrototype = giveCard;
-    }
+
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster m) {
         addToBot(new DamageAction(m, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         
-        if (giveCardPrototype != null) {
-            AbstractCard giveCardInstance = giveCardPrototype.makeCopy();
+        AbstractCard giveCard = getGiveCard();
+        if (giveCard != null) {
             if (this.upgraded) {
-                giveCardInstance.upgrade();
+                giveCard.upgrade();
             }
-            addToTop(new ApplyPowerAction(player, player, new NightmarePower(player, 1, giveCardInstance)));
+            addToTop(new ApplyPowerAction(player, player, new NightmarePower(player, 1, giveCard)));
         }
     }
     
-    
+    protected AbstractCard getGiveCard(){
+        return null;
+    }
 
 }

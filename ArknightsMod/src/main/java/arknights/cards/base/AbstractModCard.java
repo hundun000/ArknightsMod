@@ -4,28 +4,33 @@ import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.cards.base.component.UseCounter;
 import arknights.characters.Doctor;
+import arknights.powers.MagicStrengthPower;
+import arknights.variables.ExtraVariable;
 
-/**
- * 游戏设计模式/子类沙箱模式 https://gpp.tkchu.me/subclass-sandbox.html
- */
 public abstract class AbstractModCard extends CustomCard {
     private final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
-
-    public static final int EXTRA_MAGIC_NUMBER_SIZE = 1;
-    public int[] extraMagicNumbers = new int[EXTRA_MAGIC_NUMBER_SIZE];        
-    public int[] baseExtraMagicNumbers = new int[EXTRA_MAGIC_NUMBER_SIZE];
-    public boolean[] upgradedExtraMagicNumbers = new boolean[EXTRA_MAGIC_NUMBER_SIZE];
-    public boolean[] extraMagicNumberModifieds = new boolean[EXTRA_MAGIC_NUMBER_SIZE];
-
+    
+    
+    // extra magic number slots
+    public int[] extraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];        
+    public int[] baseExtraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
+    public boolean[] extraMagicNumberUpgradeds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
+    public boolean[] extraMagicNumberModifieds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
+    
     
     /**
      * auto generate fields which always same or similar
@@ -73,7 +78,7 @@ public abstract class AbstractModCard extends CustomCard {
             this.magicNumber = this.baseMagicNumber;
         }
         
-        for (int i = 0; i < EXTRA_MAGIC_NUMBER_SIZE; i++) {
+        for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
             if (basicSetting.getExtraMagicNumber(i) != null) {
                 this.baseExtraMagicNumbers[i] = basicSetting.getExtraMagicNumber(i);
                 this.extraMagicNumbers[i] =  this.baseExtraMagicNumbers[i];
@@ -82,14 +87,36 @@ public abstract class AbstractModCard extends CustomCard {
     }
 
     
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+        //calculateMagicDamage();
+    }
     
-    
-    
+    @Deprecated
+    private void calculateMagicDamage() {
+        AbstractPower power = AbstractDungeon.player.getPower(MagicStrengthPower.POWER_ID);
+        if (power != null) {
+            this.extraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX] = Math.max(0, this.baseExtraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX] + power.amount);
+        } else {
+            this.extraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX] = this.baseExtraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX];
+        }
+    }
+
     protected void setUpgradeInfo(UpgradeSetting upgradeSetting) {
         this.upgradeSetting = upgradeSetting;
     }
     
-    
+    @Override
+    public void displayUpgrades() {
+        super.displayUpgrades();
+        for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
+            if (extraMagicNumberUpgradeds[i]) {
+                extraMagicNumbers[i] = baseExtraMagicNumbers[i];
+                extraMagicNumberModifieds[i] = true;
+            }
+        }
+    }
     
     @Override
     public void upgrade() {
@@ -108,7 +135,7 @@ public abstract class AbstractModCard extends CustomCard {
                 upgradeMagicNumber(upgradeSetting.getPlusMagicNumber());
             }
             
-            for (int i = 0; i < EXTRA_MAGIC_NUMBER_SIZE; i++) {
+            for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
                 if (upgradeSetting.getPlusExtraMagicNumber(i) != null) {
                     upgradeExtraMagicNumber(i, upgradeSetting.getPlusExtraMagicNumber(i));
                 }
@@ -124,6 +151,7 @@ public abstract class AbstractModCard extends CustomCard {
     protected void upgradeExtraMagicNumber(int index, int amount) {
         baseExtraMagicNumbers[index] += amount; 
         extraMagicNumbers[index] = baseExtraMagicNumbers[index];
-        upgradedExtraMagicNumbers[index] = true;
+        extraMagicNumberUpgradeds[index] = true;
     }
+
 }

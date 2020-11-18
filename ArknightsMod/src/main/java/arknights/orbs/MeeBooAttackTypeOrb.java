@@ -1,7 +1,7 @@
 package arknights.orbs;
 
-import static arknights.DefaultMod.makeCardPath;
-import static arknights.DefaultMod.makeOrbPath;
+import static arknights.ArknightsMod.makeCardPath;
+import static arknights.ArknightsMod.makeOrbPath;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,7 +23,7 @@ import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.cards.FourStarSingleTargetMedicDeploy;
 import arknights.util.LocalizationUtils;
 import arknights.util.TextureLoader;
@@ -35,7 +35,7 @@ import basemod.abstracts.CustomOrb;
  */
 public class MeeBooAttackTypeOrb extends AbstractModOrb {
     
-    public static final String ID = DefaultMod.makeID(MeeBooAttackTypeOrb.class);
+    public static final String ID = ArknightsMod.makeID(MeeBooAttackTypeOrb.class);
     public static final String IMG_PATH = makeOrbPath(MeeBooAttackTypeOrb.class.getSimpleName() + ".png");
    
     // Standard ID/Description

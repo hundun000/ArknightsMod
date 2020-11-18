@@ -1,7 +1,7 @@
 package arknights.relics;
 
-import static arknights.DefaultMod.makeRelicOutlinePath;
-import static arknights.DefaultMod.makeRelicPath;
+import static arknights.ArknightsMod.makeRelicOutlinePath;
+import static arknights.ArknightsMod.makeRelicPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic.LandingSound;
 import com.megacrit.cardcrawl.relics.AbstractRelic.RelicTier;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
 
@@ -26,7 +26,7 @@ public class StereoProjectorRelic extends CustomRelic {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID(StereoProjectorRelic.class);
+    public static final String ID = ArknightsMod.makeID(StereoProjectorRelic.class);
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath(StereoProjectorRelic.class.getSimpleName() + ".png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath(StereoProjectorRelic.class.getSimpleName() + ".png"));

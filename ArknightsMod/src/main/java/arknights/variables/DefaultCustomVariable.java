@@ -2,7 +2,7 @@ package arknights.variables;
 
 import basemod.abstracts.DynamicVariable;
 
-import static arknights.DefaultMod.makeID;
+import static arknights.ArknightsMod.makeID;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;

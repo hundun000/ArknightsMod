@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import arknights.cards.base.AbstractModCard;
+import arknights.variables.ExtraVariable;
 
 /**
  * @author hundun
@@ -13,7 +14,7 @@ public class BasicSetting {
     private Integer damage;
     private Integer block;
     private Integer magicNumber;
-    private Map<Integer, Integer> extraMagicNumbers = new HashMap<>(AbstractModCard.EXTRA_MAGIC_NUMBER_SIZE);
+    private Map<Integer, Integer> extraMagicNumbers = new HashMap<>(ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE);
     public Integer getDamage() {
         return damage;
     }

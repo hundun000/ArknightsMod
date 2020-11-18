@@ -4,7 +4,7 @@ import basemod.AutoAdd;
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
 
-import static arknights.DefaultMod.makeCardPath;
+import static arknights.ArknightsMod.makeCardPath;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
@@ -21,8 +21,8 @@ import arknights.characters.Doctor;
 
 public class FourStarSingleTargetMedicDeploy extends AbstractModCard {
     
-    public static final String ID = DefaultMod.makeID(FourStarSingleTargetMedicDeploy.class);
-    public static final String IMG = DefaultMod.makeCardPngPath(AbstractModCard.class);
+    public static final String ID = ArknightsMod.makeID(FourStarSingleTargetMedicDeploy.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
 
     

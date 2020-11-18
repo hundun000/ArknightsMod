@@ -1,7 +1,7 @@
 {
   "modid": "hundun:${project.artifactId}",
   "name": "${project.name}",
-  "author_list": ["NotGremious"],
+  "author_list": ["hundun"],
   "credits": "Basemod, ModTheSpire, #modding",
   "description": "${project.description}",
   "version": "${project.version}",

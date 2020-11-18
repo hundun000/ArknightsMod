@@ -1,7 +1,22 @@
 {
+  "arknights:CounterStrike": {
+    "NAME": "蓄力打击",
+    "DESCRIPTION": "造成 !D! 点伤害。每 !M! 次打出时，额外增加 !2ndM! 点伤害。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （已打出{}次。）"
+    ]
+  },
+  "arknights:Chimera": {
+    "NAME": "奇美拉",
+    "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
+  },
+  "arknights:DeprecatedMagicStrengthGain": {
+    "NAME": "Deprecated获得魔法增幅",
+    "DESCRIPTION": "Deprecated获得 !M! 层 魔法增幅 。"
+  },
   "arknights:SwordRain": {
     "NAME": "剑雨",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 虚弱 和 1 层 缓慢 。 获得 !arknights:2ndM! 点 [E] 。 消耗 。 "
+    "DESCRIPTION": "对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 虚弱 。 获得 !2ndM! 点 [E] 。 消耗 。 "
   },
   "arknights:ChargeAlpha": {
     "NAME": "冲锋号令·α型",
@@ -11,19 +26,19 @@
     "NAME": "攻击型咪波召唤",
     "DESCRIPTION": "召唤 !M! 只 攻击型咪波 。"
   },
-  "arknights:FourStarVanguardDeploy": {
-    "NAME": "四星先锋部署",
+  "arknights:FangDeploy": {
+    "NAME": "芬部署",
     "DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张 冲锋号令·α型 加入手牌。",
     "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张已 升级 的 冲锋号令·α型 加入手牌。"
   },
-  "arknights:FiveStarVanguardDeploy": {
-    "NAME": "五星型先锋部署",
+  "arknights:TexasDeploy": {
+    "NAME": "德克萨斯部署",
     "DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张 剑雨 加入手牌。",
     "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张已 升级 的 剑雨 加入手牌。"
   },
-  "arknights:DkssDeploy": {
-    "NAME": "德克萨斯部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 在下一回合获得 [E] [E] 。NL 给予所有敌人一层眩晕。"
+  "arknights:TalentLavender": {
+    "NAME": "天赋-薰衣草",
+    "DESCRIPTION": "获得 !M! 层多层护甲。"
   },
   "arknights:FourStarSingleTargetMedicDeploy": {
     "NAME": "四星单体医疗部署",

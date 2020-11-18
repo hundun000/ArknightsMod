@@ -21,11 +21,8 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.cards.*;
-import arknights.cards.demo.DefaultCommonAttack;
-import arknights.cards.demo.DefaultRareAttack;
-import arknights.cards.demo.DefaultUncommonAttack;
 import arknights.relics.DefaultClickableRelic;
 import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
@@ -35,7 +32,7 @@ import arknights.relics.UrsusBreadRelic;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static arknights.DefaultMod.*;
+import static arknights.ArknightsMod.*;
 import static arknights.characters.Doctor.Enums.COLOR_GRAY;
 
 import java.util.ArrayList;
@@ -45,7 +42,7 @@ import java.util.ArrayList;
 //All text (starting description and loadout, anything labeled TEXT[]) can be found in DefaultMod-character-Strings.json in the resources
 
 public class Doctor extends CustomPlayer {
-    public static final Logger logger = LogManager.getLogger(DefaultMod.class.getName());
+    public static final Logger logger = LogManager.getLogger(ArknightsMod.class.getName());
 
     // =============== CHARACTER ENUMERATORS =================
     // These are enums for your Characters color (both general color and for the card library) as well as
@@ -91,17 +88,17 @@ public class Doctor extends CustomPlayer {
     // =============== TEXTURES OF BIG ENERGY ORB ===============
 
     public static final String[] orbTextures = {
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer1.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer2.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer3.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer4.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer5.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer6.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer1d.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer2d.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer3d.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer4d.png",
-            DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer5d.png",};
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer1.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer2.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer3.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer4.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer5.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer6.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer1d.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer2d.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer3d.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer4d.png",
+            ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/layer5d.png",};
 
     // =============== /TEXTURES OF BIG ENERGY ORB/ ===============
 
@@ -109,9 +106,9 @@ public class Doctor extends CustomPlayer {
 
     public Doctor(String name, PlayerClass setClass) {
         super(name, setClass, orbTextures,
-                DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/vfx.png", null,
+                ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/orb/vfx.png", null,
                 new SpriterAnimation(
-                        DefaultMod.IMAGES_FOLDER + "/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
+                        ArknightsMod.IMAGES_FOLDER + "/char/defaultCharacter/Spriter/theDefaultAnimation.scml"));
 
 
         // =============== TEXTURES, ENERGY, LOADOUT =================  
@@ -164,14 +161,17 @@ public class Doctor extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
-        retVal.add(FourStarVanguardDeploy.ID);
-        retVal.add(FiveStarVanguardDeploy.ID);
+        retVal.add(FangDeploy.ID);
+        retVal.add(TexasDeploy.ID);
         retVal.add(FourStarSingleTargetMedicDeploy.ID);
         retVal.add(MeebooAttackTypeSummon.ID);
-        
-        retVal.add(DefaultCommonAttack.ID);
-        retVal.add(DefaultUncommonAttack.ID);
-        retVal.add(DefaultRareAttack.ID);
+        retVal.add(FourStarSingleTargetMedicDeploy.ID);
+        retVal.add(TalentLavender.ID);
+        retVal.add(MagicStrengthGain.ID);
+        retVal.add(Chimera.ID);
+//        retVal.add(DefaultCommonAttack.ID);
+//        retVal.add(DefaultUncommonAttack.ID);
+//        retVal.add(DefaultRareAttack.ID);
 
 //        retVal.add(DefaultCommonSkill.ID);
 //        retVal.add(DefaultUncommonSkill.ID);
@@ -233,7 +233,7 @@ public class Doctor extends CustomPlayer {
     // Should return a color object to be used to color the trail of moving cards
     @Override
     public Color getCardTrailColor() {
-        return arknights.DefaultMod.DEFAULT_GRAY;
+        return arknights.ArknightsMod.DEFAULT_GRAY;
     }
 
     // Should return a BitmapFont object that you can use to customize how your
@@ -252,7 +252,7 @@ public class Doctor extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new DefaultCommonAttack();
+        return new CounterStrike();
     }
 
     // The class name as it appears next to your player name in-game
@@ -270,14 +270,14 @@ public class Doctor extends CustomPlayer {
     // Should return a Color object to be used to color the miniature card images in run history.
     @Override
     public Color getCardRenderColor() {
-        return arknights.DefaultMod.DEFAULT_GRAY;
+        return arknights.ArknightsMod.DEFAULT_GRAY;
     }
 
     // Should return a Color object to be used as screen tint effect when your
     // character attacks the heart.
     @Override
     public Color getSlashAttackColor() {
-        return arknights.DefaultMod.DEFAULT_GRAY;
+        return arknights.ArknightsMod.DEFAULT_GRAY;
     }
 
     // Should return an AttackEffect array of any size greater than 0. These effects

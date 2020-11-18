@@ -2,13 +2,13 @@ package arknights.relics;
 
 import basemod.abstracts.CustomRelic;
 
-import static arknights.DefaultMod.makeRelicOutlinePath;
-import static arknights.DefaultMod.makeRelicPath;
+import static arknights.ArknightsMod.makeRelicOutlinePath;
+import static arknights.ArknightsMod.makeRelicPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.util.TextureLoader;
 
 public class PlaceholderRelic extends CustomRelic {
@@ -20,7 +20,7 @@ public class PlaceholderRelic extends CustomRelic {
      */
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("PlaceholderRelic");
+    public static final String ID = ArknightsMod.makeID("PlaceholderRelic");
 
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic.png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic.png"));

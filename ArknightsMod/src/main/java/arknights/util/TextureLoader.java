@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class TextureLoader {
                 loadTexture(textureString);
             } catch (GdxRuntimeException e) {
                 logger.error("Could not find texture: " + textureString);
-                return getTexture(DefaultMod.IMAGES_FOLDER + "/ui/missing_texture.png");
+                return getTexture(ArknightsMod.IMAGES_FOLDER + "/ui/missing_texture.png");
             }
         }
         return textures.get(textureString);

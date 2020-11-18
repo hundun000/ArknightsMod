@@ -1,6 +1,6 @@
 package arknights.events;
 
-import static arknights.DefaultMod.makeEventPath;
+import static arknights.ArknightsMod.makeEventPath;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -16,12 +16,12 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 
 public class IdentityCrisisEvent extends AbstractImageEvent {
 
 
-    public static final String ID = DefaultMod.makeID("IdentityCrisisEvent");
+    public static final String ID = ArknightsMod.makeID("IdentityCrisisEvent");
     private static final EventStrings eventStrings = CardCrawlGame.languagePack.getEventString(ID);
 
     private static final String NAME = eventStrings.NAME;
@@ -110,7 +110,7 @@ public class IdentityCrisisEvent extends AbstractImageEvent {
                         screenNum = 1;
                         break;
                     case 3: // If you press button the fourth button (Button at index 3), in this case: TOUCH
-                        imageEventText.loadImage(DefaultMod.IMAGES_FOLDER + "/events/IdentityCrisisEvent2.png"); // Change the shown image
+                        imageEventText.loadImage(ArknightsMod.IMAGES_FOLDER + "/events/IdentityCrisisEvent2.png"); // Change the shown image
                         // Other than that, this option doesn't do anything special.
                         this.imageEventText.updateBodyText(DESCRIPTIONS[4]);
                         this.imageEventText.updateDialogOption(0, OPTIONS[5]);

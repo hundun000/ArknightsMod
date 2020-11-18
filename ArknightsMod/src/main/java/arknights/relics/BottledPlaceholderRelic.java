@@ -17,12 +17,12 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-import arknights.DefaultMod;
+import arknights.ArknightsMod;
 import arknights.patches.relics.BottledPlaceholderField;
 import arknights.util.TextureLoader;
 
-import static arknights.DefaultMod.makeRelicOutlinePath;
-import static arknights.DefaultMod.makeRelicPath;
+import static arknights.ArknightsMod.makeRelicOutlinePath;
+import static arknights.ArknightsMod.makeRelicPath;
 
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -45,7 +45,7 @@ public class BottledPlaceholderRelic extends CustomRelic implements CustomBottle
 
 
     // ID, images, text.
-    public static final String ID = DefaultMod.makeID("BottledPlaceholderRelic");
+    public static final String ID = ArknightsMod.makeID("BottledPlaceholderRelic");
     private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("BottledPlaceholder.png"));
     private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("BottledPlaceholder.png"));
 
