@@ -50,6 +50,7 @@ public class TexasDeploy extends BaseVanguardDeploy {
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
                 );
+        this.cardsToPreview = new SwordRain();
     }
     
     @Override

@@ -23,11 +23,14 @@ import arknights.cards.base.component.UseCounter;
 import arknights.cards.derivations.SwordRain;
 import arknights.util.LocalizationUtils;
 import arknights.variables.ExtraVariable;
+import basemod.AutoAdd;
 
 /**
  * @author hundun
  * Created on 2020/11/18
  */
+@AutoAdd.Ignore
+@Deprecated
 public class CounterStrike extends AbstractModCard {
     
     public static final String ID = ArknightsMod.makeID(CounterStrike.class.getSimpleName()); 
@@ -58,7 +61,6 @@ public class CounterStrike extends AbstractModCard {
                 .setPlusDamage(3)
                 .setPlusExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, UPGRADE_COUNTER_REACH_PLUS_DAMAGE)
                 );
-        this.exhaust = true;
     }
 
     @Override

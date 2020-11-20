@@ -75,9 +75,9 @@ public class Chimera extends AbstractModCard {
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new ApplyPowerAction(player, player, new StrengthPower(player,this.magicNumber), this.magicNumber));
         addToBot(new ApplyPowerAction(player, player, new EndTurnDeathPower(player)));
-        
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
-        
+        for (int i = 0; i < this.extraMagicNumbers[ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX]; i++) {
+            addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
+        }
     }
     
     

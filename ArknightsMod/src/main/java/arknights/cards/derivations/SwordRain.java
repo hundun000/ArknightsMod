@@ -2,6 +2,7 @@ package arknights.cards.derivations;
 
 import static arknights.ArknightsMod.makeCardPath;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -79,8 +80,9 @@ public class SwordRain extends AbstractModCard {
         
         //addToBot(new VFXAction(player, new IntimidateEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 1.0F));
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-            addToBot(new ApplyPowerAction(mo, player, new WeakPower(mo, this.extraMagicNumbers[0], false)));
-            //addToBot(new ApplyPowerAction(mo, player, new SlowPower(mo, 1)));
+            if ((!monster.isDead) && (!monster.isDying)) {
+                addToBot(new StunMonsterAction(mo, player, this.extraMagicNumbers[0]));
+            }
         }
     }
 

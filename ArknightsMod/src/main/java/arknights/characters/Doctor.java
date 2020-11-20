@@ -10,6 +10,8 @@ import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.status.Burn;
+import com.megacrit.cardcrawl.cards.status.Wound;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -161,14 +163,20 @@ public class Doctor extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
-        retVal.add(FangDeploy.ID);
-        retVal.add(TexasDeploy.ID);
-        retVal.add(FourStarSingleTargetMedicDeploy.ID);
-        retVal.add(MeebooAttackTypeSummon.ID);
-        retVal.add(FourStarSingleTargetMedicDeploy.ID);
-        retVal.add(TalentLavender.ID);
-        retVal.add(MagicStrengthGain.ID);
+        retVal.add(BindingChains.ID);
         retVal.add(Chimera.ID);
+        retVal.add(FangDeploy.ID);
+        retVal.add(MeebooAttackTypeSummon.ID);
+        retVal.add(RagingIronFist.ID);
+        retVal.add(ScorchedEarth.ID);
+        retVal.add(SteamPump.ID);
+        retVal.add(SuspendedCross.ID);
+        retVal.add(TalentLavender.ID);
+        retVal.add(TelescopingElectricNet.ID);
+        retVal.add(TexasDeploy.ID);
+        retVal.add(ToxicOverload.ID);
+        retVal.add(Wound.ID);
+        retVal.add(Burn.ID);
 //        retVal.add(DefaultCommonAttack.ID);
 //        retVal.add(DefaultUncommonAttack.ID);
 //        retVal.add(DefaultRareAttack.ID);
@@ -252,7 +260,7 @@ public class Doctor extends CustomPlayer {
     //Which card should be obtainable from the Match and Keep event?
     @Override
     public AbstractCard getStartCardForEvent() {
-        return new CounterStrike();
+        return new FangDeploy();
     }
 
     // The class name as it appears next to your player name in-game

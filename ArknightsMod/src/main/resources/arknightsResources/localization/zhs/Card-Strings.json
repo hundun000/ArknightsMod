@@ -1,22 +1,35 @@
 {
-  "arknights:CounterStrike": {
-    "NAME": "蓄力打击",
-    "DESCRIPTION": "造成 !D! 点伤害。每 !M! 次打出时，额外增加 !2ndM! 点伤害。",
-    "EXTENDED_DESCRIPTION": [
-      " NL （已打出{}次。）"
-    ]
+  "arknights:TelescopingElectricNet": {
+    "NAME": "伸缩式电捕网",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。每次 斩杀 时，获得 !M! 金币。"
+  },
+  "arknights:BindingChains": {
+    "NAME": "束缚链",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。抽 !M! 张牌，然后将手牌中的一张牌放到你抽牌堆的顶端。"
+  },
+  "arknights:SuspendedCross": {
+    "NAME": "十字悬挂",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 缠绕 。"
+  },
+  "arknights:ToxicOverload": {
+    "NAME": "蓄力毒尾击",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 缓慢 。"
+  },
+  "arknights:SteamPump": {
+    "NAME": "水蒸气泵",
+    "DESCRIPTION": "获得 !B! 点 格挡 。选择1张牌丢弃，若选择的是 *灼伤 ，改为将其 消耗 并获得 [E] 。"
+  },
+  "arknights:RagingIronFist": {
+    "NAME": "铁意六合",
+    "DESCRIPTION": "造成 !D! 点伤害。选择1张牌丢弃，若选择的是 *伤口 ，改为将其 消耗 并获得 [E] 。"
   },
   "arknights:Chimera": {
     "NAME": "奇美拉",
     "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
   },
-  "arknights:DeprecatedMagicStrengthGain": {
-    "NAME": "Deprecated获得魔法增幅",
-    "DESCRIPTION": "Deprecated获得 !M! 层 魔法增幅 。"
-  },
   "arknights:SwordRain": {
     "NAME": "剑雨",
-    "DESCRIPTION": "对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 虚弱 。 获得 !2ndM! 点 [E] 。 消耗 。 "
+    "DESCRIPTION": "对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 击晕 。 获得 !2ndM! 点 [E] 。 消耗 。 "
   },
   "arknights:ChargeAlpha": {
     "NAME": "冲锋号令·α型",
@@ -40,6 +53,10 @@
     "NAME": "天赋-薰衣草",
     "DESCRIPTION": "获得 !M! 层多层护甲。"
   },
+  "arknights:ScorchedEarth": {
+    "NAME": "焦土",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害，将1张 *灼伤 放入你的弃牌堆中。"
+  },
   "arknights:FourStarSingleTargetMedicDeploy": {
     "NAME": "四星单体医疗部署",
     "DESCRIPTION": "获得 !B! 点 格挡。"
@@ -60,11 +77,6 @@
     "NAME": "群体术士部署",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害。"
   },
-  "arknights:IfritScorchedEarth": {
-    "NAME": "伊芙利特-焦土",
-    "DESCRIPTION": "造成 !D! 点伤害，将 !M! 张 灼伤 加入手牌。",
-    "UPGRADE_DESCRIPTION": "WWWWWWWWWWW"
-  },
   "arknights:SingleTargetSniperDeploy": {
     "NAME": "单体狙击部署",
     "DESCRIPTION": "造成 !D! 点伤害 !M! 次。"
@@ -73,56 +85,24 @@
     "NAME": "群体狙击部署",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
   },
-  
-  "arknights:DefaultCommonAttack": {
-    "NAME": "攻击",
-    "DESCRIPTION": "造成 !D! 点伤害. NL [#0000ff]This[] [#ff0000]Is[] [#ffff00]How[] [#88888]color[] [#ff00ff]works.[]"
+  "arknights:DeprecatedDisplacementTrap": {
+    "NAME": "Deprecated陷阱",
+    "DESCRIPTION": "造成 !D! 点伤害X次。X等于敌人的位移层数。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害X+1次。X等于敌人的位移层数。",
+    "EXTENDED_DESCRIPTION":[
+      "(共 !B! 次)",
+      ""
+    ]
   },
-  "arknights:DefaultCommonSkill": {
-    "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block. NL arknights:Multiword_Keyword."
+  "arknights:DeprecatedCounterStrike": {
+    "NAME": "Deprecated蓄力打击",
+    "DESCRIPTION": "Deprecated造成 !D! 点伤害。每 !M! 次打出时，额外增加 !2ndM! 点伤害。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （已打出{}次。）"
+    ]
   },
-  "arknights:DefaultCommonPower": {
-    "NAME": "Hold Place",
-    "DESCRIPTION": "Gain !M! arknights:Keyword.",
-    "UPGRADE_DESCRIPTION": "Gain !M! arknights:Keywords."
-  },
-  "arknights:DefaultUncommonAttack": {
-    "NAME": "大打击",
-    "DESCRIPTION": "造成 !D! 点伤害"
-  },
-  "arknights:DefaultUncommonSkill": {
-    "NAME": "A Better Defend",
-    "DESCRIPTION": "Gain !B! Plated Armor. Affected by Dexterity."
-  },
-  "arknights:DefaultUncommonPower": {
-    "NAME": "Weirdness",
-    "DESCRIPTION": "Gain X arknights:Keywords.",
-    "UPGRADE_DESCRIPTION": "Gain X +1 arknights:Keywords."
-  },
-  "arknights:DefaultRareAttack": {
-    "NAME": "TOUCH",
-    "DESCRIPTION": "造成 !D! 点伤害."
-  },
-  "arknights:DefaultRareSkill": {
-    "NAME": "For Each Loop x2",
-    "DESCRIPTION": "Apply !M! vulnerable to all enemies, 2 times.",
-    "UPGRADE_DESCRIPTION": "Apply !M! vulnerable to all enemies, 3 times."
-  },
-  "arknights:DefaultRarePower": {
-    "NAME": "In-Progress Form",
-    "DESCRIPTION": "At the start of your turn, play a TOUCH."
-  },
-  "arknights:DefaultAttackWithVariable": {
-    "NAME": "Special Strike",
-    "DESCRIPTION": "造成 !D! 点伤害 [E] times. NL (造成 !arknights:ENERGY_DAMAGE! damage total.)"
-  },
-  "arknights:DefaultSecondMagicNumberSkill": {
-    "NAME": "Cool 2 Number Card",
-    "DESCRIPTION": "Apply !M! vulnerable and !arknights:SecondMagic! poison to an enemy."
-  },
-  "arknights:OrbSkill": {
-    "NAME": "Get Orb",
-    "DESCRIPTION": "Channel 1 Default Orb."
+  "arknights:DeprecatedMagicStrengthGain": {
+    "NAME": "Deprecated获得魔法增幅",
+    "DESCRIPTION": "Deprecated获得 !M! 层 魔法增幅 。"
   }
 }

@@ -1,6 +1,12 @@
 {
-  "arknights:MagicStrengthPower": {
-    "NAME": "魔法增幅",
+  "arknights:DeprecatedDisplacementPower": {
+    "NAME": "Deprecated位移",
+    "DESCRIPTIONS": [
+      "你对该敌人造成的 位移 。"
+    ]
+  }, 
+  "arknights:DeprecatedMagicStrengthPower": {
+    "NAME": "Deprecated魔法增幅",
     "DESCRIPTIONS": [
       "魔法伤害提升 #b{} 。",
       "魔法伤害降低 #b{} 。"
