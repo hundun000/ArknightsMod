@@ -49,6 +49,7 @@ public class TexasDeploy extends BaseVanguardDeploy {
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
+                .setUpgradeCardToPreview(true)
                 );
         this.cardsToPreview = new SwordRain();
     }

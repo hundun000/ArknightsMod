@@ -39,8 +39,8 @@ public class Chimera extends AbstractModCard {
     public static final String ID = ArknightsMod.makeID(Chimera.class);
     public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    
+    
     
 
     private static final CardRarity RARITY = CardRarity.RARE;

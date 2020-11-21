@@ -33,7 +33,7 @@ public class ChargeAlpha extends AbstractModCard {
     public static final String ID = ArknightsMod.makeID(ChargeAlpha.class.getSimpleName()); 
     public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.COMMON; 
+    private static final CardRarity RARITY = CardRarity.SPECIAL; 
     private static final CardTarget TARGET = CardTarget.SELF;  
     private static final CardType TYPE = CardType.SKILL;       
     

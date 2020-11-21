@@ -164,17 +164,19 @@ public class Doctor extends CustomPlayer {
         logger.info("Begin loading starter Deck Strings");
 
         retVal.add(BindingChains.ID);
-        retVal.add(Chimera.ID);
         retVal.add(FangDeploy.ID);
-        retVal.add(MeebooAttackTypeSummon.ID);
+        retVal.add(Phantom.ID);
         retVal.add(RagingIronFist.ID);
+        retVal.add(RatSwarm.ID);
         retVal.add(ScorchedEarth.ID);
         retVal.add(SteamPump.ID);
+        retVal.add(SteamPump.ID);
+        retVal.add(SteamPump.ID);
         retVal.add(SuspendedCross.ID);
-        retVal.add(TalentLavender.ID);
         retVal.add(TelescopingElectricNet.ID);
         retVal.add(TexasDeploy.ID);
         retVal.add(ToxicOverload.ID);
+        retVal.add(Wolfpack.ID);
         retVal.add(Wound.ID);
         retVal.add(Burn.ID);
 //        retVal.add(DefaultCommonAttack.ID);

@@ -48,24 +48,25 @@ public class SwordRain extends AbstractModCard {
 
     private static final int COST = 0;
     
-    private static final int WEAK_STACK_NUM = 1;
     private static final int GIVE_ENERGY_NUM = 1;
     
-    private static final int PLUS_WEAK_STACK_NUM = 1;
     private static final int PLUS_GIVE_ENERGY_NUM = 1;
     
+    private static final int WEAK_STACK_NUM = 1;
+    private static final int PLUS_WEAK_STACK_NUM = 1;
+    private static final int WEAK_MAGIC_INDEX = ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX;
     
     public SwordRain() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(7)
                 .setMagicNumber(GIVE_ENERGY_NUM)
-                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, WEAK_STACK_NUM)
+                .setExtraMagicNumber(WEAK_MAGIC_INDEX, WEAK_STACK_NUM)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
                 .setPlusMagicNumber(PLUS_GIVE_ENERGY_NUM)
-                .setPlusExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, PLUS_WEAK_STACK_NUM)
+                .setPlusExtraMagicNumber(WEAK_MAGIC_INDEX, PLUS_WEAK_STACK_NUM)
                 );
         this.exhaust = true;
         this.isMultiDamage = true;
@@ -81,7 +82,7 @@ public class SwordRain extends AbstractModCard {
         //addToBot(new VFXAction(player, new IntimidateEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 1.0F));
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
             if ((!monster.isDead) && (!monster.isDying)) {
-                addToBot(new StunMonsterAction(mo, player, this.extraMagicNumbers[0]));
+                addToBot(new StunMonsterAction(mo, player, this.extraMagicNumbers[WEAK_MAGIC_INDEX]));
             }
         }
     }

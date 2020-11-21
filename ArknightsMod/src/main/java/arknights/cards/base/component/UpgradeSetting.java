@@ -15,6 +15,7 @@ public class UpgradeSetting {
     private Integer plusBlock;
     private Integer newCost;
     private Integer plusMagicNumber;
+    boolean upgradeCardToPreview = false;
     private Map<Integer, Integer> plusExtraMagicNumbers = new HashMap<>(ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE);
     
     public Integer getPlusDamage() {
@@ -52,4 +53,12 @@ public class UpgradeSetting {
         this.plusExtraMagicNumbers.put(index, plusMagicNumber);
         return this;
     }
+    public boolean isUpgradeCardToPreview() {
+        return upgradeCardToPreview;
+    }
+    public UpgradeSetting setUpgradeCardToPreview(boolean upgradeCardToPreview) {
+        this.upgradeCardToPreview = upgradeCardToPreview;
+        return this;
+    }
+    
 }

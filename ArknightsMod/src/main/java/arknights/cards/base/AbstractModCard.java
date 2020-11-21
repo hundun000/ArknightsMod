@@ -20,7 +20,7 @@ import arknights.powers.MagicStrengthPower;
 import arknights.variables.ExtraVariable;
 
 public abstract class AbstractModCard extends CustomCard {
-    private final CardStrings cardStrings;
+    protected final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
     
@@ -144,6 +144,11 @@ public abstract class AbstractModCard extends CustomCard {
             if (cardStrings.UPGRADE_DESCRIPTION != null) {
                 this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             }
+            
+            if (upgradeSetting.isUpgradeCardToPreview()) {
+                this.cardsToPreview.update();
+            }
+            
             initializeDescription();
         }
     }

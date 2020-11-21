@@ -2,6 +2,7 @@ package arknights.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.PutOnDeckAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -45,11 +46,12 @@ public class BindingChains extends AbstractModCard {
                 .setPlusDamage(5)
                 .setPlusMagicNumber(1)
                 );
+        this.isMultiDamage = true;
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
+        addToBot(new DamageAllEnemiesAction(player, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         addToBot(new DrawCardAction(player, magicNumber));
         if (player.hand.size() > 0) {
             addToBot(new PutOnDeckAction(player, player, 1, false));

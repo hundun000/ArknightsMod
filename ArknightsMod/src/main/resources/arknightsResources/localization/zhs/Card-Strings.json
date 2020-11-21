@@ -1,4 +1,32 @@
-{
+{	
+  "arknights:Phantom": {
+    "NAME": "傀影",
+    "DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，在你的手牌中加入1张 镜中虚影 。",
+    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，抽1张牌，在你的手牌中加入1张 升级 过的 镜中虚影 。",
+    "EXTENDED_DESCRIPTION": [
+      "这张牌不能被打出。"
+    ]
+  },
+  "arknights:PhantomInTheMirror": {
+    "NAME": "镜中虚影",
+    "DESCRIPTION": "造成 !D! 点伤害。 消耗 。 虚无 。"
+  },
+  "arknights:RatSwarm": {
+    "NAME": "鼠群",
+    "DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，获得 !B! 点 格挡 。",
+    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，抽1张牌，获得 !B! 点 格挡 。",
+    "EXTENDED_DESCRIPTION": [
+      "这张牌不能被打出。"
+    ]
+  },
+  "arknights:Wolfpack": {
+    "NAME": "狼群",
+    "DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，对随机一个敌人造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，抽1张牌，对随机一个敌人造成 !D! 点伤害。",
+    "EXTENDED_DESCRIPTION": [
+      "这张牌不能被打出。"
+    ]
+  },
   "arknights:TelescopingElectricNet": {
     "NAME": "伸缩式电捕网",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害。每次 斩杀 时，获得 !M! 金币。"
