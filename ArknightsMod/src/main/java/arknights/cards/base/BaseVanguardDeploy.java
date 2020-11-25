@@ -9,14 +9,20 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.NightmarePower;
 
+import arknights.powers.TurnCountDownGainCardPower;
+
 /**
  * @author hundun
  * Created on 2020/11/16
  */
 public abstract class BaseVanguardDeploy extends AbstractModCard {
 
+    protected int countDownTurnNum;
+    protected int cardNum;
     public BaseVanguardDeploy(String id, String img, int cost, CardRarity rarity) {
         super(id, img, cost, CardType.ATTACK, rarity, CardTarget.ENEMY);
+        this.countDownTurnNum = 3;
+        this.cardNum = 1;
     }
 
 
@@ -29,12 +35,13 @@ public abstract class BaseVanguardDeploy extends AbstractModCard {
             if (this.upgraded) {
                 giveCard.upgrade();
             }
-            addToTop(new ApplyPowerAction(player, player, new NightmarePower(player, 1, giveCard)));
+            addToTop(new ApplyPowerAction(player, player, new TurnCountDownGainCardPower(player, countDownTurnNum, giveCard, cardNum)));
         }
     }
     
     protected AbstractCard getGiveCard(){
         return null;
     }
+
 
 }

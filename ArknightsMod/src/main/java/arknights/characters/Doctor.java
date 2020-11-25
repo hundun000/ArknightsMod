@@ -30,6 +30,7 @@ import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
 import arknights.relics.StereoProjectorRelic;
 import arknights.relics.UrsusBreadRelic;
+import arknights.relics.BattleRecords;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -164,21 +165,13 @@ public class Doctor extends CustomPlayer {
         logger.info("Begin loading starter Deck Strings");
 
         retVal.add(BindingChains.ID);
-        retVal.add(FangDeploy.ID);
-        retVal.add(Phantom.ID);
-        retVal.add(RagingIronFist.ID);
-        retVal.add(RatSwarm.ID);
-        retVal.add(ScorchedEarth.ID);
-        retVal.add(SteamPump.ID);
-        retVal.add(SteamPump.ID);
-        retVal.add(SteamPump.ID);
-        retVal.add(SuspendedCross.ID);
-        retVal.add(TelescopingElectricNet.ID);
-        retVal.add(TexasDeploy.ID);
-        retVal.add(ToxicOverload.ID);
-        retVal.add(Wolfpack.ID);
-        retVal.add(Wound.ID);
-        retVal.add(Burn.ID);
+        retVal.add(FrontlineRecord.ID);
+        retVal.add(SummonMeeboo.ID);
+        retVal.add(SummonMeeboo.ID);
+        retVal.add(SummonMeeboo.ID);
+        retVal.add(SummonFreezingSupportDrone.ID);
+        retVal.add(SummonFreezingSupportDrone.ID);
+        retVal.add(SummonFreezingSupportDrone.ID);
 //        retVal.add(DefaultCommonAttack.ID);
 //        retVal.add(DefaultUncommonAttack.ID);
 //        retVal.add(DefaultRareAttack.ID);
@@ -201,14 +194,14 @@ public class Doctor extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
 
-        retVal.add(PlaceholderRelic.ID);
-        retVal.add(PlaceholderRelic2.ID);
-        retVal.add(DefaultClickableRelic.ID);
+        //retVal.add(PlaceholderRelic.ID);
+        //retVal.add(PlaceholderRelic2.ID);
+        retVal.add(BattleRecords.ID);
         retVal.add(UrsusBreadRelic.ID);
         
         UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
         UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
-        UnlockTracker.markRelicAsSeen(DefaultClickableRelic.ID);
+        UnlockTracker.markRelicAsSeen(BattleRecords.ID);
         UnlockTracker.markRelicAsSeen(UrsusBreadRelic.ID);
         return retVal;
     }

@@ -18,20 +18,22 @@ import com.megacrit.cardcrawl.orbs.Lightning;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 
 import arknights.ArknightsMod;
+import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.BaseSummon;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
+import arknights.orbs.FreezingSupportDrone;
 import arknights.orbs.MeeBooAttackTypeOrb;
 
 /**
  * @author hundun
  * Created on 2020/11/10
  */
-public class MeebooAttackTypeSummon extends BaseSummon {
+public class SummonFreezingSupportDrone extends BaseSummon {
 
-    public static final String ID = ArknightsMod.makeID(MeebooAttackTypeSummon.class);
-    public static final String IMG = ArknightsMod.makeCardPngPath(MeebooAttackTypeSummon.class);
+    public static final String ID = ArknightsMod.makeID(SummonFreezingSupportDrone.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     
@@ -41,7 +43,7 @@ public class MeebooAttackTypeSummon extends BaseSummon {
     private static final int SUMMON_NUM = 1;  
     private static final int UPGRADED_SUMMON_NUM = 2;  
     
-    public MeebooAttackTypeSummon() { 
+    public SummonFreezingSupportDrone() { 
         super(ID, IMG, COST, RARITY);
         initBaseFields(new BasicSetting()
                 .setMagicNumber(SUMMON_NUM)
@@ -53,7 +55,7 @@ public class MeebooAttackTypeSummon extends BaseSummon {
 
     @Override
     protected AbstractOrb getSummonOrb() {
-        return new MeeBooAttackTypeOrb();
+        return new FreezingSupportDrone();
     }
 
 }

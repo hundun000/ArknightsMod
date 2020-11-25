@@ -1,4 +1,11 @@
 {
+  "arknights:TurnCountDownGainCardPower": {
+    "NAME": "充能",
+    "DESCRIPTIONS": [
+      "在 #b{} 回合后，增加 #b{} 张 #b{} 到你的手牌中。",
+      "在下个回合开始时，增加 #b{} 张 #b{} 到你的手牌中。"
+    ]
+  },
   "arknights:DeprecatedDisplacementPower": {
     "NAME": "Deprecated位移",
     "DESCRIPTIONS": [

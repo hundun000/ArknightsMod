@@ -30,6 +30,7 @@ import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
 import arknights.relics.StereoProjectorRelic;
 import arknights.relics.UrsusBreadRelic;
+import arknights.relics.BattleRecords;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
 import arknights.variables.DefaultCustomVariable;
@@ -399,6 +400,7 @@ public class ArknightsMod implements
         BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), Doctor.Enums.COLOR_GRAY);
         BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.COLOR_GRAY);
         BaseMod.addRelicToCustomPool(new UrsusBreadRelic(), Doctor.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new BattleRecords(), Doctor.Enums.COLOR_GRAY);
         
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);

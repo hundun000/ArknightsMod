@@ -1,4 +1,20 @@
 {	
+  "arknights:SummonFreezingSupportDrone": {
+    "NAME": "制冷无人机支援",
+    "DESCRIPTION": "召唤 !M! 个 制冷无人机 。"
+  },
+  "arknights:SummonMiningSupportDrone": {
+    "NAME": "激光无人机支援",
+    "DESCRIPTION": "召唤 !M! 个 激光无人机 。"
+  },
+  "arknights:SummonMeeboo": {
+    "NAME": "召唤咪波",
+    "DESCRIPTION": "召唤 !M! 个 攻击型咪波 。"
+  },
+  "arknights:FrontlineRecord": {
+    "NAME": "前线录像",
+    "DESCRIPTION": "获得 !M! 点 作战录像 。如果目标敌人的意图是攻击，获得双倍作战录像 。 消耗 。"
+  },
   "arknights:Phantom": {
     "NAME": "傀影",
     "DESCRIPTION": "不能被打出 。 NL 如果这张牌从你的手牌中被丢弃，在你的手牌中加入1张 镜中虚影 。",
@@ -63,19 +79,16 @@
     "NAME": "冲锋号令·α型",
     "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
   },
-  "arknights:MeebooAttackTypeSummon": {
-    "NAME": "攻击型咪波召唤",
-    "DESCRIPTION": "召唤 !M! 只 攻击型咪波 。"
-  },
+  
   "arknights:FangDeploy": {
     "NAME": "芬部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张 冲锋号令·α型 加入手牌。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张已 升级 的 冲锋号令·α型 加入手牌。"
+    "DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张 冲锋号令·α型 加入手牌。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张已 升级 的 冲锋号令·α型 加入手牌。"
   },
   "arknights:TexasDeploy": {
     "NAME": "德克萨斯部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张 剑雨 加入手牌。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在下一回合，将一张已 升级 的 剑雨 加入手牌。"
+    "DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张 剑雨 加入手牌。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张已 升级 的 剑雨 加入手牌。"
   },
   "arknights:TalentLavender": {
     "NAME": "天赋-薰衣草",
