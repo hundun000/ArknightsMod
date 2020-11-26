@@ -69,6 +69,7 @@ public class FrontlineRecord extends AbstractModCard {
             } else {
                 relic.addCounter(magicNumber);
             }
+            AbstractDungeon.player.getRelic(BattleRecords.ID).flash();
         }
     }
  

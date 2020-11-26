@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 
-import arknights.orbs.MeeBooAttackTypeOrb;
+import arknights.orbs.MeeBoo;
 
 /**
  * @author hundun

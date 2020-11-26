@@ -39,9 +39,7 @@ public abstract class BaseVanguardDeploy extends AbstractModCard {
         }
     }
     
-    protected AbstractCard getGiveCard(){
-        return null;
-    }
+    protected abstract AbstractCard getGiveCard();
 
 
 }

@@ -1,35 +1,18 @@
 [
   {
-    "NAMES": [
-      "Deprecated位移"
-    ],
-    "DESCRIPTION": "回合结束时，失去位移状态。"
-  },
-  {
-    "NAMES": [
-      "Deprecated魔法伤害"
-    ],
-    "DESCRIPTION": "魔法伤害在结算时，不受 力量 或 虚弱 等状态影响，受 arknights:魔法增幅 等状态影响。"
-  },
-  {
-    "NAMES": [
-      "Deprecated魔法增幅"
-    ],
-    "DESCRIPTION": "魔法增幅会让魔法攻击获得额外的伤害。"
-  },
-  {
+    "PROPER_NAME": "召唤物",
     "NAMES": [
       "咪波",
       "制冷无人机",
       "激光无人机"
     ],
-    "DESCRIPTION": "召唤物。占用1个召唤物部署位。"
+    "DESCRIPTION": "占用1个召唤物部署位"
   },
   {
     "NAMES": [
       "回收"
     ],
-    "DESCRIPTION": "激发 充能球，触发该充能球的 回收 效果。"
+    "DESCRIPTION": "失去充能球，触发该充能球的 回收 效果。"
   },
   {
     "NAMES": [

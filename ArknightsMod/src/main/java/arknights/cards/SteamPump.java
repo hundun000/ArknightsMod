@@ -1,10 +1,14 @@
 package arknights.cards;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsInHandAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DiscardSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
@@ -49,7 +53,18 @@ public class SteamPump extends AbstractModCard {
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new GainBlockAction(player, player, block));
-        addToBot(new DiscardWantTargetCardAction(player, 1, Burn.class));
+        addToBot(new SelectCardsInHandAction(1, "选择", list -> {
+            if (!list.isEmpty()) {
+                AbstractCard card = list.get(0);
+                if (card instanceof Burn) {
+                    addToBot(new ExhaustSpecificCardAction(card, player.hand, true));
+                } else {
+                    addToBot(new DiscardSpecificCardAction(card, player.hand));
+                }
+            }
+        }));
+                
+        //addToBot(new DiscardWantTargetCardAction(player, 1, Burn.class));
         
     }
 

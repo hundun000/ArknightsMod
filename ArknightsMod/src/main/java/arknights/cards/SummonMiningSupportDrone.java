@@ -23,15 +23,17 @@ import arknights.cards.base.BaseSummon;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
+import arknights.orbs.FreezingSupportDrone;
 import arknights.orbs.MeeBoo;
+import arknights.orbs.MiningSupportDrone;
 
 /**
  * @author hundun
  * Created on 2020/11/10
  */
-public class SummonMeeboo extends BaseSummon {
+public class SummonMiningSupportDrone extends BaseSummon {
 
-    public static final String ID = ArknightsMod.makeID(SummonMeeboo.class);
+    public static final String ID = ArknightsMod.makeID(SummonMiningSupportDrone.class);
     public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
@@ -42,7 +44,7 @@ public class SummonMeeboo extends BaseSummon {
     private static final int SUMMON_NUM = 1;  
     private static final int UPGRADED_SUMMON_NUM = 1;  
     
-    public SummonMeeboo() { 
+    public SummonMiningSupportDrone() { 
         super(ID, IMG, COST, RARITY);
         initBaseFields(new BasicSetting()
                 .setMagicNumber(SUMMON_NUM)
@@ -54,7 +56,7 @@ public class SummonMeeboo extends BaseSummon {
 
     @Override
     protected AbstractOrb getSummonOrb() {
-        return new MeeBoo();
+        return new MiningSupportDrone();
     }
 
 }

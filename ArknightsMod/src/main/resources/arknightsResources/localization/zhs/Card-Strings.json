@@ -9,7 +9,7 @@
   },
   "arknights:SummonMeeboo": {
     "NAME": "召唤咪波",
-    "DESCRIPTION": "召唤 !M! 个 攻击型咪波 。"
+    "DESCRIPTION": "召唤 !M! 个 咪波 。"
   },
   "arknights:FrontlineRecord": {
     "NAME": "前线录像",
@@ -49,7 +49,7 @@
   },
   "arknights:BindingChains": {
     "NAME": "束缚链",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。抽 !M! 张牌，然后将手牌中的一张牌放到你抽牌堆的顶端。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。抽 !M! 张牌，然后将手牌中的1张牌放到你抽牌堆的顶端。"
   },
   "arknights:SuspendedCross": {
     "NAME": "十字悬挂",
@@ -79,7 +79,21 @@
     "NAME": "冲锋号令·α型",
     "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
   },
-  
+  "arknights:ShellDefense": {
+    "NAME": "壳状防御",
+    "DESCRIPTION": "获得 !B! 点 格挡 。你的下一回合开始时 格挡 不会消失。你在这个回合不能打出 #y攻击牌 。"
+  },
+  "arknights:Cooking": {
+    "NAME": "食粮烹制",
+    "DESCRIPTION": "获得 !B! 点 格挡 。回复 !M! 生命 。你在这个回合不能打出 #y攻击牌 。"
+  },
+  "arknights:WaveStrike": {
+    "NAME": "跃浪击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 这张牌被打出 !M! 次后，在本场战斗中其基础伤害减少 !2ndM! 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （已打出 {} 次。）"
+    ]
+  },
   "arknights:FangDeploy": {
     "NAME": "芬部署",
     "DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张 冲锋号令·α型 加入手牌。",

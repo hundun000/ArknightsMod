@@ -24,7 +24,7 @@ import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.characters.Doctor;
 import arknights.orbs.FreezingSupportDrone;
-import arknights.orbs.MeeBooAttackTypeOrb;
+import arknights.orbs.MeeBoo;
 
 /**
  * @author hundun
@@ -41,7 +41,7 @@ public class SummonFreezingSupportDrone extends BaseSummon {
     
     // special const
     private static final int SUMMON_NUM = 1;  
-    private static final int UPGRADED_SUMMON_NUM = 2;  
+    private static final int UPGRADED_SUMMON_NUM = 1;  
     
     public SummonFreezingSupportDrone() { 
         super(ID, IMG, COST, RARITY);

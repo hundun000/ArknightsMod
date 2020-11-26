@@ -58,7 +58,9 @@ public abstract class AbstractModOrb extends CustomOrb {
     protected void chargeEvokeAmount() {
         if (evokeAmountChargeSpeed != null) {
             addToBot(new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.DARK), 0.1f));
-            this.evokeAmount += this.evokeAmountChargeSpeed;
+            this.baseEvokeAmount += this.evokeAmountChargeSpeed;
+            this.evokeAmount = baseEvokeAmount;
+            updateDescription();
         }
     }
     

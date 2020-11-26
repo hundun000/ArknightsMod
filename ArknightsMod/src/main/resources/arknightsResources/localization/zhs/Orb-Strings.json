@@ -1,14 +1,20 @@
 {
-  "arknights:MeeBooAttackTypeOrb": {
+  "arknights:MeeBoo": {
     "NAME": "咪波",
     "DESCRIPTION": [
-      "#y被动： 在你的回合开始时，对随机一个敌人造成 #b{} 点伤害，将这个充能球的激发伤害增加 #b{} 点。 NL #y激发： 对所有敌人造成 #b{} 点伤害。"
+      "#y被动： 在你的回合开始时，对随机一个敌人造成 #b{} 点伤害。将这个充能球的激发伤害增加 #b{} 点。 NL #y激发 ： 对所有敌人造成 #b{} 点伤害。"
     ]
   },
   "arknights:FreezingSupportDrone": {
     "NAME": "制冷无人机",
     "DESCRIPTION": [
-      "#y被动： 在你的回合开始时，获得 #b{} 点格挡，将这个充能球的激发获得的格挡增加 #b{} 点。 NL #y激发： 获得 #b{} 点格挡。"
+      "#y被动： 在你的回合开始时，获得 #b{} 点格挡。将这个充能球的激发获得的格挡增加 #b{} 点。 NL #y激发 ： 获得 #b{} 点格挡。"
+    ]
+  },
+  "arknights:MiningSupportDrone": {
+    "NAME": "激光无人机",
+    "DESCRIPTION": [
+      "#y被动： 在你的回合开始时，对随机一个敌人去除所有 格挡 值，并造成 #b{} 点伤害。将这个充能球的激发伤害增加 #b{} 点。 NL #y激发 ：对随机一个敌人去除所有 格挡 值, #y金属化 和 #多层护甲，造成 #b{} 点伤害。"
     ]
   },
   "arknights:DefaultOrb": {

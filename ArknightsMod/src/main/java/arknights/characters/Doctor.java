@@ -166,12 +166,14 @@ public class Doctor extends CustomPlayer {
 
         retVal.add(BindingChains.ID);
         retVal.add(FrontlineRecord.ID);
-        retVal.add(SummonMeeboo.ID);
-        retVal.add(SummonMeeboo.ID);
-        retVal.add(SummonMeeboo.ID);
+        retVal.add(SteamPump.ID);
+        retVal.add(Burn.ID);
         retVal.add(SummonFreezingSupportDrone.ID);
-        retVal.add(SummonFreezingSupportDrone.ID);
-        retVal.add(SummonFreezingSupportDrone.ID);
+        retVal.add(SummonMiningSupportDrone.ID);
+        retVal.add(Cooking.ID);
+        retVal.add(ShellDefense.ID);
+        retVal.add(SummonMeeboo.ID);
+        retVal.add(WaveStrike.ID);
 //        retVal.add(DefaultCommonAttack.ID);
 //        retVal.add(DefaultUncommonAttack.ID);
 //        retVal.add(DefaultRareAttack.ID);
