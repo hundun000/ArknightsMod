@@ -42,7 +42,7 @@ public abstract class AbstractModCard extends CustomCard {
             final CardType type,
             final CardRarity rarity,
             final CardTarget target) {
-        this(id, img, cost, type, Doctor.Enums.COLOR_GRAY, rarity, target);
+        this(id, img, cost, type, Doctor.Enums.ARKNIGHTS_CARD_COLOR, rarity, target);
     }
     
     /**

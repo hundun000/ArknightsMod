@@ -26,5 +26,12 @@
   "arknights:RarePower": {
     "NAME": "Placeholder Power",
     "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
+  },
+  "arknights:D12BombPower": {
+    "NAME": "D12",
+    "DESCRIPTIONS": [
+      "在 #b{} 回合开始时，对所有敌人造成 #b{} 伤害。",
+      "在下回合开始时，对所有敌人造成 #{} 伤害。"
+    ]
   }
 }

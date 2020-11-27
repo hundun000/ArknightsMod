@@ -36,7 +36,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static arknights.ArknightsMod.*;
-import static arknights.characters.Doctor.Enums.COLOR_GRAY;
+import static arknights.characters.Doctor.Enums.ARKNIGHTS_CARD_COLOR;
 
 import java.util.ArrayList;
 
@@ -56,11 +56,15 @@ public class Doctor extends CustomPlayer {
 
     public static class Enums {
         @SpireEnum
-        public static AbstractPlayer.PlayerClass THE_DEFAULT;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR") // These two HAVE to have the same absolutely identical name.
-        public static AbstractCard.CardColor COLOR_GRAY;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR") 
-        public static CardLibrary.LibraryType LIBRARY_COLOR;
+        public static AbstractPlayer.PlayerClass CHARACTER_COLOR;
+        @SpireEnum(name = "DEFAULT_GRAY_COLOR")
+        public static AbstractCard.CardColor ARKNIGHTS_CARD_COLOR;
+
+    }
+    
+    public static class LibraryTypeEnums {
+        @SpireEnum(name = "DEFAULT_GRAY_COLOR")  
+        public static CardLibrary.LibraryType ARKNIGHTS_CARD_COLOR;
     }
 
     // =============== CHARACTER ENUMERATORS  =================
@@ -174,6 +178,8 @@ public class Doctor extends CustomPlayer {
         retVal.add(ShellDefense.ID);
         retVal.add(SummonMeeboo.ID);
         retVal.add(WaveStrike.ID);
+        retVal.add(TexasDeploy.ID);
+        retVal.add(D12Bomb.ID);
 //        retVal.add(DefaultCommonAttack.ID);
 //        retVal.add(DefaultUncommonAttack.ID);
 //        retVal.add(DefaultRareAttack.ID);
@@ -232,7 +238,7 @@ public class Doctor extends CustomPlayer {
     // Should return the card color enum to be associated with your character.
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return COLOR_GRAY;
+        return ARKNIGHTS_CARD_COLOR;
     }
 
     // Should return a color object to be used to color the trail of moving cards

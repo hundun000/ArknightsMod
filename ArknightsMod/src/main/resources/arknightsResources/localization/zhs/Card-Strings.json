@@ -53,11 +53,11 @@
   },
   "arknights:SuspendedCross": {
     "NAME": "十字悬挂",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 缠绕 。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 !M! 层 #y缠绕 。"
   },
   "arknights:ToxicOverload": {
     "NAME": "蓄力毒尾击",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 缓慢 。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 #y缓慢 。"
   },
   "arknights:SteamPump": {
     "NAME": "水蒸气泵",
@@ -89,10 +89,14 @@
   },
   "arknights:WaveStrike": {
     "NAME": "跃浪击",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 这张牌被打出 !M! 次后，在本场战斗中其基础伤害减少 !2ndM! 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 这张牌被打出 !M! 次后，在本场战斗中其基础伤害减少 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
       " NL （已打出 {} 次。）"
     ]
+  },
+  "arknights:VorpalEdge": {
+    "NAME": "极度锋利",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 你在接下来 !M! 回合内无法再从卡牌中获得格挡。"
   },
   "arknights:FangDeploy": {
     "NAME": "芬部署",
@@ -139,6 +143,10 @@
   "arknights:AreaTargetSniperDeploy": {
     "NAME": "群体狙击部署",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
+  },
+  "arknights:D12Bomb": {
+    "NAME": "D12",
+    "DESCRIPTION": "给予生命值最多的 !M! 个敌人 #yD12炸弹 。每个 #yD12炸弹 在第 3 回合开始时，对所有敌人造成 !D! 点伤害。"
   },
   "arknights:DeprecatedDisplacementTrap": {
     "NAME": "Deprecated陷阱",

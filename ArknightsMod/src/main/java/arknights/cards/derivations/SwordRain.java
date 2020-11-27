@@ -80,8 +80,8 @@ public class SwordRain extends AbstractModCard {
         
         
         //addToBot(new VFXAction(player, new IntimidateEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 1.0F));
-        for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-            if ((!monster.isDead) && (!monster.isDying)) {
+        for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
+            if ((!mo.isDead) && (!mo.isDying)) {
                 addToBot(new StunMonsterAction(mo, player, this.extraMagicNumbers[WEAK_MAGIC_INDEX]));
             }
         }

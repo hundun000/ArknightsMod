@@ -218,9 +218,9 @@ public class ArknightsMod implements
         
         logger.info("Done subscribing");
         
-        logger.info("Creating the color " + Doctor.Enums.COLOR_GRAY.toString());
+        logger.info("Creating the color " + Doctor.Enums.ARKNIGHTS_CARD_COLOR.toString());
         
-        BaseMod.addColor(Doctor.Enums.COLOR_GRAY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
+        BaseMod.addColor(Doctor.Enums.ARKNIGHTS_CARD_COLOR, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
                 DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY, SKILL_DEFAULT_GRAY, POWER_DEFAULT_GRAY, ENERGY_ORB_DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
@@ -302,13 +302,13 @@ public class ArknightsMod implements
     
     @Override
     public void receiveEditCharacters() {
-        logger.info("Beginning to edit characters. " + "Add " + Doctor.Enums.THE_DEFAULT.toString());
+        logger.info("Beginning to edit characters. " + "Add " + Doctor.Enums.CHARACTER_COLOR.toString());
         
-        BaseMod.addCharacter(new Doctor("the Default", Doctor.Enums.THE_DEFAULT),
-                THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, Doctor.Enums.THE_DEFAULT);
+        BaseMod.addCharacter(new Doctor("the Default", Doctor.Enums.CHARACTER_COLOR),
+                THE_DEFAULT_BUTTON, THE_DEFAULT_PORTRAIT, Doctor.Enums.CHARACTER_COLOR);
         
         receiveEditPotions();
-        logger.info("Added " + Doctor.Enums.THE_DEFAULT.toString());
+        logger.info("Added " + Doctor.Enums.CHARACTER_COLOR.toString());
     }
     
     // =============== /LOAD THE CHARACTER/ =================
@@ -373,7 +373,7 @@ public class ArknightsMod implements
         // Class Specific Potion. If you want your potion to not be class-specific,
         // just remove the player class at the end (in this case the "TheDefaultEnum.THE_DEFAULT".
         // Remember, you can press ctrl+P inside parentheses like addPotions)
-        BaseMod.addPotion(PlaceholderPotion.class, PLACEHOLDER_POTION_LIQUID, PLACEHOLDER_POTION_HYBRID, PLACEHOLDER_POTION_SPOTS, PlaceholderPotion.POTION_ID, Doctor.Enums.THE_DEFAULT);
+        BaseMod.addPotion(PlaceholderPotion.class, PLACEHOLDER_POTION_LIQUID, PLACEHOLDER_POTION_HYBRID, PLACEHOLDER_POTION_SPOTS, PlaceholderPotion.POTION_ID, Doctor.Enums.CHARACTER_COLOR);
         
         logger.info("Done editing potions");
     }
@@ -395,12 +395,12 @@ public class ArknightsMod implements
         // in order to automatically differentiate which pool to add the relic too.
 
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
-        BaseMod.addRelicToCustomPool(new PlaceholderRelic(), Doctor.Enums.COLOR_GRAY);
-        BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), Doctor.Enums.COLOR_GRAY);
-        BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), Doctor.Enums.COLOR_GRAY);
-        BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.COLOR_GRAY);
-        BaseMod.addRelicToCustomPool(new UrsusBreadRelic(), Doctor.Enums.COLOR_GRAY);
-        BaseMod.addRelicToCustomPool(new BattleRecords(), Doctor.Enums.COLOR_GRAY);
+        BaseMod.addRelicToCustomPool(new PlaceholderRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+        BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+        BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+        BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+        BaseMod.addRelicToCustomPool(new UrsusBreadRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+        BaseMod.addRelicToCustomPool(new BattleRecords(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
