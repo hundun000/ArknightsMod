@@ -71,5 +71,13 @@ public class D12Bomb extends AbstractModCard {
             addToBot(new ApplyPowerAction(target, player, new D12BombPower(target, 3, this.damage)));
         }
     }
+    
+    @Override
+    public void initializeDescription() {
+        super.initializeDescription();
+        StringBuilder builder = new StringBuilder();
+        description.forEach(item -> builder.append(item.text).append(","));
+        ArknightsMod.logger.info("D12::after initializeDescription, description = {}", builder.toString());
+    }
 
 }

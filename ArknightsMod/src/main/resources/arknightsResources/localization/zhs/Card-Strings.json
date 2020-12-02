@@ -11,6 +11,10 @@
     "NAME": "召唤咪波",
     "DESCRIPTION": "召唤 !M! 个 咪波 。"
   },
+  "arknights:OrbOverload": {
+    "NAME": "召唤物过载",
+    "DESCRIPTION": "使最右边的召唤物 过载 。"
+  },
   "arknights:FrontlineRecord": {
     "NAME": "前线录像",
     "DESCRIPTION": "获得 !M! 点 作战录像 。如果目标敌人的意图是攻击，获得双倍作战录像 。 消耗 。"
@@ -94,6 +98,13 @@
       " NL （已打出 {} 次。）"
     ]
   },
+  "arknights:PeriodStrike": {
+    "NAME": "蓄力击",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （已打出 {} 次。）"
+    ]
+  },
   "arknights:VorpalEdge": {
     "NAME": "极度锋利",
     "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 你在接下来 !M! 回合内无法再从卡牌中获得格挡。"
@@ -146,7 +157,7 @@
   },
   "arknights:D12Bomb": {
     "NAME": "D12",
-    "DESCRIPTION": "给予生命值最多的 !M! 个敌人 #yD12炸弹 。每个 #yD12炸弹 在第 3 回合开始时，对所有敌人造成 !D! 点伤害。"
+    "DESCRIPTION": "给予生命值最多的 !M! 个敌人 D12炸弹 。每个D12炸弹在第 #b3 回合开始时，对所有敌人造成 !D! 点伤害。"
   },
   "arknights:DeprecatedDisplacementTrap": {
     "NAME": "Deprecated陷阱",

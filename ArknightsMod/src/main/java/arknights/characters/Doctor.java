@@ -168,10 +168,6 @@ public class Doctor extends CustomPlayer {
 
         logger.info("Begin loading starter Deck Strings");
 
-        retVal.add(BindingChains.ID);
-        retVal.add(FrontlineRecord.ID);
-        retVal.add(SteamPump.ID);
-        retVal.add(Burn.ID);
         retVal.add(SummonFreezingSupportDrone.ID);
         retVal.add(SummonMiningSupportDrone.ID);
         retVal.add(Cooking.ID);
@@ -180,6 +176,7 @@ public class Doctor extends CustomPlayer {
         retVal.add(WaveStrike.ID);
         retVal.add(TexasDeploy.ID);
         retVal.add(D12Bomb.ID);
+        retVal.add(PeriodStrike.ID);
 //        retVal.add(DefaultCommonAttack.ID);
 //        retVal.add(DefaultUncommonAttack.ID);
 //        retVal.add(DefaultRareAttack.ID);

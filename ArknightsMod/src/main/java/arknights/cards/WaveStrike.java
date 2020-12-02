@@ -41,13 +41,13 @@ public class WaveStrike extends AbstractModCard {
     public WaveStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(12)
+                .setDamage(8)
                 .setBlock(3)
                 .setMagicNumber(2)
                 .setExtraMagicNumber(DAMAGE_DOWN_MAGIC_INDEX, 2)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(5)
+                .setPlusDamage(4)
                 .setPlusBlock(2)
                 .setPlusMagicNumber(1)
                 );
@@ -56,13 +56,14 @@ public class WaveStrike extends AbstractModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
+        useTimes++;
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
         addToBot(new GainBlockAction(player, player, block));
         if (useTimes == magicNumber) {
             addToBot(new ModifyDamageAction(this.uuid, - extraMagicNumbers[DAMAGE_DOWN_MAGIC_INDEX]));
         }
-        useTimes++;
         this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.useTimes);
+        initializeDescription();
     }
     
     @Override
@@ -72,11 +73,12 @@ public class WaveStrike extends AbstractModCard {
         return copy;
     }
     
-    @Override
-    public void applyPowers() {
-        super.applyPowers();
-        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.useTimes);
-    }
+//    @Override
+//    public void applyPowers() {
+//        super.applyPowers();
+//        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.useTimes);
+//        initializeDescription();
+//    }
     
     
 

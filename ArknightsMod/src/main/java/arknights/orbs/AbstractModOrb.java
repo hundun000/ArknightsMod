@@ -86,5 +86,9 @@ public abstract class AbstractModOrb extends CustomOrb {
                 Integer.toString(passiveAmount), this.cX + NUM_X_OFFSET, this.cY + this.bobEffect.y / 2.0F + NUM_Y_OFFSET + 20.0F * Settings.scale, this.c, this.fontScale);
     }
     
+    public void overload() {
+        
+    }
+    
 
 }

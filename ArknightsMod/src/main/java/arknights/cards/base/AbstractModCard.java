@@ -86,22 +86,7 @@ public abstract class AbstractModCard extends CustomCard {
         }
     }
 
-    
-    @Override
-    public void applyPowers() {
-        super.applyPowers();
-        //calculateMagicDamage();
-    }
-    
-    @Deprecated
-    private void calculateMagicDamage() {
-        AbstractPower power = AbstractDungeon.player.getPower(MagicStrengthPower.POWER_ID);
-        if (power != null) {
-            this.extraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX] = Math.max(0, this.baseExtraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX] + power.amount);
-        } else {
-            this.extraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX] = this.baseExtraMagicNumbers[ExtraVariable.MAGIC_DAMAGE_INDEX];
-        }
-    }
+
 
     protected void setUpgradeInfo(UpgradeSetting upgradeSetting) {
         this.upgradeSetting = upgradeSetting;
