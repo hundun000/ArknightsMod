@@ -1,7 +1,10 @@
 package arknights.actions;
 
+import com.evacipated.cardcrawl.mod.stslib.actions.defect.EvokeSpecificOrbAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.ActionType;
+import com.megacrit.cardcrawl.actions.defect.EvokeOrbAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
@@ -14,7 +17,7 @@ import arknights.orbs.AbstractModOrb;
  */
 public class OrbOverloadAction extends AbstractGameAction {
     private AbstractModOrb orb;
-
+    private AbstractPlayer player;
     public OrbOverloadAction(AbstractModOrb orb)
     {
         duration = this.startDuration;
@@ -27,9 +30,11 @@ public class OrbOverloadAction extends AbstractGameAction {
     {
         if (duration == this.startDuration) {
             if (orb != null) {
-                AbstractDungeon.player.orbs.remove(orb);
                 orb.triggerEvokeAnimation();
-                orb.overload();
+                orb.onOverload();
+                AbstractDungeon.player.orbs.remove(orb);
+                AbstractDungeon.player.orbs.add(0, orb);
+                AbstractDungeon.player.evokeOrb();
             }
         }
         this.tickDuration();

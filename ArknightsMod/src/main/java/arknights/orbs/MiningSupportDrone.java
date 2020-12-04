@@ -60,8 +60,7 @@ public class MiningSupportDrone extends AbstractModOrb {
 
     @Override
     public void onEvoke() {
-        addToBot(new LaserAttackRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.evokeAmount, DamageType.THORNS), AttackEffect.NONE, true, true));
-        addToBot(new SFXAction("TINGSHA")); 
+        
     }
 
     @Override
@@ -80,6 +79,11 @@ public class MiningSupportDrone extends AbstractModOrb {
     public void onStartOfTurn() {
         chargeEvokeAmount();
         addToBot(new LaserAttackRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.passiveAmount, DamageType.THORNS), AttackEffect.NONE, true, false));
+    }
+    @Override
+    public void onOverload() {
+        addToBot(new LaserAttackRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.evokeAmount, DamageType.THORNS), AttackEffect.NONE, true, true));
+        addToBot(new SFXAction("TINGSHA")); 
     }
 
 }

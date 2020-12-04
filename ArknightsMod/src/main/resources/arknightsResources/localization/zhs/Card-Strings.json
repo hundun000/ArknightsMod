@@ -100,7 +100,7 @@
   },
   "arknights:PeriodStrike": {
     "NAME": "蓄力击",
-    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
       " NL （已打出 {} 次。）"
     ]

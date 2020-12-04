@@ -57,8 +57,7 @@ public class FreezingSupportDrone extends AbstractModOrb {
 
     @Override
     public void onEvoke() {
-        addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, this.evokeAmount, true));
-        addToBot(new SFXAction("TINGSHA")); 
+        
     }
 
     @Override
@@ -82,6 +81,11 @@ public class FreezingSupportDrone extends AbstractModOrb {
         }
         addToBot(new VFXAction(new OrbFlareEffect(this, OrbFlareEffect.OrbFlareColor.FROST), speedTime));
         addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, this.passiveAmount, true));
+    }
+    @Override
+    public void onOverload() {
+        addToBot(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, this.evokeAmount, true));
+        addToBot(new SFXAction("TINGSHA")); 
     }
 
 }

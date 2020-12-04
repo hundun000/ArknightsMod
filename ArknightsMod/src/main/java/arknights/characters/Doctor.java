@@ -20,6 +20,8 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
@@ -39,6 +41,7 @@ import static arknights.ArknightsMod.*;
 import static arknights.characters.Doctor.Enums.ARKNIGHTS_CARD_COLOR;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
 //and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
@@ -151,6 +154,10 @@ public class Doctor extends CustomPlayer {
 
     }
 
+    
+    
+    
+
     // =============== /CHARACTER CLASS END/ =================
 
     // Starting description and loadout
@@ -170,6 +177,8 @@ public class Doctor extends CustomPlayer {
 
         retVal.add(SummonFreezingSupportDrone.ID);
         retVal.add(SummonMiningSupportDrone.ID);
+        retVal.add(SummonMeeboo.ID);
+        retVal.add(OrbOverload.ID);
         retVal.add(Cooking.ID);
         retVal.add(ShellDefense.ID);
         retVal.add(SummonMeeboo.ID);

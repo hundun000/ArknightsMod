@@ -56,5 +56,7 @@ public class SummonMeeboo extends BaseSummon {
     protected AbstractOrb getSummonOrb() {
         return new MeeBoo();
     }
+    
+    
 
 }

@@ -66,8 +66,7 @@ public class MeeBoo extends AbstractModOrb {
 
     @Override
     public void onEvoke() {
-        addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(evokeAmount, true, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.NONE));
-        addToBot(new SFXAction("TINGSHA")); 
+        
     }
 
     @Override
@@ -88,6 +87,11 @@ public class MeeBoo extends AbstractModOrb {
         addToBot(new DamageRandomEnemyAction(new DamageInfo(AbstractDungeon.player, this.passiveAmount, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.NONE));
     }
     
+    @Override
+    public void onOverload() {
+        addToBot(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(evokeAmount, true, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.NONE));
+        addToBot(new SFXAction("TINGSHA")); 
+    }
     
 
 
