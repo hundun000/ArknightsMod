@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
@@ -32,12 +33,34 @@ public class OriginiumSlugRaceEvent extends AbstractImageEvent {
     private static final String[] OPTIONS = eventStrings.OPTIONS;
     public static final String IMG = makeEventPath("IdentityCrisisEvent.png");
     
-
+    
+    private static final int BODY_TEXT_INDEX_MAIN = 0;
+    private static final int BODY_TEXT_INDEX_END = 1;
+    private static final int BODY_TEXT_INDEX_RACING = 2;
+    private static final int BODY_TEXT_INDEX_YOU_WIN = 3;
+    private static final int BODY_TEXT_INDEX_YOU_LOSE = 4;
+    private static final int BODY_TEXT_INDEX_HAS_NEXT_RACE = 5;
+    private static final int BODY_TEXT_INDEX_HAS_NOT_NEXT_RACE = 6;
+    
+    private static final int SCREEN_INDEX_MAIN = 0;
+    private static final int SCREEN_INDEX_RACING = 1;
+    private static final int SCREEN_INDEX_END = 2;
+    
+    private static final int OPTION_TEXT_INDEX_MAIN_PAID = 0;
+    private static final int OPTION_TEXT_INDEX_MAIN_LEAVE = 1;
+    private static final int OPTION_TEXT_INDEX_RACING = 2;
+    private static final int OPTION_TEXT_INDEX_END = 3;
+    
+    private static final int OPTION_LAYOUT_INDEX_MAIN_PAID = 0;
+    private static final int OPTION_LAYOUT_INDEX_MAIN_LEAVE = 1;
+    private static final int OPTION_LAYOUT_INDEX_RACING = 0;
+    private static final int OPTION_LAYOUT_INDEX_END = 0;
+    
     private int wagerPrice; 
     Random random = new Random();
     
     public OriginiumSlugRaceEvent() {
-        super(NAME, DESCRIPTIONS[0], IMG);
+        super(NAME, DESCRIPTIONS[BODY_TEXT_INDEX_MAIN], IMG);
 
         if (AbstractDungeon.ascensionLevel >= 15) { 
             wagerPrice = 20;
@@ -45,61 +68,71 @@ public class OriginiumSlugRaceEvent extends AbstractImageEvent {
             wagerPrice = 30;
         }
 
-        imageEventText.setDialogOption(OPTIONS[0]); 
-        imageEventText.setDialogOption(LocalizationUtils.formatDescription(OPTIONS[1], wagerPrice));
+        screenNum = SCREEN_INDEX_MAIN;
+        imageEventText.setDialogOption(LocalizationUtils.formatDescription(OPTIONS[OPTION_TEXT_INDEX_MAIN_PAID], wagerPrice));
+        imageEventText.setDialogOption(OPTIONS[OPTION_TEXT_INDEX_MAIN_LEAVE]); 
+        
     }
 
     @Override
     protected void buttonEffect(int i) { // This is the event:
         switch (screenNum) {
-            case 0: // While you are on screen number 0 (The starting screen)
+            case SCREEN_INDEX_MAIN: // While you are on screen number 0 (The starting screen)
                 switch (i) {
-                    case 0: // If you press button the first button (Button at index 0), in this case: Inspiration.
-                        this.imageEventText.updateBodyText(DESCRIPTIONS[1]); 
-                        this.imageEventText.updateDialogOption(0, OPTIONS[2]); 
+                    case OPTION_LAYOUT_INDEX_MAIN_LEAVE: 
+                        this.imageEventText.updateBodyText(DESCRIPTIONS[BODY_TEXT_INDEX_END]); 
+                        this.imageEventText.updateDialogOption(OPTION_LAYOUT_INDEX_END, OPTIONS[OPTION_TEXT_INDEX_END]); 
                         this.imageEventText.clearRemainingOptions(); 
-                        screenNum = 1; 
+                        screenNum = SCREEN_INDEX_END; 
 
-                        break; // Onto screen 1 we go.
-                    case 1: // If you press button the second button (Button at index 1), in this case: Deinal
+                        break; 
+                    case OPTION_LAYOUT_INDEX_MAIN_PAID: 
 
-                        CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.MED, ScreenShake.ShakeDur.MED, false);
-                        CardCrawlGame.sound.play("BLUNT_FAST");  // Play a hit sound
+                        AbstractDungeon.player.loseGold(wagerPrice);
+                        this.imageEventText.updateBodyText(DESCRIPTIONS[BODY_TEXT_INDEX_RACING]); 
+                        this.imageEventText.updateDialogOption(OPTION_LAYOUT_INDEX_RACING, OPTIONS[OPTION_TEXT_INDEX_RACING]); 
+                        this.imageEventText.clearRemainingOptions(); 
+                        screenNum = SCREEN_INDEX_RACING;
                         
-                        boolean win = random.nextBoolean();
-                        String mainText = "";
-                        if (win) {
-                            AbstractDungeon.player.gainGold(wagerPrice * 2);
-                            mainText += DESCRIPTIONS[2];
-                        } else {
-                            mainText += DESCRIPTIONS[3];
-                        }
-                        boolean hasNextRace = random.nextBoolean();
-                        if (hasNextRace) {
-                            mainText += DESCRIPTIONS[4];
-                        } else {
-                            mainText += DESCRIPTIONS[5];
-                        }
-
-                        this.imageEventText.updateBodyText(mainText);
-                        
-                        if (hasNextRace) {
-                            this.imageEventText.updateDialogOption(0, OPTIONS[0]);
-                            this.imageEventText.updateDialogOption(1, LocalizationUtils.formatDescription(OPTIONS[1], wagerPrice));
-                            screenNum = 0;
-                        } else {
-                            this.imageEventText.updateDialogOption(0, OPTIONS[2]);
-                            screenNum = 1;
-                        }
-                        this.imageEventText.clearRemainingOptions();
-                        
-
                         break;
                 }
                 break;
-            case 1:
+            case SCREEN_INDEX_RACING:
                 switch (i) {
-                    case 0: 
+                    case OPTION_LAYOUT_INDEX_RACING: 
+                        boolean win = random.nextBoolean();
+                        String mainText = "";
+                        if (win) {
+                            AbstractDungeon.effectList.add(new RainingGoldEffect(wagerPrice * 2));
+                            AbstractDungeon.player.gainGold(wagerPrice * 2);
+                            mainText += DESCRIPTIONS[BODY_TEXT_INDEX_YOU_WIN];
+                        } else {
+                            mainText += DESCRIPTIONS[BODY_TEXT_INDEX_YOU_LOSE];
+                        }
+                        boolean hasNextRace = random.nextBoolean();
+                        if (hasNextRace) {
+                            mainText += DESCRIPTIONS[BODY_TEXT_INDEX_HAS_NEXT_RACE];
+                        } else {
+                            mainText += DESCRIPTIONS[BODY_TEXT_INDEX_HAS_NOT_NEXT_RACE];
+                        }
+
+                        this.imageEventText.updateBodyText(mainText);
+                        if (hasNextRace) {
+                            this.imageEventText.updateDialogOption(OPTION_LAYOUT_INDEX_MAIN_LEAVE, OPTIONS[OPTION_TEXT_INDEX_MAIN_LEAVE]);
+                            this.imageEventText.updateDialogOption(OPTION_LAYOUT_INDEX_MAIN_PAID, LocalizationUtils.formatDescription(OPTIONS[OPTION_TEXT_INDEX_MAIN_PAID], wagerPrice));
+                            screenNum = SCREEN_INDEX_MAIN;
+                        } else {
+                            this.imageEventText.updateDialogOption(OPTION_LAYOUT_INDEX_END, OPTIONS[OPTION_TEXT_INDEX_END]);
+                            screenNum = SCREEN_INDEX_END;
+                        }
+                        this.imageEventText.clearRemainingOptions();
+                        
+                        break;
+                }
+                break;
+            case SCREEN_INDEX_END:
+                switch (i) {
+                    case OPTION_LAYOUT_INDEX_END: 
                         openMap();
                         break;
                 }

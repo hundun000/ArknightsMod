@@ -22,8 +22,8 @@ import arknights.util.TextureLoader;
  * @author hundun
  * Created on 2020/11/27
  */
-public class D12BombPower extends AbstractPower {
-    public static final String ID_START = ArknightsMod.makeID(D12BombPower.class);
+public class W12BombPower extends AbstractPower {
+    public static final String ID_START = ArknightsMod.makeID(W12BombPower.class);
     private static int idOffset = 0;
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID_START);
     public static final String NAME = powerStrings.NAME;
@@ -34,7 +34,7 @@ public class D12BombPower extends AbstractPower {
 
     private int damage;
     
-    public D12BombPower(final AbstractCreature owner, final int turns, final int damage) {
+    public W12BombPower(final AbstractCreature owner, final int turns, final int damage) {
         this.name = NAME;
         this.ID = ID_START + idOffset;
         idOffset++;

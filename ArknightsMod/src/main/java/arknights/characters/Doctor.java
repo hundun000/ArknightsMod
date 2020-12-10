@@ -184,7 +184,7 @@ public class Doctor extends CustomPlayer {
         retVal.add(SummonMeeboo.ID);
         retVal.add(WaveStrike.ID);
         retVal.add(TexasDeploy.ID);
-        retVal.add(D12Bomb.ID);
+        retVal.add(W12Bomb.ID);
         retVal.add(PeriodStrike.ID);
 //        retVal.add(DefaultCommonAttack.ID);
 //        retVal.add(DefaultUncommonAttack.ID);

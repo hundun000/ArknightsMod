@@ -24,15 +24,15 @@ import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.CardTemplant;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
-import arknights.powers.D12BombPower;
+import arknights.powers.W12BombPower;
 
 /**
  * @author hundun
  * Created on 2020/11/27
  */
-public class D12Bomb extends AbstractModCard {
+public class W12Bomb extends AbstractModCard {
     
-    public static final String ID = ArknightsMod.makeID(D12Bomb.class); 
+    public static final String ID = ArknightsMod.makeID(W12Bomb.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
@@ -42,11 +42,11 @@ public class D12Bomb extends AbstractModCard {
     private static final int COST = 2;
 
     
-    public D12Bomb() {
+    public W12Bomb() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(15)
-                .setMagicNumber(1)
+                .setMagicNumber(2)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(5)
@@ -68,16 +68,16 @@ public class D12Bomb extends AbstractModCard {
         });
         for (int i = 0; i < magicNumber && i < topMonsters.size(); i++) {
             AbstractMonster target = topMonsters.get(i);
-            addToBot(new ApplyPowerAction(target, player, new D12BombPower(target, 3, this.damage)));
+            addToBot(new ApplyPowerAction(target, player, new W12BombPower(target, 3, this.damage)));
         }
     }
     
-    @Override
-    public void initializeDescription() {
-        super.initializeDescription();
-        StringBuilder builder = new StringBuilder();
-        description.forEach(item -> builder.append(item.text).append(","));
-        ArknightsMod.logger.info("D12::after initializeDescription, description = {}", builder.toString());
-    }
+//    @Override
+//    public void initializeDescription() {
+//        super.initializeDescription();
+//        StringBuilder builder = new StringBuilder();
+//        description.forEach(item -> builder.append(item.text).append(","));
+//        ArknightsMod.logger.info("D12::after initializeDescription, description = {}", builder.toString());
+//    }
 
 }

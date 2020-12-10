@@ -155,9 +155,9 @@
     "NAME": "群体狙击部署",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
   },
-  "arknights:D12Bomb": {
-    "NAME": "D12",
-    "DESCRIPTION": "给予生命值最多的 !M! 个敌人 D12炸弹 。每个D12炸弹在第 #b3 回合开始时，对所有敌人造成 !D! 点伤害。"
+  "arknights:W12Bomb": {
+    "NAME": "W12",
+    "DESCRIPTION": "给予生命值最多的 !M! 个敌人 W12炸弹 。每个W12炸弹在第 #b3 回合开始时，对所有敌人造成 !D! 点伤害。"
   },
   "arknights:DeprecatedDisplacementTrap": {
     "NAME": "Deprecated陷阱",
