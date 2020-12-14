@@ -19,12 +19,16 @@ import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.monsters.MonsterInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import arknights.cards.*;
 import arknights.characters.Doctor;
 import arknights.events.IdentityCrisisEvent;
 import arknights.events.OriginiumSlugRaceEvent;
+import arknights.monster.Puncturer;
 import arknights.potions.PlaceholderPotion;
 import arknights.powers.MagicStrengthPower;
 import arknights.relics.BottledPlaceholderRelic;
@@ -165,6 +169,14 @@ public class ArknightsMod implements
     
     public static String makeRelicOutlinePath(String resourcePath) {
         return IMAGES_FOLDER+ "/relics/outline/" + resourcePath;
+    }
+    //images/monsters/theBottom/cultist/skeleton.atlas
+    public static String makeMonsterSkeletonAtlasPath(Class<?> monsterClazz) {
+        return IMAGES_FOLDER+ "/monsters/" + monsterClazz.getSimpleName() + "/skeleton.atlas";
+    }
+    
+    public static String makeMonsterSkeletonJsonPath(Class<?> monsterClazz) {
+        return IMAGES_FOLDER+ "/monsters/" + monsterClazz.getSimpleName() + "/skeleton.json";
     }
     
     public static String makeOrbPath(String resourcePath) {
@@ -355,18 +367,22 @@ public class ArknightsMod implements
         
         // =============== EVENTS =================
         
-        // This event will be exclusive to the City (act 2). If you want an event that's present at any
-        // part of the game, simply don't include the dungeon ID
-        // If you want to have a character-specific event, look at slimebound (CityRemoveEventPatch).
-        // Essentially, you need to patch the game and say "if a player is not playing my character class, remove the event from the pool"
         BaseMod.addEvent(OriginiumSlugRaceEvent.ID, OriginiumSlugRaceEvent.class, Exordium.ID);
         BaseMod.addEvent(IdentityCrisisEvent.ID, IdentityCrisisEvent.class, TheCity.ID);
         
-        // =============== /EVENTS/ =================
+        // =============== MONSTERS =================
+        BaseMod.addMonster(Puncturer.ID + "x2", () -> new MonsterGroup(new AbstractMonster[] {
+                new Puncturer(-230.0F, 15.0F),
+                new Puncturer(100.0F, 25.0F)
+        }));
+        BaseMod.addMonster(Puncturer.ID + "x1", () -> new Puncturer(-230.0F, 15.0F));
+        
+        BaseMod.addMonsterEncounter(Exordium.ID, new MonsterInfo(Puncturer.ID + "x1", 10.0F));
+        BaseMod.addMonsterEncounter(Exordium.ID, new MonsterInfo(Puncturer.ID + "x2", 10.0F));
+        
         logger.info("Done loading badge Image and mod options");
     }
-    
-    // =============== / POST-INITIALIZE/ =================
+
     
     
     // ================ ADD POTIONS ===================
@@ -518,6 +534,10 @@ public class ArknightsMod implements
         // OrbStrings
         BaseMod.loadCustomStringsFile(OrbStrings.class,
                 LOCALIZATION_FOLDER + languageFolder + "/Orb-Strings.json");
+        
+        // Monster
+        BaseMod.loadCustomStringsFile(MonsterStrings.class,
+                LOCALIZATION_FOLDER + languageFolder + "/Monster-Strings.json");
         
         logger.info("Done edittting strings");
     }
