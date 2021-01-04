@@ -33,6 +33,7 @@ import arknights.potions.PlaceholderPotion;
 import arknights.powers.MagicStrengthPower;
 import arknights.relics.BottledPlaceholderRelic;
 import arknights.relics.DefaultClickableRelic;
+import arknights.relics.HumanResource;
 import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
 import arknights.relics.StereoProjectorRelic;
@@ -42,6 +43,8 @@ import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
 import arknights.variables.DefaultCustomVariable;
 import arknights.variables.SecondMagicNumberVariable;
+import arknights.variables.ThirdMagicNumberVariable;
+import arknights.variables.UseCountVariable;
 import arknights.variables.MagicDamageVariable;
 
 import org.apache.logging.log4j.LogManager;
@@ -421,6 +424,7 @@ public class ArknightsMod implements
         BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         BaseMod.addRelicToCustomPool(new UrsusBreadRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         BaseMod.addRelicToCustomPool(new BattleRecords(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+        BaseMod.addRelicToCustomPool(new HumanResource(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
@@ -443,8 +447,10 @@ public class ArknightsMod implements
         // Add the Custom Dynamic Variables
         logger.info("Add variables");
         // Add the Custom Dynamic variables
-        BaseMod.addDynamicVariable(new DefaultCustomVariable());
+        //BaseMod.addDynamicVariable(new DefaultCustomVariable());
         BaseMod.addDynamicVariable(new SecondMagicNumberVariable());
+        BaseMod.addDynamicVariable(new ThirdMagicNumberVariable());
+        BaseMod.addDynamicVariable(new UseCountVariable());
         
         logger.info("Adding cards");
         // Add the cards

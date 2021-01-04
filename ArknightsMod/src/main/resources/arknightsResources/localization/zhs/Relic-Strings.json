@@ -21,6 +21,14 @@
       "选择1张牌升级。"
     ]
   },
+  "arknights:HumanResource": {
+    "NAME": "人力资源",
+    "FLAVOR": "The more you right-click it, the more orbs you've evoked in your lifetime.",
+    "DESCRIPTIONS": [
+      "在战斗以外的时候，右键遗物使用。消耗600点 合成玉 ，随机获得一张干员牌。每攀爬一层楼层获得50点 合成玉 。",
+      "获得一张干员牌"
+    ]
+  },
   "arknights:PlaceholderRelic": {
     "NAME": "Placeholder Energy Relic",
     "FLAVOR": "The snake is a friend.",

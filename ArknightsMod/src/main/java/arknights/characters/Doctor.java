@@ -28,6 +28,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import arknights.ArknightsMod;
 import arknights.cards.*;
 import arknights.relics.DefaultClickableRelic;
+import arknights.relics.HumanResource;
 import arknights.relics.PlaceholderRelic;
 import arknights.relics.PlaceholderRelic2;
 import arknights.relics.StereoProjectorRelic;
@@ -41,6 +42,7 @@ import static arknights.ArknightsMod.*;
 import static arknights.characters.Doctor.Enums.ARKNIGHTS_CARD_COLOR;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
@@ -167,6 +169,8 @@ public class Doctor extends CustomPlayer {
                 STARTING_HP, MAX_HP, ORB_SLOTS, STARTING_GOLD, CARD_DRAW, this, getStartingRelics(),
                 getStartingDeck(), false);
     }
+    
+    
 
     // Starting Deck
     @Override
@@ -174,33 +178,16 @@ public class Doctor extends CustomPlayer {
         ArrayList<String> retVal = new ArrayList<>();
 
         logger.info("Begin loading starter Deck Strings");
+        String[] summonPackage = new String[]{SummonFreezingSupportDrone.ID, SummonMiningSupportDrone.ID, SummonMeeboo.ID, OrbOverload.ID};
+        String[] defensePackage = new String[]{Cooking.ID, ShellDefense.ID};
+        String[] vanguardPackage = new String[]{TexasDeploy.ID, FangDeploy.ID};
+        String[] guardPackage = new String[]{WaveStrike.ID, ChargingStrike.ID, VorpalEdge.ID};
+        String[] shotPackage = new String[]{W12Bomb.ID, ChargingShot.ID, PrepareShot.ID};
+        
+        retVal.addAll(Arrays.asList(vanguardPackage));
+        retVal.addAll(Arrays.asList(guardPackage));
+        retVal.addAll(Arrays.asList(shotPackage));
 
-        retVal.add(SummonFreezingSupportDrone.ID);
-        retVal.add(SummonMiningSupportDrone.ID);
-        retVal.add(SummonMeeboo.ID);
-        retVal.add(OrbOverload.ID);
-        retVal.add(Cooking.ID);
-        retVal.add(ShellDefense.ID);
-        retVal.add(SummonMeeboo.ID);
-        retVal.add(WaveStrike.ID);
-        retVal.add(TexasDeploy.ID);
-        retVal.add(W12Bomb.ID);
-        retVal.add(PeriodStrike.ID);
-//        retVal.add(DefaultCommonAttack.ID);
-//        retVal.add(DefaultUncommonAttack.ID);
-//        retVal.add(DefaultRareAttack.ID);
-
-//        retVal.add(DefaultCommonSkill.ID);
-//        retVal.add(DefaultUncommonSkill.ID);
-//        retVal.add(DefaultRareSkill.ID);
-//
-//        retVal.add(DefaultCommonPower.ID);
-//        retVal.add(DefaultUncommonPower.ID);
-//        retVal.add(DefaultRarePower.ID);
-
-//        retVal.add(DefaultAttackWithVariable.ID);
-//        retVal.add(DefaultSecondMagicNumberSkill.ID);
-//        retVal.add(OrbSkill.ID);
         return retVal;
     }
 
@@ -212,11 +199,13 @@ public class Doctor extends CustomPlayer {
         //retVal.add(PlaceholderRelic2.ID);
         retVal.add(BattleRecords.ID);
         retVal.add(UrsusBreadRelic.ID);
+        retVal.add(HumanResource.ID);
         
         UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
         UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
         UnlockTracker.markRelicAsSeen(BattleRecords.ID);
         UnlockTracker.markRelicAsSeen(UrsusBreadRelic.ID);
+        UnlockTracker.markRelicAsSeen(HumanResource.ID);
         return retVal;
     }
 

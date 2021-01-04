@@ -61,7 +61,7 @@
   },
   "arknights:ToxicOverload": {
     "NAME": "蓄力毒尾击",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 #y缓慢 。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。给予所有敌人 #y减速 。"
   },
   "arknights:SteamPump": {
     "NAME": "水蒸气泵",
@@ -98,11 +98,11 @@
       " NL （已打出 {} 次。）"
     ]
   },
-  "arknights:PeriodStrike": {
-    "NAME": "蓄力击",
+  "arknights:ChargingStrike": {
+    "NAME": "蓄力打击",
     "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
-      " NL （已打出 {} 次。）"
+      " NL （已打出 !UC! 次。）"
     ]
   },
   "arknights:VorpalEdge": {
@@ -127,56 +127,22 @@
     "NAME": "焦土",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害，将1张 *灼伤 放入你的弃牌堆中。"
   },
-  "arknights:FourStarSingleTargetMedicDeploy": {
-    "NAME": "四星单体医疗部署",
-    "DESCRIPTION": "获得 !B! 点 格挡。"
+  "arknights:ChargingShot": {
+    "NAME": "蓄力射击",
+    "DESCRIPTION": "造成 !D! 点伤害 !3rdM! 次。 NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （已打出 !UC! 次。）"
+    ]
   },
-  "arknights:AreaMedicDeploy": {
-    "NAME": "群体医疗部署",
-    "DESCRIPTION": "获得 !B! 点 格挡。 NL 下回合开始时获得 !B! 格挡。"
-  },
-  "arknights:GuardDeploy": {
-    "NAME": "近卫部署",
-    "DESCRIPTION": "造成 !D! 点伤害 。"
-  },
-  "arknights:SingleTargetCasterDeploy": {
-    "NAME": "单体术士部署",
-    "DESCRIPTION": "造成 !D! 点伤害。"
-  },
-  "arknights:AreaTargetCasterDeploy": {
-    "NAME": "群体术士部署",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。"
-  },
-  "arknights:SingleTargetSniperDeploy": {
-    "NAME": "单体狙击部署",
-    "DESCRIPTION": "造成 !D! 点伤害 !M! 次。"
-  },
-  "arknights:AreaTargetSniperDeploy": {
-    "NAME": "群体狙击部署",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
+  "arknights:PrepareShot": {
+    "NAME": "瞄准射击",
+    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 当这张牌被保留 !M! 回合后，直到下次打出，基础伤害增加 !2ndM! 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （已保留 !3rdM! 次。）"
+    ]
   },
   "arknights:W12Bomb": {
     "NAME": "W12",
     "DESCRIPTION": "给予生命值最多的 !M! 个敌人 W12炸弹 。每个W12炸弹在第 #b3 回合开始时，对所有敌人造成 !D! 点伤害。"
-  },
-  "arknights:DeprecatedDisplacementTrap": {
-    "NAME": "Deprecated陷阱",
-    "DESCRIPTION": "造成 !D! 点伤害X次。X等于敌人的位移层数。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害X+1次。X等于敌人的位移层数。",
-    "EXTENDED_DESCRIPTION":[
-      "(共 !B! 次)",
-      ""
-    ]
-  },
-  "arknights:DeprecatedCounterStrike": {
-    "NAME": "Deprecated蓄力打击",
-    "DESCRIPTION": "Deprecated造成 !D! 点伤害。每 !M! 次打出时，额外增加 !2ndM! 点伤害。",
-    "EXTENDED_DESCRIPTION": [
-      " NL （已打出{}次。）"
-    ]
-  },
-  "arknights:DeprecatedMagicStrengthGain": {
-    "NAME": "Deprecated获得魔法增幅",
-    "DESCRIPTION": "Deprecated获得 !M! 层 魔法增幅 。"
   }
 }

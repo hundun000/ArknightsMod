@@ -24,7 +24,6 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
 
 import arknights.ArknightsMod;
-import arknights.cards.FourStarSingleTargetMedicDeploy;
 import arknights.util.LocalizationUtils;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomOrb;

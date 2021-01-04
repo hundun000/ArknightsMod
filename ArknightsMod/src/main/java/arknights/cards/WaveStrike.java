@@ -60,7 +60,7 @@ public class WaveStrike extends AbstractModCard {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
         addToBot(new GainBlockAction(player, player, block));
         if (useTimes == magicNumber) {
-            addToBot(new ModifyDamageAction(this.uuid, - extraMagicNumbers[DAMAGE_DOWN_MAGIC_INDEX]));
+            addToBot(new ModifyDamageAction(this.uuid, - getExtraMagicNumber(DAMAGE_DOWN_MAGIC_INDEX)));
         }
         this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.useTimes);
         initializeDescription();

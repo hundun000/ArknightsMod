@@ -59,15 +59,16 @@ public class W12Bomb extends AbstractModCard {
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         List<AbstractMonster> monsters = AbstractDungeon.getMonsters().monsters;
-        List<AbstractMonster> topMonsters = new ArrayList<>(monsters);
-        Collections.sort(topMonsters, new Comparator<AbstractMonster>() {
+        List<AbstractMonster> tempMonsters = new ArrayList<>(monsters);
+        tempMonsters.removeIf(item -> item.isDeadOrEscaped());
+        Collections.sort(tempMonsters, new Comparator<AbstractMonster>() {
             @Override
             public int compare(AbstractMonster o1, AbstractMonster o2) {
                 return o2.currentHealth - o1.currentHealth;
             }
         });
-        for (int i = 0; i < magicNumber && i < topMonsters.size(); i++) {
-            AbstractMonster target = topMonsters.get(i);
+        for (int i = 0; i < magicNumber && i < tempMonsters.size(); i++) {
+            AbstractMonster target = tempMonsters.get(i);
             addToBot(new ApplyPowerAction(target, player, new W12BombPower(target, 3, this.damage)));
         }
     }

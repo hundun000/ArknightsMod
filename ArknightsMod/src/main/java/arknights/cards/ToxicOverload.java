@@ -16,6 +16,7 @@ import arknights.ArknightsMod;
 import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.powers.SlowOneTurnPower;
 
 /**
  * @author hundun
@@ -50,7 +51,7 @@ public class ToxicOverload extends AbstractModCard {
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new DamageAllEnemiesAction(player, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         for (AbstractMonster mo : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
-            addToBot(new ApplyPowerAction(mo, player, new SlowPower(mo, 1), 1));
+            addToBot(new ApplyPowerAction(mo, player, new SlowOneTurnPower(mo, 1), 1));
         }
     }
 

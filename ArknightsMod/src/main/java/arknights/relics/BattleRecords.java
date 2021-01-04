@@ -64,7 +64,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
     @Override
     public void onRightClick() {// On right click
         
-        if (!useable()) {
+        if (!usable()) {
             return;
         }
         
@@ -109,7 +109,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
         
         counter -= UPGRADE_COST_STACK;
         flash();
-        if (useable()) {
+        if (usable()) {
             beginPulse();
         } else {
             stopPulse();
@@ -117,7 +117,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
     }
 
 
-    private boolean useable() {
+    private boolean usable() {
         boolean hasEnoughStack = counter >= UPGRADE_COST_STACK;
         return (isObtained && outsideBattle && hasEnoughStack && this.cardsSelected);
     }
@@ -134,7 +134,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
         outsideBattle = true;
         addCounter(1);
         flash();
-        if (useable()) {
+        if (usable()) {
             beginPulse();
         } else {
             stopPulse();

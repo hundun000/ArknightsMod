@@ -18,7 +18,10 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.DemonFormPower;
+import com.megacrit.cardcrawl.powers.IntangiblePower;
 import com.megacrit.cardcrawl.powers.RitualPower;
+import com.megacrit.cardcrawl.powers.ThieveryPower;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 
 import arknights.ArknightsMod;
@@ -41,7 +44,7 @@ public class Puncturer extends AbstractMonster {
                 private static final float HB_X = -8.0F;
     /*     */   private static final float HB_Y = 10.0F;
     /*     */   private static final float HB_W = 230.0F;
-    /*  29 */   private static final String INCANTATION_NAME = MOVES[2];
+    /*  29 */   private static final String PREPARE_TALK_TEXT = MOVES[2];
     /*     */   
     /*     */   private static final float HB_H = 240.0F;
     /*     */   
@@ -54,6 +57,8 @@ public class Puncturer extends AbstractMonster {
     /*     */   private static final byte INCANTATION = 3;
     /*     */   private boolean talky = true;
     /*     */   
+    
+    private static final int INTANGIBLE_POWER_TURN = 3;
     
     private int turnCount = 0;
     private enum AnimationState {
@@ -84,12 +89,12 @@ public class Puncturer extends AbstractMonster {
     /*  53 */     this.dialogY = 50.0F * Settings.scale;
     /*     */     
     /*  55 */     if (AbstractDungeon.ascensionLevel >= 2) {
-    /*  56 */       this.addDamageSpeed = 4;
+    /*  56 */       this.addDamageSpeed = 3;
     /*     */     } else {
-    /*  58 */       this.addDamageSpeed = 3;
+    /*  58 */       this.addDamageSpeed = 2;
     /*     */     } 
     /*     */     
-    /*  61 */     this.damage.add(new DamageInfo((AbstractCreature)this, 6));
+    /*  61 */     this.damage.add(new DamageInfo((AbstractCreature)this, 1));
     /*     */     
     /*  63 */     this.talky = talk;
     /*  64 */     if (Settings.FAST_MODE) {
@@ -108,6 +113,11 @@ public class Puncturer extends AbstractMonster {
     /*  77 */     this(x, y, true);
     /*     */   }
     /*     */    
+    
+    public void usePreBattleAction() {
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new IntangiblePower(this, INTANGIBLE_POWER_TURN)));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new RitualPower(this, this.addDamageSpeed, false)));
+    }
     
     public void takeTurn() {
         this.turnCount++;
@@ -181,8 +191,8 @@ public class Puncturer extends AbstractMonster {
     private static final byte ATTACK_MOVE_CODE = (byte)1;
      
     protected void getMove(int num) {
-        if (this.turnCount < 3) {
-            setMove(INCANTATION_NAME, PREPARE_MOVE_CODE, AbstractMonster.Intent.BUFF);
+        if (this.turnCount < INTANGIBLE_POWER_TURN) {
+            setMove(PREPARE_TALK_TEXT, PREPARE_MOVE_CODE, AbstractMonster.Intent.BUFF);
         } else {
             setMove(ATTACK_MOVE_CODE, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(0)).base);
         }

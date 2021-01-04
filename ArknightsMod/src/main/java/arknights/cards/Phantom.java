@@ -46,6 +46,7 @@ public class Phantom extends AbstractModCard {
         this.cardsToPreview = new PhantomInTheMirror();
     }
     
+    @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
         return false;
@@ -56,6 +57,7 @@ public class Phantom extends AbstractModCard {
         // do nothing
     }
     
+    @Override
     public void triggerOnManualDiscard() {
         AbstractPlayer player = AbstractDungeon.player;
         if (magicNumber > 0) {

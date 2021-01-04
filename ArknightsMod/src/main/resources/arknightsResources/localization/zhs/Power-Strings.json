@@ -5,33 +5,21 @@
       "在 #b{} 回合后，增加 #b{} 张 #b{} 到你的手牌中。",
       "在下个回合开始时，增加 #b{} 张 #b{} 到你的手牌中。"
     ]
-  },
-  "arknights:DeprecatedDisplacementPower": {
-    "NAME": "Deprecated位移",
-    "DESCRIPTIONS": [
-      "你对该敌人造成的 位移 。"
-    ]
-  }, 
-  "arknights:DeprecatedMagicStrengthPower": {
-    "NAME": "Deprecated魔法增幅",
-    "DESCRIPTIONS": [
-      "魔法伤害提升 #b{} 。",
-      "魔法伤害降低 #b{} 。"
-    ]
-  },     
-  "arknights:CommonPower": {
-    "NAME": "Placeholder Power",
-    "DESCRIPTIONS": ["You applied #b", " keyword.", " keywords."]
-  },
-  "arknights:RarePower": {
-    "NAME": "Placeholder Power",
-    "DESCRIPTIONS": ["At the start of your turn, TOUCH #b", " enemy." , " enemies."]
-  },
+  },    
   "arknights:W12BombPower": {
     "NAME": "W12",
     "DESCRIPTIONS": [
       "在 #b{} 回合开始时，对所有敌人造成 #b{} 伤害。",
       "在下回合开始时，对所有敌人造成 #b{} 伤害。"
+    ]
+  },
+  "arknights:SlowOneTurn": {
+    "NAME": "减速",
+    "DESCRIPTIONS": [
+      "你在这个回合每打出一张卡牌， ",
+      " 从 #y攻击 受到的伤害增加 #b10% 。回合结束时失去。",
+      " （受到 #b",
+      "% 额外伤害）"
     ]
   }
 }

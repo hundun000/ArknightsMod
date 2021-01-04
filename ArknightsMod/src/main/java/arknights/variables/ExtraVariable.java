@@ -39,7 +39,7 @@ public abstract class ExtraVariable extends DynamicVariable {
 
     @Override
     public int value(AbstractCard card) {
-        return ((AbstractModCard) card).extraMagicNumbers[extraIndex];
+        return ((AbstractModCard) card).getExtraMagicNumber(extraIndex);
     }
 
     @Override

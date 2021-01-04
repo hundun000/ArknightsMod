@@ -24,14 +24,23 @@ public abstract class AbstractModCard extends CustomCard {
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
     
-    
+    /*
+     * XXXX:  当前属性值，结算了power加成等
+     * baseXXX: 基础值，未结算power加成等。卡片效果是“基础伤害下降”，指的是该属性
+     * XXXXUpgraded: instance当前的baseXXX和instance初始化时的baseXXX不一样。如升级或卡片效果是“基础伤害下降”。
+     * XXXModified: instance当前的XXX和instance的baseXXX不一样。如因为power。
+     */
     // extra magic number slots
-    public int[] extraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];        
+    private int[] extraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];        
     public int[] baseExtraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     public boolean[] extraMagicNumberUpgradeds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     public boolean[] extraMagicNumberModifieds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     
-    
+    private int useTimeCount = -1;
+    /**
+     * 每次对useTimeCount取MagicNumber的模
+     */
+    protected boolean useMagicNumberAsUseTimeCountThreshold;
     /**
      * auto generate fields which always same or similar
      */
@@ -64,6 +73,7 @@ public abstract class AbstractModCard extends CustomCard {
         super.isMagicNumberModified = false;
         
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
+        this.useTimeCount = 0;
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -90,6 +100,27 @@ public abstract class AbstractModCard extends CustomCard {
 
     protected void setUpgradeInfo(UpgradeSetting upgradeSetting) {
         this.upgradeSetting = upgradeSetting;
+    }
+    
+    
+    
+    public void addUseCount() {
+        useTimeCount++;
+        if (useMagicNumberAsUseTimeCountThreshold && magicNumber != 0) {
+            useTimeCount %= magicNumber;
+        }
+    }
+    
+    public boolean isNextUseTimeReachThreshold() {
+        if (useMagicNumberAsUseTimeCountThreshold && magicNumber != 0) {
+            return useTimeCount + 1 == magicNumber;
+        } else {
+            return false;
+        }
+    }
+    
+    public int getUseTimeCount() {
+        return useTimeCount;
     }
     
     @Override
@@ -137,11 +168,51 @@ public abstract class AbstractModCard extends CustomCard {
             initializeDescription();
         }
     }
+    
+    
+    public void applyPowersWithTempAddBaseDamage(int tempAddDamage) {
+        int originBaseDamage = this.baseDamage;
+        this.baseDamage += tempAddDamage;
+        
+        super.applyPowers();
+        
+        this.baseDamage = originBaseDamage;
+        this.isDamageModified = (this.damage != this.baseDamage);
+    }
+    
+    public void calculateCardDamageWithTempAddBaseDamage(AbstractMonster arg0, int tempAddDamage) {
+        int originBaseDamage = this.baseDamage;
+        this.baseDamage += tempAddDamage;
+        
+        super.calculateCardDamage(arg0);
+        
+        this.baseDamage = originBaseDamage;
+        this.isDamageModified = (this.damage != this.baseDamage);
+    }
 
+    /**
+     * 直接用途是修改base；
+     * 因为base被修改，所以Upgraded=true；
+     * 因为base被修改，所以value已过时，重置为base，等待重新计算其他加成。
+     */
     protected void upgradeExtraMagicNumber(int index, int amount) {
+        upgradeExtraMagicNumber(index, amount, true);
+    }
+    
+    public int getExtraMagicNumber(int index) {
+        return extraMagicNumbers[index];
+    }
+    
+    protected void resetExtraMagicNumber(int index, int resetValue) {
+        baseExtraMagicNumbers[index] = resetValue; 
+        extraMagicNumbers[index] = baseExtraMagicNumbers[index];
+        extraMagicNumberUpgradeds[index] = false;
+    }
+    
+    protected void upgradeExtraMagicNumber(int index, int amount, boolean manualUpgraded) {
         baseExtraMagicNumbers[index] += amount; 
         extraMagicNumbers[index] = baseExtraMagicNumbers[index];
-        extraMagicNumberUpgradeds[index] = true;
+        extraMagicNumberUpgradeds[index] = manualUpgraded;
     }
 
 }
