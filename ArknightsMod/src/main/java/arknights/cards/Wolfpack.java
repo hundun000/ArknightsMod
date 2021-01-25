@@ -2,13 +2,7 @@ package arknights.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.AttackDamageRandomEnemyAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
-import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
-import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -46,6 +40,7 @@ public class Wolfpack extends AbstractModCard {
                 );
     }
     
+    @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
         return false;
@@ -56,6 +51,7 @@ public class Wolfpack extends AbstractModCard {
         // do nothing
     }
     
+    @Override
     public void triggerOnManualDiscard() {
         AbstractPlayer player = AbstractDungeon.player;
         addToBot(new AttackDamageRandomEnemyAction(this, AbstractGameAction.AttackEffect.SMASH));

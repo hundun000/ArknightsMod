@@ -1,32 +1,18 @@
 package arknights.orbs;
 
-import static arknights.ArknightsMod.makeCardPath;
 import static arknights.ArknightsMod.makeOrbPath;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
-import com.megacrit.cardcrawl.actions.defect.LightningOrbEvokeAction;
-import com.megacrit.cardcrawl.actions.defect.LightningOrbPassiveAction;
 import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.vfx.combat.OrbFlareEffect;
-
 import arknights.ArknightsMod;
 import arknights.util.LocalizationUtils;
-import arknights.util.TextureLoader;
-import basemod.abstracts.CustomOrb;
 
 /**
  * @author hundun

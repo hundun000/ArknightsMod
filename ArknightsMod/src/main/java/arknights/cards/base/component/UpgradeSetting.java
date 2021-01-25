@@ -3,7 +3,6 @@ package arknights.cards.base.component;
 import java.util.HashMap;
 import java.util.Map;
 
-import arknights.cards.base.AbstractModCard;
 import arknights.variables.ExtraVariable;
 
 /**

@@ -1,7 +1,6 @@
 package arknights.monster;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.AnimationState.TrackEntry;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.AnimateSlowAttackAction;
@@ -17,11 +16,8 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.DemonFormPower;
 import com.megacrit.cardcrawl.powers.IntangiblePower;
 import com.megacrit.cardcrawl.powers.RitualPower;
-import com.megacrit.cardcrawl.powers.ThieveryPower;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
 
 import arknights.ArknightsMod;
@@ -94,7 +90,7 @@ public class Puncturer extends AbstractMonster {
     /*  58 */       this.addDamageSpeed = 2;
     /*     */     } 
     /*     */     
-    /*  61 */     this.damage.add(new DamageInfo((AbstractCreature)this, 1));
+    /*  61 */     this.damage.add(new DamageInfo(this, 1));
     /*     */     
     /*  63 */     this.talky = talk;
     /*  64 */     if (Settings.FAST_MODE) {
@@ -114,11 +110,13 @@ public class Puncturer extends AbstractMonster {
     /*     */   }
     /*     */    
     
+    @Override
     public void usePreBattleAction() {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new IntangiblePower(this, INTANGIBLE_POWER_TURN)));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new RitualPower(this, this.addDamageSpeed, false)));
     }
     
+    @Override
     public void takeTurn() {
         this.turnCount++;
         
@@ -130,30 +128,30 @@ public class Puncturer extends AbstractMonster {
     /*  85 */         if (this.talky) {
     /*  86 */           playSfx();
     /*  87 */           if (temp < 4) {
-    /*  88 */             AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[0], 1.0F, 2.0F));
+    /*  88 */             AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[0], 1.0F, 2.0F));
     /*  90 */           } else if (temp < 7) {
-    /*  91 */             AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new TalkAction((AbstractCreature)this, DIALOG[1], 1.0F, 2.0F));
+    /*  91 */             AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[1], 1.0F, 2.0F));
     /*     */           } 
     /*     */         } 
     /*  94 */         break;
     /*     */ 
     /*     */       
     /*     */       case ATTACK_MOVE_CODE:
-    /* 103 */         AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new AnimateSlowAttackAction((AbstractCreature)this));
-    /* 104 */         AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new DamageAction((AbstractCreature)AbstractDungeon.player, this.damage
+    /* 103 */         AbstractDungeon.actionManager.addToBottom(new AnimateSlowAttackAction(this));
+    /* 104 */         AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, this.damage
     /* 105 */               .get(0), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
     /*     */         break;
     /*     */     } 
     /*     */ 
     /*     */ 
     /*     */     
-    /* 111 */     AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new RollMoveAction(this));
+    /* 111 */     AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
     /*     */   }
     /*     */   
     /*     */   private void playSfx() {
 //    /* 115 */     int roll = MathUtils.random(2);
 //    /* 116 */     if (roll == 0) {
-    /* 117 */       AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_CULTIST_1A"));
+    /* 117 */       AbstractDungeon.actionManager.addToBottom(new SFXAction("VO_CULTIST_1A"));
 //    /* 118 */     } else if (roll == 1) {
 //    /* 119 */       AbstractDungeon.actionManager.addToBottom((AbstractGameAction)new SFXAction("VO_CULTIST_1B"));
 //    /*     */     } else {
@@ -173,7 +171,8 @@ public class Puncturer extends AbstractMonster {
     /*     */   }
     /*     */ 
     /*     */   
-    /*     */   public void die() {
+    /*     */   @Override
+    public void die() {
     /* 138 */     playDeathSfx();
     /* 139 */     this.state.setTimeScale(0.1F);
     /* 140 */     useShakeAnimation(5.0F);
@@ -190,11 +189,12 @@ public class Puncturer extends AbstractMonster {
     private static final byte PREPARE_MOVE_CODE = (byte)3;
     private static final byte ATTACK_MOVE_CODE = (byte)1;
      
+    @Override
     protected void getMove(int num) {
         if (this.turnCount < INTANGIBLE_POWER_TURN) {
             setMove(PREPARE_TALK_TEXT, PREPARE_MOVE_CODE, AbstractMonster.Intent.BUFF);
         } else {
-            setMove(ATTACK_MOVE_CODE, AbstractMonster.Intent.ATTACK, ((DamageInfo)this.damage.get(0)).base);
+            setMove(ATTACK_MOVE_CODE, AbstractMonster.Intent.ATTACK, this.damage.get(0).base);
         }
     }
 }

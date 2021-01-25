@@ -1,19 +1,15 @@
 package arknights.actions;
 
-import java.util.Collection;
-
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 /**
  * @author hundun
@@ -50,6 +46,7 @@ public class DiscardWantTargetCardAction extends AbstractGameAction {
     }
     
     
+    @Override
     public void update() {
         if (this.duration == DURATION) {
             if (AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {

@@ -1,14 +1,5 @@
 package arknights.variables;
 
-import basemod.abstracts.DynamicVariable;
-
-import static arknights.ArknightsMod.makeID;
-
-import com.megacrit.cardcrawl.cards.AbstractCard;
-
-import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
-
 public class ThirdMagicNumberVariable extends ExtraVariable {
 
     

@@ -40,9 +40,9 @@ public class IdentityCrisisEvent extends AbstractImageEvent {
         super(NAME, DESCRIPTIONS[0], IMG);
 
         if (AbstractDungeon.ascensionLevel >= 15) { // If the player is ascension 15 or above, lose 5% max hp. Else, lose just 3%.
-            healthdamage = (int) ((float) AbstractDungeon.player.maxHealth * HEALTH_LOSS_PERCENTAGE);
+            healthdamage = (int) (AbstractDungeon.player.maxHealth * HEALTH_LOSS_PERCENTAGE);
         } else {
-            healthdamage = (int) ((float) AbstractDungeon.player.maxHealth * HEALTH_LOSS_PERCENTAGE_LOW_ASCENSION);
+            healthdamage = (int) (AbstractDungeon.player.maxHealth * HEALTH_LOSS_PERCENTAGE_LOW_ASCENSION);
         }
 
         // The first dialogue options available to us.
@@ -68,7 +68,7 @@ public class IdentityCrisisEvent extends AbstractImageEvent {
                         AbstractRelic relicToAdd = RelicLibrary.starterList.get(AbstractDungeon.relicRng.random(RelicLibrary.starterList.size() - 1)).makeCopy();
                         // Get a random starting relic
 
-                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2), relicToAdd);
+                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2, Settings.HEIGHT / 2, relicToAdd);
 
 
                         break; // Onto screen 1 we go.
@@ -102,7 +102,7 @@ public class IdentityCrisisEvent extends AbstractImageEvent {
                     case 2: // If you press button the third button (Button at index 2), in this case: Acceptance
 
                         AbstractCard c = new Apotheosis().makeCopy();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, (float) (Settings.WIDTH / 2), (float) (Settings.HEIGHT / 2)));
+                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(c, Settings.WIDTH / 2, Settings.HEIGHT / 2));
 
                         this.imageEventText.updateBodyText(DESCRIPTIONS[3]);
                         this.imageEventText.updateDialogOption(0, OPTIONS[5]);
@@ -129,11 +129,12 @@ public class IdentityCrisisEvent extends AbstractImageEvent {
         }
     }
 
+    @Override
     public void update() { // We need the update() when we use grid screens (such as, in this case, the screen for selecting a card to remove)
         super.update(); // Do everything the original update()
         if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) { // Once the grid screen isn't empty (we selected a card for removal)
-            AbstractCard c = (AbstractCard)AbstractDungeon.gridSelectScreen.selectedCards.get(0); // Get the card
-            AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(c, (float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2))); // Create the card removal effect
+            AbstractCard c = AbstractDungeon.gridSelectScreen.selectedCards.get(0); // Get the card
+            AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(c, Settings.WIDTH / 2, Settings.HEIGHT / 2)); // Create the card removal effect
             AbstractDungeon.player.masterDeck.removeCard(c); // Remove it from the deck
             AbstractDungeon.gridSelectScreen.selectedCards.clear(); // Or you can .remove(c) instead of clear,
             // if you want to continue using the other selected cards for something

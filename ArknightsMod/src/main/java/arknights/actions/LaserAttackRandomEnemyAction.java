@@ -30,8 +30,9 @@ public class LaserAttackRandomEnemyAction extends AbstractGameAction {
         this.removePower = removePower;
     }
     
+    @Override
     public void update() {
-        this.target = (AbstractCreature)AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+        this.target = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
         this.source = info.owner;
         if (this.target != null) {
             if (removeBlock) {

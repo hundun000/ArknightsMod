@@ -1,7 +1,6 @@
 package arknights;
 
 import basemod.*;
-import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 
 import com.badlogic.gdx.Gdx;
@@ -14,7 +13,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.Exordium;
-import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -22,30 +20,21 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.monsters.MonsterInfo;
-import com.megacrit.cardcrawl.unlock.UnlockTracker;
-
-import arknights.cards.*;
 import arknights.characters.Doctor;
 import arknights.events.IdentityCrisisEvent;
 import arknights.events.OriginiumSlugRaceEvent;
 import arknights.monster.Puncturer;
 import arknights.potions.PlaceholderPotion;
-import arknights.powers.MagicStrengthPower;
-import arknights.relics.BottledPlaceholderRelic;
-import arknights.relics.DefaultClickableRelic;
 import arknights.relics.HumanResource;
-import arknights.relics.PlaceholderRelic;
-import arknights.relics.PlaceholderRelic2;
 import arknights.relics.StereoProjectorRelic;
 import arknights.relics.UrsusBreadRelic;
 import arknights.relics.BattleRecords;
+import arknights.util.AbstractDungeonHelper;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
-import arknights.variables.DefaultCustomVariable;
 import arknights.variables.SecondMagicNumberVariable;
 import arknights.variables.ThirdMagicNumberVariable;
 import arknights.variables.UseCountVariable;
-import arknights.variables.MagicDamageVariable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -111,6 +100,7 @@ public class ArknightsMod implements
     // Colors (RGB)
     // Character Color
     public static final Color DEFAULT_GRAY = CardHelper.getColor(64.0f, 70.0f, 70.0f);
+    public static final Color STARLIGHT = CardHelper.getColor(0, 10, 125);
     
     // Potion Colors in RGB
     public static final Color PLACEHOLDER_POTION_LIQUID = CardHelper.getColor(209.0f, 53.0f, 18.0f); // Orange-ish Red
@@ -237,9 +227,15 @@ public class ArknightsMod implements
         logger.info("Done subscribing");
         
         logger.info("Creating the color " + Doctor.Enums.ARKNIGHTS_CARD_COLOR.toString());
-        
         BaseMod.addColor(Doctor.Enums.ARKNIGHTS_CARD_COLOR, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
                 DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
+                ATTACK_DEFAULT_GRAY, SKILL_DEFAULT_GRAY, POWER_DEFAULT_GRAY, ENERGY_ORB_DEFAULT_GRAY,
+                ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
+                ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
+        
+        logger.info("Creating the color " + Doctor.Enums.ARKNIGHTS_CARD_COLOR.toString());
+        BaseMod.addColor(Doctor.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, STARLIGHT, STARLIGHT, STARLIGHT,
+                STARLIGHT, STARLIGHT, STARLIGHT, STARLIGHT,
                 ATTACK_DEFAULT_GRAY, SKILL_DEFAULT_GRAY, POWER_DEFAULT_GRAY, ENERGY_ORB_DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
                 ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
@@ -383,6 +379,8 @@ public class ArknightsMod implements
         BaseMod.addMonsterEncounter(Exordium.ID, new MonsterInfo(Puncturer.ID + "x1", 10.0F));
         BaseMod.addMonsterEncounter(Exordium.ID, new MonsterInfo(Puncturer.ID + "x2", 10.0F));
         
+        AbstractDungeonHelper.addOperatorCards();
+        
         logger.info("Done loading badge Image and mod options");
     }
 
@@ -418,19 +416,16 @@ public class ArknightsMod implements
         // in order to automatically differentiate which pool to add the relic too.
 
         // This adds a character specific relic. Only when you play with the mentioned color, will you get this relic.
-        BaseMod.addRelicToCustomPool(new PlaceholderRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
-        BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
-        BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
-        BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
+         BaseMod.addRelicToCustomPool(new StereoProjectorRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         BaseMod.addRelicToCustomPool(new UrsusBreadRelic(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         BaseMod.addRelicToCustomPool(new BattleRecords(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         BaseMod.addRelicToCustomPool(new HumanResource(), Doctor.Enums.ARKNIGHTS_CARD_COLOR);
         
         // This adds a relic to the Shared pool. Every character can find this relic.
-        BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
+
         
         // Mark relics as seen (the others are all starters so they're marked as seen in the character file
-        UnlockTracker.markRelicAsSeen(BottledPlaceholderRelic.ID);
+
         logger.info("Done adding relics!");
     }
     
@@ -468,7 +463,7 @@ public class ArknightsMod implements
             .packageFilter("arknights.cards")
             .setDefaultSeen(true)
             .cards();
-
+        
         // .setDefaultSeen(true) unlocks the cards
         // This is so that they are all "seen" in the library,
         // for people who like to look at the card list before playing your mod

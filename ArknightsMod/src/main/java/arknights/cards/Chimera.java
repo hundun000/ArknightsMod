@@ -25,7 +25,6 @@ import arknights.ArknightsMod;
 import arknights.cards.base.AbstractModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
-import arknights.powers.MagicStrengthPower;
 import arknights.variables.ExtraVariable;
 
 /**

@@ -5,15 +5,8 @@ import basemod.abstracts.CustomRelic;
 import static arknights.ArknightsMod.makeRelicOutlinePath;
 import static arknights.ArknightsMod.makeRelicPath;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
-import com.megacrit.cardcrawl.actions.animations.TalkAction;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.defect.EvokeOrbAction;
-import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -21,8 +14,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.LocalizedStrings;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
@@ -93,6 +84,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
 
     }
     
+    @Override
     public void update() {
         super.update();
         if (!this.cardsSelected && AbstractDungeon.gridSelectScreen.selectedCards.size() == MAX_SELECT_NUM) {
@@ -107,13 +99,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
         AbstractDungeon.topLevelEffects.add(new ShowCardBrieflyEffect(selectedCard.makeStatEquivalentCopy()));
         AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
         
-        counter -= UPGRADE_COST_STACK;
-        flash();
-        if (usable()) {
-            beginPulse();
-        } else {
-            stopPulse();
-        }
+        addCounter(-1 * UPGRADE_COST_STACK);
     }
 
 
@@ -133,12 +119,6 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
     public void onVictory() {
         outsideBattle = true;
         addCounter(1);
-        flash();
-        if (usable()) {
-            beginPulse();
-        } else {
-            stopPulse();
-        }
     }
     
     @Override
@@ -149,11 +129,18 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
         initializeTips();
     }
     
+    @Override
     public String getUpdatedDescription() {
         return this.DESCRIPTIONS[0];
     }
     
     public void addCounter(int addition) {
-        counter = Math.min(counter + addition, 20);
+        counter = Math.min(counter + addition, 99);
+        flash();
+        if (usable()) {
+            beginPulse();
+        } else {
+            stopPulse();
+        }
     }
 }

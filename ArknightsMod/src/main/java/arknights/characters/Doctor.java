@@ -10,8 +10,6 @@ import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.status.Burn;
-import com.megacrit.cardcrawl.cards.status.Wound;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -20,18 +18,12 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.orbs.AbstractOrb;
-import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import arknights.ArknightsMod;
 import arknights.cards.*;
-import arknights.relics.DefaultClickableRelic;
 import arknights.relics.HumanResource;
-import arknights.relics.PlaceholderRelic;
-import arknights.relics.PlaceholderRelic2;
-import arknights.relics.StereoProjectorRelic;
 import arknights.relics.UrsusBreadRelic;
 import arknights.relics.BattleRecords;
 
@@ -43,7 +35,6 @@ import static arknights.characters.Doctor.Enums.ARKNIGHTS_CARD_COLOR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 //Wiki-page https://github.com/daviscook477/BaseMod/wiki/Custom-Characters
 //and https://github.com/daviscook477/BaseMod/wiki/Migrating-to-5.0
@@ -62,15 +53,20 @@ public class Doctor extends CustomPlayer {
     public static class Enums {
         @SpireEnum
         public static AbstractPlayer.PlayerClass CHARACTER_COLOR;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR")
+        @SpireEnum(name = "ARKNIGHTS_CARD_COLOR")
         public static AbstractCard.CardColor ARKNIGHTS_CARD_COLOR;
-
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_CARD_COLOR")
+        public static AbstractCard.CardColor ARKNIGHTS_OPERATOR_CARD_COLOR;
     }
     
     public static class LibraryTypeEnums {
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR")  
-        public static CardLibrary.LibraryType ARKNIGHTS_CARD_COLOR;
+        @SpireEnum(name = "ARKNIGHTS_CARD_COLOR")  
+        public static CardLibrary.LibraryType ARKNIGHTS_CARD_LIBRARY_TYPE;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_CARD_COLOR")  
+        public static CardLibrary.LibraryType ARKNIGHTS_OPERATOR_CARD_LIBRARY_TYPE;
     }
+    
+    public static final Color MOVING_CARDS_TRAIL_COLOR = ArknightsMod.DEFAULT_GRAY;
 
     // =============== CHARACTER ENUMERATORS  =================
 
@@ -187,11 +183,12 @@ public class Doctor extends CustomPlayer {
         retVal.addAll(Arrays.asList(vanguardPackage));
         retVal.addAll(Arrays.asList(guardPackage));
         retVal.addAll(Arrays.asList(shotPackage));
-
+        retVal.add(ToxicOverload.ID);
         return retVal;
     }
 
     // Starting Relics	
+    @Override
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
 
@@ -201,8 +198,6 @@ public class Doctor extends CustomPlayer {
         retVal.add(UrsusBreadRelic.ID);
         retVal.add(HumanResource.ID);
         
-        UnlockTracker.markRelicAsSeen(PlaceholderRelic.ID);
-        UnlockTracker.markRelicAsSeen(PlaceholderRelic2.ID);
         UnlockTracker.markRelicAsSeen(BattleRecords.ID);
         UnlockTracker.markRelicAsSeen(UrsusBreadRelic.ID);
         UnlockTracker.markRelicAsSeen(HumanResource.ID);
@@ -236,10 +231,9 @@ public class Doctor extends CustomPlayer {
         return ARKNIGHTS_CARD_COLOR;
     }
 
-    // Should return a color object to be used to color the trail of moving cards
     @Override
     public Color getCardTrailColor() {
-        return arknights.ArknightsMod.DEFAULT_GRAY;
+        return MOVING_CARDS_TRAIL_COLOR;
     }
 
     // Should return a BitmapFont object that you can use to customize how your

@@ -5,15 +5,10 @@ import static arknights.ArknightsMod.makeRelicPath;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.relics.AbstractRelic.LandingSound;
-import com.megacrit.cardcrawl.relics.AbstractRelic.RelicTier;
-
 import arknights.ArknightsMod;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
@@ -37,10 +32,11 @@ public class UrsusBreadRelic extends CustomRelic {
     }
 
 
+    @Override
     public void atBattleStart() {
         flash();
-        addToBot((AbstractGameAction)new RelicAboveCreatureAction((AbstractCreature)AbstractDungeon.player, this));
-        addToBot((AbstractGameAction)new DrawCardAction((AbstractCreature)AbstractDungeon.player, 1));
+        addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+        addToBot(new DrawCardAction(AbstractDungeon.player, 1));
     }
 
 

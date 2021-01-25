@@ -4,14 +4,8 @@ import static arknights.ArknightsMod.makeRelicOutlinePath;
 import static arknights.ArknightsMod.makeRelicPath;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.relics.AbstractRelic.LandingSound;
-import com.megacrit.cardcrawl.relics.AbstractRelic.RelicTier;
-
 import arknights.ArknightsMod;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomRelic;

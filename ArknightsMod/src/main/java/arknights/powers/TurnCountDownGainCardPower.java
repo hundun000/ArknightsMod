@@ -2,21 +2,14 @@ package arknights.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.tempCards.Shiv;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.AbstractPower.PowerType;
-
 import arknights.ArknightsMod;
 import arknights.util.LocalizationUtils;
 import arknights.util.TextureLoader;
@@ -41,21 +34,21 @@ public class TurnCountDownGainCardPower extends AbstractPower {
     private final int cardNum;
     
     public TurnCountDownGainCardPower(final AbstractCreature owner, final int countDownTurnNum, AbstractCard gainCard, int cardNum) {
-        name = NAME;
-        ID = ID_START + idOffset;
-        idOffset++;
+        this.name = NAME;
+        this.ID = ID_START + idOffset;
+        
+        this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
         
         this.owner = owner;
         this.amount = countDownTurnNum;
-
-        this.gainCard = gainCard;
-        this.cardNum = cardNum;
-        
-        // We load those txtures here.
-        this.region128 = new TextureAtlas.AtlasRegion(tex84, 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(tex32, 0, 0, 32, 32);
         this.type = PowerType.DEBUFF;
         updateDescription();
+        
+        
+        
+        this.gainCard = gainCard;
+        this.cardNum = cardNum;
     }
 
     @Override
@@ -68,6 +61,7 @@ public class TurnCountDownGainCardPower extends AbstractPower {
         }
     }
     
+    @Override
     public void updateDescription() {
         if (this.amount > 1) {
             this.description = LocalizationUtils.formatDescription(DESCRIPTIONS[0], amount, cardNum, gainCard.name);

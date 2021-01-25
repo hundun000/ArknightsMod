@@ -16,7 +16,6 @@ import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.cards.base.component.UseCounter;
 import arknights.characters.Doctor;
-import arknights.powers.MagicStrengthPower;
 import arknights.variables.ExtraVariable;
 
 public abstract class AbstractModCard extends CustomCard {
