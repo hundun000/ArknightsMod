@@ -1,6 +1,7 @@
 package arknights.cards.derivations;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.EnergizedPower;
@@ -42,7 +43,7 @@ public class ChargeAlpha extends AbstractModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new ApplyPowerAction(player, player, new EnergizedPower(player, magicNumber), magicNumber));
+        addToBot(new GainEnergyAction(magicNumber));
     }
 
 }

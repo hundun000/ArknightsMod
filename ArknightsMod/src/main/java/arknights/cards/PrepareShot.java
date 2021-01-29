@@ -28,7 +28,6 @@ public class PrepareShot extends AbstractModCard {
 
     private static final int COST = 1;
 
-    private static final int PREPARE_COUNT_MAGIC_INDEX = ExtraVariable.GENERAL_3rd_MAGIC_NUMBER_INDEX;
     private static final int DAMAGE_UP_MAGIC_INDEX = ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX;
     
     public PrepareShot() {
@@ -56,14 +55,15 @@ public class PrepareShot extends AbstractModCard {
     @Override
     public void onRetained() {
         super.onRetained();
-        upgradeExtraMagicNumber(PREPARE_COUNT_MAGIC_INDEX, 1);;
-        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], getExtraMagicNumber(PREPARE_COUNT_MAGIC_INDEX));
+        addPrepareCount(1);
+        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], getPrepareCount());
         initializeDescription();
     }
+
     
     @Override
     public void applyPowers() {
-        boolean reach = getExtraMagicNumber(PREPARE_COUNT_MAGIC_INDEX) >= this.magicNumber;
+        boolean reach = getPrepareCount() >= this.magicNumber;
         if (reach) {
             applyPowersWithTempAddBaseDamage(getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
@@ -73,7 +73,7 @@ public class PrepareShot extends AbstractModCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster arg0) {
-        boolean reach = getExtraMagicNumber(PREPARE_COUNT_MAGIC_INDEX) >= this.magicNumber;
+        boolean reach = getPrepareCount() >= this.magicNumber;
         if (reach) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
@@ -81,17 +81,15 @@ public class PrepareShot extends AbstractModCard {
         }
     }
     
-    public void clearPrepareCount() {
-        resetExtraMagicNumber(PREPARE_COUNT_MAGIC_INDEX, 0);
-        this.rawDescription = cardStrings.DESCRIPTION;
-        initializeDescription();
-    }
+    
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
         
         clearPrepareCount();
+        this.rawDescription = cardStrings.DESCRIPTION;
+        initializeDescription();
     }
 
 }

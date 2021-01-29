@@ -75,14 +75,6 @@
     "NAME": "奇美拉",
     "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
   },
-  "arknights:SwordRain": {
-    "NAME": "剑雨",
-    "DESCRIPTION": "对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 击晕 。 获得 !2ndM! 点 [E] 。 消耗 。 "
-  },
-  "arknights:ChargeAlpha": {
-    "NAME": "冲锋号令·α型",
-    "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
-  },
   "arknights:ShellDefense": {
     "NAME": "壳状防御",
     "DESCRIPTION": "获得 !B! 点 格挡 。你的下一回合开始时 格挡 不会消失。你在这个回合不能打出 #y攻击牌 。"
@@ -110,14 +102,26 @@
     "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 你在接下来 !M! 回合内无法再从卡牌中获得格挡。"
   },
   "arknights:FangDeploy": {
-    "NAME": "芬部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张 冲锋号令·α型 加入手牌。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张已 升级 的 冲锋号令·α型 加入手牌。"
+    "NAME": "芬-部署",
+    "DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张该干员的 *干员战斗形态牌 加入你的手牌中，然后 消耗 。",
+    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张升级过的该干员的 *干员战斗形态牌 加入你的手牌中，然后 消耗 。"
+  },
+  "arknights:ChargeAlpha": {
+    "NAME": "冲锋号令·α型",
+    "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
   },
   "arknights:TexasDeploy": {
-    "NAME": "德克萨斯部署",
-    "DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张 剑雨 加入手牌。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害。 在3回合后，将一张已 升级 的 剑雨 加入手牌。"
+    "NAME": "德克萨斯-部署",
+    "DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张该干员的 *干员战斗形态牌 加入你的手牌中，然后 消耗 。",
+    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张升级过的该干员的 *干员战斗形态牌 加入你的手牌中，然后 消耗 。"
+  },
+  "arknights:SwordRain": {
+    "NAME": "剑雨",
+    "DESCRIPTION": "准备三 。对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 击晕 。 获得 !2ndM! 点 [E] 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （准备指示物： !PC! 个。）",
+      "准备指示物不足！"
+    ]
   },
   "arknights:TalentLavender": {
     "NAME": "天赋-薰衣草",
@@ -136,9 +140,9 @@
   },
   "arknights:PrepareShot": {
     "NAME": "瞄准射击",
-    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 当这张牌被保留 !M! 回合后，直到下次打出，基础伤害增加 !2ndM! 。",
+    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 若这张牌的准备指示物达到 !M! 个，基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
-      " NL （已保留 !3rdM! 次。）"
+      " NL （准备指示物： !PC! 个。）"
     ]
   },
   "arknights:W12Bomb": {

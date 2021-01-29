@@ -32,6 +32,7 @@ import arknights.relics.BattleRecords;
 import arknights.util.AbstractDungeonHelper;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
+import arknights.variables.PrepareCountVariable;
 import arknights.variables.SecondMagicNumberVariable;
 import arknights.variables.ThirdMagicNumberVariable;
 import arknights.variables.UseCountVariable;
@@ -446,6 +447,7 @@ public class ArknightsMod implements
         BaseMod.addDynamicVariable(new SecondMagicNumberVariable());
         BaseMod.addDynamicVariable(new ThirdMagicNumberVariable());
         BaseMod.addDynamicVariable(new UseCountVariable());
+        BaseMod.addDynamicVariable(new PrepareCountVariable());
         
         logger.info("Adding cards");
         // Add the cards
@@ -507,6 +509,9 @@ public class ArknightsMod implements
         String languageFolder = getLanguageFolder();
         
         logger.info("Beginning to edit strings for mod with ID: " + getModID());
+        
+        BaseMod.loadCustomStringsFile(UIStrings.class,
+                LOCALIZATION_FOLDER + languageFolder + "/UI-Strings.json");
         
         // CardStrings
         BaseMod.loadCustomStringsFile(CardStrings.class,

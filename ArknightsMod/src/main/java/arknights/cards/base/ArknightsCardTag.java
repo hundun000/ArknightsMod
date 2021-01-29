@@ -9,5 +9,5 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
  */
 public class ArknightsCardTag {
     @SpireEnum
-    public static AbstractCard.CardTags OPERATOR;
+    public static AbstractCard.CardTags DEPLOY;
 }

@@ -23,6 +23,8 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import arknights.ArknightsMod;
 import arknights.cards.*;
+import arknights.cards.operator.FangDeploy;
+import arknights.cards.operator.TexasDeploy;
 import arknights.relics.HumanResource;
 import arknights.relics.UrsusBreadRelic;
 import arknights.relics.BattleRecords;

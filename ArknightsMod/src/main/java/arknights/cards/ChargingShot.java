@@ -45,12 +45,12 @@ public class ChargingShot extends AbstractModCard {
                 .setPlusExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX, 1)
                 .setPlusExtraMagicNumber(DAMAGE_TIMES_INDEX, 1)
                 );
-        super.useMagicNumberAsUseTimeCountThreshold = true;
+
     }
     
     @Override
     public void applyPowers() {
-        if (isNextUseTimeReachThreshold()) {
+        if (isNextUseTimeReachThreshold(magicNumber)) {
             applyPowersWithTempAddBaseDamage(getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
             super.applyPowers();
@@ -59,7 +59,7 @@ public class ChargingShot extends AbstractModCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster arg0) {
-        if (isNextUseTimeReachThreshold()) {
+        if (isNextUseTimeReachThreshold(magicNumber)) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
             super.calculateCardDamage(arg0);
@@ -68,7 +68,7 @@ public class ChargingShot extends AbstractModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addUseCount();
+        addUseCount(magicNumber);
         this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
         initializeDescription();
         
@@ -78,10 +78,8 @@ public class ChargingShot extends AbstractModCard {
     }
     
     @Override
-    public void triggerOnGlowCheck() {
-        this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
-        if (isNextUseTimeReachThreshold()) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-        }
+    protected boolean needSetBorderOnGlow() {
+        return isNextUseTimeReachThreshold(magicNumber);
     }
+    
 }

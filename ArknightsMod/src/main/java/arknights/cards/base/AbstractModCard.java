@@ -4,6 +4,7 @@ import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -36,10 +37,8 @@ public abstract class AbstractModCard extends CustomCard {
     public boolean[] extraMagicNumberModifieds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     
     private int useTimeCount = -1;
-    /**
-     * 每次对useTimeCount取MagicNumber的模
-     */
-    protected boolean useMagicNumberAsUseTimeCountThreshold;
+    private int prepareCount = -1;
+
     /**
      * auto generate fields which always same or similar
      */
@@ -73,6 +72,7 @@ public abstract class AbstractModCard extends CustomCard {
         
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
         this.useTimeCount = 0;
+        this.prepareCount = 0;
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -102,24 +102,27 @@ public abstract class AbstractModCard extends CustomCard {
     }
     
     
-    
-    public void addUseCount() {
+    public void addUseCount(Integer useTimeCountMod) {
         useTimeCount++;
-        if (useMagicNumberAsUseTimeCountThreshold && magicNumber != 0) {
+        if (useTimeCountMod != null) {
             useTimeCount %= magicNumber;
         }
     }
     
-    public boolean isNextUseTimeReachThreshold() {
-        if (useMagicNumberAsUseTimeCountThreshold && magicNumber != 0) {
-            return useTimeCount + 1 == magicNumber;
-        } else {
-            return false;
-        }
+    public void addPrepareCount(int amount) {
+        prepareCount += amount;
+    }
+    
+    public boolean isNextUseTimeReachThreshold(int threshold) {
+        return useTimeCount + 1 == threshold;
     }
     
     public int getUseTimeCount() {
         return useTimeCount;
+    }
+    
+    public int getPrepareCount() {
+        return prepareCount;
     }
     
     @Override
@@ -212,6 +215,25 @@ public abstract class AbstractModCard extends CustomCard {
         baseExtraMagicNumbers[index] += amount; 
         extraMagicNumbers[index] = baseExtraMagicNumbers[index];
         extraMagicNumberUpgradeds[index] = manualUpgraded;
+    }
+    
+    
+    
+    public void clearPrepareCount() {
+        this.prepareCount = 0;
+    }
+    
+    protected boolean needSetBorderOnGlow() {
+        return false;
+    }
+    
+    @Override
+    public void triggerOnGlowCheck() {
+        if (needSetBorderOnGlow()) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        } else {
+            this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        }
     }
 
 }

@@ -27,7 +27,7 @@ public class AbstractDungeonHelper {
     public static void addOperatorCards() {
         for (Map.Entry<String, AbstractCard> c : (Iterable<Map.Entry<String, AbstractCard>>)CardLibrary.cards.entrySet()) {
             AbstractCard card = c.getValue();
-            if (card.hasTag(ArknightsCardTag.OPERATOR)) {
+            if (card.hasTag(ArknightsCardTag.DEPLOY)) {
                 operatorCardPool.addToTop(card);
             }
         } 
