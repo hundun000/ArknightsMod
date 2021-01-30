@@ -47,9 +47,9 @@ public abstract class BaseDeployCard extends AbstractModCard {
             int giveCardsRange;
             if (this.upgraded) {
                 giveCards.forEach(item -> item.upgrade());
-                giveCardsRange = Math.min(giveCards.size() + 1, giveCardsUpgradedRange);
+                giveCardsRange = Math.min(giveCards.size(), giveCardsUpgradedRange);
             } else {
-                giveCardsRange = Math.min(giveCards.size() + 1, giveCardsBaseRange);
+                giveCardsRange = Math.min(giveCards.size(), giveCardsBaseRange);
             }
             giveCards = giveCards.subList(0, giveCardsRange);
             addToTop(new DiscoveryTargetCardsAction(giveCards, 1));

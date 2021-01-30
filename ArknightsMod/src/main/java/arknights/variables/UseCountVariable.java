@@ -19,7 +19,7 @@ public class UseCountVariable extends DynamicVariable {
     @Override
     public boolean isModified(AbstractCard card) {
         // will not paint green
-        return false;
+        return true;
     }
 
     @Override

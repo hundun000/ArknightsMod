@@ -11,12 +11,14 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
+import arknights.ArknightsMod;
+
 /**
  * @author hundun
  * Created on 2020/11/20
  */
 public class DiscardWantTargetCardAction extends AbstractGameAction {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("DiscardAction");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ArknightsMod.makeID(DiscardWantTargetCardAction.class));
     public static final String[] TEXT = uiStrings.TEXT;
     AbstractPlayer player;
     Class<? extends AbstractCard> exhaustTargetClass;

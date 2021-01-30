@@ -36,7 +36,7 @@ public class DiscoveryTargetCardsAction extends AbstractGameAction {
 
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
-            AbstractDungeon.cardRewardScreen.customCombatOpen(targetCards, uiStrings.TEXT[1], false);
+            AbstractDungeon.cardRewardScreen.customCombatOpen(targetCards, uiStrings.TEXT[0], false);
             tickDuration();
             return;
         } 

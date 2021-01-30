@@ -3,5 +3,10 @@
     "TEXT": [
       "干员牌将转变为你选择的一个战斗形态牌"
     ]
+  },
+  "arknights:DiscardWantTargetCardAction": {
+    "TEXT": [
+      "选择一张牌丢弃111"
+    ]
   }
 }

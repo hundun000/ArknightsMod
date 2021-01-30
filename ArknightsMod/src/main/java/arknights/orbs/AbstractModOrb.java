@@ -39,6 +39,7 @@ public abstract class AbstractModOrb extends CustomOrb {
         super(id, languagePack.getOrbString(id).NAME, basePassiveAmount, baseEvokeAmount, passiveDescription, evokeDescription, imgPath);
         super.angle = 0;
         super.channelAnimTimer = 0.5f;
+        
     }
     
     protected void addToBot(AbstractGameAction action) {

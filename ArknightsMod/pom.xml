@@ -15,8 +15,9 @@
         <SlayTheSpire.version>01-23-2019</SlayTheSpire.version>
         <ModTheSpire.version>3.8.0</ModTheSpire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
-        <Steam.path>D:\wwj\tool\steam\steamapps</Steam.path>
+        <!--CHANGE THIS TO YOUR STEAM INSTALLATION D:\wwj\tool\steam\steamapps-->
+        <!--CHANGE THIS TO YOUR STEAM INSTALLATION D:\software\SteamLibrary\steamapps-->
+        <Steam.path>D:\software\SteamLibrary\steamapps</Steam.path>
     </properties>
 
     <dependencies>
