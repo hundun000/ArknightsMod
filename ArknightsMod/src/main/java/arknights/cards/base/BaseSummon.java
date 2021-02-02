@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
  * @author hundun
  * Created on 2020/11/10
  */
-public abstract class BaseSummon extends AbstractModCard {
+public abstract class BaseSummon extends ArknightsModCard {
 
     public BaseSummon(String id, String img, int cost, CardRarity rarity) {
         super(id, img, cost, CardType.SKILL, rarity, CardTarget.SELF);        

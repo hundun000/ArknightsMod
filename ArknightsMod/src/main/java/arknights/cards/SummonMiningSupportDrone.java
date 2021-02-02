@@ -1,8 +1,9 @@
 package arknights.cards;
 
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseSummon;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
@@ -15,7 +16,7 @@ import arknights.orbs.MiningSupportDrone;
 public class SummonMiningSupportDrone extends BaseSummon {
 
     public static final String ID = ArknightsMod.makeID(SummonMiningSupportDrone.class);
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     

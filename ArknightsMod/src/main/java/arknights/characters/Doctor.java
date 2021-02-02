@@ -25,9 +25,9 @@ import arknights.ArknightsMod;
 import arknights.cards.*;
 import arknights.cards.operator.FangDeploy;
 import arknights.cards.operator.TexasDeploy;
+import arknights.relics.BattleRecords;
 import arknights.relics.HumanResource;
 import arknights.relics.UrsusBreadRelic;
-import arknights.relics.BattleRecords;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -182,7 +182,7 @@ public class Doctor extends CustomPlayer {
         String[] guardPackage = new String[]{WaveStrike.ID, ChargingStrike.ID, VorpalEdge.ID};
         String[] shotPackage = new String[]{W12Bomb.ID, ChargingShot.ID, PrepareShot.ID};
         
-        retVal.addAll(Arrays.asList(vanguardPackage));
+        //retVal.addAll(Arrays.asList(vanguardPackage));
         retVal.addAll(Arrays.asList(guardPackage));
         retVal.addAll(Arrays.asList(shotPackage));
         retVal.add(ToxicOverload.ID);

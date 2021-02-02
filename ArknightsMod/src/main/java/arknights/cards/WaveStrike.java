@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.util.LocalizationUtils;
@@ -20,10 +20,10 @@ import arknights.variables.ExtraVariable;
  * @author hundun
  * Created on 2020/11/26
  */
-public class WaveStrike extends AbstractModCard {
+public class WaveStrike extends ArknightsModCard {
     
     public static final String ID = ArknightsMod.makeID(WaveStrike.class.getSimpleName()); 
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ENEMY;  

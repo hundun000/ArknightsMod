@@ -26,7 +26,8 @@
     "FLAVOR": "The more you right-click it, the more orbs you've evoked in your lifetime.",
     "DESCRIPTIONS": [
       "在地图界面右键遗物使用。消耗 600点 #y合成玉 ，随机获得一张 #y干员牌 。每攀爬一层楼层获得 50点 #y合成玉 。",
-      "获得一张干员牌"
+      "获得一张干员牌",
+      "提升干员潜力"
     ]
   }
 }

@@ -20,15 +20,19 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.monsters.MonsterInfo;
+import com.megacrit.cardcrawl.rewards.RewardSave;
+
 import arknights.characters.Doctor;
 import arknights.events.IdentityCrisisEvent;
 import arknights.events.OriginiumSlugRaceEvent;
 import arknights.monster.Puncturer;
 import arknights.potions.PlaceholderPotion;
+import arknights.relics.BattleRecords;
 import arknights.relics.HumanResource;
 import arknights.relics.StereoProjectorRelic;
 import arknights.relics.UrsusBreadRelic;
-import arknights.relics.BattleRecords;
+import arknights.rewards.PotentialReward;
+import arknights.rewards.PotentialRewardTypePatch;
 import arknights.util.AbstractDungeonHelper;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
@@ -179,6 +183,10 @@ public class ArknightsMod implements
     
     public static String makePowerPath(String resourcePath) {
         return IMAGES_FOLDER + "/powers/" + resourcePath;
+    }
+    
+    public static String makeRewardPngPath(Class<?> clazz) {
+        return IMAGES_FOLDER + "/rewards/" + clazz.getSimpleName() + ".png";
     }
     
     public static String makePowerPngPath(Class<?> clazz, int iconSize) {
@@ -364,6 +372,16 @@ public class ArknightsMod implements
         
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
 
+     // =============== EVENTS =================
+        
+        BaseMod.registerCustomReward(
+                PotentialRewardTypePatch.POTENTIAL,
+                (rewardSave) -> { // this handles what to do when this quest type is loaded.
+                    return new PotentialReward(rewardSave.id, "from save", rewardSave.amount);
+                }, 
+                (potentialReward) -> { // this handles what to do when this quest type is saved.
+                    return new RewardSave(PotentialRewardTypePatch.POTENTIAL.name(), ((PotentialReward)potentialReward).operatorCardId, ((PotentialReward)potentialReward).amount, 0);
+                });
         
         // =============== EVENTS =================
         

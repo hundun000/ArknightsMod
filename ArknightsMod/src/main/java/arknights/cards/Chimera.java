@@ -22,7 +22,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.watcher.EndTurnDeathPower;
 
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.variables.ExtraVariable;
@@ -31,12 +31,12 @@ import arknights.variables.ExtraVariable;
  * @author hundun
  * Created on 2020/11/17
  */
-public class Chimera extends AbstractModCard {
+public class Chimera extends ArknightsModCard {
     
     private static final Logger logger = LogManager.getLogger(Chimera.class.getName());
 
     public static final String ID = ArknightsMod.makeID(Chimera.class);
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     
     

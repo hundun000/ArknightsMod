@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
@@ -19,7 +20,7 @@ import arknights.cards.derivations.ChargeAlpha;
 public class FangDeploy extends BaseDeployCard {
 
     public static final String ID = ArknightsMod.makeID(FangDeploy.class);
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.SPECIAL;     
     

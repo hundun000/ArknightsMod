@@ -7,8 +7,9 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 
@@ -16,10 +17,10 @@ import arknights.cards.base.component.UpgradeSetting;
  * @author hundun
  * Created on 2020/11/20
  */
-public class ScorchedEarth extends AbstractModCard {
+public class ScorchedEarth extends ArknightsModCard {
 
     public static final String ID = ArknightsMod.makeID(ScorchedEarth.class.getSimpleName()); 
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.RARE; 
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;  

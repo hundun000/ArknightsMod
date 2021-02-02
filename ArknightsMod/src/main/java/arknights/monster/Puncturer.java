@@ -54,7 +54,7 @@ public class Puncturer extends AbstractMonster {
     /*     */   private boolean talky = true;
     /*     */   
     
-    private static final int INTANGIBLE_POWER_TURN = 3;
+    private static final int INTANGIBLE_POWER_TURN = 2;
     
     private int turnCount = 0;
     private enum AnimationState {

@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.cards.derivations.PhantomInTheMirror;
@@ -17,10 +17,10 @@ import arknights.cards.derivations.PhantomInTheMirror;
  * @author hundun
  * Created on 2020/11/21
  */
-public class Phantom extends AbstractModCard {
+public class Phantom extends ArknightsModCard {
     
     public static final String ID = ArknightsMod.makeID(Phantom.class.getSimpleName()); 
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON; 
     private static final CardTarget TARGET = CardTarget.NONE;  

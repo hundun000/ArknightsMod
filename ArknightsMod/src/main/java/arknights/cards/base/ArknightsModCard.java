@@ -15,11 +15,10 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import arknights.ArknightsMod;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
-import arknights.cards.base.component.UseCounter;
 import arknights.characters.Doctor;
 import arknights.variables.ExtraVariable;
 
-public abstract class AbstractModCard extends CustomCard {
+public abstract class ArknightsModCard extends CustomCard {
     protected final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
@@ -38,11 +37,12 @@ public abstract class AbstractModCard extends CustomCard {
     
     private int useTimeCount = -1;
     private int prepareCount = -1;
-
+    protected int potentialCount = 0;
+    
     /**
      * auto generate fields which always same or similar
      */
-    public AbstractModCard(
+    public ArknightsModCard(
             final String id,
             final String img,
             final int cost,
@@ -55,7 +55,7 @@ public abstract class AbstractModCard extends CustomCard {
     /**
      * template-project recommend
      */
-    public AbstractModCard(final String id,
+    public ArknightsModCard(final String id,
                                final String img,
                                final int cost,
                                final CardType type,
@@ -111,6 +111,15 @@ public abstract class AbstractModCard extends CustomCard {
     
     public void addPrepareCount(int amount) {
         prepareCount += amount;
+    }
+    
+    public void addPotentialCount(int amount) {
+        setPotentialCount(this.potentialCount + amount);
+    }
+    
+    protected void setPotentialCount(int potentialCount) {
+        this.potentialCount = potentialCount;
+        onPotentialChange();
     }
     
     public boolean isNextUseTimeReachThreshold(int threshold) {
@@ -234,6 +243,35 @@ public abstract class AbstractModCard extends CustomCard {
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
+    }
+    
+    protected void onPotentialChange() {
+        if (this.upgraded) {
+            this.name = cardStrings.NAME + "+";
+        } else {
+            this.name = cardStrings.NAME;
+        }
+        if (this.potentialCount > 0) {
+            // FIXME use localization file
+            this.name += " 潜能" + this.potentialCount;
+        }  
+    }
+    
+    public String toIdString() {
+        return this.cardID + "[" + this.uuid + "]";
+    }
+    
+    /**
+     * 应把牌组中牌的必要的field传递给抽牌堆中的copy
+     */
+    @Override
+    public AbstractCard makeCopy() {
+        ArknightsModCard copy = (ArknightsModCard)super.makeCopy();
+        copy.setPotentialCount(this.potentialCount);
+        if (copy.potentialCount != 0) {
+            ArknightsMod.logger.debug(this.toIdString() + " give potentialCount to cppy " + copy.toIdString());
+        }
+        return copy;
     }
 
 }

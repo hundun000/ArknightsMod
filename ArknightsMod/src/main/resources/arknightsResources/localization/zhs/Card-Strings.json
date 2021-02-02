@@ -102,18 +102,16 @@
     "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 你在接下来 !M! 回合内无法再从卡牌中获得格挡。"
   },
   "arknights:FangDeploy": {
-    "NAME": "芬-部署",
-    "DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张该干员的 干员战斗形态牌 加入你的手牌中，然后 消耗 。",
-    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张升级过的该干员的 干员战斗形态牌 加入你的手牌中，然后 消耗 。"
+    "NAME": "芬",
+    "DESCRIPTION": "干员牌 。"
   },
   "arknights:ChargeAlpha": {
     "NAME": "冲锋号令·α型",
     "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
   },
   "arknights:TexasDeploy": {
-    "NAME": "德克萨斯-部署",
-    "DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张该干员的 干员战斗形态牌 加入你的手牌中，然后 消耗 。",
-    "UPGRADE_DESCRIPTION": "不能被打出 。 NL 当你抽到这张牌时，选择一张升级过的该干员的 干员战斗形态牌 加入你的手牌中，然后 消耗 。"
+    "NAME": "德克萨斯",
+    "DESCRIPTION": "干员牌 。"
   },
   "arknights:SwordRain": {
     "NAME": "剑雨",

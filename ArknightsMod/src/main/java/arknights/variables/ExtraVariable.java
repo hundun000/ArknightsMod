@@ -4,7 +4,7 @@ import basemod.abstracts.DynamicVariable;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 
 public abstract class ExtraVariable extends DynamicVariable {
     
@@ -32,21 +32,21 @@ public abstract class ExtraVariable extends DynamicVariable {
 
     @Override
     public boolean isModified(AbstractCard card) {
-        return ((AbstractModCard) card).extraMagicNumberModifieds[extraIndex];
+        return ((ArknightsModCard) card).extraMagicNumberModifieds[extraIndex];
     }
 
     @Override
     public int value(AbstractCard card) {
-        return ((AbstractModCard) card).getExtraMagicNumber(extraIndex);
+        return ((ArknightsModCard) card).getExtraMagicNumber(extraIndex);
     }
 
     @Override
     public int baseValue(AbstractCard card) {
-        return ((AbstractModCard) card).baseExtraMagicNumbers[extraIndex];
+        return ((ArknightsModCard) card).baseExtraMagicNumbers[extraIndex];
     }
 
     @Override
     public boolean upgraded(AbstractCard card) {
-        return ((AbstractModCard) card).extraMagicNumberUpgradeds[extraIndex];
+        return ((ArknightsModCard) card).extraMagicNumberUpgradeds[extraIndex];
     }
 }

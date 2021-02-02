@@ -4,7 +4,7 @@ import basemod.abstracts.DynamicVariable;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 
 public class UseCountVariable extends DynamicVariable {
 
@@ -24,7 +24,7 @@ public class UseCountVariable extends DynamicVariable {
 
     @Override
     public int value(AbstractCard card) {
-        return ((AbstractModCard) card).getUseTimeCount();
+        return ((ArknightsModCard) card).getUseTimeCount();
     }
 
     @Override

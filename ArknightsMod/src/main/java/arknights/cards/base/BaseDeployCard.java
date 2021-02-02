@@ -8,12 +8,15 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAndDeckAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import arknights.ArknightsMod;
 import arknights.actions.DiscoveryTargetCardsAction;
 import arknights.characters.Doctor;
 import arknights.powers.TurnCountDownGainCardPower;
@@ -22,7 +25,7 @@ import arknights.powers.TurnCountDownGainCardPower;
  * @author hundun
  * Created on 2020/11/16
  */
-public abstract class BaseDeployCard extends AbstractModCard {
+public abstract class BaseDeployCard extends ArknightsModCard {
 
     protected List<AbstractCard> giveCards;
     protected int giveCardsBaseRange = 0;
@@ -52,7 +55,12 @@ public abstract class BaseDeployCard extends AbstractModCard {
                 giveCardsRange = Math.min(giveCards.size(), giveCardsBaseRange);
             }
             giveCards = giveCards.subList(0, giveCardsRange);
-            addToTop(new DiscoveryTargetCardsAction(giveCards, 1));
+            
+            if (giveCards.size() > 1) {
+                addToTop(new DiscoveryTargetCardsAction(giveCards, 1));
+            } else if (giveCards.size() == 1) {
+                addToTop(new MakeTempCardInHandAction(giveCards.get(0), 1));
+            }
         }
         addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
     }
@@ -60,7 +68,14 @@ public abstract class BaseDeployCard extends AbstractModCard {
 
     protected List<AbstractCard> getGiveCardsCopy() {
         List<AbstractCard> copys = new ArrayList<>();
-        giveCards.forEach(item -> copys.add(item.makeCopy()));
+        for (AbstractCard card : giveCards) {
+            AbstractCard copy = card.makeCopy();
+            if (copy instanceof ArknightsModCard) {
+                ArknightsMod.logger.info(this.toIdString() + " add Potential = " + this.potentialCount + " to GiveCard: " + copy.cardID);
+                ((ArknightsModCard) copy).addPotentialCount(this.potentialCount);
+            }
+            copys.add(copy);
+        }
         return copys;
     }
     

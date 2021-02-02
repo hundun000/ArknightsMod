@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.powers.W12BombPower;
@@ -20,10 +20,10 @@ import arknights.powers.W12BombPower;
  * @author hundun
  * Created on 2020/11/27
  */
-public class W12Bomb extends AbstractModCard {
+public class W12Bomb extends ArknightsModCard {
     
     public static final String ID = ArknightsMod.makeID(W12Bomb.class); 
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;  

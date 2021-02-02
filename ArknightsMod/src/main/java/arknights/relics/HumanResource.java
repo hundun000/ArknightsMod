@@ -12,7 +12,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon.CurrentScreen;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+
 import arknights.ArknightsMod;
+import arknights.rewards.PotentialReward;
 import arknights.util.AbstractDungeonHelper;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
@@ -59,13 +61,30 @@ public class HumanResource extends CustomRelic implements ClickableRelic {
 
         AbstractCard operatorCard = AbstractDungeonHelper.returnOperatorCard(null);
 
+        boolean obtained = false;
+        for (AbstractCard card : AbstractDungeon.player.masterDeck.group) {
+            if (card.cardID.equals(operatorCard.cardID)) {
+                obtained = true;
+                break;
+            }
+        }
+
+        
         AbstractDungeon.combatRewardScreen.open(this.DESCRIPTIONS[1]);
         AbstractDungeon.combatRewardScreen.rewards.clear();
         
-        RewardItem cardReward = new RewardItem();
-        cardReward.cards.clear();
-        cardReward.cards.add(operatorCard);
-        AbstractDungeon.combatRewardScreen.rewards.add(cardReward);
+        
+        if (obtained) {
+            String potentialText = operatorCard.name + this.DESCRIPTIONS[2];
+            PotentialReward potentialReward = new PotentialReward(operatorCard.cardID, potentialText,1);
+            AbstractDungeon.combatRewardScreen.rewards.add(potentialReward);
+        } else {
+            RewardItem cardReward = new RewardItem();
+            cardReward.cards.clear();
+            cardReward.cards.add(operatorCard);
+            AbstractDungeon.combatRewardScreen.rewards.add(cardReward);
+        }
+        
         
         AbstractDungeon.combatRewardScreen.positionRewards();
         AbstractDungeon.getCurrRoom().rewardPopOutTimer = 0.0F;

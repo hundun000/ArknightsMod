@@ -4,7 +4,7 @@ import basemod.abstracts.DynamicVariable;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 
 public class PrepareCountVariable extends DynamicVariable {
 
@@ -24,7 +24,7 @@ public class PrepareCountVariable extends DynamicVariable {
 
     @Override
     public int value(AbstractCard card) {
-        return ((AbstractModCard) card).getPrepareCount();
+        return ((ArknightsModCard) card).getPrepareCount();
     }
 
     @Override

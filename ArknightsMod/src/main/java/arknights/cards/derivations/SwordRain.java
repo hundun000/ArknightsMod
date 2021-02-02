@@ -9,8 +9,9 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.EnergizedPower;
+
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.util.LocalizationUtils;
@@ -20,10 +21,10 @@ import arknights.variables.ExtraVariable;
  * @author hundun
  * Created on 2020/11/13
  */
-public class SwordRain extends AbstractModCard {
+public class SwordRain extends ArknightsModCard {
     
     public static final String ID = ArknightsMod.makeID(SwordRain.class.getSimpleName()); 
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;  
@@ -46,11 +47,6 @@ public class SwordRain extends AbstractModCard {
                 .setDamage(7)
                 .setMagicNumber(GIVE_ENERGY_NUM)
                 .setExtraMagicNumber(WEAK_MAGIC_INDEX, WEAK_STACK_NUM)
-                );
-        setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusMagicNumber(PLUS_GIVE_ENERGY_NUM)
-                .setPlusExtraMagicNumber(WEAK_MAGIC_INDEX, PLUS_WEAK_STACK_NUM)
                 );
         this.selfRetain = true;
         this.isMultiDamage = true;
@@ -94,6 +90,20 @@ public class SwordRain extends AbstractModCard {
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         return getPrepareCount() >= PREPARE_COUNT_THRESHOLD_FOR_USE;
+    }
+    
+    @Override
+    public boolean canUpgrade() {
+        return false;
+    }
+    
+    @Override
+    public void addPotentialCount(int amount) {
+        super.addPotentialCount(amount);
+        for (int i = 0; i < amount; i++) {
+            upgradeDamage(1);
+            initializeDescription();
+        }
     }
 
 }

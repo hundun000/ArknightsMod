@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 
 import arknights.ArknightsMod;
-import arknights.cards.base.AbstractModCard;
+import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 
@@ -15,10 +15,10 @@ import arknights.cards.base.component.UpgradeSetting;
  * @author hundun
  * Created on 2020/11/17
  */
-public class TalentLavender extends AbstractModCard {
+public class TalentLavender extends ArknightsModCard {
 
     public static final String ID = ArknightsMod.makeID(TalentLavender.class.getSimpleName()); // DELETE THIS ONE.
-    public static final String IMG = ArknightsMod.makeCardPngPath(AbstractModCard.class);
+    public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON; 
     private static final CardTarget TARGET = CardTarget.SELF;  
