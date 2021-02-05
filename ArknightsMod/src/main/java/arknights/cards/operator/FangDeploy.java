@@ -7,6 +7,7 @@ import java.util.List;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import arknights.ArknightsMod;
+import arknights.cards.Chimera;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
 import arknights.cards.base.component.BasicSetting;
@@ -24,12 +25,11 @@ public class FangDeploy extends BaseDeployCard {
 
     private static final CardRarity RARITY = CardRarity.SPECIAL;     
     
-    private static final int COST = 1;  
+    private static final int COST = 0;  
 
     public FangDeploy() { 
-        super(ID, IMG, COST, RARITY);
-        initGiveCardsSetting(Arrays.asList(new ChargeAlpha()), 1, 1);
-        
+        super(ID, IMG);
+        initGiveCardsSetting(Arrays.asList(new ChargeAlpha()));
     }
 
 }

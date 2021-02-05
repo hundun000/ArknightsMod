@@ -18,7 +18,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
 import arknights.actions.DiscoveryTargetCardsAction;
-import arknights.characters.Doctor;
+import arknights.cards.operator.PromotionState;
+import arknights.characters.ArknightsPlayer;
 import arknights.powers.TurnCountDownGainCardPower;
 
 /**
@@ -28,54 +29,69 @@ import arknights.powers.TurnCountDownGainCardPower;
 public abstract class BaseDeployCard extends ArknightsModCard {
 
     protected List<AbstractCard> giveCards;
-    protected int giveCardsBaseRange = 0;
-    protected int giveCardsUpgradedRange = 0;
     
-    public BaseDeployCard(String id, String img, int cost, CardRarity rarity) {
-        super(id, img, cost, CardType.SKILL, Doctor.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, rarity, CardTarget.ENEMY);
-
+    
+    
+    public BaseDeployCard(String id, String img) {
+        super(id, img, 0, CardType.SKILL, ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
+        
         this.tags.add(ArknightsCardTag.DEPLOY);
+        this.promotionState = PromotionState.ZERO;
     }
     
-    protected void initGiveCardsSetting(List<AbstractCard> giveCards, int baseRange, int upgradedRange) {
+    protected void initGiveCardsSetting(List<AbstractCard> giveCards) {
         this.giveCards = giveCards;
-        this.giveCardsBaseRange = baseRange;
-        this.giveCardsUpgradedRange = upgradedRange;
     }
+    
+    @Override
+    public boolean canUpgrade() {
+        boolean isMaxLevel = this.promotionState == PromotionState.TWO && this.timesUpgraded == this.promotionState.getMaxLevel();
+        return !isMaxLevel;
+    }
+    
+    
+    @Override
+    public void upgrade() {
+        this.timesUpgraded++;
+        ArknightsMod.logger.info("{} upgrade to timesUpgraded = {}", this.toIdString(), this.timesUpgraded);
+        this.upgraded = true;
+        if (this.timesUpgraded > promotionState.getMaxLevel()) {
+            promotionState = promotionState.next();
+        }
+        updateNameWithPromotionLevel();
+        
+        switch (promotionState) {
+            case ONE:
+                this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+                break;
+            case TWO:
+                this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+                break;
+            default:
+                this.rawDescription = cardStrings.DESCRIPTION;
+                break;
+        }
+        initializeDescription();
+    }
+    
 
     @Override
     public void triggerWhenDrawn() {
-        List<AbstractCard> giveCards = getGiveCardsCopy();
-        if (giveCards != null && !giveCards.isEmpty()) {
-            int giveCardsRange;
-            if (this.upgraded) {
-                giveCards.forEach(item -> item.upgrade());
-                giveCardsRange = Math.min(giveCards.size(), giveCardsUpgradedRange);
-            } else {
-                giveCardsRange = Math.min(giveCards.size(), giveCardsBaseRange);
-            }
-            giveCards = giveCards.subList(0, giveCardsRange);
-            
-            if (giveCards.size() > 1) {
-                addToTop(new DiscoveryTargetCardsAction(giveCards, 1));
-            } else if (giveCards.size() == 1) {
-                addToTop(new MakeTempCardInHandAction(giveCards.get(0), 1));
-            }
-        }
-        addToTop(new ExhaustSpecificCardAction(this, AbstractDungeon.player.hand));
     }
 
 
-    protected List<AbstractCard> getGiveCardsCopy() {
+    public List<AbstractCard> getGiveCardsCopy() {
         List<AbstractCard> copys = new ArrayList<>();
         for (AbstractCard card : giveCards) {
             AbstractCard copy = card.makeCopy();
-            if (copy instanceof ArknightsModCard) {
-                ArknightsMod.logger.info(this.toIdString() + " add Potential = " + this.potentialCount + " to GiveCard: " + copy.cardID);
-                ((ArknightsModCard) copy).addPotentialCount(this.potentialCount);
+            if (copy instanceof IOperatorCreateable) {
+                ((IOperatorCreateable)copy).initByOperatorCreate(this);
             }
             copys.add(copy);
         }
+        int range = Math.min(copys.size(), promotionState.getGiveCardRange());
+        ArknightsMod.logger.info("{} GiveCards range = {}", this.toIdString(), range);
+        copys = copys.subList(0, range);
         return copys;
     }
     
@@ -88,5 +104,17 @@ public abstract class BaseDeployCard extends ArknightsModCard {
     public void use(AbstractPlayer arg0, AbstractMonster arg1) {
     }
 
+    
+    
+    
+    
+    
+    public void addPotentialCount() {
+        for (int i = 0; i < 3; i++) {
+            if (canUpgrade()) {
+                upgrade();
+            }
+        }
+    }
 
 }

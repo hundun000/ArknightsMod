@@ -49,12 +49,16 @@ public class PrepareShot extends ArknightsModCard {
     @Override
     public void onMoveToDiscard() {
         super.onMoveToDiscard();
+        
         clearPrepareCount();
+        this.rawDescription = cardStrings.DESCRIPTION;
+        initializeDescription();
     }
     
     @Override
     public void onRetained() {
         super.onRetained();
+        
         addPrepareCount(1);
         this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], getPrepareCount());
         initializeDescription();

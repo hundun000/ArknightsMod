@@ -15,10 +15,11 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import arknights.ArknightsMod;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
-import arknights.characters.Doctor;
+import arknights.cards.operator.PromotionState;
+import arknights.characters.ArknightsPlayer;
 import arknights.variables.ExtraVariable;
 
-public abstract class ArknightsModCard extends CustomCard {
+public abstract class ArknightsModCard extends CustomCard implements IOperatorCreateable {
     protected final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
@@ -37,7 +38,8 @@ public abstract class ArknightsModCard extends CustomCard {
     
     private int useTimeCount = -1;
     private int prepareCount = -1;
-    protected int potentialCount = 0;
+    
+    public PromotionState promotionState;
     
     /**
      * auto generate fields which always same or similar
@@ -49,7 +51,7 @@ public abstract class ArknightsModCard extends CustomCard {
             final CardType type,
             final CardRarity rarity,
             final CardTarget target) {
-        this(id, img, cost, type, Doctor.Enums.ARKNIGHTS_CARD_COLOR, rarity, target);
+        this(id, img, cost, type, ArknightsPlayer.Enums.ARKNIGHTS_CARD_COLOR, rarity, target);
     }
     
     /**
@@ -73,6 +75,7 @@ public abstract class ArknightsModCard extends CustomCard {
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
         this.useTimeCount = 0;
         this.prepareCount = 0;
+        this.promotionState = PromotionState.NO_PROMOTION;
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -112,15 +115,7 @@ public abstract class ArknightsModCard extends CustomCard {
     public void addPrepareCount(int amount) {
         prepareCount += amount;
     }
-    
-    public void addPotentialCount(int amount) {
-        setPotentialCount(this.potentialCount + amount);
-    }
-    
-    protected void setPotentialCount(int potentialCount) {
-        this.potentialCount = potentialCount;
-        onPotentialChange();
-    }
+
     
     public boolean isNextUseTimeReachThreshold(int threshold) {
         return useTimeCount + 1 == threshold;
@@ -245,17 +240,7 @@ public abstract class ArknightsModCard extends CustomCard {
         }
     }
     
-    protected void onPotentialChange() {
-        if (this.upgraded) {
-            this.name = cardStrings.NAME + "+";
-        } else {
-            this.name = cardStrings.NAME;
-        }
-        if (this.potentialCount > 0) {
-            // FIXME use localization file
-            this.name += " 潜能" + this.potentialCount;
-        }  
-    }
+    
     
     public String toIdString() {
         return this.cardID + "[" + this.uuid + "]";
@@ -267,11 +252,55 @@ public abstract class ArknightsModCard extends CustomCard {
     @Override
     public AbstractCard makeCopy() {
         ArknightsModCard copy = (ArknightsModCard)super.makeCopy();
-        copy.setPotentialCount(this.potentialCount);
-        if (copy.potentialCount != 0) {
-            ArknightsMod.logger.debug(this.toIdString() + " give potentialCount to cppy " + copy.toIdString());
-        }
+        copy.timesUpgraded = this.timesUpgraded;
+        copy.promotionState = this.promotionState;
+        copy.updateNameWithPromotionLevel();
         return copy;
     }
+    
+    protected void updateNameWithPromotionLevel() {
+        if (this.promotionState != PromotionState.NO_PROMOTION) {
+            // FIXME use localization file
+            this.name = cardStrings.NAME + "精英" + this.promotionState.name() + "等级" + getOperatorLevel();
+        } else {
+            if (this.upgraded) {
+                this.name = cardStrings.NAME + "+";
+            } else {
+                this.name = cardStrings.NAME;
+            }
+        }
+        
+    }
+    
+    private int getOperatorLevel() {
+        switch (this.promotionState) {
+            case ZERO:
+                return 1 + this.timesUpgraded;
+            case ONE:
+                return 1 + this.timesUpgraded - PromotionState.ZERO.getMaxLevel();
+            case TWO:
+                return 1 + this.timesUpgraded - PromotionState.ZERO.getMaxLevel() - PromotionState.ONE.getMaxLevel();
+            default:
+                return 0;
+        }
+    }
+    
+    @Override
+    public void initByOperatorCreate(BaseDeployCard operator) {
+        switch (operator.promotionState) {
+            case ONE:
+            case TWO:
+                if (canUpgrade()) {
+                    upgrade();
+                }
+                break;
+    
+            default:
+                break;
+        }
+    }
+    
+    
+    
 
 }

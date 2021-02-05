@@ -3,17 +3,30 @@ package arknights.relics;
 import static arknights.ArknightsMod.makeRelicOutlinePath;
 import static arknights.ArknightsMod.makeRelicPath;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAndDeckAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon.CurrentScreen;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
 
 import arknights.ArknightsMod;
+import arknights.actions.DiscoveryTargetCardsAction;
+import arknights.cards.base.BaseDeployCard;
 import arknights.rewards.PotentialReward;
 import arknights.util.AbstractDungeonHelper;
 import arknights.util.TextureLoader;
@@ -76,7 +89,7 @@ public class HumanResource extends CustomRelic implements ClickableRelic {
         
         if (obtained) {
             String potentialText = operatorCard.name + this.DESCRIPTIONS[2];
-            PotentialReward potentialReward = new PotentialReward(operatorCard.cardID, potentialText,1);
+            PotentialReward potentialReward = new PotentialReward(operatorCard.cardID, potentialText);
             AbstractDungeon.combatRewardScreen.rewards.add(potentialReward);
         } else {
             RewardItem cardReward = new RewardItem();
@@ -125,6 +138,31 @@ public class HumanResource extends CustomRelic implements ClickableRelic {
     @Override
     public void onEnterRoom(AbstractRoom room) {
         addCounter(GAIN_COUNT_PER_ROOM);
+    }
+    
+    @Override
+    public void atBattleStart() {
+        super.atBattleStart();
+        
+        flash();
+        List<AbstractCard> cards = new ArrayList<>(AbstractDungeon.player.drawPile.group);
+        for (AbstractCard card : cards) {
+            if (card instanceof BaseDeployCard) {
+                BaseDeployCard deployCard = (BaseDeployCard)card;
+                List<AbstractCard> giveCards = deployCard.getGiveCardsCopy();
+                if (giveCards != null && !giveCards.isEmpty()) {
+                    if (giveCards.size() > 1) {
+                        ArknightsMod.logger.info("adding DiscoveryTargetCardsAction for {}", ((BaseDeployCard) card).toIdString());
+                        addToTop(new DiscoveryTargetCardsAction(AbstractDungeon.player, giveCards, 1));
+                    } else if (giveCards.size() == 1) {
+                        AbstractDungeon.effectList.add(new ShowCardAndAddToDrawPileEffect(giveCards.get(0), Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F - 10.0F * Settings.scale, Settings.HEIGHT / 2.0F, true, false));
+                    }
+                }
+                
+                addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.drawPile));
+                
+            }
+        }
     }
 
 }

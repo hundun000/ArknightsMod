@@ -1,11 +1,47 @@
 {	
-  "arknights:SummonFreezingSupportDrone": {
-    "NAME": "制冷无人机支援",
-    "DESCRIPTION": "召唤 !M! 个 制冷无人机 。"
+  "arknights:DurinStrike": {
+    "NAME": "平A",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "arknights:F12Strike": {
+    "NAME": "平A",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "arknights:NoirCorneDefend": {
+    "NAME": "平D",
+    "DESCRIPTION": "获得 !B! 点 格挡 。"
+  },
+  "arknights:RangersStrike": {
+    "NAME": "平A",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "arknights:YatoStrike": {
+    "NAME": "平A",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "arknights:Amiya": {
+    "NAME": "阿米娅",
+    "DESCRIPTION": "选择形态范围 ：术士普攻B。",
+    "EXTENDED_DESCRIPTION": [
+      "选择形态范围 ：术士普攻B、精神爆发。",
+      "选择形态范围 ：术士普攻B、精神爆发、奇美拉。"
+    ]
+  },
+  "arknights:SpiritBurst": {
+    "NAME": "精神爆发",
+    "DESCRIPTION": "随机对敌人造成 !D! 点伤害 !M! 次。 NL 结束你的回合。"
+  },
+  "arknights:Chimera": {
+    "NAME": "奇美拉",
+    "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
   },
   "arknights:SummonMiningSupportDrone": {
     "NAME": "激光无人机支援",
     "DESCRIPTION": "召唤 !M! 个 激光无人机 。"
+  },
+  "arknights:SummonFreezingSupportDrone": {
+    "NAME": "制冷无人机支援",
+    "DESCRIPTION": "召唤 !M! 个 制冷无人机 。"
   },
   "arknights:SummonMeeboo": {
     "NAME": "召唤咪波",
@@ -71,10 +107,6 @@
     "NAME": "铁意六合",
     "DESCRIPTION": "造成 !D! 点伤害。选择1张牌丢弃，若选择的是 *伤口 ，改为将其 消耗 并获得 [E] 。"
   },
-  "arknights:Chimera": {
-    "NAME": "奇美拉",
-    "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
-  },
   "arknights:ShellDefense": {
     "NAME": "壳状防御",
     "DESCRIPTION": "获得 !B! 点 格挡 。你的下一回合开始时 格挡 不会消失。你在这个回合不能打出 #y攻击牌 。"
@@ -103,15 +135,23 @@
   },
   "arknights:FangDeploy": {
     "NAME": "芬",
-    "DESCRIPTION": "干员牌 。"
+    "DESCRIPTION": "选择形态范围 ：冲锋号令。",
+    "EXTENDED_DESCRIPTION": [
+      "选择形态范围 ：冲锋号令。",
+      "选择形态范围 ：冲锋号令。"
+    ]
   },
   "arknights:ChargeAlpha": {
-    "NAME": "冲锋号令·α型",
+    "NAME": "冲锋号令",
     "DESCRIPTION": "获得 !M! 点 [E] 。 消耗 。 "
   },
   "arknights:TexasDeploy": {
     "NAME": "德克萨斯",
-    "DESCRIPTION": "干员牌 。"
+    "DESCRIPTION": "选择形态范围 ：冲锋号令。",
+    "EXTENDED_DESCRIPTION": [
+      "选择形态范围 ：冲锋号令、剑雨。",
+      "选择形态范围 ：冲锋号令、剑雨。"
+    ]
   },
   "arknights:SwordRain": {
     "NAME": "剑雨",
@@ -146,5 +186,12 @@
   "arknights:W12Bomb": {
     "NAME": "W12",
     "DESCRIPTION": "给予生命值最多的 !M! 个敌人 W12炸弹 。每个W12炸弹在第 #b3 回合开始时，对所有敌人造成 !D! 点伤害。"
+  },
+  "arknights:RegainBlockCard": {
+    "NAME": "格挡恢复牌",
+    "DESCRIPTION": "进行 !M! 点 格挡恢复 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （当前最多可恢复的格挡： {} 点。）"
+    ]
   }
 }

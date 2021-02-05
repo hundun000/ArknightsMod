@@ -45,7 +45,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
             ) {
         super(ID, IMG, OUTLINE, relicTier, landingSound);
         this.outsideBattle = true;
-        this.counter = 15;
+        this.counter = 150;
         this.cardsSelected = true;
         tips.clear();
         tips.add(new PowerTip(name, description));
@@ -62,7 +62,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
 
         this.cardsSelected = false;
         CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        for (AbstractCard card : (AbstractDungeon.player.masterDeck.getPurgeableCards()).group) {
+        for (AbstractCard card : (AbstractDungeon.player.masterDeck.getUpgradableCards()).group) {
             tmp.addToTop(card);
         }
         if (tmp.group.isEmpty()) {
@@ -135,7 +135,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
     }
     
     public void addCounter(int addition) {
-        counter = Math.min(counter + addition, 99);
+        counter = Math.min(counter + addition, 999);
         flash();
         if (usable()) {
             beginPulse();

@@ -21,12 +21,10 @@ public class TexasDeploy extends BaseDeployCard {
     public static final String ID = ArknightsMod.makeID(TexasDeploy.class.getSimpleName()); // DELETE THIS ONE.
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.SPECIAL;      
-    private static final int COST = 1;  
   
     public TexasDeploy() { 
-        super(ID, IMG, COST, RARITY);
-        initGiveCardsSetting(Arrays.asList(new ChargeAlpha(), new SwordRain()), 2, 2);
+        super(ID, IMG);
+        initGiveCardsSetting(Arrays.asList(new ChargeAlpha(), new SwordRain()));
         
     }
 

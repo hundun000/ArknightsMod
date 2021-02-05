@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,70 +14,61 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.powers.watcher.MasterRealityPower;
 import com.megacrit.cardcrawl.screens.CardRewardScreen;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
 
 import arknights.ArknightsMod;
 
 /** 
- * alter from DiscoveryAction
+ * alter from Marisa-mod BinaryStarsAction
  * @author hundun
  * Created on 2021/01/29
  */
 public class DiscoveryTargetCardsAction extends AbstractGameAction {
-    private boolean retrieveCard = false;
-
-    private ArrayList<AbstractCard> targetCards;
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ArknightsMod.makeID(DiscoveryTargetCardsAction.class));
     
-    public DiscoveryTargetCardsAction(List<AbstractCard> targetCards, int gainCardAmout) {
+    private AbstractPlayer player;
+    private List<AbstractCard> targetCards;
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ArknightsMod.makeID(DiscoveryTargetCardsAction.class));
+    List<AbstractCard> callbackList;
+    
+    
+    public DiscoveryTargetCardsAction(AbstractPlayer player, List<AbstractCard> targetCards, int gainCardAmout) {
         this.actionType = AbstractGameAction.ActionType.CARD_MANIPULATION;
-        this.duration = Settings.ACTION_DUR_FAST;
+        this.duration = Settings.ACTION_DUR_MED;
         this.targetCards = new ArrayList<>(targetCards);
         this.amount = gainCardAmout;
+        this.player = player;
+        
     }
 
-    public void update() {
-        if (this.duration == Settings.ACTION_DUR_FAST) {
-            AbstractDungeon.cardRewardScreen.customCombatOpen(targetCards, uiStrings.TEXT[0], false);
+
+    @Override
+    public void update(){
+        CardGroup tmp;
+        if (this.duration == Settings.ACTION_DUR_MED){
+            tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+            targetCards.forEach(item -> tmp.addToBottom(item));
+            AbstractDungeon.gridSelectScreen.open(tmp, 1, uiStrings.TEXT[0], false);
             tickDuration();
             return;
-        } 
-        if (!this.retrieveCard) {
-            if (AbstractDungeon.cardRewardScreen.discoveryCard != null) {
-                AbstractCard disCard = AbstractDungeon.cardRewardScreen.discoveryCard.makeStatEquivalentCopy();
-                AbstractCard disCard2 = AbstractDungeon.cardRewardScreen.discoveryCard.makeStatEquivalentCopy();
-                
-                if (AbstractDungeon.player.hasPower(MasterRealityPower.POWER_ID)) {
-                    disCard.upgrade();
-                    disCard2.upgrade();
-                } 
-                disCard.setCostForTurn(0);
-                disCard2.setCostForTurn(0);
-                
-                disCard.current_x = -1000.0F * Settings.scale;
-                disCard2.current_x = -1000.0F * Settings.scale + AbstractCard.IMG_HEIGHT_S;
-                
-                if (this.amount == 1) {
-                    if (AbstractDungeon.player.hand.size() < Settings.MAX_HAND_SIZE) {
-                        AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(disCard, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    } else {
-                        AbstractDungeon.effectList.add(new ShowCardAndAddToDiscardEffect(disCard, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    } 
-                    disCard2 = null;
-                } else if (AbstractDungeon.player.hand.size() + this.amount <= Settings.MAX_HAND_SIZE) {
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(disCard, Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(disCard2, Settings.WIDTH / 2.0F + AbstractCard.IMG_WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                } else if (AbstractDungeon.player.hand.size() == Settings.MAX_HAND_SIZE - 1) {
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToHandEffect(disCard, Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToDiscardEffect(disCard2, Settings.WIDTH / 2.0F + AbstractCard.IMG_WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                } else {
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToDiscardEffect(disCard, Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    AbstractDungeon.effectList.add(new ShowCardAndAddToDiscardEffect(disCard2, Settings.WIDTH / 2.0F + AbstractCard.IMG_WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                } 
-                AbstractDungeon.cardRewardScreen.discoveryCard = null;
-            } 
-            this.retrieveCard = true;
-        } 
+        }
+        if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0){
+//            for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards){
+//                c.unhover();
+//                if (this.player.hand.size() == 10){
+//                    this.player.createHandIsFullDialog();
+//                    this.player.discardPile.addToTop(c);
+//                }
+//                else{
+//                    this.player.hand.addToTop(c);
+//            }
+            
+            for (AbstractCard selectedCard : AbstractDungeon.gridSelectScreen.selectedCards) {
+                AbstractDungeon.effectList.add(new ShowCardAndAddToDrawPileEffect(selectedCard, Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F - 10.0F * Settings.scale, Settings.HEIGHT / 2.0F, true, false));
+            }
+            
+            AbstractDungeon.gridSelectScreen.selectedCards.clear();
+        }
         tickDuration();
     }
 
