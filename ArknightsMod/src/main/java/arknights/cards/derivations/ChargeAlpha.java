@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.powers.EnergizedPower;
 import arknights.ArknightsMod;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
-import arknights.cards.base.IOperatorCreateable;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 

@@ -3,6 +3,7 @@ package arknights.cards.operator;
  * @author hundun
  * Created on 2021/02/06
  */
+@Deprecated
 public enum PromotionState {
     NO_PROMOTION(-1, 0),
     ZERO(1, 1),

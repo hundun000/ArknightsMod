@@ -19,7 +19,7 @@ import arknights.cards.operator.PromotionState;
 import arknights.characters.ArknightsPlayer;
 import arknights.variables.ExtraVariable;
 
-public abstract class ArknightsModCard extends CustomCard implements IOperatorCreateable {
+public abstract class ArknightsModCard extends CustomCard {
     protected final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
@@ -38,8 +38,7 @@ public abstract class ArknightsModCard extends CustomCard implements IOperatorCr
     
     private int useTimeCount = -1;
     private int prepareCount = -1;
-    
-    public PromotionState promotionState;
+
     
     /**
      * auto generate fields which always same or similar
@@ -75,7 +74,7 @@ public abstract class ArknightsModCard extends CustomCard implements IOperatorCr
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
         this.useTimeCount = 0;
         this.prepareCount = 0;
-        this.promotionState = PromotionState.NO_PROMOTION;
+
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -253,52 +252,34 @@ public abstract class ArknightsModCard extends CustomCard implements IOperatorCr
     public AbstractCard makeCopy() {
         ArknightsModCard copy = (ArknightsModCard)super.makeCopy();
         copy.timesUpgraded = this.timesUpgraded;
-        copy.promotionState = this.promotionState;
         copy.updateNameWithPromotionLevel();
         return copy;
     }
     
     protected void updateNameWithPromotionLevel() {
-        if (this.promotionState != PromotionState.NO_PROMOTION) {
-            // FIXME use localization file
-            this.name = cardStrings.NAME + "精英" + this.promotionState.name() + "等级" + getOperatorLevel();
-        } else {
+
             if (this.upgraded) {
-                this.name = cardStrings.NAME + "+";
+                if (this.timesUpgraded == 1) {
+                    this.name = cardStrings.NAME + "+";
+                } else {
+                    this.name = cardStrings.NAME + "+" + this.timesUpgraded;
+                }
+                
             } else {
                 this.name = cardStrings.NAME;
             }
-        }
-        
-    }
-    
-    private int getOperatorLevel() {
-        switch (this.promotionState) {
-            case ZERO:
-                return 1 + this.timesUpgraded;
-            case ONE:
-                return 1 + this.timesUpgraded - PromotionState.ZERO.getMaxLevel();
-            case TWO:
-                return 1 + this.timesUpgraded - PromotionState.ZERO.getMaxLevel() - PromotionState.ONE.getMaxLevel();
-            default:
-                return 0;
-        }
+
     }
     
     @Override
-    public void initByOperatorCreate(BaseDeployCard operator) {
-        switch (operator.promotionState) {
-            case ONE:
-            case TWO:
-                if (canUpgrade()) {
-                    upgrade();
-                }
-                break;
-    
-            default:
-                break;
-        }
+    public void initializeDescription() {
+        String before = this.description.toString();
+        super.initializeDescription();
+        String after = this.description.toString();
+        ArknightsMod.logger.debug("{} initializeDescription, befor = {}, after = {}", this.toIdString(), before, after);
     }
+
+
     
     
     

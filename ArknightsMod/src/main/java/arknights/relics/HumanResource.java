@@ -149,7 +149,7 @@ public class HumanResource extends CustomRelic implements ClickableRelic {
         for (AbstractCard card : cards) {
             if (card instanceof BaseDeployCard) {
                 BaseDeployCard deployCard = (BaseDeployCard)card;
-                List<AbstractCard> giveCards = deployCard.getGiveCardsCopy();
+                List<AbstractCard> giveCards = deployCard.getCurrentGiveCardsCopy();
                 if (giveCards != null && !giveCards.isEmpty()) {
                     if (giveCards.size() > 1) {
                         ArknightsMod.logger.info("adding DiscoveryTargetCardsAction for {}", ((BaseDeployCard) card).toIdString());

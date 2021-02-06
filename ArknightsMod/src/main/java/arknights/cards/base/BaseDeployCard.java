@@ -27,26 +27,32 @@ import arknights.powers.TurnCountDownGainCardPower;
  * Created on 2020/11/16
  */
 public abstract class BaseDeployCard extends ArknightsModCard {
+    private List<AbstractCard> baseGiveCards;
+    private List<AbstractCard> currentGiveCards;
 
-    protected List<AbstractCard> giveCards;
     
-    
+    private int timesUpgradeLimit;
     
     public BaseDeployCard(String id, String img) {
         super(id, img, 0, CardType.SKILL, ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
         
         this.tags.add(ArknightsCardTag.DEPLOY);
-        this.promotionState = PromotionState.ZERO;
+        
+        this.currentGiveCards = new ArrayList<>();
+        this.timesUpgradeLimit = 0;
+        
+        
     }
     
-    protected void initGiveCardsSetting(List<AbstractCard> giveCards) {
-        this.giveCards = giveCards;
+    protected void initGiveCardsSetting(List<AbstractCard> baseGiveCards) {
+        this.baseGiveCards = baseGiveCards;
+        this.timesUpgradeLimit = giveCardsSizeToTimesUpgradeLimit(baseGiveCards.size());
+        updateCurrentGiveCards();
     }
     
     @Override
     public boolean canUpgrade() {
-        boolean isMaxLevel = this.promotionState == PromotionState.TWO && this.timesUpgraded == this.promotionState.getMaxLevel();
-        return !isMaxLevel;
+        return this.timesUpgraded < timesUpgradeLimit;
     }
     
     
@@ -55,43 +61,39 @@ public abstract class BaseDeployCard extends ArknightsModCard {
         this.timesUpgraded++;
         ArknightsMod.logger.info("{} upgrade to timesUpgraded = {}", this.toIdString(), this.timesUpgraded);
         this.upgraded = true;
-        if (this.timesUpgraded > promotionState.getMaxLevel()) {
-            promotionState = promotionState.next();
-        }
+
         updateNameWithPromotionLevel();
+        updateCurrentGiveCards();
         
-        switch (promotionState) {
-            case ONE:
-                this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[0];
-                break;
-            case TWO:
-                this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[1];
-                break;
-            default:
-                this.rawDescription = cardStrings.DESCRIPTION;
-                break;
-        }
+        int index = Math.min(cardStrings.EXTENDED_DESCRIPTION.length, this.timesUpgraded - 1);
+        this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[index];
         initializeDescription();
-    }
+    } 
     
+    protected void updateCurrentGiveCards() {
 
-    @Override
-    public void triggerWhenDrawn() {
+        currentGiveCards.clear();
+        currentGiveCards.add(baseGiveCards.get(0).makeCopy());
+        if (this.timesUpgraded >= 1 && currentGiveCards.get(0).canUpgrade()) {
+            currentGiveCards.get(0).upgrade();
+        }
+        if (this.timesUpgraded >= 2) {
+            currentGiveCards.add(baseGiveCards.get(1).makeCopy());
+        }
+        if (this.timesUpgraded >= 3) {
+            currentGiveCards.get(1).upgrade();
+        }
+
     }
 
 
-    public List<AbstractCard> getGiveCardsCopy() {
+
+    public List<AbstractCard> getCurrentGiveCardsCopy() {
         List<AbstractCard> copys = new ArrayList<>();
-        for (AbstractCard card : giveCards) {
+        for (AbstractCard card : currentGiveCards) {
             AbstractCard copy = card.makeCopy();
-            if (copy instanceof IOperatorCreateable) {
-                ((IOperatorCreateable)copy).initByOperatorCreate(this);
-            }
             copys.add(copy);
         }
-        int range = Math.min(copys.size(), promotionState.getGiveCardRange());
-        ArknightsMod.logger.info("{} GiveCards range = {}", this.toIdString(), range);
-        copys = copys.subList(0, range);
         return copys;
     }
     
@@ -106,11 +108,23 @@ public abstract class BaseDeployCard extends ArknightsModCard {
 
     
     
-    
+    private int giveCardsSizeToTimesUpgradeLimit(int giveCardsSize) {
+        switch (giveCardsSize) {
+            case 0:
+            case 1:
+                return 0;
+            case 2:
+                return 2;
+            case 3:
+                return 3;
+            default:
+                return 0;
+        }
+    }
     
     
     public void addPotentialCount() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             if (canUpgrade()) {
                 upgrade();
             }

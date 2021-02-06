@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.powers.EnergizedPower;
 import arknights.ArknightsMod;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
-import arknights.cards.base.IOperatorCreateable;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.util.LocalizationUtils;
@@ -23,7 +22,7 @@ import arknights.variables.ExtraVariable;
  * @author hundun
  * Created on 2020/11/13
  */
-public class SwordRain extends ArknightsModCard implements IOperatorCreateable {
+public class SwordRain extends ArknightsModCard {
     
     public static final String ID = ArknightsMod.makeID(SwordRain.class.getSimpleName()); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
@@ -95,15 +94,5 @@ public class SwordRain extends ArknightsModCard implements IOperatorCreateable {
     }
 
 
-    @Override
-    public void initByOperatorCreate(BaseDeployCard operator) {
-        switch (operator.promotionState) {
-            case ONE:
-            case TWO:
-                upgrade();
-                break;
-            default:
-                break;
-        }
-    }
+    
 }
