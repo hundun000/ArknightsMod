@@ -6,14 +6,14 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import arknights.cards.base.ArknightsModCard;
 
-public class PrepareCountVariable extends DynamicVariable {
+public class SpCountVariable extends DynamicVariable {
 
-    public PrepareCountVariable() {
+    public SpCountVariable() {
     }
     
     @Override
     public String key() {
-        return "PC";
+        return "SPC";
     }
 
     @Override
@@ -24,7 +24,7 @@ public class PrepareCountVariable extends DynamicVariable {
 
     @Override
     public int value(AbstractCard card) {
-        return ((ArknightsModCard) card).getPrepareCount();
+        return ((ArknightsModCard) card).getSpCount();
     }
 
     @Override

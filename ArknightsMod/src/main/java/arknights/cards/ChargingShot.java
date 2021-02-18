@@ -61,6 +61,7 @@ public class ChargingShot extends ArknightsModCard {
     public void calculateCardDamage(AbstractMonster arg0) {
         if (isNextUseTimeReachThreshold(magicNumber)) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
+            clearSpCount();
         } else {
             super.calculateCardDamage(arg0);
         }
@@ -68,7 +69,7 @@ public class ChargingShot extends ArknightsModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addUseCount(magicNumber);
+        addSpCount(1);
         this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
         initializeDescription();
         
@@ -80,6 +81,11 @@ public class ChargingShot extends ArknightsModCard {
     @Override
     protected boolean needSetBorderOnGlow() {
         return isNextUseTimeReachThreshold(magicNumber);
+    }
+
+    private boolean isNextUseTimeReachThreshold(int magicNumber) {
+        // TODO Auto-generated method stub
+        return false;
     }
     
 }

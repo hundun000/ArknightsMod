@@ -42,6 +42,7 @@ public class PrepareShot extends ArknightsModCard {
                 .setPlusExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX, 2)
                 );
         this.selfRetain = true;
+        setSpThreshold(this.magicNumber);
     }
     
     
@@ -50,7 +51,7 @@ public class PrepareShot extends ArknightsModCard {
     public void onMoveToDiscard() {
         super.onMoveToDiscard();
         
-        clearPrepareCount();
+        clearSpCount();
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }
@@ -59,16 +60,15 @@ public class PrepareShot extends ArknightsModCard {
     public void onRetained() {
         super.onRetained();
         
-        addPrepareCount(1);
-        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], getPrepareCount());
+        addSpCount(1);
+        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], getSpCount());
         initializeDescription();
     }
 
     
     @Override
     public void applyPowers() {
-        boolean reach = getPrepareCount() >= this.magicNumber;
-        if (reach) {
+        if (isSpCountReachThreshold()) {
             applyPowersWithTempAddBaseDamage(getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
             super.applyPowers();
@@ -77,8 +77,7 @@ public class PrepareShot extends ArknightsModCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster arg0) {
-        boolean reach = getPrepareCount() >= this.magicNumber;
-        if (reach) {
+        if (isSpCountReachThreshold()) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
             super.calculateCardDamage(arg0);
@@ -91,7 +90,7 @@ public class PrepareShot extends ArknightsModCard {
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
         
-        clearPrepareCount();
+        clearSpCount();
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }

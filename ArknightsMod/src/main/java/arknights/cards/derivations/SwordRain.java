@@ -64,8 +64,8 @@ public class SwordRain extends ArknightsModCard {
             }
         }
         
-        clearPrepareCount();
-        ArknightsMod.logger.info("SwordRain use(). getPrepareCount = " + getPrepareCount());
+        clearSpCount();
+        ArknightsMod.logger.info("SwordRain use(). getPrepareCount = " + getSpCount());
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }
@@ -73,8 +73,8 @@ public class SwordRain extends ArknightsModCard {
     @Override
     public void onMoveToDiscard() {
         super.onMoveToDiscard();
-        clearPrepareCount();
-        ArknightsMod.logger.info("SwordRain onMoveToDiscard(). getPrepareCount = " + getPrepareCount());
+        clearSpCount();
+        ArknightsMod.logger.info("SwordRain onMoveToDiscard(). getPrepareCount = " + getSpCount());
         this.rawDescription = cardStrings.DESCRIPTION;
         initializeDescription();
     }
@@ -82,15 +82,15 @@ public class SwordRain extends ArknightsModCard {
     @Override
     public void onRetained() {
         super.onRetained();
-        addPrepareCount(1);
-        ArknightsMod.logger.info("SwordRain onRetained(). getPrepareCount = " + getPrepareCount());
+        addSpCount(1);
+        ArknightsMod.logger.info("SwordRain onRetained(). getPrepareCount = " + getSpCount());
         this.rawDescription = cardStrings.DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
         initializeDescription();
     }
     
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
-        return getPrepareCount() >= PREPARE_COUNT_THRESHOLD_FOR_USE;
+        return getSpCount() >= PREPARE_COUNT_THRESHOLD_FOR_USE;
     }
 
 

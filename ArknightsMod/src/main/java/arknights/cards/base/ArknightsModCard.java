@@ -36,9 +36,8 @@ public abstract class ArknightsModCard extends CustomCard {
     public boolean[] extraMagicNumberUpgradeds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     public boolean[] extraMagicNumberModifieds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     
-    private int useTimeCount = -1;
-    private int prepareCount = -1;
-
+    private int spCount = -1;
+    private Integer spThreshold;
     
     /**
      * auto generate fields which always same or similar
@@ -72,9 +71,8 @@ public abstract class ArknightsModCard extends CustomCard {
         super.isMagicNumberModified = false;
         
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
-        this.useTimeCount = 0;
-        this.prepareCount = 0;
-
+        this.spCount = 0;
+        
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -104,29 +102,30 @@ public abstract class ArknightsModCard extends CustomCard {
     }
     
     
-    public void addUseCount(Integer useTimeCountMod) {
-        useTimeCount++;
-        if (useTimeCountMod != null) {
-            useTimeCount %= magicNumber;
+    public void addSpCount(int amount) {
+        spCount += amount;
+        if (isSpCountReachThreshold()) {
+            spCount = spThreshold;
         }
-    }
-    
-    public void addPrepareCount(int amount) {
-        prepareCount += amount;
     }
 
     
-    public boolean isNextUseTimeReachThreshold(int threshold) {
-        return useTimeCount + 1 == threshold;
+    public void setSpThreshold(Integer spThreshold) {
+        this.spThreshold = spThreshold;
     }
     
-    public int getUseTimeCount() {
-        return useTimeCount;
+    public Integer getSpThreshold() {
+        return spThreshold;
     }
     
-    public int getPrepareCount() {
-        return prepareCount;
+    public int getSpCount() {
+        return spCount;
     }
+    
+    public boolean isSpCountReachThreshold() {
+        return spThreshold != null && spCount >= spThreshold;
+    }
+
     
     @Override
     public void displayUpgrades() {
@@ -222,8 +221,8 @@ public abstract class ArknightsModCard extends CustomCard {
     
     
     
-    public void clearPrepareCount() {
-        this.prepareCount = 0;
+    public void clearSpCount() {
+        this.spCount = 0;
     }
     
     protected boolean needSetBorderOnGlow() {
@@ -278,6 +277,8 @@ public abstract class ArknightsModCard extends CustomCard {
         String after = this.description.toString();
         ArknightsMod.logger.debug("{} initializeDescription, befor = {}, after = {}", this.toIdString(), before, after);
     }
+    
+    
 
 
     

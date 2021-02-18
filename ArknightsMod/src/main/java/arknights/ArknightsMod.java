@@ -37,10 +37,10 @@ import arknights.rewards.PotentialRewardTypePatch;
 import arknights.util.AbstractDungeonHelper;
 import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
-import arknights.variables.PrepareCountVariable;
+import arknights.variables.SpCountVariable;
+import arknights.variables.SpThresholdVariable;
 import arknights.variables.SecondMagicNumberVariable;
 import arknights.variables.ThirdMagicNumberVariable;
-import arknights.variables.UseCountVariable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -465,8 +465,8 @@ public class ArknightsMod implements
         //BaseMod.addDynamicVariable(new DefaultCustomVariable());
         BaseMod.addDynamicVariable(new SecondMagicNumberVariable());
         BaseMod.addDynamicVariable(new ThirdMagicNumberVariable());
-        BaseMod.addDynamicVariable(new UseCountVariable());
-        BaseMod.addDynamicVariable(new PrepareCountVariable());
+        BaseMod.addDynamicVariable(new SpCountVariable());
+        BaseMod.addDynamicVariable(new SpThresholdVariable());
         
         logger.info("Adding cards");
         // Add the cards

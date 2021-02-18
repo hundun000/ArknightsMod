@@ -117,16 +117,16 @@
   },
   "arknights:WaveStrike": {
     "NAME": "跃浪击",
-    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。NL 这张牌被打出 !M! 次后，在本场战斗中其基础伤害减少 !2ndM! 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 NL 这张牌被打出 !M! 次后，在本场战斗中其基础伤害减少 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
       " NL （已打出 {} 次。）"
     ]
   },
   "arknights:ChargingStrike": {
     "NAME": "蓄力打击",
-    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 打出时获得技力 。 技力 !SPT! ：基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
-      " NL （已打出 !UC! 次。）"
+      " NL （技力 !SPC! / !SPT! 次。）"
     ]
   },
   "arknights:VorpalEdge": {
@@ -155,10 +155,10 @@
   },
   "arknights:SwordRain": {
     "NAME": "剑雨",
-    "DESCRIPTION": "准备三 。对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 击晕 。 获得 !2ndM! 点 [E] 。",
+    "DESCRIPTION": "保留 。 保留时获得技力。 技力 !SPT! ：对所有敌人造成 !D! 点 伤害 。给予所有敌人 !M! 层 击晕 。 获得 !2ndM! 点 [E] 。",
     "EXTENDED_DESCRIPTION": [
-      " NL （准备指示物： !PC! 个。）",
-      "准备指示物不足！"
+      " NL （技力 !SPC! / !SPT! 次。）",
+      "技力不足，无法打出！"
     ]
   },
   "arknights:TalentLavender": {

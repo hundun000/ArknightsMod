@@ -57,7 +57,7 @@ public class RegainBlockCard extends ArknightsModCard {
         super.applyPowers();
         
         // update currentRegainAmount
-        currentRegainAmountLimit = Math.max(0, MoreGameActionManager.decrementBlockThisTurn - MoreGameActionManager.regainBlockThisTurn);
+        currentRegainAmountLimit = MoreGameActionManager.getCurrentRegainAmountLimit();
         
         
         this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], currentRegainAmountLimit);

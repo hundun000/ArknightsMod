@@ -6,25 +6,25 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import arknights.cards.base.ArknightsModCard;
 
-public class UseCountVariable extends DynamicVariable {
+public class SpThresholdVariable extends DynamicVariable {
 
-    public UseCountVariable() {
+    public SpThresholdVariable() {
     }
     
     @Override
     public String key() {
-        return "UC";
+        return "SPT";
     }
 
     @Override
     public boolean isModified(AbstractCard card) {
         // will not paint green
-        return true;
+        return false;
     }
 
     @Override
     public int value(AbstractCard card) {
-        return ((ArknightsModCard) card).getUseTimeCount();
+        return ((ArknightsModCard) card).getSpCount();
     }
 
     @Override

@@ -89,30 +89,22 @@ public class Doctor extends ArknightsPlayer {
     public AbstractPlayer newInstance() {
         return new Doctor();
     }
-    
-    @Override
-    protected int decrementBlock(DamageInfo arg0, int arg1) {
-        int before = this.currentBlock;
-        int returnValue = super.decrementBlock(arg0, arg1);
-        int after = this.currentBlock;
-        int decrement = Math.max(0, before - after);
-        MoreGameActionManager.countDecrementBlock(decrement);
-        return returnValue;
-    }
 
     
     @Override
     public void applyEndOfTurnTriggers() {
+        MoreGameActionManager.applyEndOfTurnTriggers(this);
         super.applyEndOfTurnTriggers();
         
-        MoreGameActionManager.applyEndOfTurnTriggers();
+        
     }
     
     @Override
     public void applyStartOfCombatLogic() {
+        MoreGameActionManager.applyStartOfCombatLogic();
         super.applyStartOfCombatLogic();
         
-        MoreGameActionManager.applyStartOfCombatLogic();
+        
     }
 
 }

@@ -44,12 +44,21 @@ public class ChargingStrike extends ArknightsModCard {
                 .setPlusBlock(1)
                 .setPlusExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX, 1)
                 );
+        setSpThreshold(this.magicNumber);
+    }
+    
+    
+    @Override
+    public void upgrade() {
+       super.upgrade();
+       
+       setSpThreshold(this.magicNumber);
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addUseCount(magicNumber);
-        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.getUseTimeCount());
+        addSpCount(magicNumber);
+        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.getSpCount());
         initializeDescription();
         
         addToBot(new GainBlockAction(player, player, block));
@@ -60,7 +69,7 @@ public class ChargingStrike extends ArknightsModCard {
     
     @Override
     public void applyPowers() {
-        if (isNextUseTimeReachThreshold(magicNumber)) {
+        if (isSpCountReachThreshold()) {
             applyPowersWithTempAddBaseDamage(getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
             super.applyPowers();
@@ -69,8 +78,9 @@ public class ChargingStrike extends ArknightsModCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster arg0) {
-        if (isNextUseTimeReachThreshold(magicNumber)) {
+        if (isSpCountReachThreshold()) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
+            clearSpCount();
         } else {
             super.calculateCardDamage(arg0);
         }
@@ -78,7 +88,7 @@ public class ChargingStrike extends ArknightsModCard {
     
     @Override
     protected boolean needSetBorderOnGlow() {
-        return isNextUseTimeReachThreshold(magicNumber);
+        return isSpCountReachThreshold();
     }
 
 }
