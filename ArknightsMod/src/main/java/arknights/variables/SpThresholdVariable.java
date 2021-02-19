@@ -24,12 +24,12 @@ public class SpThresholdVariable extends DynamicVariable {
 
     @Override
     public int value(AbstractCard card) {
-        return ((ArknightsModCard) card).getSpCount();
+        return ((ArknightsModCard) card).getSpThreshold();
     }
 
     @Override
     public int baseValue(AbstractCard card) {
-        return -1;
+        return ((ArknightsModCard) card).getSpThreshold();
     }
 
     @Override

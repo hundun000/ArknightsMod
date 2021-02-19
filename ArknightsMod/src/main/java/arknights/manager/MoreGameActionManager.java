@@ -34,7 +34,7 @@ public class MoreGameActionManager {
         ArknightsMod.logger.info("MoreGameActionManager applyStartOfTurn done");
     }
     
-    public static int getCurrentRegainAmountLimit() {
+    public static int getCurrentRegainBlockAmountLimit() {
         int currentRegainAmountLimit = Math.max(0, MoreGameActionManager.numBlockLastTurnEnd - MoreGameActionManager.regainBlockThisTurn);
         return currentRegainAmountLimit;
     }

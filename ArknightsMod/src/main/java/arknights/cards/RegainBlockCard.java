@@ -33,7 +33,7 @@ public class RegainBlockCard extends ArknightsModCard {
 
     private static final int COST = 0;
 
-    private int currentRegainAmountLimit = -1;
+    private int currentRegainBlockAmountLimit = -1;
     
     public RegainBlockCard() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
@@ -47,7 +47,7 @@ public class RegainBlockCard extends ArknightsModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        int currentRegainAmount = Math.min(currentRegainAmountLimit, this.magicNumber);
+        int currentRegainAmount = Math.min(currentRegainBlockAmountLimit, this.magicNumber);
         MoreGameActionManager.countRegainBlock(currentRegainAmount);
         addToBot(new GainBlockAction(player, player, currentRegainAmount));
     }
@@ -57,10 +57,10 @@ public class RegainBlockCard extends ArknightsModCard {
         super.applyPowers();
         
         // update currentRegainAmount
-        currentRegainAmountLimit = MoreGameActionManager.getCurrentRegainAmountLimit();
+        currentRegainBlockAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
         
         
-        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], currentRegainAmountLimit);
+        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], currentRegainBlockAmountLimit);
         initializeDescription();
     }
     

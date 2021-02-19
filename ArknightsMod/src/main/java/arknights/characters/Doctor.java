@@ -60,7 +60,7 @@ public class Doctor extends ArknightsPlayer {
         String[] guardPackage = new String[]{WaveStrike.ID, ChargingStrike.ID, VorpalEdge.ID};
         String[] shotPackage = new String[]{W12Bomb.ID, ChargingShot.ID, PrepareShot.ID};
         
-        //retVal.addAll(Arrays.asList(vanguardPackage));
+        retVal.addAll(Arrays.asList(guardPackage));
         retVal.addAll(Arrays.asList(operators));
         retVal.addAll(Arrays.asList(starter));
         retVal.addAll(Arrays.asList(defensePackage));

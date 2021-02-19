@@ -47,7 +47,7 @@ public class NextTurnRegainBlockPower extends AbstractPower {
 
     public void atStartOfTurn() {
         // update currentRegainAmount
-        int currentRegainAmountLimit = MoreGameActionManager.getCurrentRegainAmountLimit();
+        int currentRegainAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
        
         flash();
         AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.owner.hb.cX, this.owner.hb.cY, AbstractGameAction.AttackEffect.SHIELD));

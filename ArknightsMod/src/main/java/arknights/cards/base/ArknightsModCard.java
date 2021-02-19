@@ -37,7 +37,15 @@ public abstract class ArknightsModCard extends CustomCard {
     public boolean[] extraMagicNumberModifieds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     
     private int spCount = -1;
-    private Integer spThreshold;
+    private int spThreshold = -1;
+    private GainSpType gainSpType = GainSpType.NO_SP;
+    
+    public enum GainSpType {
+        NO_SP,
+        ON_DRAWN,
+        ON_USE,
+        
+    }
     
     /**
      * auto generate fields which always same or similar
@@ -123,7 +131,7 @@ public abstract class ArknightsModCard extends CustomCard {
     }
     
     public boolean isSpCountReachThreshold() {
-        return spThreshold != null && spCount >= spThreshold;
+        return spThreshold != -1 && spCount >= spThreshold;
     }
 
     
