@@ -10,8 +10,8 @@ public abstract class ExtraVariable extends DynamicVariable {
     
     public static final int GENERAL_2nd_MAGIC_NUMBER_INDEX = 0;
     public static final int GENERAL_3rd_MAGIC_NUMBER_INDEX = 1;
-    @Deprecated
-    public static final int MAGIC_DAMAGE_INDEX = 4;
+    
+    public static final int MAGIC_DAMAGE_INDEX = 3;
     
     public static final int EXTRA_MAGIC_NUMBER_SIZE = 4;
     

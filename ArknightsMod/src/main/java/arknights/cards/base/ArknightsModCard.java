@@ -5,6 +5,7 @@ import basemod.abstracts.CustomCard;
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -20,7 +21,9 @@ import arknights.characters.ArknightsPlayer;
 import arknights.variables.ExtraVariable;
 
 public abstract class ArknightsModCard extends CustomCard {
-    protected final CardStrings cardStrings;
+	protected final static DamageType MAGICDAMAGETYP_DAMAGE_TYPE = DamageType.HP_LOSS;
+	
+	protected final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
     
@@ -111,7 +114,8 @@ public abstract class ArknightsModCard extends CustomCard {
     
     
     public void addSpCount(int amount) {
-        spCount += amount;
+    	ArknightsMod.logger.info("{} addSpCount {} + {}", this.toIdString(), spCount, amount);
+    	spCount += amount;
         if (isSpCountReachThreshold()) {
             spCount = spThreshold;
         }
@@ -182,6 +186,8 @@ public abstract class ArknightsModCard extends CustomCard {
     }
     
     
+    
+    
     public void applyPowersWithTempAddBaseDamage(int tempAddDamage) {
         int originBaseDamage = this.baseDamage;
         this.baseDamage += tempAddDamage;
@@ -231,6 +237,7 @@ public abstract class ArknightsModCard extends CustomCard {
     
     public void clearSpCount() {
         this.spCount = 0;
+        ArknightsMod.logger.info("{} SpCount cleared", this.toIdString());
     }
     
     protected boolean needSetBorderOnGlow() {
@@ -276,14 +283,6 @@ public abstract class ArknightsModCard extends CustomCard {
                 this.name = cardStrings.NAME;
             }
 
-    }
-    
-    @Override
-    public void initializeDescription() {
-        String before = this.description.toString();
-        super.initializeDescription();
-        String after = this.description.toString();
-        ArknightsMod.logger.debug("{} initializeDescription, befor = {}, after = {}", this.toIdString(), before, after);
     }
     
     

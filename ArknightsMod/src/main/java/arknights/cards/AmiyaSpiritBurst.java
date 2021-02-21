@@ -22,19 +22,19 @@ import arknights.cards.base.component.UpgradeSetting;
  * @author hundun
  * Created on 2021/02/06
  */
-public class SpiritBurst extends ArknightsModCard {
+public class AmiyaSpiritBurst extends ArknightsModCard {
     
     public static final String ID = ArknightsMod.makeID(CardTemplant.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.COMMON; 
-    private static final CardTarget TARGET = CardTarget.NONE;  
+    private static final CardRarity RARITY = CardRarity.SPECIAL; 
+    private static final CardTarget TARGET = CardTarget.ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
     private static final int COST = 0;
 
     
-    public SpiritBurst() {
+    public AmiyaSpiritBurst() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(5)

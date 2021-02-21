@@ -7,7 +7,7 @@ import java.util.List;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import arknights.ArknightsMod;
-import arknights.cards.Chimera;
+import arknights.cards.AmiyaChimera;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
 import arknights.cards.base.component.BasicSetting;

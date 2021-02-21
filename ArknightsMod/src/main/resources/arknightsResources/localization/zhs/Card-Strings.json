@@ -19,19 +19,23 @@
     "NAME": "平A",
     "DESCRIPTION": "造成 !D! 点伤害。"
   },
-  "arknights:Amiya": {
+  "arknights:AmiyaDeploy": {
     "NAME": "阿米娅",
-    "DESCRIPTION": "选择形态范围 ：术士普攻B。",
+    "DESCRIPTION": "选择形态范围 ：阿米娅平A。",
     "EXTENDED_DESCRIPTION": [
-      "选择形态范围 ：术士普攻B、精神爆发。",
-      "选择形态范围 ：术士普攻B、精神爆发、奇美拉。"
+      "选择形态范围 ：阿米娅平A、精神爆发。",
+      "选择形态范围 ：阿米娅平A、精神爆发、奇美拉。"
     ]
   },
-  "arknights:SpiritBurst": {
-    "NAME": "精神爆发",
-    "DESCRIPTION": "随机对敌人造成 !D! 点伤害 !M! 次。 NL 结束你的回合。"
+  "arknights:AmiyaStrike": {
+    "NAME": "阿米娅平A",
+    "DESCRIPTION": "造成 !D! 点 伤害 。"
   },
-  "arknights:Chimera": {
+  "arknights:AmiyaSpiritBurst": {
+    "NAME": "精神爆发",
+    "DESCRIPTION": "随机对敌人造成 !D! 点 伤害 !M! 次。 NL 结束你的回合。"
+  },
+  "arknights:AmiyaChimera": {
     "NAME": "奇美拉",
     "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
   },
@@ -126,7 +130,7 @@
     "NAME": "蓄力打击",
     "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 打出时获得技力 。 技力 !SPT! ：基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
-      " NL （技力 !SPC! / !SPT! 次。）"
+      " NL （技力 !SPC! / !SPT! ）"
     ]
   },
   "arknights:VorpalEdge": {

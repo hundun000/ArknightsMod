@@ -57,7 +57,7 @@ public class ChargingStrike extends ArknightsModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addSpCount(magicNumber);
+        addSpCount(1);
         this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.getSpCount());
         initializeDescription();
         
@@ -81,6 +81,8 @@ public class ChargingStrike extends ArknightsModCard {
         if (isSpCountReachThreshold()) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
             clearSpCount();
+            this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.getSpCount());
+            initializeDescription();
         } else {
             super.calculateCardDamage(arg0);
         }

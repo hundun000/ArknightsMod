@@ -39,6 +39,7 @@ import arknights.util.IDCheckDontTouchPls;
 import arknights.util.TextureLoader;
 import arknights.variables.SpCountVariable;
 import arknights.variables.SpThresholdVariable;
+import arknights.variables.MagicDamageVariable;
 import arknights.variables.SecondMagicNumberVariable;
 import arknights.variables.ThirdMagicNumberVariable;
 
@@ -465,6 +466,7 @@ public class ArknightsMod implements
         //BaseMod.addDynamicVariable(new DefaultCustomVariable());
         BaseMod.addDynamicVariable(new SecondMagicNumberVariable());
         BaseMod.addDynamicVariable(new ThirdMagicNumberVariable());
+        BaseMod.addDynamicVariable(new MagicDamageVariable());
         BaseMod.addDynamicVariable(new SpCountVariable());
         BaseMod.addDynamicVariable(new SpThresholdVariable());
         

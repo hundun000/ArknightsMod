@@ -11,6 +11,7 @@ import arknights.ArknightsMod;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.util.LocalizationUtils;
 import arknights.variables.ExtraVariable;
 
 /**
@@ -45,12 +46,20 @@ public class ChargingShot extends ArknightsModCard {
                 .setPlusExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX, 1)
                 .setPlusExtraMagicNumber(DAMAGE_TIMES_INDEX, 1)
                 );
+        setSpThreshold(this.magicNumber);
 
     }
     
     @Override
+    public void upgrade() {
+       super.upgrade();
+       
+       setSpThreshold(this.magicNumber);
+    }
+    
+    @Override
     public void applyPowers() {
-        if (isNextUseTimeReachThreshold(magicNumber)) {
+        if (isSpCountReachThreshold()) {
             applyPowersWithTempAddBaseDamage(getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
         } else {
             super.applyPowers();
@@ -59,9 +68,11 @@ public class ChargingShot extends ArknightsModCard {
     
     @Override
     public void calculateCardDamage(AbstractMonster arg0) {
-        if (isNextUseTimeReachThreshold(magicNumber)) {
+        if (isSpCountReachThreshold()) {
             calculateCardDamageWithTempAddBaseDamage(arg0, getExtraMagicNumber(DAMAGE_UP_MAGIC_INDEX));
             clearSpCount();
+            this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.getSpCount());
+            initializeDescription();
         } else {
             super.calculateCardDamage(arg0);
         }
@@ -80,12 +91,8 @@ public class ChargingShot extends ArknightsModCard {
     
     @Override
     protected boolean needSetBorderOnGlow() {
-        return isNextUseTimeReachThreshold(magicNumber);
+        return isSpCountReachThreshold();
     }
 
-    private boolean isNextUseTimeReachThreshold(int magicNumber) {
-        // TODO Auto-generated method stub
-        return false;
-    }
     
 }

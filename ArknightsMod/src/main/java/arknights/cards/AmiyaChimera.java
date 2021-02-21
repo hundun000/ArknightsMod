@@ -31,11 +31,11 @@ import arknights.variables.ExtraVariable;
  * @author hundun
  * Created on 2020/11/17
  */
-public class Chimera extends ArknightsModCard {
+public class AmiyaChimera extends ArknightsModCard {
     
-    private static final Logger logger = LogManager.getLogger(Chimera.class.getName());
+    private static final Logger logger = LogManager.getLogger(AmiyaChimera.class.getName());
 
-    public static final String ID = ArknightsMod.makeID(Chimera.class);
+    public static final String ID = ArknightsMod.makeID(AmiyaChimera.class);
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     
@@ -56,7 +56,7 @@ public class Chimera extends ArknightsModCard {
     private static final int MAGIC_DAMAGE = 6;
 
     
-    public Chimera() {
+    public AmiyaChimera() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(MAGIC_DAMAGE)

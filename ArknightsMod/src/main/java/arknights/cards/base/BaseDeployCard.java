@@ -65,7 +65,7 @@ public abstract class BaseDeployCard extends ArknightsModCard {
         updateNameWithPromotionLevel();
         updateCurrentGiveCards();
         
-        int index = Math.min(cardStrings.EXTENDED_DESCRIPTION.length, this.timesUpgraded - 1);
+        int index = Math.min(cardStrings.EXTENDED_DESCRIPTION.length - 1, this.timesUpgraded - 1);
         this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[index];
         initializeDescription();
     } 

@@ -22,6 +22,7 @@ import arknights.cards.ToxicOverload;
 import arknights.cards.VorpalEdge;
 import arknights.cards.W12Bomb;
 import arknights.cards.WaveStrike;
+import arknights.cards.operator.AmiyaDeploy;
 import arknights.cards.operator.FangDeploy;
 import arknights.cards.operator.TexasDeploy;
 import arknights.cards.simple.DurinStrike;
@@ -53,7 +54,7 @@ public class Doctor extends ArknightsPlayer {
 
         logger.info("Begin loading starter Deck Strings");
         String[] operators = new String[]{ FangDeploy.ID, TexasDeploy.ID};
-        String[] starter = new String[]{RegainBlockCard.ID, DurinStrike.ID, F12Strike.ID, NoirCorneDefend.ID, RangersStrike.ID, YatoStrike.ID};
+        String[] starter = new String[]{RegainBlockCard.ID, DurinStrike.ID, F12Strike.ID, NoirCorneDefend.ID, RangersStrike.ID, YatoStrike.ID, AmiyaDeploy.ID};
         String[] summonPackage = new String[]{SummonFreezingSupportDrone.ID, SummonMiningSupportDrone.ID, SummonMeeboo.ID, OrbOverload.ID};
         String[] defensePackage = new String[]{Cooking.ID, ShellDefense.ID};
         String[] vanguardPackage = new String[]{TexasDeploy.ID, FangDeploy.ID};
@@ -61,7 +62,7 @@ public class Doctor extends ArknightsPlayer {
         String[] shotPackage = new String[]{W12Bomb.ID, ChargingShot.ID, PrepareShot.ID};
         
         retVal.addAll(Arrays.asList(guardPackage));
-        retVal.addAll(Arrays.asList(operators));
+        //retVal.addAll(Arrays.asList(operators));
         retVal.addAll(Arrays.asList(starter));
         retVal.addAll(Arrays.asList(defensePackage));
         return retVal;

@@ -5,6 +5,9 @@ import java.util.Arrays;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
 
 import arknights.ArknightsMod;
+import arknights.cards.AmiyaStrike;
+import arknights.cards.AmiyaChimera;
+import arknights.cards.AmiyaSpiritBurst;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
 import arknights.cards.derivations.ChargeAlpha;
@@ -21,7 +24,7 @@ public class AmiyaDeploy extends BaseDeployCard {
 
     public AmiyaDeploy() { 
         super(ID, IMG);
-        initGiveCardsSetting(Arrays.asList(new ChargeAlpha()));
+        initGiveCardsSetting(Arrays.asList(new AmiyaStrike(), new AmiyaSpiritBurst(), new AmiyaChimera()));
         
     }
 }
