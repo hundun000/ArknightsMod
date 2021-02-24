@@ -16,17 +16,21 @@
   "arknights:SlowOneTurnPower": {
     "NAME": "减速",
     "DESCRIPTIONS": [
-      "你在这个回合每打出一张卡牌， ",
-      " 从 #y攻击 受到的伤害增加 #b10% 。回合结束时失去。",
-      " （受到 #b",
-      "% 额外伤害）"
+      "你在这个回合每打出一张卡牌， {} 从 #y攻击 受到的伤害增加 #b10% 。回合结束时失去。",
+      " （受到 #b{}% 额外伤害）"
     ]
   },
   "arknights:DeadExplosivePower": {
     "NAME": "不稳定高能原石",
     "DESCRIPTIONS": [
-      "在死亡时，给予你 #b",
-      " 点伤害 。"
+      "在死亡时，给予你 #b{} 点伤害 。"
+    ]
+  },
+  "arknights:SpellStrength": {
+    "NAME": "法术增幅",
+    "DESCRIPTIONS": [
+      "法术伤害提升为 #b{}% 。",
+      "法术伤害降低为 #b{}% 。"
     ]
   }
 }

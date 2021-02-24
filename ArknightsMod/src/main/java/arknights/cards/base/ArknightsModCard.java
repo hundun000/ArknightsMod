@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
@@ -18,11 +19,16 @@ import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.cards.operator.PromotionState;
 import arknights.characters.ArknightsPlayer;
+import arknights.manager.MoreGameActionManager;
+import arknights.util.LocalizationUtils;
 import arknights.variables.ExtraVariable;
 
 public abstract class ArknightsModCard extends CustomCard {
-	protected final static DamageType MAGICDAMAGETYP_DAMAGE_TYPE = DamageType.HP_LOSS;
-	
+	protected final static DamageType SPELL_DAMAGE_TYPE = DamageType.HP_LOSS;
+	private static final CardStrings PUBLIC_CARDSTRINGS = CardCrawlGame.languagePack.getCardStrings(ArknightsMod.makeID(ArknightsModCard.class));
+    private static final String RAW_SP_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[0];
+    private static final String RAW_REGAIN_BLOCK_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[1];
+    
 	protected final CardStrings cardStrings;
     
     protected UpgradeSetting upgradeSetting = new UpgradeSetting();
@@ -34,20 +40,38 @@ public abstract class ArknightsModCard extends CustomCard {
      * XXXModified: instance当前的XXX和instance的baseXXX不一样。如因为power。
      */
     // extra magic number slots
-    private int[] extraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];        
+    protected int[] extraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];        
     public int[] baseExtraMagicNumbers = new int[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     public boolean[] extraMagicNumberUpgradeds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     public boolean[] extraMagicNumberModifieds = new boolean[ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE];
     
+    public int regainBlock = 0;
+    public int baseRegainBlock = 0;
+    public boolean regainBlockUpgraded = false;
+    public boolean regainBlockModified = false;
+    public int currentRegainBlockAmountLimit = 0;
+    
     private int spCount = -1;
     private int spThreshold = -1;
-    private GainSpType gainSpType = GainSpType.NO_SP;
+    private boolean firstTimeDrawn = true;   
+    
+    
+    protected GainSpType gainSpType;
     
     public enum GainSpType {
         NO_SP,
         ON_DRAWN,
         ON_USE,
         
+    }
+    
+    protected RawDescriptionState rawDescriptionState;
+    
+    public enum RawDescriptionState {
+        BASE,
+        BASE_AND_SP_HINT,
+        BASE_AND_REGAIN_BLOCK_HINT,
+        BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT,
     }
     
     /**
@@ -75,15 +99,16 @@ public abstract class ArknightsModCard extends CustomCard {
                                final CardTarget target) {
 
         super(id, languagePack.getCardStrings(id).NAME, img, cost, languagePack.getCardStrings(id).DESCRIPTION, type, color, rarity, target);
-        super.isCostModified = false;
-        super.isCostModifiedForTurn = false;
-        super.isDamageModified = false;
-        super.isBlockModified = false;
-        super.isMagicNumberModified = false;
+//        super.isCostModified = false;
+//        super.isCostModifiedForTurn = false;
+//        super.isDamageModified = false;
+//        super.isBlockModified = false;
+//        super.isMagicNumberModified = false;
         
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
         this.spCount = 0;
-        
+        this.gainSpType = GainSpType.NO_SP;
+        this.rawDescriptionState = RawDescriptionState.BASE;
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -97,13 +122,22 @@ public abstract class ArknightsModCard extends CustomCard {
             this.baseMagicNumber = basicSetting.getMagicNumber();
             this.magicNumber = this.baseMagicNumber;
         }
-        
+        if (basicSetting.getRegainBlock() != null) {
+            this.baseRegainBlock = basicSetting.getRegainBlock();
+            this.regainBlock = this.baseRegainBlock;
+        }
+        if (basicSetting.getDamageType() != null) {
+            this.damageType = basicSetting.getDamageType();
+            this.damageTypeForTurn = damageType;
+        }
         for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
             if (basicSetting.getExtraMagicNumber(i) != null) {
                 this.baseExtraMagicNumbers[i] = basicSetting.getExtraMagicNumber(i);
                 this.extraMagicNumbers[i] =  this.baseExtraMagicNumbers[i];
             }
         }
+        
+        initializeDescription();
     }
 
 
@@ -119,11 +153,13 @@ public abstract class ArknightsModCard extends CustomCard {
         if (isSpCountReachThreshold()) {
             spCount = spThreshold;
         }
+        initializeDescription();
     }
 
-    
-    public void setSpThreshold(Integer spThreshold) {
+
+    protected void setSpThreshold(Integer spThreshold, GainSpType gainSpType) {
         this.spThreshold = spThreshold;
+        this.gainSpType = gainSpType;
     }
     
     public Integer getSpThreshold() {
@@ -139,6 +175,9 @@ public abstract class ArknightsModCard extends CustomCard {
     }
 
     
+    /**
+     * 检查各个custom变量组，若又需要，则将customValue重设为baseCustomValue
+     */
     @Override
     public void displayUpgrades() {
         super.displayUpgrades();
@@ -149,6 +188,33 @@ public abstract class ArknightsModCard extends CustomCard {
             }
         }
     }
+    
+    
+    protected void handleSpAfterUse() {
+        if (isSpCountReachThreshold()) {
+            clearSpCount();
+        } else {
+            if (this.gainSpType == GainSpType.ON_USE) {
+                addSpCount(1);
+            }
+        }
+    }
+    
+    @Override
+    public void triggerWhenDrawn() {
+        super.triggerWhenDrawn();
+        
+        if (this.gainSpType == GainSpType.ON_DRAWN) {
+            addSpCount(1);
+        }
+        
+        if (firstTimeDrawn) {
+            firstTimeDrawn = false;
+            triggerWhenFirstTimeDrawn();
+        }
+    }
+    
+    public void triggerWhenFirstTimeDrawn() {}
     
     @Override
     public void upgrade() {
@@ -181,13 +247,24 @@ public abstract class ArknightsModCard extends CustomCard {
                 this.cardsToPreview.update();
             }
             
-            initializeDescription();
+            updateRawDescriptionByStateAndInitializeDescription();
         }
     }
     
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+        
+
+        // update currentRegainAmount
+        currentRegainBlockAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
+        
+    }
     
     
-    
+    /**
+     * 拓展super.applyPowers()
+     */
     public void applyPowersWithTempAddBaseDamage(int tempAddDamage) {
         int originBaseDamage = this.baseDamage;
         this.baseDamage += tempAddDamage;
@@ -196,8 +273,14 @@ public abstract class ArknightsModCard extends CustomCard {
         
         this.baseDamage = originBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
+        
+        // update currentRegainAmount
+        currentRegainBlockAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
     }
     
+    /**
+     * 拓展super.calculateCardDamage(arg0)
+     */
     public void calculateCardDamageWithTempAddBaseDamage(AbstractMonster arg0, int tempAddDamage) {
         int originBaseDamage = this.baseDamage;
         this.baseDamage += tempAddDamage;
@@ -208,26 +291,27 @@ public abstract class ArknightsModCard extends CustomCard {
         this.isDamageModified = (this.damage != this.baseDamage);
     }
 
-    /**
-     * 直接用途是修改base；
-     * 因为base被修改，所以Upgraded=true；
-     * 因为base被修改，所以value已过时，重置为base，等待重新计算其他加成。
-     */
+    
     protected void upgradeExtraMagicNumber(int index, int amount) {
-        upgradeExtraMagicNumber(index, amount, true);
+        modifyBaseExtraMagicNumber(index, amount, true);
     }
     
     public int getExtraMagicNumber(int index) {
         return extraMagicNumbers[index];
     }
     
-    protected void resetExtraMagicNumber(int index, int resetValue) {
+    protected void resetBaseExtraMagicNumber(int index, int resetValue) {
         baseExtraMagicNumbers[index] = resetValue; 
         extraMagicNumbers[index] = baseExtraMagicNumbers[index];
         extraMagicNumberUpgradeds[index] = false;
     }
     
-    protected void upgradeExtraMagicNumber(int index, int amount, boolean manualUpgraded) {
+    /**
+     * 直接用途是修改baseValue；
+     * 如果修改源自upgrade，则Upgraded=true；
+     * 因为baseValue被修改，所以value已过时，重置为base，等待重新计算其他加成。
+     */
+    protected void modifyBaseExtraMagicNumber(int index, int amount, boolean manualUpgraded) {
         baseExtraMagicNumbers[index] += amount; 
         extraMagicNumbers[index] = baseExtraMagicNumbers[index];
         extraMagicNumberUpgradeds[index] = manualUpgraded;
@@ -235,13 +319,14 @@ public abstract class ArknightsModCard extends CustomCard {
     
     
     
-    public void clearSpCount() {
+    private void clearSpCount() {
         this.spCount = 0;
         ArknightsMod.logger.info("{} SpCount cleared", this.toIdString());
+        initializeDescription();
     }
     
     protected boolean needSetBorderOnGlow() {
-        return false;
+        return isSpCountReachThreshold();
     }
     
     @Override
@@ -252,8 +337,7 @@ public abstract class ArknightsModCard extends CustomCard {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
     }
-    
-    
+
     
     public String toIdString() {
         return this.cardID + "[" + this.uuid + "]";
@@ -265,27 +349,65 @@ public abstract class ArknightsModCard extends CustomCard {
     @Override
     public AbstractCard makeCopy() {
         ArknightsModCard copy = (ArknightsModCard)super.makeCopy();
-        copy.timesUpgraded = this.timesUpgraded;
-        copy.updateNameWithPromotionLevel();
+        copy.customPostMakeCopy(this);
         return copy;
     }
     
+    protected void customPostMakeCopy(ArknightsModCard from) {}
+    
     protected void updateNameWithPromotionLevel() {
 
-            if (this.upgraded) {
-                if (this.timesUpgraded == 1) {
-                    this.name = cardStrings.NAME + "+";
-                } else {
-                    this.name = cardStrings.NAME + "+" + this.timesUpgraded;
-                }
-                
+        if (this.upgraded) {
+            if (this.timesUpgraded == 1) {
+                this.name = cardStrings.NAME + "+";
             } else {
-                this.name = cardStrings.NAME;
+                this.name = cardStrings.NAME + "+" + this.timesUpgraded;
             }
+            
+        } else {
+            this.name = cardStrings.NAME;
+        }
 
     }
     
     
+    
+    
+    protected void updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState newState) {
+        this.rawDescriptionState = newState;
+        updateRawDescriptionByStateAndInitializeDescription();
+    }
+    
+    /**
+     * 根据rawDescriptionState和upgraded自动计算更新rawDescription，然后initializeDescription()
+     */
+    protected void updateRawDescriptionByStateAndInitializeDescription() {
+        if (this.upgraded && cardStrings.UPGRADE_DESCRIPTION != null) {
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        } else {
+            this.rawDescription = cardStrings.DESCRIPTION;
+        }
+        switch (rawDescriptionState) {
+            case BASE:
+                break;
+            case BASE_AND_SP_HINT:
+                this.rawDescription += RAW_SP_HINT;
+                break;
+            case BASE_AND_REGAIN_BLOCK_HINT:
+                this.rawDescription += LocalizationUtils.formatDescription(RAW_REGAIN_BLOCK_HINT, this.currentRegainBlockAmountLimit);
+                break;
+            case BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT:
+                this.rawDescription += RAW_SP_HINT + LocalizationUtils.formatDescription(RAW_REGAIN_BLOCK_HINT, this.currentRegainBlockAmountLimit);
+                break;
+            default:
+                break;
+        }
+        this.initializeDescription();
+    }
+    public static String getRawSpBarHint(ArknightsModCard card) {
+        return RAW_SP_HINT;
+    }
+
 
 
     

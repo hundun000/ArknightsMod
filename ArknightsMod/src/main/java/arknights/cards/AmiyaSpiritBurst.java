@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
+import arknights.cards.base.ArknightsCardTag;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.CardTemplant;
 import arknights.cards.base.component.BasicSetting;
@@ -24,7 +25,7 @@ import arknights.cards.base.component.UpgradeSetting;
  */
 public class AmiyaSpiritBurst extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(CardTemplant.class); 
+    public static final String ID = ArknightsMod.makeID(AmiyaSpiritBurst.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.SPECIAL; 
@@ -39,10 +40,12 @@ public class AmiyaSpiritBurst extends ArknightsModCard {
         initBaseFields(new BasicSetting()
                 .setDamage(5)
                 .setMagicNumber(6)
+                .setDamageType(SPELL_DAMAGE_TYPE)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(2)
                 );
+        this.tags.add(ArknightsCardTag.SPELL_DAMAGE);
     }
 
     @Override

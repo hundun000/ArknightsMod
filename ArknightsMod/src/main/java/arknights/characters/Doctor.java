@@ -8,13 +8,19 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import arknights.ArknightsMod;
-import arknights.cards.ChargingShot;
-import arknights.cards.ChargingStrike;
+import arknights.cards.AdnachielStrike;
+import arknights.cards.BeagleDefend;
+import arknights.cards.CatapultStrike;
+import arknights.cards.MelanthaStrike;
+import arknights.cards.MidnightStrike;
 import arknights.cards.Cooking;
+import arknights.cards.KroosStrike;
+import arknights.cards.LavaStrike;
 import arknights.cards.OrbOverload;
-import arknights.cards.PrepareShot;
-import arknights.cards.RegainBlockCard;
+import arknights.cards.PlumeStrike;
+import arknights.cards.PopukarStrike;
 import arknights.cards.ShellDefense;
+import arknights.cards.SpotDefend;
 import arknights.cards.SummonFreezingSupportDrone;
 import arknights.cards.SummonMeeboo;
 import arknights.cards.SummonMiningSupportDrone;
@@ -25,10 +31,14 @@ import arknights.cards.WaveStrike;
 import arknights.cards.operator.AmiyaDeploy;
 import arknights.cards.operator.FangDeploy;
 import arknights.cards.operator.TexasDeploy;
+import arknights.cards.simple.Castle3Strike;
 import arknights.cards.simple.DurinStrike;
 import arknights.cards.simple.F12Strike;
+import arknights.cards.simple.Lancet2Strike;
 import arknights.cards.simple.NoirCorneDefend;
 import arknights.cards.simple.RangersStrike;
+import arknights.cards.simple.SimpleRegainBlock;
+import arknights.cards.simple.ThermalExStrike;
 import arknights.cards.simple.YatoStrike;
 import arknights.manager.MoreGameActionManager;
 import arknights.relics.BattleRecords;
@@ -54,17 +64,22 @@ public class Doctor extends ArknightsPlayer {
 
         logger.info("Begin loading starter Deck Strings");
         String[] operators = new String[]{ FangDeploy.ID, TexasDeploy.ID};
-        String[] starter = new String[]{RegainBlockCard.ID, DurinStrike.ID, F12Strike.ID, NoirCorneDefend.ID, RangersStrike.ID, YatoStrike.ID, AmiyaDeploy.ID};
-        String[] summonPackage = new String[]{SummonFreezingSupportDrone.ID, SummonMiningSupportDrone.ID, SummonMeeboo.ID, OrbOverload.ID};
-        String[] defensePackage = new String[]{Cooking.ID, ShellDefense.ID};
-        String[] vanguardPackage = new String[]{TexasDeploy.ID, FangDeploy.ID};
-        String[] guardPackage = new String[]{WaveStrike.ID, ChargingStrike.ID, VorpalEdge.ID};
-        String[] shotPackage = new String[]{W12Bomb.ID, ChargingShot.ID, PrepareShot.ID};
+        String[] starter = new String[]{
+                DurinStrike.ID, F12Strike.ID, NoirCorneDefend.ID, RangersStrike.ID, 
+                YatoStrike.ID, Castle3Strike.ID, Lancet2Strike.ID, ThermalExStrike.ID,
+                };
+        String[] threeStars = new String[]{
+                PlumeStrike.ID, MelanthaStrike.ID, PopukarStrike.ID, 
+                MidnightStrike.ID, AdnachielStrike.ID, KroosStrike.ID, 
+                CatapultStrike.ID, SpotDefend.ID, BeagleDefend.ID, 
+                LavaStrike.ID
+                };
+        String[] testing = new String[]{};
         
-        retVal.addAll(Arrays.asList(guardPackage));
+        retVal.add(AmiyaDeploy.ID);
+        retVal.addAll(Arrays.asList(testing));
         //retVal.addAll(Arrays.asList(operators));
-        retVal.addAll(Arrays.asList(starter));
-        retVal.addAll(Arrays.asList(defensePackage));
+        retVal.addAll(Arrays.asList(threeStars));
         return retVal;
     }
 

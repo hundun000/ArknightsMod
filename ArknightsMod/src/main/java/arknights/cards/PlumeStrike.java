@@ -1,50 +1,55 @@
 package arknights.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.defect.SunderAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.combat.WeightyImpactEffect;
 
 import arknights.ArknightsMod;
-import arknights.cards.base.ArknightsCardTag;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.variables.ExtraVariable;
 
-public class AmiyaStrike extends ArknightsModCard {
+public class PlumeStrike extends ArknightsModCard {
 	
-	public static final String ID = ArknightsMod.makeID(AmiyaStrike.class); 
+	public static final String ID = ArknightsMod.makeID(PlumeStrike.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.SPECIAL; 
+    private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
-    private static final int COST = 2;
+    private static final int COST = 1;
 	
 	
-	public AmiyaStrike() {
+	public PlumeStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(15)
+                .setDamage(6)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(6)
+                .setPlusDamage(3)
                 );
-        this.tags.add(ArknightsCardTag.SPELL_DAMAGE);
     }
 
 	
 
 	@Override
 	public void use(AbstractPlayer player, AbstractMonster monster) {
-		addToBot(new DamageAction(monster, new DamageInfo(player, damage, DamageType.HP_LOSS), AbstractGameAction.AttackEffect.SMASH));
+	    addToBot((AbstractGameAction)new VFXAction(new WeightyImpactEffect(monster.hb.cX, monster.hb.cY)));
+	    addToBot((AbstractGameAction)new WaitAction(0.8F));
+	    addToBot((AbstractGameAction)new SunderAction(monster, new DamageInfo(player, this.damage, this.damageTypeForTurn), 1));
 	}
 	
 

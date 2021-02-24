@@ -2,56 +2,68 @@ package arknights.cards;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.unique.GreedAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
-import arknights.actions.BlastDamageAllEnemiesAction;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.CardTemplant;
+import arknights.cards.base.ArknightsModCard.RawDescriptionState;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.cards.derivations.MetalCrabStrike;
+import arknights.util.LocalizationUtils;
 
 /**
  * @author hundun
- * Created on 2021/02/07
+ * Created on 2021/02/22
  */
-public class CatapultStrike extends ArknightsModCard {
+public class FangStrike extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(CatapultStrike.class); 
+    public static final String ID = ArknightsMod.makeID(FangStrike.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
-    private static final int COST = 0;
+    private static final int COST = 1;
 
     
-    public CatapultStrike() {
+    public FangStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
-                .setMagicNumber(75)
+                .setDamage(3)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusMagicNumber(25)
+                .setPlusDamage(2)
                 );
-        this.isMultiDamage = true;
+        setSpThreshold(4, GainSpType.ON_DRAWN);
     }
+    
+    @Override
+    public void triggerWhenFirstTimeDrawn() {
+        super.triggerWhenFirstTimeDrawn();
+        addSpCount(3);
+        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_SP_HINT);
+    }
+
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new BlastDamageAllEnemiesAction(player, monster, magicNumber/100.0, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn)));
+        addToBot(new MakeTempCardInDiscardAction(new MetalCrabStrike(), 1));
+        if (isSpCountReachThreshold()) {
+            addToBot(new GainEnergyAction(magicNumber));
+        }
+        handleSpAfterUse();
     }
 
 }

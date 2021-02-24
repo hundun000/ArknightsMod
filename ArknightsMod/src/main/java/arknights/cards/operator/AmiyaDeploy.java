@@ -10,7 +10,6 @@ import arknights.cards.AmiyaChimera;
 import arknights.cards.AmiyaSpiritBurst;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.BaseDeployCard;
-import arknights.cards.derivations.ChargeAlpha;
 
 /**
  * @author hundun
@@ -26,5 +25,20 @@ public class AmiyaDeploy extends BaseDeployCard {
         super(ID, IMG);
         initGiveCardsSetting(Arrays.asList(new AmiyaStrike(), new AmiyaSpiritBurst(), new AmiyaChimera()));
         
+    }
+    
+    @Override
+    protected void updateCurrentGiveCards() {
+        super.updateCurrentGiveCards();
+        
+        // 升变后
+        if (this.timesUpgraded >= 4) {
+            currentGiveCards.add(baseGiveCards.get(3).makeCopy());
+            currentGiveCards.add(baseGiveCards.get(4).makeCopy());
+        }
+        if (this.timesUpgraded >= 5) {
+            currentGiveCards.get(3).upgrade();
+            currentGiveCards.get(4).upgrade();
+        }
     }
 }

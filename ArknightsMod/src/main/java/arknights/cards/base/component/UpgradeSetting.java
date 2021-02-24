@@ -14,6 +14,7 @@ public class UpgradeSetting {
     private Integer plusBlock;
     private Integer newCost;
     private Integer plusMagicNumber;
+    private Integer plusRegainBlock;
     boolean upgradeCardToPreview = false;
     private Map<Integer, Integer> plusExtraMagicNumbers = new HashMap<>(ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE);
     
@@ -57,6 +58,14 @@ public class UpgradeSetting {
     }
     public UpgradeSetting setUpgradeCardToPreview(boolean upgradeCardToPreview) {
         this.upgradeCardToPreview = upgradeCardToPreview;
+        return this;
+    }
+    
+    public Integer getPlusRegainBlock() {
+        return plusRegainBlock;
+    }
+    public UpgradeSetting setPlusRegainBlock(Integer plusRegainBlock) {
+        this.plusRegainBlock = plusRegainBlock;
         return this;
     }
     

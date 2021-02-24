@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import arknights.ArknightsMod;
+import arknights.util.LocalizationUtils;
 import arknights.util.TextureLoader;
 
 /**
@@ -44,9 +45,9 @@ public class SlowOneTurnPower extends AbstractPower {
     
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0] + FontHelper.colorString(this.owner.name, "y") + DESCRIPTIONS[1];
+        this.description = LocalizationUtils.formatDescription(DESCRIPTIONS[0], FontHelper.colorString(this.owner.name, "y"));
         if (this.amount != 0) {
-            this.description += DESCRIPTIONS[2] + (this.amount * 10) + DESCRIPTIONS[3];
+            this.description += LocalizationUtils.formatDescription(DESCRIPTIONS[1], (this.amount * 10));
         }
     }
     

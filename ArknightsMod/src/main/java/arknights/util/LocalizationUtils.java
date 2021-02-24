@@ -1,4 +1,12 @@
 package arknights.util;
+
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.UIStrings;
+
+import arknights.ArknightsMod;
+import arknights.actions.DiscoveryTargetCardsAction;
+import arknights.cards.base.ArknightsModCard;
+
 /**
  * @author hundun
  * Created on 2020/11/16
@@ -25,5 +33,10 @@ public class LocalizationUtils {
         System.out.println(formatDescription("造成{}点伤害{}次", 1));
         System.out.println(formatDescription("造成1点伤害2次"));
     }
+    
+    
+    
+    
+    
 
 }

@@ -15,7 +15,7 @@ import arknights.ArknightsMod;
  */
 public class BlastDamageAllEnemiesAction extends DamageAllEnemiesAction {
 
-    public BlastDamageAllEnemiesAction(AbstractCreature source, AbstractCreature mainTarget, double blastDamageRate, int[] amount, DamageType type, AttackEffect effect) {
+    public BlastDamageAllEnemiesAction(AbstractCreature source, AbstractMonster mainTarget, double blastDamageRate, int[] amount, DamageType type, AttackEffect effect) {
         super(source, amount, type, effect);
         
         int mainTargetIndex = -1;
@@ -23,17 +23,22 @@ public class BlastDamageAllEnemiesAction extends DamageAllEnemiesAction {
             AbstractMonster monster = AbstractDungeon.getCurrRoom().monsters.monsters.get(i);
             if (monster == mainTarget) {
                 mainTargetIndex = i;
+                ArknightsMod.logger.debug("monster {} is mainTarget", monster.toString());
                 break;
+            } else {
+                ArknightsMod.logger.debug("monster {} is not mainTarget", monster.toString());
             }
         }
         ArknightsMod.logger.debug("before BlastDamage init, mainTargetIndex = {}, damage[] = {}", mainTargetIndex, damage);
         if (mainTargetIndex != -1) {
             for (int i = 0; i < this.damage.length; i++) {
-                int blastDamage = (int) Math.ceil(this.damage[i] * blastDamageRate);
-                this.damage[i] = blastDamage;
+                if (i != mainTargetIndex) {
+                    int blastDamage = (int) Math.ceil(this.damage[i] * blastDamageRate);
+                    this.damage[i] = blastDamage;
+                }
             }
         }
-        ArknightsMod.logger.debug("after BlastDamage init, damage[] = {}", damage);
+        ArknightsMod.logger.info("after BlastDamage init, damage[] = {}", damage);
     }
 
 }

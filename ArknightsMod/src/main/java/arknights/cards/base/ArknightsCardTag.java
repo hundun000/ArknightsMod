@@ -10,4 +10,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 public class ArknightsCardTag {
     @SpireEnum
     public static AbstractCard.CardTags DEPLOY;
+    
+    @SpireEnum
+    public static AbstractCard.CardTags SPELL_DAMAGE;
 }

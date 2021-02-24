@@ -46,26 +46,19 @@ public class AmiyaChimera extends ArknightsModCard {
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.ATTACK;
 
-    private static final int COST = 0;
-    
-    private static final int STACK = 5;
-    private static final int UPGRADE_PLUS_STACK = 3;
-    private static final int ATTACK_TIMES = 4;
-    private static final int UPGRADE_PLUS_ATTACK_TIMES = 2;
-    
-    private static final int MAGIC_DAMAGE = 6;
+    private static final int COST = 3;
 
     
     public AmiyaChimera() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(MAGIC_DAMAGE)
-                .setMagicNumber(STACK)
-                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, ATTACK_TIMES)
+                .setDamage(6)
+                .setMagicNumber(5)
+                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 4)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusMagicNumber(UPGRADE_PLUS_STACK)
-                .setPlusExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, UPGRADE_PLUS_ATTACK_TIMES)
+                .setPlusMagicNumber(1)
+                .setPlusExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 3)
                 );
         this.exhaust = true;
     }

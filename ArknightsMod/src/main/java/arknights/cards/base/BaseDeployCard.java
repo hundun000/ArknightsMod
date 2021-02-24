@@ -27,11 +27,11 @@ import arknights.powers.TurnCountDownGainCardPower;
  * Created on 2020/11/16
  */
 public abstract class BaseDeployCard extends ArknightsModCard {
-    private List<AbstractCard> baseGiveCards;
-    private List<AbstractCard> currentGiveCards;
+    protected List<AbstractCard> baseGiveCards;
+    protected List<AbstractCard> currentGiveCards;
 
     
-    private int timesUpgradeLimit;
+    protected int timesUpgradeLimit;
     
     public BaseDeployCard(String id, String img) {
         super(id, img, 0, CardType.SKILL, ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
@@ -40,12 +40,17 @@ public abstract class BaseDeployCard extends ArknightsModCard {
         
         this.currentGiveCards = new ArrayList<>();
         this.timesUpgradeLimit = 0;
-        
+        this.baseGiveCards = new ArrayList<>();
         
     }
     
     protected void initGiveCardsSetting(List<AbstractCard> baseGiveCards) {
-        this.baseGiveCards = baseGiveCards;
+        this.baseGiveCards.clear();;
+        appendGiveCardsSetting(baseGiveCards);
+    }
+    
+    protected void appendGiveCardsSetting(List<AbstractCard> baseGiveCards) {
+        this.baseGiveCards.addAll(baseGiveCards);
         this.timesUpgradeLimit = giveCardsSizeToTimesUpgradeLimit(baseGiveCards.size());
         updateCurrentGiveCards();
     }
@@ -61,14 +66,30 @@ public abstract class BaseDeployCard extends ArknightsModCard {
         this.timesUpgraded++;
         ArknightsMod.logger.info("{} upgrade to timesUpgraded = {}", this.toIdString(), this.timesUpgraded);
         this.upgraded = true;
-
+      
+        updateForTimesUpgradedChange();
+    } 
+    
+    /**
+     * 执行所有TimesUpgraded变动引起的更新
+     */
+    protected void updateForTimesUpgradedChange() {
         updateNameWithPromotionLevel();
         updateCurrentGiveCards();
         
         int index = Math.min(cardStrings.EXTENDED_DESCRIPTION.length - 1, this.timesUpgraded - 1);
-        this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[index];
+        if (index < 0) {
+            this.rawDescription = cardStrings.DESCRIPTION;
+        } else {
+            this.rawDescription = cardStrings.EXTENDED_DESCRIPTION[index];
+        }
         initializeDescription();
-    } 
+    }
+    
+    @Override
+    protected void customPostMakeCopy(ArknightsModCard from) {
+        updateForTimesUpgradedChange();
+    }
     
     protected void updateCurrentGiveCards() {
 
@@ -76,14 +97,16 @@ public abstract class BaseDeployCard extends ArknightsModCard {
         currentGiveCards.add(baseGiveCards.get(0).makeCopy());
         if (this.timesUpgraded >= 1 && currentGiveCards.get(0).canUpgrade()) {
             currentGiveCards.get(0).upgrade();
-        }
-        if (this.timesUpgraded >= 2) {
             currentGiveCards.add(baseGiveCards.get(1).makeCopy());
         }
-        if (this.timesUpgraded >= 3) {
+        if (this.timesUpgraded >= 2) {
             currentGiveCards.get(1).upgrade();
+            currentGiveCards.add(baseGiveCards.get(2).makeCopy());
         }
-
+        if (this.timesUpgraded >= 3) {
+            currentGiveCards.get(2).upgrade();
+        }
+        
     }
 
 

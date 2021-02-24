@@ -63,10 +63,9 @@ public class WaveStrike extends ArknightsModCard {
     }
     
     @Override
-    public AbstractCard makeCopy() {
-        WaveStrike copy = new WaveStrike();
-        copy.useTimes = this.useTimes;
-        return copy;
+    protected void customPostMakeCopy(ArknightsModCard from) {
+        WaveStrike fromWaveStrike = (WaveStrike)from;
+        this.useTimes = fromWaveStrike.useTimes;
     }
     
 //    @Override

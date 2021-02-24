@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardRarity;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardTarget;
 import com.megacrit.cardcrawl.cards.AbstractCard.CardType;
@@ -16,25 +15,41 @@ import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.CardTemplant;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.manager.MoreGameActionManager;
+import arknights.util.LocalizationUtils;
 
 /**
  * @author hundun
  * Created on 2021/02/06
  */
-public abstract class SimpleStrike extends ArknightsModCard {
+public abstract class SimpleRegainBlock extends ArknightsModCard {
     
-    protected static final CardTarget TARGET = CardTarget.ENEMY;  
-    protected static final CardType TYPE = CardType.ATTACK;       
+    private static final CardTarget TARGET = CardTarget.SELF;  
+    private static final CardType TYPE = CardType.SKILL;       
+
     
-    
-    public SimpleStrike(String ID, String IMG, CardRarity RARITY, int COST) {
+    public SimpleRegainBlock(String ID, String IMG, CardRarity RARITY, int COST) {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
-        addToBot(new GainBlockAction(player, player, block));
+        int finalRegainAmount = Math.min(currentRegainBlockAmountLimit, this.regainBlock);
+        MoreGameActionManager.countRegainBlock(finalRegainAmount);
+        addToBot(new GainBlockAction(player, player, finalRegainAmount));
+    }
+    
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+        
+        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_REGAIN_BLOCK_HINT);
+    }
+   
+    public void onMoveToDiscard() {
+        super.onMoveToDiscard();
+        
+        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE);
     }
 
 }

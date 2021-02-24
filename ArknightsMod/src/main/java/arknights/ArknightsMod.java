@@ -40,6 +40,7 @@ import arknights.util.TextureLoader;
 import arknights.variables.SpCountVariable;
 import arknights.variables.SpThresholdVariable;
 import arknights.variables.MagicDamageVariable;
+import arknights.variables.RegainBlockVariable;
 import arknights.variables.SecondMagicNumberVariable;
 import arknights.variables.ThirdMagicNumberVariable;
 
@@ -469,6 +470,7 @@ public class ArknightsMod implements
         BaseMod.addDynamicVariable(new MagicDamageVariable());
         BaseMod.addDynamicVariable(new SpCountVariable());
         BaseMod.addDynamicVariable(new SpThresholdVariable());
+        BaseMod.addDynamicVariable(new RegainBlockVariable());
         
         logger.info("Adding cards");
         // Add the cards

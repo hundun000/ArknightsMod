@@ -3,6 +3,8 @@ package arknights.cards.base.component;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
+
 import arknights.variables.ExtraVariable;
 
 /**
@@ -12,7 +14,9 @@ import arknights.variables.ExtraVariable;
 public class BasicSetting {
     private Integer damage;
     private Integer block;
+    private Integer regainBlock;
     private Integer magicNumber;
+    private DamageType damageType;
     private Map<Integer, Integer> extraMagicNumbers = new HashMap<>(ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE);
     public Integer getDamage() {
         return damage;
@@ -31,6 +35,12 @@ public class BasicSetting {
     public Integer getMagicNumber() {
         return magicNumber;
     }
+    public Integer getRegainBlock() {
+        return regainBlock;
+    }
+    public DamageType getDamageType() {
+        return damageType;
+    }
     public BasicSetting setMagicNumber(Integer magicNumber) {
         this.magicNumber = magicNumber;
         return this;
@@ -40,6 +50,14 @@ public class BasicSetting {
     }
     public BasicSetting setExtraMagicNumber(int index, Integer value) {
         this.extraMagicNumbers.put(index, value);
+        return this;
+    }
+    public BasicSetting setRegainBlock(Integer regainBlock) {
+        this.regainBlock = regainBlock;
+        return this;
+    }
+    public BasicSetting setDamageType(DamageType damageType) {
+        this.damageType = damageType;
         return this;
     }
 }

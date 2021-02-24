@@ -37,18 +37,18 @@ public class FrontlineRecord extends ArknightsModCard {
                 );
         this.exhaust = true;
     }
+
     
     @Override
-    public void triggerOnGlowCheck() {
-        this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+    protected boolean needSetBorderOnGlow() {
         if (AbstractDungeon.player.hasRelic(BattleRecords.ID)) {
             for (AbstractMonster m : (AbstractDungeon.getCurrRoom()).monsters.monsters) {
                 if (!m.isDeadOrEscaped() && m.getIntentBaseDmg() >= 0) {
-                    this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
-                    break;
+                    return true;
                 } 
             }
         }
+        return false;
     }
 
     @Override
