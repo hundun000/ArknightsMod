@@ -59,9 +59,8 @@ public class FangStrike extends ArknightsModCard {
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn)));
-        addToBot(new MakeTempCardInDiscardAction(new MetalCrabStrike(), 1));
         if (isSpCountReachThreshold()) {
-            addToBot(new GainEnergyAction(magicNumber));
+            addToBot(new GainEnergyAction(1));
         }
         handleSpAfterUse();
     }

@@ -4,6 +4,7 @@ import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -20,6 +21,7 @@ import arknights.cards.base.component.UpgradeSetting;
 import arknights.cards.operator.PromotionState;
 import arknights.characters.ArknightsPlayer;
 import arknights.manager.MoreGameActionManager;
+import arknights.powers.IModifyRegainBlockPower;
 import arknights.util.LocalizationUtils;
 import arknights.variables.ExtraVariable;
 
@@ -28,6 +30,8 @@ public abstract class ArknightsModCard extends CustomCard {
 	private static final CardStrings PUBLIC_CARDSTRINGS = CardCrawlGame.languagePack.getCardStrings(ArknightsMod.makeID(ArknightsModCard.class));
     private static final String RAW_SP_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[0];
     private static final String RAW_REGAIN_BLOCK_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[1];
+    private static final String RAW_SP_HINT_PLACEHOLDER = "{SP_HINT}";
+    private static final String RAW_REGAIN_BLOCK_HINT_PLACEHOLDER = "{RB_HINT}";
     
 	protected final CardStrings cardStrings;
     
@@ -68,10 +72,27 @@ public abstract class ArknightsModCard extends CustomCard {
     protected RawDescriptionState rawDescriptionState;
     
     public enum RawDescriptionState {
-        BASE,
-        BASE_AND_SP_HINT,
-        BASE_AND_REGAIN_BLOCK_HINT,
-        BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT,
+        BASE(false, false, false),
+        BASE_AND_SP_HINT(true, false, false),
+        BASE_AND_REGAIN_BLOCK_HINT(false, true, false),
+        BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT(true, true, false),
+        BASE_AND_SP_HINT_AND_EX0(true, false, true),
+        ;
+        
+        public final boolean hasSpHint;
+        public final boolean hasRegainBlockHint;
+        public final boolean hasEx0;
+        
+        private RawDescriptionState(
+                boolean hasSpHint, 
+                boolean hasRegainBlockHint, 
+                boolean hasEx0) {
+            this.hasSpHint = hasSpHint;
+            this.hasRegainBlockHint = hasRegainBlockHint;
+            this.hasEx0 = hasEx0;
+        } 
+        
+        
     }
     
     /**
@@ -108,7 +129,7 @@ public abstract class ArknightsModCard extends CustomCard {
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
         this.spCount = 0;
         this.gainSpType = GainSpType.NO_SP;
-        this.rawDescriptionState = RawDescriptionState.BASE;
+        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE);
     }
     
     protected void initBaseFields(BasicSetting basicSetting) {
@@ -253,19 +274,51 @@ public abstract class ArknightsModCard extends CustomCard {
     
     @Override
     public void applyPowers() {
-        super.applyPowers();
         
-
+    }
+    
+    /**
+     * 拓展super.applyPowers()
+     */
+    public void applyPowersToBlock(int tempAddBlock) {
+        int originBaseBlock = this.baseBlock;
+        this.baseBlock += tempAddBlock;
+        
+        super.applyPowersToBlock();
+        
+        this.baseBlock = originBaseBlock;
+        this.isBlockModified = (this.block != this.baseBlock);
+        
         // update currentRegainAmount
         currentRegainBlockAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
+        applyPowersToRegainBlock();
         
+    }
+    
+    protected void applyPowersToRegainBlock() {
+        this.regainBlockModified = false;
+        float tmp = this.baseRegainBlock;
+        for (AbstractPower p : AbstractDungeon.player.powers) {
+            if (p instanceof IModifyRegainBlockPower) {
+                tmp = ((IModifyRegainBlockPower)p).modifyRegainBlock(tmp, this);
+            }
+        }
+  
+        if (this.baseRegainBlock != MathUtils.floor(tmp)) {
+            this.regainBlockModified = true;
+        }
+        
+        if (tmp < 0.0F) {
+            tmp = 0.0F;
+        }
+        this.regainBlock = MathUtils.floor(tmp);
     }
     
     
     /**
      * 拓展super.applyPowers()
      */
-    public void applyPowersWithTempAddBaseDamage(int tempAddDamage) {
+    public void applyPowers(int tempAddDamage) {
         int originBaseDamage = this.baseDamage;
         this.baseDamage += tempAddDamage;
         
@@ -274,14 +327,12 @@ public abstract class ArknightsModCard extends CustomCard {
         this.baseDamage = originBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
         
-        // update currentRegainAmount
-        currentRegainBlockAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
     }
     
     /**
      * 拓展super.calculateCardDamage(arg0)
      */
-    public void calculateCardDamageWithTempAddBaseDamage(AbstractMonster arg0, int tempAddDamage) {
+    public void calculateCardDamage(AbstractMonster arg0, int tempAddDamage) {
         int originBaseDamage = this.baseDamage;
         this.baseDamage += tempAddDamage;
         
@@ -382,30 +433,29 @@ public abstract class ArknightsModCard extends CustomCard {
      * 根据rawDescriptionState和upgraded自动计算更新rawDescription，然后initializeDescription()
      */
     protected void updateRawDescriptionByStateAndInitializeDescription() {
+        String newRawDescription;
         if (this.upgraded && cardStrings.UPGRADE_DESCRIPTION != null) {
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            newRawDescription = cardStrings.UPGRADE_DESCRIPTION;
         } else {
-            this.rawDescription = cardStrings.DESCRIPTION;
+            newRawDescription = cardStrings.DESCRIPTION;
         }
-        switch (rawDescriptionState) {
-            case BASE:
-                break;
-            case BASE_AND_SP_HINT:
-                this.rawDescription += RAW_SP_HINT;
-                break;
-            case BASE_AND_REGAIN_BLOCK_HINT:
-                this.rawDescription += LocalizationUtils.formatDescription(RAW_REGAIN_BLOCK_HINT, this.currentRegainBlockAmountLimit);
-                break;
-            case BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT:
-                this.rawDescription += RAW_SP_HINT + LocalizationUtils.formatDescription(RAW_REGAIN_BLOCK_HINT, this.currentRegainBlockAmountLimit);
-                break;
-            default:
-                break;
+        
+        if (rawDescriptionState.hasEx0) {
+            newRawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         }
+        if (rawDescriptionState.hasSpHint) {
+            newRawDescription = newRawDescription.replace(RAW_SP_HINT_PLACEHOLDER, RAW_SP_HINT);
+        } else {
+            newRawDescription = newRawDescription.replace(RAW_SP_HINT_PLACEHOLDER, "");
+        }
+        if (rawDescriptionState.hasRegainBlockHint) {
+            newRawDescription = newRawDescription.replace(RAW_REGAIN_BLOCK_HINT_PLACEHOLDER, RAW_SP_HINT);
+        } else {
+            newRawDescription = newRawDescription.replace(RAW_REGAIN_BLOCK_HINT_PLACEHOLDER, LocalizationUtils.formatDescription(RAW_REGAIN_BLOCK_HINT, this.currentRegainBlockAmountLimit));
+        }
+        
+        this.rawDescription = newRawDescription;
         this.initializeDescription();
-    }
-    public static String getRawSpBarHint(ArknightsModCard card) {
-        return RAW_SP_HINT;
     }
 
 

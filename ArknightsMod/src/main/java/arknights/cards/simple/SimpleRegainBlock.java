@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import arknights.ArknightsMod;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.CardTemplant;
+import arknights.cards.base.ArknightsModCard.RawDescriptionState;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.manager.MoreGameActionManager;
@@ -42,8 +43,12 @@ public abstract class SimpleRegainBlock extends ArknightsModCard {
     @Override
     public void applyPowers() {
         super.applyPowers();
-        
+        StringBuilder before = new StringBuilder();
+        this.description.forEach(item -> before.append(item.text).append("\n"));
         updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_REGAIN_BLOCK_HINT);
+        StringBuilder after = new StringBuilder();
+        this.description.forEach(item -> after.append(item.text).append("\n"));
+        ArknightsMod.logger.info("{} description from 【{}】 to 【{}】", this.toIdString(), before.toString(), after.toString());
     }
    
     public void onMoveToDiscard() {

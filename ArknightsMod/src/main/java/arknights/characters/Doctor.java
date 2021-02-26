@@ -77,7 +77,7 @@ public class Doctor extends ArknightsPlayer {
         String[] testing = new String[]{};
         
         retVal.add(AmiyaDeploy.ID);
-        retVal.addAll(Arrays.asList(testing));
+        retVal.addAll(Arrays.asList(starter));
         //retVal.addAll(Arrays.asList(operators));
         retVal.addAll(Arrays.asList(threeStars));
         return retVal;

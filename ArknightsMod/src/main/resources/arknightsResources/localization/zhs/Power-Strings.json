@@ -26,11 +26,23 @@
       "在死亡时，给予你 #b{} 点伤害 。"
     ]
   },
-  "arknights:SpellStrength": {
+  "arknights:SpellStrengthPower": {
     "NAME": "法术增幅",
     "DESCRIPTIONS": [
       "法术伤害提升为 #b{}% 。",
       "法术伤害降低为 #b{}% 。"
+    ]
+  },
+  "arknights:CommonRarityCardStrengthPower": {
+    "NAME": "平凡者之力",
+    "DESCRIPTIONS": [
+      "普通稀有度的卡牌的伤害，格挡，格挡恢复提升 #b{}"
+    ]
+  },
+  "arknights:SmashBarrierPower": {
+    "NAME": "反击屏障",
+    "DESCRIPTIONS": [
+      "每受到一次 #y攻击 ，造成 #b{} 点反伤。"
     ]
   }
 }

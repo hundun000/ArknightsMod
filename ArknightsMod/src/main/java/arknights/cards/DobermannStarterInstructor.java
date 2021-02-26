@@ -10,14 +10,15 @@ import arknights.ArknightsMod;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.powers.CommonRarityCardStrengthPower;
 
 /**
  * @author hundun
  * Created on 2020/11/17
  */
-public class TalentLavender extends ArknightsModCard {
+public class DobermannStarterInstructor extends ArknightsModCard {
 
-    public static final String ID = ArknightsMod.makeID(TalentLavender.class);
+    public static final String ID = ArknightsMod.makeID(DobermannStarterInstructor.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.UNCOMMON; 
@@ -26,7 +27,7 @@ public class TalentLavender extends ArknightsModCard {
     
     private static final int COST = 1;  
 
-    public TalentLavender() {
+    public DobermannStarterInstructor() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setMagicNumber(3)
@@ -39,7 +40,7 @@ public class TalentLavender extends ArknightsModCard {
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(player, player,
-                    new PlatedArmorPower(player, this.magicNumber)));
+                    new CommonRarityCardStrengthPower(player, this.magicNumber)));
     }
 
 }

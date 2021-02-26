@@ -65,7 +65,7 @@ public class AdnachielStrike extends ArknightsModCard {
     @Override
     public void applyPowers() {
         if (isSpCountReachThreshold()) {
-            applyPowersWithTempAddBaseDamage(magicNumber);
+            applyPowers(magicNumber);
         } else {
             super.applyPowers();
         }
@@ -74,9 +74,9 @@ public class AdnachielStrike extends ArknightsModCard {
     @Override
     public void calculateCardDamage(AbstractMonster arg0) {
         if (isSpCountReachThreshold()) {
-            calculateCardDamageWithTempAddBaseDamage(arg0, magicNumber);
+            calculateCardDamage(arg0, magicNumber);
         } else {
-            super.applyPowers();
+            super.calculateCardDamage(arg0);
         }
     }
 

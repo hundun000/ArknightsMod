@@ -20,10 +20,12 @@ public class YatoStrike extends SimpleStrike {
     public YatoStrike() {
         super(ID, IMG, CardRarity.BASIC, 1);
         initBaseFields(new BasicSetting()
-                .setDamage(6)
+                .setDamage(4)
+                .setBlock(2)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
+                .setPlusDamage(2)
+                .setPlusBlock(2)
                 );
     }
 

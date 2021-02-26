@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
+import arknights.actions.RangedGuardTwiceDamageAction;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
@@ -48,12 +49,9 @@ public class MidnightStrike extends ArknightsModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        
-        
+
         addToBot(new GainBlockAction(player, player, block));
-        int rangedWeakerDamage = MathUtils.floor(damage * 0.8F);
-        addToBot(new DamageAction(monster, new DamageInfo(player, rangedWeakerDamage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
+        addToBot(new RangedGuardTwiceDamageAction(monster, player, damage, damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
     }
 
 

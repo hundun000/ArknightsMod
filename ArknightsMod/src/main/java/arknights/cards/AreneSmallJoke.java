@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import arknights.ArknightsMod;
+import arknights.actions.RangedGuardTwiceDamageAction;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.ArknightsModCard.RawDescriptionState;
 import arknights.cards.base.component.BasicSetting;
@@ -20,9 +21,9 @@ import arknights.variables.ExtraVariable;
  * @author hundun
  * Created on 2020/12/02
  */
-public class MelanthaStrike extends ArknightsModCard {
+public class AreneSmallJoke extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(MelanthaStrike.class); 
+    public static final String ID = ArknightsMod.makeID(AreneSmallJoke.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
@@ -31,12 +32,11 @@ public class MelanthaStrike extends ArknightsModCard {
 
     private static final int COST = 1;
     
-    public MelanthaStrike() {
+    public AreneSmallJoke() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(8)
                 .setBlock(3)
-                .setMagicNumber(3)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
@@ -56,31 +56,12 @@ public class MelanthaStrike extends ArknightsModCard {
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        
-        
         addToBot(new GainBlockAction(player, player, block));
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
-        
+        addToBot(new RangedGuardTwiceDamageAction(monster, player, damage, damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
+        if (isSpCountReachThreshold()) {
+            addToBot(new RangedGuardTwiceDamageAction(monster, player, damage, damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
+        }
         handleSpAfterUse();
-    }
-
-    
-    @Override
-    public void applyPowers() {
-        if (isSpCountReachThreshold()) {
-            applyPowers(magicNumber);
-        } else {
-            super.applyPowers();
-        }
-    }
-
-    @Override
-    public void calculateCardDamage(AbstractMonster arg0) {
-        if (isSpCountReachThreshold()) {
-            calculateCardDamage(arg0, magicNumber);
-        } else {
-            super.calculateCardDamage(arg0);
-        }
     }
 
 

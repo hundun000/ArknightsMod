@@ -13,7 +13,7 @@ public class RegainBlockVariable extends DynamicVariable {
     
     @Override
     public String key() {
-        return "RB";
+        return "customScope:my_B";
     }
 
     @Override

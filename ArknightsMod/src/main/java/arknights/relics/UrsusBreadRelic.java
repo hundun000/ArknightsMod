@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 import arknights.ArknightsMod;
-import arknights.powers.SpellStrength;
+import arknights.powers.SpellStrengthPower;
 import arknights.util.TextureLoader;
 import basemod.abstracts.CustomRelic;
 
@@ -43,7 +43,7 @@ public class UrsusBreadRelic extends CustomRelic {
         addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         addToBot(new DrawCardAction(AbstractDungeon.player, 1));
         addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, 
-                new SpellStrength(AbstractDungeon.player, AbstractDungeon.player, 1)));
+                new SpellStrengthPower(AbstractDungeon.player, AbstractDungeon.player, 3)));
         addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, 
                 new StrengthPower(AbstractDungeon.player, -1)));
     }
