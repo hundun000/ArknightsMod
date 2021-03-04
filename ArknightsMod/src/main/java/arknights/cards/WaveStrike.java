@@ -22,7 +22,7 @@ import arknights.variables.ExtraVariable;
  */
 public class WaveStrike extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(WaveStrike.class.getSimpleName()); 
+    public static final String ID = ArknightsMod.makeID(WaveStrike.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
@@ -30,9 +30,8 @@ public class WaveStrike extends ArknightsModCard {
     private static final CardType TYPE = CardType.ATTACK;       
 
     private static final int COST = 1;
-    private static final int DAMAGE_DOWN_MAGIC_INDEX = ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX;
+
     
-    private int useTimes;
     
     public WaveStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
@@ -40,14 +39,20 @@ public class WaveStrike extends ArknightsModCard {
                 .setDamage(8)
                 .setBlock(3)
                 .setMagicNumber(2)
-                .setExtraMagicNumber(DAMAGE_DOWN_MAGIC_INDEX, 2)
+                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 2)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(4)
                 .setPlusBlock(2)
                 .setPlusMagicNumber(1)
                 );
-        this.useTimes = 0;
+    }
+    
+    @Override
+    public void triggerWhenFirstTimeDrawn() {
+        super.triggerWhenFirstTimeDrawn();
+        
+        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_USE_TIMES_HINT);
     }
 
     @Override
@@ -56,25 +61,10 @@ public class WaveStrike extends ArknightsModCard {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
         addToBot(new GainBlockAction(player, player, block));
         if (useTimes == magicNumber) {
-            addToBot(new ModifyDamageAction(this.uuid, - getExtraMagicNumber(DAMAGE_DOWN_MAGIC_INDEX)));
+            addToBot(new ModifyDamageAction(this.uuid, - getExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX)));
+            initializeDescription();
         }
-        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.useTimes);
-        initializeDescription();
     }
-    
-    @Override
-    protected void customPostMakeCopy(ArknightsModCard from) {
-        WaveStrike fromWaveStrike = (WaveStrike)from;
-        this.useTimes = fromWaveStrike.useTimes;
-    }
-    
-//    @Override
-//    public void applyPowers() {
-//        super.applyPowers();
-//        this.rawDescription = cardStrings.DESCRIPTION + LocalizationUtils.formatDescription(cardStrings.EXTENDED_DESCRIPTION[0], this.useTimes);
-//        initializeDescription();
-//    }
-    
-    
+
 
 }

@@ -29,7 +29,6 @@ public class DiscoveryTargetCardsAction extends AbstractGameAction {
     private AbstractPlayer player;
     private List<AbstractCard> targetCards;
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ArknightsMod.makeID(DiscoveryTargetCardsAction.class));
-    List<AbstractCard> callbackList;
     
     
     public DiscoveryTargetCardsAction(AbstractPlayer player, List<AbstractCard> targetCards, int gainCardAmout) {

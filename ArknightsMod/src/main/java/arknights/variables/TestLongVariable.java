@@ -6,14 +6,14 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import arknights.cards.base.ArknightsModCard;
 
-public class RegainBlockVariable extends DynamicVariable {
+public class TestLongVariable extends DynamicVariable {
 
-    public RegainBlockVariable() {
+    public TestLongVariable() {
     }
     
     @Override
     public String key() {
-        return "RB";
+        return "A_Long_Dynamic_Variable_Key";
     }
 
     @Override

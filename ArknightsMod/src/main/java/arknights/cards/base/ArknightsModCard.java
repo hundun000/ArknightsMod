@@ -4,9 +4,14 @@ import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
+import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -27,10 +32,14 @@ import arknights.variables.ExtraVariable;
 
 public abstract class ArknightsModCard extends CustomCard {
 	protected final static DamageType SPELL_DAMAGE_TYPE = DamageType.HP_LOSS;
+	
 	private static final CardStrings PUBLIC_CARDSTRINGS = CardCrawlGame.languagePack.getCardStrings(ArknightsMod.makeID(ArknightsModCard.class));
     private static final String RAW_SP_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[0];
     private static final String RAW_REGAIN_BLOCK_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[1];
-    private static final String RAW_SP_HINT_PLACEHOLDER = "{SP_HINT}";
+    private static final String RAW_USE_TIMES_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[2];
+    
+    
+    private static final String RAW_SP_HINT_PLACEHOLDER = "{SPC_HINT}";
     private static final String RAW_REGAIN_BLOCK_HINT_PLACEHOLDER = "{RB_HINT}";
     
 	protected final CardStrings cardStrings;
@@ -59,6 +68,8 @@ public abstract class ArknightsModCard extends CustomCard {
     private int spThreshold = -1;
     private boolean firstTimeDrawn = true;   
     
+    protected int useTimes;
+    
     
     protected GainSpType gainSpType;
     
@@ -72,24 +83,29 @@ public abstract class ArknightsModCard extends CustomCard {
     protected RawDescriptionState rawDescriptionState;
     
     public enum RawDescriptionState {
-        BASE(false, false, false),
-        BASE_AND_SP_HINT(true, false, false),
-        BASE_AND_REGAIN_BLOCK_HINT(false, true, false),
-        BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT(true, true, false),
-        BASE_AND_SP_HINT_AND_EX0(true, false, true),
+        BASE(false, false, false, false),
+        BASE_AND_SP_HINT(true, false, false, false),
+        BASE_AND_USE_TIMES_HINT(true, false, false, true),
+        BASE_AND_REGAIN_BLOCK_HINT(false, true, false, false),
+        BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT(true, true, false, false),
+        BASE_AND_SP_HINT_AND_EX0(true, false, true, false),
         ;
         
         public final boolean hasSpHint;
         public final boolean hasRegainBlockHint;
         public final boolean hasEx0;
+        public final boolean hasUseTimes;
         
         private RawDescriptionState(
                 boolean hasSpHint, 
                 boolean hasRegainBlockHint, 
-                boolean hasEx0) {
+                boolean hasEx0,
+                boolean hasUseTimes
+                ) {
             this.hasSpHint = hasSpHint;
             this.hasRegainBlockHint = hasRegainBlockHint;
             this.hasEx0 = hasEx0;
+            this.hasUseTimes = hasUseTimes;
         } 
         
         
@@ -128,6 +144,7 @@ public abstract class ArknightsModCard extends CustomCard {
         
         this.cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
         this.spCount = 0;
+        this.useTimes = 0;
         this.gainSpType = GainSpType.NO_SP;
         updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE);
     }
@@ -178,9 +195,10 @@ public abstract class ArknightsModCard extends CustomCard {
     }
 
 
-    protected void setSpThreshold(Integer spThreshold, GainSpType gainSpType) {
+    protected void initSpThreshold(Integer spThreshold, GainSpType gainSpType) {
         this.spThreshold = spThreshold;
         this.gainSpType = gainSpType;
+        initializeDescription();
     }
     
     public Integer getSpThreshold() {
@@ -271,11 +289,7 @@ public abstract class ArknightsModCard extends CustomCard {
             updateRawDescriptionByStateAndInitializeDescription();
         }
     }
-    
-    @Override
-    public void applyPowers() {
-        
-    }
+
     
     /**
      * 拓展super.applyPowers()
@@ -319,6 +333,8 @@ public abstract class ArknightsModCard extends CustomCard {
      * 拓展super.applyPowers()
      */
     public void applyPowers(int tempAddDamage) {
+        
+        
         int originBaseDamage = this.baseDamage;
         this.baseDamage += tempAddDamage;
         
@@ -327,6 +343,7 @@ public abstract class ArknightsModCard extends CustomCard {
         this.baseDamage = originBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
         
+        ArknightsMod.logger.info("{} applyPowers done. this.damage = {}, this.block = {}, this.regainBlock = {}", this.toIdString(), this.damage, this.block, this.regainBlock);
     }
     
     /**
@@ -340,6 +357,8 @@ public abstract class ArknightsModCard extends CustomCard {
         
         this.baseDamage = originBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
+        
+        ArknightsMod.logger.info("{} calculateCardDamage to {} done. this.damage = {}, this.block = {}, this.regainBlock = {}", this.toIdString(), this.damage, this.block, this.regainBlock);
     }
 
     
@@ -401,6 +420,7 @@ public abstract class ArknightsModCard extends CustomCard {
     public AbstractCard makeCopy() {
         ArknightsModCard copy = (ArknightsModCard)super.makeCopy();
         copy.customPostMakeCopy(this);
+        ArknightsMod.logger.info("{} makeCopy {}. copy.descriptionToString = {}", this.toIdString(), copy.toIdString(), descriptionToString(copy.description));
         return copy;
     }
     
@@ -443,21 +463,51 @@ public abstract class ArknightsModCard extends CustomCard {
         if (rawDescriptionState.hasEx0) {
             newRawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
         }
+        if (rawDescriptionState.hasUseTimes) {
+            newRawDescription += LocalizationUtils.formatDescription(RAW_USE_TIMES_HINT, this.useTimes);
+        }
         if (rawDescriptionState.hasSpHint) {
             newRawDescription = newRawDescription.replace(RAW_SP_HINT_PLACEHOLDER, RAW_SP_HINT);
         } else {
             newRawDescription = newRawDescription.replace(RAW_SP_HINT_PLACEHOLDER, "");
         }
         if (rawDescriptionState.hasRegainBlockHint) {
-            newRawDescription = newRawDescription.replace(RAW_REGAIN_BLOCK_HINT_PLACEHOLDER, RAW_SP_HINT);
-        } else {
             newRawDescription = newRawDescription.replace(RAW_REGAIN_BLOCK_HINT_PLACEHOLDER, LocalizationUtils.formatDescription(RAW_REGAIN_BLOCK_HINT, this.currentRegainBlockAmountLimit));
+        } else {
+            newRawDescription = newRawDescription.replace(RAW_REGAIN_BLOCK_HINT_PLACEHOLDER, "");
         }
         
         this.rawDescription = newRawDescription;
         this.initializeDescription();
+        
+        ArknightsMod.logger.info("{} updateRawDescription done; \n"
+                + "this.rawDescription = {}; \n"
+                + "this.descriptionToString = {}; \n", this.toIdString(), this.rawDescription, descriptionToString(this.description));
     }
 
+    @Override
+    public void initializeDescriptionCN() {
+        ArknightsMod.logger.info("{} before initializeDescriptionCN, this.rawDescription.split(\" \") = {}", this.toIdString(), this.rawDescription.split(" "));
+        super.initializeDescriptionCN();
+        ArknightsMod.logger.info("{} after initializeDescriptionCN, his.descriptionToString = {}", this.toIdString(), descriptionToString(this.description));
+    }
+    
+    
+    @Override
+    public void render(SpriteBatch sb, boolean selected) {
+        ArknightsMod.logger.info("{} before render; \n"
+                + "this.descriptionToString = {}; \n", this.toIdString(), descriptionToString(this.description));
+        super.render(sb, selected);
+    }
+    
+    public static String descriptionToString(ArrayList<DescriptionLine> description) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < description.size(); i++) {
+            DescriptionLine line = description.get(i);
+            builder.append("line").append(i).append(":").append(Arrays.toString(line.getCachedTokenizedTextCN())).append("     ");
+        }
+        return builder.toString();
+    }
 
 
     

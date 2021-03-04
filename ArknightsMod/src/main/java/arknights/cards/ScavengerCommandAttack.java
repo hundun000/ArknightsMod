@@ -52,7 +52,7 @@ public class ScavengerCommandAttack extends ArknightsModCard {
                 .setPlusDamage(3)
                 .setPlusMagicNumber(1)
                 );
-        setSpThreshold(4, GainSpType.ON_DRAWN);
+        initSpThreshold(4, GainSpType.ON_DRAWN);
     }
     
     @Override

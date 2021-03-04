@@ -139,30 +139,6 @@ public class HumanResource extends CustomRelic implements ClickableRelic {
     public void onEnterRoom(AbstractRoom room) {
         addCounter(GAIN_COUNT_PER_ROOM);
     }
-    
-    @Override
-    public void atBattleStart() {
-        super.atBattleStart();
-        
-        flash();
-        List<AbstractCard> cards = new ArrayList<>(AbstractDungeon.player.drawPile.group);
-        for (AbstractCard card : cards) {
-            if (card instanceof BaseDeployCard) {
-                BaseDeployCard deployCard = (BaseDeployCard)card;
-                List<AbstractCard> giveCards = deployCard.getCurrentGiveCardsCopy();
-                if (giveCards != null && !giveCards.isEmpty()) {
-                    if (giveCards.size() > 1) {
-                        ArknightsMod.logger.info("adding DiscoveryTargetCardsAction for {}", ((BaseDeployCard) card).toIdString());
-                        addToTop(new DiscoveryTargetCardsAction(AbstractDungeon.player, giveCards, 1));
-                    } else if (giveCards.size() == 1) {
-                        AbstractDungeon.effectList.add(new ShowCardAndAddToDrawPileEffect(giveCards.get(0), Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F - 10.0F * Settings.scale, Settings.HEIGHT / 2.0F, true, false));
-                    }
-                }
-                
-                addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.drawPile));
-                
-            }
-        }
-    }
+
 
 }

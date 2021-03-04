@@ -48,7 +48,7 @@ public class MyrtleHealingWings extends ArknightsModCard {
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(2)
                 );
-        setSpThreshold(4, GainSpType.ON_DRAWN);
+        initSpThreshold(4, GainSpType.ON_DRAWN);
     }
     
     @Override

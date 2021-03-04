@@ -44,7 +44,7 @@ public class PopukarStrike extends ArknightsModCard {
                 .setPlusDamage(3)
                 .setPlusBlock(1)
                 );
-        setSpThreshold(4, GainSpType.ON_DRAWN);
+        initSpThreshold(4, GainSpType.ON_DRAWN);
         this.isMultiDamage = true;
     }
 

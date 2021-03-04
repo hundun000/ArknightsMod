@@ -44,7 +44,7 @@ public class VignaHammerOn extends ArknightsModCard {
                 .setPlusDamage(3)
                 .setPlusMagicNumber(3)
                 );
-        setSpThreshold(4, GainSpType.ON_DRAWN);
+        initSpThreshold(4, GainSpType.ON_DRAWN);
     }
 
 	

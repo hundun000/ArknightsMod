@@ -112,7 +112,7 @@ public class Puncturer extends AbstractMonster {
     
     @Override
     public void usePreBattleAction() {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new IntangiblePower(this, INTANGIBLE_POWER_TURN)));
+        //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new IntangiblePower(this, INTANGIBLE_POWER_TURN)));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new RitualPower(this, this.addDamageSpeed, false)));
     }
     

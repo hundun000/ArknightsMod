@@ -36,14 +36,12 @@ public class KroosStrike extends ArknightsModCard {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(5)
-                .setBlock(2)
                 .setMagicNumber(3)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
-                .setPlusBlock(1)
                 );
-        setSpThreshold(4, GainSpType.ON_USE);
+        initSpThreshold(4, GainSpType.ON_USE);
     }
 
     

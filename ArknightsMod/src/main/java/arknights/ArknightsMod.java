@@ -208,6 +208,10 @@ public class ArknightsMod implements
     // =============== SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE =================
     
     public ArknightsMod() {
+        
+    }
+    public void subscribeToMainGame() {
+    
         logger.info("Subscribe to BaseMod hooks");
         
         BaseMod.subscribe(this);
@@ -317,7 +321,8 @@ public class ArknightsMod implements
     
     public static void initialize() {
         logger.info("========================= Initializing Default Mod. Hi. =========================");
-        ArknightsMod defaultmod = new ArknightsMod();
+        ArknightsMod mod = new ArknightsMod();
+        mod.subscribeToMainGame();
         logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
     }
     

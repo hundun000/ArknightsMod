@@ -23,9 +23,6 @@ public class FangDeploy extends BaseDeployCard {
     public static final String ID = ArknightsMod.makeID(FangDeploy.class);
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.SPECIAL;     
-    
-    private static final int COST = 0;  
 
     public FangDeploy() { 
         super(ID, IMG);

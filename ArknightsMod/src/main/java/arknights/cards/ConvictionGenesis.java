@@ -59,6 +59,7 @@ public class ConvictionGenesis extends ArknightsModCard {
                 for (AbstractPower pow : monster.powers) {
                     if (pow.type == AbstractPower.PowerType.BUFF) {
                         AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(monster, player, pow));
+                        break;
                     }
                 }
             }

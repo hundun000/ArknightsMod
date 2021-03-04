@@ -42,7 +42,7 @@ public class SpotDefend extends ArknightsModCard {
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusBlock(3)
                 );
-        setSpThreshold(4, GainSpType.ON_DRAWN);
+        initSpThreshold(4, GainSpType.ON_DRAWN);
         
         initializeDescription();
     }
