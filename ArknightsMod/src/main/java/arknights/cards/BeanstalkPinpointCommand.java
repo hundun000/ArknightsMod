@@ -17,6 +17,7 @@ import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.CardTemplant;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.cards.derivations.MetalCrabStrike;
 import arknights.util.LocalizationUtils;
 import arknights.variables.ExtraVariable;
 
@@ -40,6 +41,7 @@ public class BeanstalkPinpointCommand extends ArknightsModCard {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(3)
+                .setMagicNumber(1)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(2)
@@ -57,7 +59,7 @@ public class BeanstalkPinpointCommand extends ArknightsModCard {
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn)));
-        addToBot(new MakeTempCardInHandAction(new MelanthaStrike(), 1));
+        addToBot(new MakeTempCardInHandAction(new MetalCrabStrike(), 1));
         if (isSpCountReachThreshold()) {
             addToBot(new GainEnergyAction(1));
         }

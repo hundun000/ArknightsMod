@@ -121,9 +121,9 @@
   },
   "arknights:ScavengerCommandAttack": {
     "NAME": "冲锋号令·攻击",
-    "DESCRIPTION": "造成 !D! 点伤害。 如果你在这回合打出的牌数少于 !2ndM! 张，基础伤害增加 !M! 。 NL 初始 3， 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 如果你在这回合打出的牌数少于 !2ndM! 张，基础伤害增加 !M! 。 初始 3， 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] 。",
     "EXTENDED_DESCRIPTION": [
-      " NL （已打出{}张牌。)"
+      "(已打出{}张牌。)"
     ]
   },
   "arknights:MyrtleHealingWings": {

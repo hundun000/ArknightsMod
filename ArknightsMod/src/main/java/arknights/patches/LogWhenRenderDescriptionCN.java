@@ -14,10 +14,10 @@ import javassist.CtBehavior;
 
 import java.util.regex.Pattern;
 
-@SpirePatch(
-		clz=AbstractCard.class,
-		method="renderDescriptionCN"
-)
+//@SpirePatch(
+//		clz=AbstractCard.class,
+//		method="renderDescriptionCN"
+//)
 public class LogWhenRenderDescriptionCN
 {
 	@SpireInsertPatch(

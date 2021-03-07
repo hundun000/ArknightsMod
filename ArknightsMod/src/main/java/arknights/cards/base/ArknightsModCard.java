@@ -449,6 +449,10 @@ public abstract class ArknightsModCard extends CustomCard {
         updateRawDescriptionByStateAndInitializeDescription();
     }
     
+    protected String getFormattedExtendDescription(int index) {
+		return cardStrings.EXTENDED_DESCRIPTION[index];
+	}
+    
     /**
      * 根据rawDescriptionState和upgraded自动计算更新rawDescription，然后initializeDescription()
      */
@@ -461,7 +465,7 @@ public abstract class ArknightsModCard extends CustomCard {
         }
         
         if (rawDescriptionState.hasEx0) {
-            newRawDescription += cardStrings.EXTENDED_DESCRIPTION[0];
+            newRawDescription += getFormattedExtendDescription(0);
         }
         if (rawDescriptionState.hasUseTimes) {
             newRawDescription += LocalizationUtils.formatDescription(RAW_USE_TIMES_HINT, this.useTimes);
@@ -493,12 +497,12 @@ public abstract class ArknightsModCard extends CustomCard {
     }
     
     
-    @Override
-    public void render(SpriteBatch sb, boolean selected) {
-        ArknightsMod.logger.info("{} before render; \n"
-                + "this.descriptionToString = {}; \n", this.toIdString(), descriptionToString(this.description));
-        super.render(sb, selected);
-    }
+//    @Override
+//    public void render(SpriteBatch sb, boolean selected) {
+//        ArknightsMod.logger.info("{} before render; \n"
+//                + "this.descriptionToString = {}; \n", this.toIdString(), descriptionToString(this.description));
+//        super.render(sb, selected);
+//    }
     
     public static String descriptionToString(ArrayList<DescriptionLine> description) {
         StringBuilder builder = new StringBuilder();

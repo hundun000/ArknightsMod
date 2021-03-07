@@ -80,5 +80,16 @@ public class ScavengerCommandAttack extends ArknightsModCard {
         }
         handleSpAfterUse();
     }
+    
+    
+    @Override
+	protected String getFormattedExtendDescription(int index) {
+		if (index == 0) {
+			return LocalizationUtils.formatDescription(super.getFormattedExtendDescription(index), AbstractDungeon.actionManager.cardsPlayedThisTurn.size());
+		} else {
+			return super.getFormattedExtendDescription(index);
+		}
+    	
+	}
 
 }
