@@ -44,9 +44,9 @@ public class UrsusBreadRelic extends CustomRelic {
         addToBot(new DrawCardAction(AbstractDungeon.player, 1));
 //        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, 
 //                new SpellStrengthPower(AbstractDungeon.player, AbstractDungeon.player, 3)));
-        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, 
-                new StrengthPower(AbstractDungeon.player, 3)));
-        ArknightsMod.logger.info("after UrsusBreadRelic atBattleStart, this.masterHandSize = {}, this.gameHandSize = {}", AbstractDungeon.player.masterHandSize, AbstractDungeon.player.gameHandSize);
+//        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, 
+//                new StrengthPower(AbstractDungeon.player, 3)));
+        
     }
 
 

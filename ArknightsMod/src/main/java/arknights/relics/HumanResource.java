@@ -59,7 +59,7 @@ public class HumanResource extends CustomRelic implements ClickableRelic {
             LandingSound landingSound
             ) {
         super(ID, IMG, OUTLINE, relicTier, landingSound);
-        this.counter = 15000;
+        this.counter = 0;
         tips.clear();
         tips.add(new PowerTip(name, description));
     }

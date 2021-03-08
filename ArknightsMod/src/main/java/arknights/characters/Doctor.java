@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
 import arknights.ArknightsMod;
 import arknights.actions.DiscoveryTargetCardsAction;
 import arknights.cards.AdnachielStrike;
+import arknights.cards.AnselStrike;
 import arknights.cards.AreneSmallJoke;
 import arknights.cards.BeagleDefend;
 import arknights.cards.BeanstalkPinpointCommand;
@@ -28,29 +29,26 @@ import arknights.cards.MelanthaStrike;
 import arknights.cards.MidnightStrike;
 import arknights.cards.MousseScratch;
 import arknights.cards.MyrtleHealingWings;
-import arknights.cards.Cooking;
 import arknights.cards.CourierCommandDefense;
 import arknights.cards.CutterCrimsonCrescent;
 import arknights.cards.DobermannStarterInstructor;
+import arknights.cards.FangStrike;
 import arknights.cards.FrostleafFrostTomahawk;
 import arknights.cards.JackieFocus;
 import arknights.cards.KroosStrike;
 import arknights.cards.LavaStrike;
 import arknights.cards.OrbOverload;
+import arknights.cards.OrchidStrike;
 import arknights.cards.PlumeStrike;
 import arknights.cards.PopukarStrike;
 import arknights.cards.ScavengerCommandAttack;
-import arknights.cards.ShellDefense;
 import arknights.cards.SpotDefend;
+import arknights.cards.StewardStrike;
 import arknights.cards.SummonFreezingSupportDrone;
 import arknights.cards.SummonMeeboo;
 import arknights.cards.SummonMiningSupportDrone;
-import arknights.cards.ToxicOverload;
 import arknights.cards.UtageDescendingStrikeEarthSplitter;
 import arknights.cards.VignaHammerOn;
-import arknights.cards.VorpalEdge;
-import arknights.cards.W12Bomb;
-import arknights.cards.WaveStrike;
 import arknights.cards.base.BaseDeployCard;
 import arknights.cards.operator.AmiyaDeploy;
 import arknights.cards.operator.BeehunterDeploy;
@@ -81,7 +79,7 @@ public class Doctor extends ArknightsPlayer implements OnStartBattleSubscriber {
     
     public Doctor() {
         super("Doctor", ArknightsPlayer.Enums.ARKNIGHTS_PLAYER_CLASS);
-        BaseMod.subscribe(this, OnStartBattleSubscriber.class);
+        BaseMod.subscribe(this);
     }
 
  // Starting Deck
@@ -96,9 +94,10 @@ public class Doctor extends ArknightsPlayer implements OnStartBattleSubscriber {
                 YatoStrike.ID, Castle3Strike.ID, Lancet2Strike.ID, ThermalExStrike.ID,
                 };
         String[] threeStars = new String[]{
-                PlumeStrike.ID, MelanthaStrike.ID, PopukarStrike.ID, 
+                FangStrike.ID, PlumeStrike.ID, MelanthaStrike.ID, PopukarStrike.ID, 
                 MidnightStrike.ID, AdnachielStrike.ID, KroosStrike.ID, 
                 CatapultStrike.ID, SpotDefend.ID, BeagleDefend.ID, 
+                AnselStrike.ID, OrchidStrike.ID, StewardStrike.ID,
                 LavaStrike.ID
                 };
         String[] fourStars = new String[]{
@@ -108,13 +107,13 @@ public class Doctor extends ArknightsPlayer implements OnStartBattleSubscriber {
                 BeehunterSoaringFists.ID, BeehunterFlexibility.ID, MousseScratch.ID, FrostleafFrostTomahawk.ID,
                 UtageDescendingStrikeEarthSplitter.ID
         };
-        String[] testing = new String[]{W12Bomb.ID};
+        String[] testing = new String[]{DobermannStarterInstructor.ID};
         
         retVal.add(AmiyaDeploy.ID);
         retVal.addAll(Arrays.asList(starter));
         //retVal.addAll(Arrays.asList(operators));
         //retVal.addAll(Arrays.asList(threeStars));
-        retVal.addAll(Arrays.asList(fourStars));
+        //retVal.addAll(Arrays.asList(fourStars));
         retVal.addAll(Arrays.asList(testing));
         return retVal;
     }
@@ -154,6 +153,7 @@ public class Doctor extends ArknightsPlayer implements OnStartBattleSubscriber {
     @Override
     public void applyStartOfCombatLogic() {
         MoreGameActionManager.applyStartOfCombatLogic();
+        askPlayerchoosOperaterCard();
         super.applyStartOfCombatLogic();
         
         
@@ -161,34 +161,37 @@ public class Doctor extends ArknightsPlayer implements OnStartBattleSubscriber {
 
     @Override
     public void applyStartOfTurnPreDrawCards() {
-        ArknightsMod.logger.info("this.masterHandSize = {}, this.gameHandSize = {}", this.masterHandSize, this.gameHandSize);
         super.applyStartOfTurnPreDrawCards();
     }
 
     @Override
     public void receiveOnBattleStart(AbstractRoom arg0) {
-        askPlayerchoosOperaterCard();
+        //askPlayerchoosOperaterCard();
     }
     
     
     private void askPlayerchoosOperaterCard() {
-        List<AbstractCard> cards = new ArrayList<>(AbstractDungeon.player.drawPile.group);
-        for (AbstractCard card : cards) {
+        List<BaseDeployCard> deployCards = new ArrayList<>();
+        
+        ArknightsMod.logger.info("before askPlayerchoosOperaterCard, drawPile.size = {}", AbstractDungeon.player.drawPile.group.size());
+        for (AbstractCard card : AbstractDungeon.player.drawPile.group) {
             if (card instanceof BaseDeployCard) {
                 BaseDeployCard deployCard = (BaseDeployCard)card;
-                List<AbstractCard> giveCards = deployCard.getCurrentGiveCardsCopy();
-                if (giveCards != null && !giveCards.isEmpty()) {
-                    if (giveCards.size() > 1) {
-                        ArknightsMod.logger.info("adding DiscoveryTargetCardsAction for {}", ((BaseDeployCard) card).toIdString());
-                        AbstractDungeon.actionManager.addToTop(new DiscoveryTargetCardsAction(AbstractDungeon.player, giveCards, 1));
-                    } else if (giveCards.size() == 1) {
-                        AbstractDungeon.effectList.add(new ShowCardAndAddToDrawPileEffect(giveCards.get(0), Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F - 10.0F * Settings.scale, Settings.HEIGHT / 2.0F, true, false));
-                    }
-                }
-                
-                AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(card, AbstractDungeon.player.drawPile));
-                
+                deployCards.add(deployCard);
             }
+        }
+        ArknightsMod.logger.info("askPlayerchoosOperaterCard found {} deployCards", deployCards.size());
+        for (BaseDeployCard deployCard : deployCards) {
+            List<AbstractCard> giveCards = deployCard.getCurrentGiveCardsCopy();
+            if (giveCards != null && !giveCards.isEmpty()) {
+                ArknightsMod.logger.info("askPlayerchoosOperaterCard {} giveCards.size = {}", deployCard.toIdString(), giveCards.size());
+                if (giveCards.size() > 1) {
+                    AbstractDungeon.actionManager.addToTop(new DiscoveryTargetCardsAction(AbstractDungeon.player, giveCards, 1));
+                } else if (giveCards.size() == 1) {
+                    AbstractDungeon.effectList.add(new ShowCardAndAddToDrawPileEffect(giveCards.get(0), Settings.WIDTH / 2.0F - AbstractCard.IMG_WIDTH / 2.0F - 10.0F * Settings.scale, Settings.HEIGHT / 2.0F, true, false));
+                }
+            }
+            AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(deployCard, AbstractDungeon.player.drawPile));
         }
     }
 }

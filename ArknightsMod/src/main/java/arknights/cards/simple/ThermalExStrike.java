@@ -38,15 +38,15 @@ public class ThermalExStrike extends ArknightsModCard {
     public ThermalExStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setMagicNumber(5)
+                .setMagicNumber(10)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusMagicNumber(2)
+                .setPlusMagicNumber(5)
                 );
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot((AbstractGameAction)new ApplyPowerAction(player, player, new TheBombPower(player, 2, this.magicNumber), 2));
+        addToBot(new ApplyPowerAction(player, player, new TheBombPower(player, 2, this.magicNumber)));
     }
 }

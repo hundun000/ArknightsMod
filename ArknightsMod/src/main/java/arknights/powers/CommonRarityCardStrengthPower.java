@@ -71,7 +71,7 @@ public class CommonRarityCardStrengthPower extends AbstractPower implements IMod
     public float modifyBlock(float blockAmount, AbstractCard card) {
         float temp = blockAmount;
         
-        if (card.rarity == CardRarity.COMMON) {
+        if (hasBonus(card)) {
             temp += this.amount;
         }
         
@@ -82,11 +82,15 @@ public class CommonRarityCardStrengthPower extends AbstractPower implements IMod
     public float atDamageGive(float damage, DamageType type, AbstractCard card) {
         float temp = damage;
         
-        if (card.rarity == CardRarity.COMMON) {
+        if (hasBonus(card)) {
             temp += this.amount;
         }
         
         return temp;
+    }
+    
+    private boolean hasBonus(AbstractCard card) {
+        return card.rarity == CardRarity.COMMON || card.rarity == CardRarity.BASIC;
     }
 
 
@@ -94,7 +98,7 @@ public class CommonRarityCardStrengthPower extends AbstractPower implements IMod
     public float modifyRegainBlock(float amount, AbstractCard card) {
         float temp = amount;
         
-        if (card.rarity == CardRarity.COMMON) {
+        if (hasBonus(card)) {
             temp += this.amount;
         }
         

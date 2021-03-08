@@ -33,17 +33,14 @@ public class AdnachielStrike extends ArknightsModCard {
     public AdnachielStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
-                .setBlock(2)
-                .setMagicNumber(3)
+                .setDamage(8)
+                .setMagicNumber(4)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusBlock(1)
+                .setPlusDamage(4)
+                .setPlusBlock(2)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
-        
-        initializeDescription();
     }
 
     

@@ -34,12 +34,13 @@ public class MelanthaStrike extends ArknightsModCard {
     public MelanthaStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(8)
+                .setDamage(6)
                 .setBlock(3)
-                .setMagicNumber(3)
+                .setMagicNumber(6)
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
+                .setPlusMagicNumber(3)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
     }

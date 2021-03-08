@@ -45,7 +45,7 @@ public class BattleRecords extends CustomRelic implements ClickableRelic { // Yo
             ) {
         super(ID, IMG, OUTLINE, relicTier, landingSound);
         this.outsideBattle = true;
-        this.counter = 150;
+        this.counter = 0;
         this.cardsSelected = true;
         tips.clear();
         tips.add(new PowerTip(name, description));

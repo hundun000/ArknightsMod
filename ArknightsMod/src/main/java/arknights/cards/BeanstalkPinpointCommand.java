@@ -40,7 +40,7 @@ public class BeanstalkPinpointCommand extends ArknightsModCard {
     public BeanstalkPinpointCommand() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(3)
+                .setDamage(6)
                 .setMagicNumber(1)
                 );
         setUpgradeInfo(new UpgradeSetting()

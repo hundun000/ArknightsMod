@@ -27,7 +27,7 @@ import arknights.variables.ExtraVariable;
  */
 public class MousseScratch extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(MousseScratch.class.getSimpleName()); 
+    public static final String ID = ArknightsMod.makeID(MousseScratch.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 

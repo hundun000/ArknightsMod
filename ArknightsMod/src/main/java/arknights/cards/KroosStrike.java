@@ -23,7 +23,7 @@ import arknights.variables.ExtraVariable;
  */
 public class KroosStrike extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(KroosStrike.class.getSimpleName()); 
+    public static final String ID = ArknightsMod.makeID(KroosStrike.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 
@@ -35,11 +35,10 @@ public class KroosStrike extends ArknightsModCard {
     public KroosStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
-                .setMagicNumber(3)
+                .setDamage(8)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
+                .setPlusDamage(4)
                 );
         initSpThreshold(4, GainSpType.ON_USE);
     }

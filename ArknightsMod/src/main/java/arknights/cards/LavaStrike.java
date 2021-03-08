@@ -34,7 +34,7 @@ public class LavaStrike extends ArknightsModCard {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(6)
-                .setDamageType(SPELL_DAMAGE_TYPE)
+                .enableSpellDamageType()
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(4)

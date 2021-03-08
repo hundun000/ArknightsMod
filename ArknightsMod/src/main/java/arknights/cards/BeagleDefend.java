@@ -29,19 +29,16 @@ public class BeagleDefend extends ArknightsModCard {
     private static final CardTarget TARGET = CardTarget.SELF;  
     private static final CardType TYPE = CardType.SKILL;       
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     
     public BeagleDefend() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setBlock(8)
+                .setBlock(20)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusBlock(3)
+                .setPlusBlock(10)
                 );
-
-        
-        initializeDescription();
     }
 
     @Override

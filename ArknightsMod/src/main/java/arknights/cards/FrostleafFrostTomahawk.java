@@ -28,7 +28,7 @@ import arknights.variables.ExtraVariable;
  */
 public class FrostleafFrostTomahawk extends ArknightsModCard {
     
-    public static final String ID = ArknightsMod.makeID(FrostleafFrostTomahawk.class.getSimpleName()); 
+    public static final String ID = ArknightsMod.makeID(FrostleafFrostTomahawk.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.COMMON; 

@@ -41,15 +41,11 @@ public abstract class SimpleRegainBlock extends ArknightsModCard {
     }
     
     @Override
-    public void applyPowers() {
-        super.applyPowers();
-        StringBuilder before = new StringBuilder();
-        this.description.forEach(item -> before.append(item.text).append("\n"));
+    public void triggerWhenFirstTimeDrawn() {
         updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_REGAIN_BLOCK_HINT);
-        StringBuilder after = new StringBuilder();
-        this.description.forEach(item -> after.append(item.text).append("\n"));
-        ArknightsMod.logger.info("{} description from 【{}】 to 【{}】", this.toIdString(), before.toString(), after.toString());
+        super.triggerWhenFirstTimeDrawn();
     }
+
    
     public void onMoveToDiscard() {
         super.onMoveToDiscard();

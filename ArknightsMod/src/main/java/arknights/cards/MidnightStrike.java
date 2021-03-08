@@ -30,20 +30,17 @@ public class MidnightStrike extends ArknightsModCard {
     private static final CardTarget TARGET = CardTarget.ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     
     public MidnightStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
-                .setBlock(2)
+                .setDamage(8)
+                .setBlock(3)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusBlock(1)
+                .setPlusDamage(4)
                 );
-        
-        initializeDescription();
     }
 
 

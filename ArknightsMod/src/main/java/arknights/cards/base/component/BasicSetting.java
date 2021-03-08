@@ -16,7 +16,7 @@ public class BasicSetting {
     private Integer block;
     private Integer regainBlock;
     private Integer magicNumber;
-    private DamageType damageType;
+    private boolean spellDamageType;
     private Map<Integer, Integer> extraMagicNumbers = new HashMap<>(ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE);
     public Integer getDamage() {
         return damage;
@@ -38,8 +38,8 @@ public class BasicSetting {
     public Integer getRegainBlock() {
         return regainBlock;
     }
-    public DamageType getDamageType() {
-        return damageType;
+    public boolean isSpellDamageType() {
+        return spellDamageType;
     }
     public BasicSetting setMagicNumber(Integer magicNumber) {
         this.magicNumber = magicNumber;
@@ -56,8 +56,8 @@ public class BasicSetting {
         this.regainBlock = regainBlock;
         return this;
     }
-    public BasicSetting setDamageType(DamageType damageType) {
-        this.damageType = damageType;
+    public BasicSetting enableSpellDamageType() {
+        this.spellDamageType = true;
         return this;
     }
 }

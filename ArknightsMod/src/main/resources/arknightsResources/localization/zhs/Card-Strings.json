@@ -10,11 +10,11 @@
   },
   "arknights:DurinStrike": {
     "NAME": "杜林平A",
-    "DESCRIPTION": "造成 !D! 点 法术伤害 。"
+    "DESCRIPTION": "造成 !D! 点 arknights:法术伤害   。"
   },
   "arknights:F12Strike": {
     "NAME": "12F平A",
-    "DESCRIPTION": "造成 !D! 点 法术伤害 。"
+    "DESCRIPTION": "造成 !D! 点 arknights:法术伤害  。"
   },
   "arknights:NoirCorneDefend": {
     "NAME": "黑角平A",
@@ -34,7 +34,7 @@
   },
   "arknights:Lancet2Strike": {
     "NAME": "医疗小车平A",
-    "DESCRIPTION": "获得 !RB! 点 格挡恢复 {RB_HINT} 。"
+    "DESCRIPTION": "获得 !RB! 点 arknights:格挡恢复 {RB_HINT} 。"
   },
   "arknights:ThermalExStrike": {
     "NAME": "自爆小车平A",
@@ -42,30 +42,30 @@
   },
   "arknights:AmiyaDeploy": {
     "NAME": "阿米娅",
-    "DESCRIPTION": "干员 。 选择形态范围 :阿米娅平A。",
+    "DESCRIPTION": "arknights:干员 。 arknights:选择形态 :阿米娅平A。",
     "EXTENDED_DESCRIPTION": [
-      "干员 。 选择形态范围 :阿米娅平A+、精神爆发。",
-      "干员 。 选择形态范围 :阿米娅平A+、精神爆发+、奇美拉。",
-      "干员 。 选择形态范围 :阿米娅平A+、精神爆发+、奇美拉+。",
-      "干员 。 选择形态范围 :阿米娅平A+、精神爆发+、奇美拉+、影霄·奔夜、影霄·绝影。",
-      "干员 。 选择形态范围 :阿米娅平A+、精神爆发+、奇美拉+、影霄·奔夜+、影霄·绝影+。"
+      "arknights:干员 。 arknights:选择形态 :阿米娅平A+、精神爆发。",
+      "arknights:干员 。 arknights:选择形态 :阿米娅平A+、精神爆发+、奇美拉。",
+      "arknights:干员 。 arknights:选择形态 :阿米娅平A+、精神爆发+、奇美拉+。",
+      "arknights:干员 。 arknights:选择形态 :阿米娅平A+、精神爆发+、奇美拉+、影霄·奔夜、影霄·绝影。",
+      "arknights:干员 。 arknights:选择形态 :阿米娅平A+、精神爆发+、奇美拉+、影霄·奔夜+、影霄·绝影+。"
     ]
   },
   "arknights:AmiyaStrike": {
     "NAME": "阿米娅平A",
-    "DESCRIPTION": "造成 !D! 点 法术伤害 。"
+    "DESCRIPTION": "造成 !D! 点 arknights:法术伤害 。"
   },
   "arknights:AmiyaSpiritBurst": {
     "NAME": "精神爆发",
-    "DESCRIPTION": "随机对敌人造成 !D! 点 法术伤害 !M! 次。 NL 结束你的回合。"
+    "DESCRIPTION": "随机对敌人造成 !D! 点 arknights:法术伤害 !M! 次。 NL 结束你的回合。"
   },
   "arknights:AmiyaChimera": {
     "NAME": "奇美拉",
-    "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点 法术伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
+    "DESCRIPTION": "获得 !M! 层 力量 。 造成 !D! 点 arknights:法术伤害 !2ndM! 次。 NL 在下回合死亡。 NL 消耗 。"
   },
   "arknights:FangStrike": {
     "NAME": "冲锋号令·α型",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 初始 3， 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL arknights:初始 3， arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:获得 [E] 。"
   },
   "arknights:PlumeStrike": {
     "NAME": "翎羽平A",
@@ -73,43 +73,55 @@
   },
   "arknights:MelanthaStrike": {
     "NAME": "玫兰莎平A",
-    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:基础伤害增加 !M! 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:本次基础伤害增加 !M! 。"
   },
   "arknights:PopukarStrike": {
     "NAME": "泡普卡平A",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:基础伤害增加 !M! 。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:本次基础伤害增加 !M! 。"
   },
   "arknights:MidnightStrike": {
     "NAME": "月见夜平A",
-    "DESCRIPTION": "造成 !D! 点伤害两次，其中第一次伤害减少20%。 获得 !B! 点 格挡 。"
+    "DESCRIPTION": "造成 !D! 点 arknights:近卫连击 。 获得 !B! 点 格挡 。"
   },
   "arknights:AdnachielStrike": {
     "NAME": "安德切尔平A",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:基础伤害增加 !M! 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:本次基础伤害增加 !M! 。"
   },
   "arknights:KroosStrike": {
     "NAME": "克洛斯平A",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 打出回复 ， 释放 !SPT! {SPC_HINT}:伤害次数增加 1 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL arknights:打出回复 ， arknights:释放 !SPT! {SPC_HINT}:伤害次数增加 1 。"
   },
   "arknights:CatapultStrike": {
     "NAME": "空爆平A",
-    "DESCRIPTION": "造成 !D! 点 溅射伤害 。"
+    "DESCRIPTION": "造成 !D! 点 arknights:溅射伤害 。"
   },
   "arknights:SpotDefend": {
     "NAME": "斑点平A",
-    "DESCRIPTION": "获得 !B! 点 格挡。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 !RB! 点 格挡恢复 {RB_HINT}。"
+    "DESCRIPTION": "获得 !B! 点 格挡。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:获得 !RB! 点 arknights:格挡恢复 {RB_HINT}。"
   },
   "arknights:BeagleDefend": {
     "NAME": "米格鲁平A",
     "DESCRIPTION": "获得 !B! 点 格挡。"
   },
+  "arknights:AnselStrike": {
+    "NAME": "安塞尔平A",
+    "DESCRIPTION": "获得 !RB! 点 arknights:格挡恢复 {RB_HINT}。"
+  },
+  "arknights:OrchidStrike": {
+    "NAME": "梓兰平A",
+    "DESCRIPTION": "造成 !D! 点 arknights:法术伤害 。给予目标 减速 状态 。"
+  },
+  "arknights:StewardStrike": {
+    "NAME": "史都华德平A",
+    "DESCRIPTION": "造成 !D! 点 arknights:法术伤害 。"
+  },
   "arknights:LavaStrike": {
     "NAME": "炎熔平A",
-    "DESCRIPTION": "对所有敌人造成 !D! 点 法术伤害 。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点 arknights:法术伤害 。"
   },
   "arknights:BeanstalkPinpointCommand": {
     "NAME": "定点指令",
-    "DESCRIPTION": "造成 !D! 点伤害, 将 !M! 张 磐蟹打击 加入手牌。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] 。"
+    "DESCRIPTION": "造成 !D! 点伤害, 将 !M! 张 磐蟹打击 加入手牌。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:获得 [E] 。"
   },
   "arknights:MetalCrabStrike": {
     "NAME": "磐蟹打击",
@@ -117,26 +129,26 @@
   },
   "arknights:VignaHammerOn": {
     "NAME": "槌音",
-    "DESCRIPTION": "造成 !D! 点伤害。 如果这张牌杀死了敌人，则获得 [E] 。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:基础伤害增加 !M! 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 如果这张牌杀死了敌人，则获得 [E] 。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:本次基础伤害增加 !M! 。"
   },
   "arknights:ScavengerCommandAttack": {
     "NAME": "冲锋号令·攻击",
-    "DESCRIPTION": "造成 !D! 点伤害。 如果你在这回合打出的牌数少于 !2ndM! 张，基础伤害增加 !M! 。 初始 3， 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 如果少于 !2ndM! 张，本次基础伤害增加 !M! 。 arknights:初始 3， arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:获得 [E] 。",
     "EXTENDED_DESCRIPTION": [
       "(已打出{}张牌。)"
     ]
   },
   "arknights:MyrtleHealingWings": {
     "NAME": "治愈之翼",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 初始 3， 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] [E] ，不造成伤害，转为获得 !RB! 点 格挡恢复 {RB_HINT}。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL arknights:初始 3， arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:获得 [E] [E] ，不造成伤害，转为获得 !RB! 点 arknights:格挡恢复 {RB_HINT}。"
   },
   "arknights:CourierCommandDefense": {
     "NAME": "冲锋号令·防御",
-    "DESCRIPTION": "获得 !B! 点 格挡。 NL 初始 3， 自然回复 ， 释放 !SPT! {SPC_HINT}:获得 [E] ，基础格挡增加 !M! 。"
+    "DESCRIPTION": "获得 !B! 点 格挡。 NL arknights:初始 3， arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:获得 [E] ，本次基础格挡增加 !M! 。"
   },
   "arknights:DobermannStarterInstructor": {
     "NAME": "新人教官",
-    "DESCRIPTION": "获得 !M! 层 平凡者之力 。"
+    "DESCRIPTION": "获得 !M! 层 arknights:平凡者之力 。"
   },
   "arknights:ConvictionGenesis": {
     "NAME": "创世纪",
@@ -144,7 +156,7 @@
   },
   "arknights:AreneSmallJoke": {
     "NAME": "小玩笑",
-    "DESCRIPTION": "造成 !D! 点伤害两次，其中第一次伤害减少20%。 获得 !B! 点 格挡 。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:额外造成 !D! 点伤害两次，其中第一次伤害减少20%。"
+    "DESCRIPTION": "造成 !D! 点 arknights:近卫连击 。 获得 !B! 点 格挡 。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:额外造成 !D! 点 arknights:近卫连击 "
   },
   "arknights:JackieFocus": {
     "NAME": "全神贯注！",
@@ -156,15 +168,15 @@
   },
   "arknights:BeehunterDeploy": {
     "NAME": "蜜蜡",
-    "DESCRIPTION": "干员 。 选择形态范围 :急速拳。",
+    "DESCRIPTION": "arknights:干员 。 arknights:选择形态 :急速拳。",
     "EXTENDED_DESCRIPTION": [
-      "干员 。 选择形态范围 :急速拳+、高机动。",
-      "干员 。 选择形态范围 :急速拳+、高机动+。"
+      "arknights:干员 。 arknights:选择形态 :急速拳+、高机动。",
+      "arknights:干员 。 arknights:选择形态 :急速拳+、高机动+。"
     ]
   },
   "arknights:BeehunterSoaringFists": {
     "NAME": "急速拳",
-    "DESCRIPTION": "造成 !D! 点伤害两次。获得 !B! 点 格挡 。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:伤害次数变为 !M! 。"
+    "DESCRIPTION": "造成 !D! 点伤害两次。获得 !B! 点 格挡 。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:伤害次数变为 !M! 。"
   },
   "arknights:BeehunterFlexibility": {
     "NAME": "高机动",
@@ -172,11 +184,11 @@
   },
   "arknights:MousseScratch": {
     "NAME": "挠伤",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 打出回复 ， 释放 !SPT! {SPC_HINT}:基础伤害增加 !M! 。给予目标 1 层 虚弱 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL arknights:打出回复 ， arknights:释放 !SPT! {SPC_HINT}:本次基础伤害增加 !M! 。给予目标 1 层 虚弱 。"
   },
   "arknights:FrostleafFrostTomahawk": {
     "NAME": "寒霜枪刃",
-    "DESCRIPTION": "造成 !D! 点伤害两次，其中第一次伤害减少20%。 获得 !B! 点 格挡 。 NL 自然回复 ， 释放 !SPT! {SPC_HINT}:基础伤害增加 !M! 。给予目标 #y减速 。"
+    "DESCRIPTION": "造成 !D! 点 arknights:近卫连击 。 获得 !B! 点 格挡 。 NL arknights:自然回复 ， arknights:释放 !SPT! {SPC_HINT}:本次基础伤害增加 !M! 。给予目标 减速 状态 。"
   },
   "arknights:UtageDescendingStrikeEarthSplitter": {
     "NAME": "落地斩·破门",
@@ -186,23 +198,23 @@
 
   "arknights:SummonMiningSupportDrone": {
     "NAME": "激光无人机支援",
-    "DESCRIPTION": "召唤 !M! 个 激光无人机 。"
+    "DESCRIPTION": "召唤 !M! 个 arknights:激光无人机 。"
   },
   "arknights:SummonFreezingSupportDrone": {
     "NAME": "制冷无人机支援",
-    "DESCRIPTION": "召唤 !M! 个 制冷无人机 。"
+    "DESCRIPTION": "召唤 !M! 个 arknights:制冷无人机 。"
   },
   "arknights:SummonMeeboo": {
     "NAME": "召唤咪波",
-    "DESCRIPTION": "召唤 !M! 个 咪波 。"
+    "DESCRIPTION": "召唤 !M! 个 arknights:咪波 。"
   },
   "arknights:OrbOverload": {
     "NAME": "召唤物过载",
-    "DESCRIPTION": "使最右边的召唤物 过载 。"
+    "DESCRIPTION": "使最右边的召唤物 arknights:过载 。"
   },
   "arknights:FrontlineRecord": {
     "NAME": "前线录像",
-    "DESCRIPTION": "获得 !M! 点 作战录像 。如果目标敌人的意图是攻击，获得双倍作战录像 。 消耗 。"
+    "DESCRIPTION": "获得 !M! 点 arknights:作战录像 。如果目标敌人的意图是攻击，获得双倍 arknights:作战录像 。 消耗 。"
   },
   "arknights:Phantom": {
     "NAME": "傀影",
@@ -273,7 +285,7 @@
   },
   "arknights:ChargingStrike": {
     "NAME": "蓄力打击",
-    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 打出时获得技力 。 NL !SPT! :基础伤害增加 !2ndM! 。",
+    "DESCRIPTION": "造成 !D! 点伤害。 获得 !B! 点 格挡 。 打出时获得技力 。 NL !SPT! :本次基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
       " NL (技力 !SPC! / !SPT! )"
     ]
@@ -284,10 +296,10 @@
   },
   "arknights:FangDeploy": {
     "NAME": "芬",
-    "DESCRIPTION": "选择形态范围 :冲锋号令。",
+    "DESCRIPTION": "arknights:选择形态 :冲锋号令。",
     "EXTENDED_DESCRIPTION": [
-      "选择形态范围 :冲锋号令。",
-      "选择形态范围 :冲锋号令。"
+      "arknights:选择形态 :冲锋号令。",
+      "arknights:选择形态 :冲锋号令。"
     ]
   },
   "arknights:ChargeAlpha": {
@@ -296,10 +308,10 @@
   },
   "arknights:TexasDeploy": {
     "NAME": "德克萨斯",
-    "DESCRIPTION": "选择形态范围 :冲锋号令。",
+    "DESCRIPTION": "arknights:选择形态 :冲锋号令。",
     "EXTENDED_DESCRIPTION": [
-      "选择形态范围 :冲锋号令、剑雨。",
-      "选择形态范围 :冲锋号令、剑雨。"
+      "arknights:选择形态 :冲锋号令、剑雨。",
+      "arknights:选择形态 :冲锋号令、剑雨。"
     ]
   },
   "arknights:SwordRain": {
@@ -318,16 +330,9 @@
     "NAME": "焦土",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害，将1张 *灼伤 放入你的弃牌堆中。"
   },
-  "arknights:ChargingShot": {
-    "NAME": "蓄力射击",
-    "DESCRIPTION": "造成 !D! 点伤害 !3rdM! 次。 NL 这张牌每打出第 !M! 次时基础伤害增加 !2ndM! 。",
-    "EXTENDED_DESCRIPTION": [
-      " NL (已打出 !UC! 次。)"
-    ]
-  },
   "arknights:PrepareShot": {
     "NAME": "瞄准射击",
-    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 若这张牌的准备指示物达到 !M! 个，基础伤害增加 !2ndM! 。",
+    "DESCRIPTION": "保留 。 NL 造成 !D! 点伤害。 NL 若这张牌的准备指示物达到 !M! 个，本次基础伤害增加 !2ndM! 。",
     "EXTENDED_DESCRIPTION": [
       " NL (准备指示物: !PC! 个。)"
     ]

@@ -15,6 +15,12 @@ import arknights.ArknightsMod;
  */
 public class BlastDamageAllEnemiesAction extends DamageAllEnemiesAction {
 
+    public static final double RATE = 0.75;
+    
+    public BlastDamageAllEnemiesAction(AbstractCreature source, AbstractMonster mainTarget, int[] amount, DamageType type, AttackEffect effect) {
+        this(source, mainTarget, RATE, amount, type, effect);
+    }
+    
     public BlastDamageAllEnemiesAction(AbstractCreature source, AbstractMonster mainTarget, double blastDamageRate, int[] amount, DamageType type, AttackEffect effect) {
         super(source, amount, type, effect);
         

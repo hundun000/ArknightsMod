@@ -34,16 +34,16 @@ public class DurinStrike extends ArknightsModCard {
         super(ID, IMG, 1, TYPE, CardRarity.BASIC, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(6)
+                .enableSpellDamageType()
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusDamage(3)
                 );
-        this.tags.add(ArknightsCardTag.SPELL_DAMAGE);
     }
     
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new DamageAction(monster, new DamageInfo(player, damage, DamageType.HP_LOSS), AbstractGameAction.AttackEffect.SMASH));
+        addToBot(new DamageAction(monster, new DamageInfo(player, damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
     }
 
 }

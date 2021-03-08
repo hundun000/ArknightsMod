@@ -25,6 +25,7 @@ import arknights.ArknightsMod;
 import arknights.cards.base.ArknightsModCard;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
+import arknights.powers.SpellStrengthPower;
 import arknights.variables.ExtraVariable;
 
 /**
@@ -42,30 +43,30 @@ public class AmiyaChimera extends ArknightsModCard {
     
     
 
-    private static final CardRarity RARITY = CardRarity.RARE;
+    private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ENEMY;
     private static final CardType TYPE = CardType.ATTACK;
 
-    private static final int COST = 3;
+    private static final int COST = 2;
 
     
     public AmiyaChimera() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(6)
-                .setMagicNumber(5)
-                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 4)
+                .setDamage(10)
+                .setMagicNumber(4)
+                .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 3)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusMagicNumber(1)
-                .setPlusExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 3)
+                .setPlusDamage(3)
+                .setPlusMagicNumber(2)
                 );
         this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new ApplyPowerAction(player, player, new StrengthPower(player,this.magicNumber), this.magicNumber));
+        addToBot(new ApplyPowerAction(player, player, new SpellStrengthPower(player, player, this.magicNumber)));
         addToBot(new ApplyPowerAction(player, player, new EndTurnDeathPower(player)));
         for (int i = 0; i < getExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX); i++) {
             addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));

@@ -31,18 +31,18 @@ public class PopukarStrike extends ArknightsModCard {
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     
     public PopukarStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
-                .setBlock(2)
-                .setMagicNumber(3)
+                .setDamage(8)
+                .setBlock(3)
+                .setMagicNumber(4)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusBlock(1)
+                .setPlusDamage(4)
+                .setPlusMagicNumber(2)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
         this.isMultiDamage = true;
@@ -59,7 +59,7 @@ public class PopukarStrike extends ArknightsModCard {
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new GainBlockAction(player, player, block));
-        addToBot(new DamageAllEnemiesAction(player, damage, damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
+        addToBot(new DamageAllEnemiesAction(player, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
         
         handleSpAfterUse();
     }

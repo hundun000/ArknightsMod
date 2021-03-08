@@ -31,20 +31,19 @@ public class SpotDefend extends ArknightsModCard {
     private static final CardTarget TARGET = CardTarget.SELF;  
     private static final CardType TYPE = CardType.SKILL;       
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     
     public SpotDefend() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setBlock(8)
-                .setRegainBlock(5)
+                .setBlock(15)
+                .setRegainBlock(10)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusBlock(3)
+                .setPlusBlock(5)
+                .setPlusRegainBlock(5)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
-        
-        initializeDescription();
     }
 
     
@@ -73,22 +72,6 @@ public class SpotDefend extends ArknightsModCard {
         return isSpCountReachThreshold();
     }
     
-    @Override
-    public void applyPowers() {
-        super.applyPowers();
-        StringBuilder before = new StringBuilder();
-        ArknightsMod.logger.info("before this.cardStrings.DESCRIPTION = {}", this.cardStrings.DESCRIPTION);
-        ArknightsMod.logger.info("before this.rawDescription = {}", this.rawDescription);
-        this.description.forEach(item -> before.append(item.text));
-        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_SP_HINT_AND_REGAIN_BLOCK_HINT);
-        StringBuilder after = new StringBuilder();
-        this.description.forEach(item -> after.append(item.text));
-        ArknightsMod.logger.info("{} description init.", this.toIdString());
-        ArknightsMod.logger.info("from = {}", before.toString());
-        ArknightsMod.logger.info("to = {}", after.toString());
-        ArknightsMod.logger.info("after this.cardStrings.DESCRIPTION = {}", this.cardStrings.DESCRIPTION);
-        ArknightsMod.logger.info("after this.rawDescription = {}", this.rawDescription);
-    }
    
     @Override
     public void onMoveToDiscard() {

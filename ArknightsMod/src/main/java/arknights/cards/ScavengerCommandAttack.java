@@ -44,13 +44,13 @@ public class ScavengerCommandAttack extends ArknightsModCard {
     public ScavengerCommandAttack() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(6)
-                .setMagicNumber(3)
+                .setDamage(8)
+                .setMagicNumber(4)
                 .setExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX, 4)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusMagicNumber(1)
+                .setPlusDamage(4)
+                .setPlusMagicNumber(2)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
     }
@@ -68,12 +68,21 @@ public class ScavengerCommandAttack extends ArknightsModCard {
         updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE_AND_SP_HINT);
     }
 
+    
+    @Override
+    protected boolean needSetBorderOnGlow() {
+       return hasBonus() || super.needSetBorderOnGlow();
+    }
+    
+    protected boolean hasBonus() {
+        return AbstractDungeon.actionManager.cardsPlayedThisTurn.size() - 1 < getExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX);
+     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         addToBot(new DamageAction(monster, new DamageInfo(player, damage, damageTypeForTurn)));
-        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() - 1 < getExtraMagicNumber(ExtraVariable.GENERAL_2nd_MAGIC_NUMBER_INDEX)) {
-            addToTop((AbstractGameAction)new DrawCardAction((AbstractCreature)AbstractDungeon.player, 1));
+        if (hasBonus()) {
+            addToTop(new DrawCardAction(AbstractDungeon.player, 1));
         }
         if (isSpCountReachThreshold()) {
             addToBot(new GainEnergyAction(1));

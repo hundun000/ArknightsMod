@@ -18,7 +18,7 @@ public class Castle3Strike extends SimpleStrike {
     public Castle3Strike() {
         super(ID, IMG, CardRarity.BASIC, 0);
         initBaseFields(new BasicSetting()
-                .setDamage(4)
+                .setDamage(3)
                 .setBlock(2)
                 );
         setUpgradeInfo(new UpgradeSetting()

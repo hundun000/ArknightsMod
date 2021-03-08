@@ -37,12 +37,12 @@ public class VignaHammerOn extends ArknightsModCard {
 	public VignaHammerOn() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(6)
+                .setDamage(8)
                 .setMagicNumber(6)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusMagicNumber(3)
+                .setPlusDamage(4)
+                .setPlusMagicNumber(2)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
     }
@@ -51,9 +51,9 @@ public class VignaHammerOn extends ArknightsModCard {
 
 	@Override
 	public void use(AbstractPlayer player, AbstractMonster monster) {
-	    addToBot((AbstractGameAction)new VFXAction(new WeightyImpactEffect(monster.hb.cX, monster.hb.cY)));
-	    addToBot((AbstractGameAction)new WaitAction(0.8F));
-	    addToBot((AbstractGameAction)new SunderAction(monster, new DamageInfo(player, this.damage, this.damageTypeForTurn), 1));
+	    addToBot(new VFXAction(new WeightyImpactEffect(monster.hb.cX, monster.hb.cY)));
+	    addToBot(new WaitAction(0.8F));
+	    addToBot(new SunderAction(monster, new DamageInfo(player, this.damage, this.damageTypeForTurn), 1));
 	}
 	
 	@Override

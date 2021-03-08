@@ -80,7 +80,7 @@ import java.util.Properties;
  * And pls. Read the comments.
  */
 
-@SpireInitializer
+
 public class ArknightsMod implements
         EditCardsSubscriber,
         EditRelicsSubscriber,
@@ -102,6 +102,8 @@ public class ArknightsMod implements
     private static final String MODNAME = "Arknights";
     private static final String AUTHOR = "hundun"; // And pretty soon - You!
     private static final String DESCRIPTION = "A base for Slay the Spire to start your own mod from, feat. the Default.";
+    
+    public static final boolean DEBUG_DESCROPTION = false;
     
     // =============== INPUT TEXTURE LOCATION =================
     
@@ -317,19 +319,7 @@ public class ArknightsMod implements
     }// NO
     
     // ====== YOU CAN EDIT AGAIN ======
-    
-    
-    public static void initialize() {
-        logger.info("========================= Initializing Default Mod. Hi. =========================");
-        ArknightsMod mod = new ArknightsMod();
-        mod.subscribeToMainGame();
-        logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
-    }
-    
-    // ============== /SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE/ =================
-    
-    
-    // =============== LOAD THE CHARACTER =================
+
     
     @Override
     public void receiveEditCharacters() {
@@ -596,7 +586,7 @@ public class ArknightsMod implements
         
         if (keywords != null) {
             for (Keyword keyword : keywords) {
-                BaseMod.addKeyword(keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword(getModID().toLowerCase(), keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
                 //  getModID().toLowerCase() makes your keyword mod specific (it won't show up in other cards that use that word)
             }
             logger.info("load {} keywords.", keywords.length);

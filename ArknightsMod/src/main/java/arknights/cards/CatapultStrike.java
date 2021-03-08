@@ -33,25 +33,23 @@ public class CatapultStrike extends ArknightsModCard {
     private static final CardTarget TARGET = CardTarget.ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
-    private static final int COST = 0;
+    private static final int COST = 2;
 
     
     public CatapultStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
-                .setMagicNumber(75)
+                .setDamage(10)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(3)
-                .setPlusMagicNumber(25)
+                .setPlusDamage(5)
                 );
         this.isMultiDamage = true;
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
-        addToBot(new BlastDamageAllEnemiesAction(player, monster, magicNumber/100.0, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        addToBot(new BlastDamageAllEnemiesAction(player, monster, multiDamage, damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
     }
 
 }

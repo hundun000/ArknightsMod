@@ -29,31 +29,30 @@ public class AmiyaSpiritBurst extends ArknightsModCard {
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
     private static final CardRarity RARITY = CardRarity.SPECIAL; 
-    private static final CardTarget TARGET = CardTarget.ENEMY;  
+    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
-    private static final int COST = 0;
+    private static final int COST = 2;
 
     
     public AmiyaSpiritBurst() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(5)
+                .setDamage(3)
                 .setMagicNumber(6)
-                .setDamageType(SPELL_DAMAGE_TYPE)
+                .enableSpellDamageType()
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(2)
+                .setPlusMagicNumber(2)
                 );
-        this.tags.add(ArknightsCardTag.SPELL_DAMAGE);
     }
 
     @Override
     public void use(AbstractPlayer player, AbstractMonster monster) {
         for (int i = 0; i < this.magicNumber; i++) {
-            addToBot((AbstractGameAction)new AttackDamageRandomEnemyAction(this, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+            addToBot(new AttackDamageRandomEnemyAction(this, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         }
-        addToBot((AbstractGameAction)new PressEndTurnButtonAction());
+        addToBot(new PressEndTurnButtonAction());
     }
 
 

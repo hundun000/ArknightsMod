@@ -1,8 +1,11 @@
 package arknights.manager;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import arknights.ArknightsMod;
+import basemod.BaseMod;
+import basemod.interfaces.OnStartBattleSubscriber;
 
 /**
  * @author hundun
@@ -13,7 +16,8 @@ public class MoreGameActionManager {
     private static int regainBlockThisCombat = -1;
     
     private static int numBlockLastTurnEnd = -1;
-
+    
+    
     public static void countRegainBlock(int amount) {
         regainBlockThisTurn += amount;
         regainBlockThisCombat += amount;
@@ -38,4 +42,5 @@ public class MoreGameActionManager {
         int currentRegainAmountLimit = Math.max(0, MoreGameActionManager.numBlockLastTurnEnd - MoreGameActionManager.regainBlockThisTurn);
         return currentRegainAmountLimit;
     }
+
 }

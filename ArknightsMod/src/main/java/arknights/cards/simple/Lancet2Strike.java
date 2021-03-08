@@ -21,7 +21,7 @@ public class Lancet2Strike extends SimpleRegainBlock {
                 .setRegainBlock(8)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusRegainBlock(3)
+                .setPlusRegainBlock(4)
                 );
         this.exhaust = true;
     }

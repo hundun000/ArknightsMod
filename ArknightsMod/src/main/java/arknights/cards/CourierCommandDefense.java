@@ -49,6 +49,7 @@ public class CourierCommandDefense extends ArknightsModCard {
                 );
         setUpgradeInfo(new UpgradeSetting()
                 .setPlusBlock(3)
+                .setPlusMagicNumber(1)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
     }
@@ -79,5 +80,13 @@ public class CourierCommandDefense extends ArknightsModCard {
         }
     }
 
+    @Override
+    public void calculateCardDamage(AbstractMonster arg0) {
+        if (isSpCountReachThreshold()) {
+            calculateCardDamage(arg0, magicNumber);
+        } else {
+            super.calculateCardDamage(arg0);
+        }
+    }
 
 }

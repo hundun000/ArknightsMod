@@ -17,19 +17,19 @@ import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
 import arknights.variables.ExtraVariable;
 
-public class AmiyaStrike extends ArknightsModCard {
+public class StewardStrike extends ArknightsModCard {
 	
-	public static final String ID = ArknightsMod.makeID(AmiyaStrike.class); 
+	public static final String ID = ArknightsMod.makeID(StewardStrike.class); 
     public static final String IMG = ArknightsMod.makeCardPngPath(ArknightsModCard.class);
 
-    private static final CardRarity RARITY = CardRarity.SPECIAL; 
+    private static final CardRarity RARITY = CardRarity.COMMON; 
     private static final CardTarget TARGET = CardTarget.ENEMY;  
     private static final CardType TYPE = CardType.ATTACK;       
 
     private static final int COST = 2;
 	
 	
-	public AmiyaStrike() {
+	public StewardStrike() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
                 .setDamage(12)

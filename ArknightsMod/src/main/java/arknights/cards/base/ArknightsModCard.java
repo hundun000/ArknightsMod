@@ -28,9 +28,12 @@ import arknights.characters.ArknightsPlayer;
 import arknights.manager.MoreGameActionManager;
 import arknights.powers.IModifyRegainBlockPower;
 import arknights.util.LocalizationUtils;
+import arknights.util.Utils;
 import arknights.variables.ExtraVariable;
 
 public abstract class ArknightsModCard extends CustomCard {
+    
+    
 	protected final static DamageType SPELL_DAMAGE_TYPE = DamageType.HP_LOSS;
 	
 	private static final CardStrings PUBLIC_CARDSTRINGS = CardCrawlGame.languagePack.getCardStrings(ArknightsMod.makeID(ArknightsModCard.class));
@@ -164,9 +167,10 @@ public abstract class ArknightsModCard extends CustomCard {
             this.baseRegainBlock = basicSetting.getRegainBlock();
             this.regainBlock = this.baseRegainBlock;
         }
-        if (basicSetting.getDamageType() != null) {
-            this.damageType = basicSetting.getDamageType();
+        if (basicSetting.isSpellDamageType()) {
+            this.damageType = SPELL_DAMAGE_TYPE;
             this.damageTypeForTurn = damageType;
+            this.tags.add(ArknightsCardTag.SPELL_DAMAGE);
         }
         for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
             if (basicSetting.getExtraMagicNumber(i) != null) {
@@ -309,6 +313,16 @@ public abstract class ArknightsModCard extends CustomCard {
         
     }
     
+    @Override
+    protected void applyPowersToBlock() {
+        super.applyPowersToBlock();
+        
+        // update currentRegainAmount
+        currentRegainBlockAmountLimit = MoreGameActionManager.getCurrentRegainBlockAmountLimit();
+        applyPowersToRegainBlock();
+    }
+
+    
     protected void applyPowersToRegainBlock() {
         this.regainBlockModified = false;
         float tmp = this.baseRegainBlock;
@@ -420,7 +434,7 @@ public abstract class ArknightsModCard extends CustomCard {
     public AbstractCard makeCopy() {
         ArknightsModCard copy = (ArknightsModCard)super.makeCopy();
         copy.customPostMakeCopy(this);
-        ArknightsMod.logger.info("{} makeCopy {}. copy.descriptionToString = {}", this.toIdString(), copy.toIdString(), descriptionToString(copy.description));
+        ArknightsMod.logger.info("{} makeCopy {}. caller = {}", this.toIdString(), copy.toIdString(), Utils.getCallerInfo());
         return copy;
     }
     
@@ -484,16 +498,16 @@ public abstract class ArknightsModCard extends CustomCard {
         this.rawDescription = newRawDescription;
         this.initializeDescription();
         
-        ArknightsMod.logger.info("{} updateRawDescription done; \n"
+        if (ArknightsMod.DEBUG_DESCROPTION) ArknightsMod.logger.info("{} updateRawDescription done; \n"
                 + "this.rawDescription = {}; \n"
                 + "this.descriptionToString = {}; \n", this.toIdString(), this.rawDescription, descriptionToString(this.description));
     }
 
     @Override
     public void initializeDescriptionCN() {
-        ArknightsMod.logger.info("{} before initializeDescriptionCN, this.rawDescription.split(\" \") = {}", this.toIdString(), this.rawDescription.split(" "));
+        if (ArknightsMod.DEBUG_DESCROPTION) ArknightsMod.logger.info("{} before initializeDescriptionCN, this.rawDescription.split(\" \") = {}", this.toIdString(), this.rawDescription.split(" "));
         super.initializeDescriptionCN();
-        ArknightsMod.logger.info("{} after initializeDescriptionCN, his.descriptionToString = {}", this.toIdString(), descriptionToString(this.description));
+        if (ArknightsMod.DEBUG_DESCROPTION) ArknightsMod.logger.info("{} after initializeDescriptionCN, his.descriptionToString = {}", this.toIdString(), descriptionToString(this.description));
     }
     
     
@@ -508,7 +522,7 @@ public abstract class ArknightsModCard extends CustomCard {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < description.size(); i++) {
             DescriptionLine line = description.get(i);
-            builder.append("line").append(i).append(":").append(Arrays.toString(line.getCachedTokenizedTextCN())).append("     ");
+            builder.append("line").append(i).append(":").append(Arrays.toString(line.getCachedTokenizedTextCN())).append("\n");
         }
         return builder.toString();
     }

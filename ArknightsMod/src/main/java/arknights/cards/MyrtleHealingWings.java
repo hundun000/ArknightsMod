@@ -42,11 +42,12 @@ public class MyrtleHealingWings extends ArknightsModCard {
     public MyrtleHealingWings() {
         super(ID, IMG, COST, TYPE, RARITY, TARGET);
         initBaseFields(new BasicSetting()
-                .setDamage(3)
-                .setRegainBlock(3)
+                .setDamage(6)
+                .setRegainBlock(6)
                 );
         setUpgradeInfo(new UpgradeSetting()
-                .setPlusDamage(2)
+                .setPlusDamage(3)
+                .setPlusRegainBlock(3)
                 );
         initSpThreshold(4, GainSpType.ON_DRAWN);
     }
