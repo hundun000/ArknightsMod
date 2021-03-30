@@ -1,20 +1,29 @@
 package arknights.cards.base;
 import basemod.AutoAdd;
+import basemod.ReflectionHacks;
 import basemod.abstracts.CustomCard;
 
 import static com.megacrit.cardcrawl.core.CardCrawlGame.languagePack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo.DamageType;
 import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -41,6 +50,7 @@ public abstract class ArknightsModCard extends CustomCard {
     private static final String RAW_REGAIN_BLOCK_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[1];
     private static final String RAW_USE_TIMES_HINT = PUBLIC_CARDSTRINGS.EXTENDED_DESCRIPTION[2];
     
+    public static final Color SP_TEXT_COLOR = new Color(0x0BFB7CFF);
     
     private static final String RAW_SP_HINT_PLACEHOLDER = "{SPC_HINT}";
     private static final String RAW_REGAIN_BLOCK_HINT_PLACEHOLDER = "{RB_HINT}";
@@ -72,7 +82,7 @@ public abstract class ArknightsModCard extends CustomCard {
     private boolean firstTimeDrawn = true;   
     
     protected int useTimes;
-    
+    public List<AbstractCard> moreCardsToPreview = new ArrayList<>();
     
     protected GainSpType gainSpType;
     
@@ -529,7 +539,89 @@ public abstract class ArknightsModCard extends CustomCard {
 
 
     
+    private Color hbTextColor = new Color(1.0F, 1.0F, 1.0F, 0.0F);
+    
+    /**
+     * call by patch
+     * @param sb
+     */
+    public void renderSp(SpriteBatch sb) {
+        boolean darken = (boolean) ReflectionHacks.getPrivate(this, AbstractCard.class, "darken");
+        if (this.spThreshold > 0 && !darken && !this.isLocked && this.isSeen) {
+            
+            Color spColor = SP_TEXT_COLOR; 
+            spColor.a = this.transparency;
+            String text = "";
+            TextureRegion gainSpTypeIcon = null;
+            
+            if (this.gainSpType == GainSpType.ON_USE) {
+                text = "U ";
+                gainSpTypeIcon = ArknightsMod.GAIN_SP_ON_USE_ATLAS;
+                
+            } else if (this.gainSpType == GainSpType.ON_DRAWN) {
+                text = "D ";
+                gainSpTypeIcon = ArknightsMod.GAIN_SP_ON_DRAW_ATLAS;
+            }
+            if (gainSpTypeIcon != null) {
+                sb.setColor(hbTextColor);
+                sb.draw(this.img, x - 12.0F, y - 12.0F, 16.0F, 16.0F, 32.0F, 32.0F, Settings.scale * 1.5F, Settings.scale * 1.5F, 0.0F, 0, 0, 32, 32, false, false);
+            }
+            
+            if (this.rawDescriptionState.hasSpHint) {
+                text += this.spCount + "/" + this.spThreshold;
+            } else {
+                text += "" + this.spThreshold;
+            }
+            if (text.length() > 0) {
+                BitmapFont font = this.getSpFont();
+                FontHelper.renderRotatedText(sb, font, text, this.current_x, this.current_y, 125.0F * this.drawScale * Settings.scale, 180.0F * this.drawScale * Settings.scale, this.angle, false, spColor);
+            }
+        }
+    }
+    
+    private BitmapFont getSpFont() {
+        FontHelper.cardEnergyFont_L.getData().setScale(this.drawScale*8/7);
+        return FontHelper.cardEnergyFont_L;
+    }
     
     
+    @Override
+    public void renderCardPreview(SpriteBatch sb) {
+        super.renderCardPreview(sb);
+        
+        if (AbstractDungeon.player != null && AbstractDungeon.player.isDraggingCard) {
+            return;
+        }
+        renderMoreCardPreviews(sb);
+        ArknightsMod.logger.info("render by Preview: {}", this.toString());
+    }
+    
+    protected void renderMoreCardPreviews(SpriteBatch sb) {
+        for (int i = 0; i < moreCardsToPreview.size(); i++) {
+            AbstractCard cardToPreview = moreCardsToPreview.get(i);
+            cardToPreview.current_x = (this.current_x - (0 + 1) * RAW_W) * Settings.scale;
+            cardToPreview.current_y = (this.current_y + (i + 1) * RAW_H) * Settings.scale;
+            cardToPreview.drawScale = 0.8F;
+            cardToPreview.render(sb);
+        }
+    }
+    
+    @Override
+    public void renderCardPreviewInSingleView(SpriteBatch sb) {
+        super.renderCardPreviewInSingleView(sb);
+        renderMoreCardPreviewsInSingleView(sb);
+    }
+    
+    protected void renderMoreCardPreviewsInSingleView(SpriteBatch sb) {
+        ArknightsMod.logger.info("render by SingleView: {}", this.toString());
+        for (int i = 0; i < moreCardsToPreview.size(); i++) {
+            AbstractCard cardToPreview = moreCardsToPreview.get(i);
+            
+            cardToPreview.current_x = (1435.0F + (-1 + 1) * RAW_W) * Settings.scale;
+            cardToPreview.current_y = (795.0F + (i + 1) * RAW_H) * Settings.scale;
+            cardToPreview.drawScale = 0.8F;
+            cardToPreview.render(sb);
+        }
+    }
 
 }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -16,6 +19,7 @@ import com.megacrit.cardcrawl.dungeons.Exordium;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
@@ -93,17 +97,26 @@ public class ArknightsMod implements
     public static final Logger logger = LogManager.getLogger(ArknightsMod.class.getName());
     private static String modID = "arknights";
 
-    // Mod-settings settings. This is if you want an on/off savable button
-    public static Properties theDefaultDefaultSettings = new Properties();
-    public static final String ENABLE_PLACEHOLDER_SETTINGS = "enablePlaceholder";
-    public static boolean enablePlaceholder = true; // The boolean we'll be setting on/off (true/false)
-
+    
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Arknights";
     private static final String AUTHOR = "hundun"; // And pretty soon - You!
     private static final String DESCRIPTION = "A base for Slay the Spire to start your own mod from, feat. the Default.";
     
+    
+ // Mod-settings settings. This is if you want an on/off savable button
+    public static Properties defaultCustomSettings = new Properties();
+    public static final String CUSTOM_SETTINGS_FILE_NAME = MODNAME + "Config";
+    public static final String ENABLE_PLACEHOLDER_SETTINGS = "enablePlaceholder";
+    public static boolean enablePlaceholder = true; // The boolean we'll be setting on/off (true/false)
+
+    
+    
     public static final boolean DEBUG_DESCROPTION = false;
+    
+    static {
+        defaultCustomSettings.setProperty(ENABLE_PLACEHOLDER_SETTINGS, "FALSE");
+    }
     
     // =============== INPUT TEXTURE LOCATION =================
     
@@ -129,9 +142,9 @@ public class ArknightsMod implements
     public static final String IMAGES_FOLDER = RESOURCES_FOLDER + "/images";
     public static final String LOCALIZATION_FOLDER = RESOURCES_FOLDER + "/localization";
     
-    private static final String ATTACK_DEFAULT_GRAY = IMAGES_FOLDER + "/512/bg_attack_default_gray.png";
-    private static final String SKILL_DEFAULT_GRAY = IMAGES_FOLDER + "/512/bg_skill_default_gray.png";
-    private static final String POWER_DEFAULT_GRAY = IMAGES_FOLDER + "/512/bg_power_default_gray.png";
+    private static final String ATTACK_DEFAULT_BG_IMAGE = IMAGES_FOLDER + "/512/bg_attack_default_gray.png";
+    private static final String SKILL_DEFAULT_BG_IMAGE = IMAGES_FOLDER + "/512/bg_skill_default_gray.png";
+    private static final String POWER_DEFAULT_BG_IMAGE = IMAGES_FOLDER + "/512/bg_power_default_gray.png";
     
     private static final String ENERGY_ORB_DEFAULT_GRAY = IMAGES_FOLDER + "/512/card_default_gray_orb.png";
     private static final String CARD_ENERGY_ORB = IMAGES_FOLDER + "/512/card_small_orb.png";
@@ -141,6 +154,17 @@ public class ArknightsMod implements
     private static final String POWER_DEFAULT_GRAY_PORTRAIT = IMAGES_FOLDER + "/1024/bg_power_default_gray.png";
     private static final String ENERGY_ORB_DEFAULT_GRAY_PORTRAIT = IMAGES_FOLDER + "/1024/card_default_gray_orb.png";
     
+    private static final String OPERTOR_3_STAR_BG_IMAGE = IMAGES_FOLDER + "/512/operator/bg_operator_3_star.png";
+    private static final String OPERTOR_4_STAR_BG_IMAGE = IMAGES_FOLDER + "/512/operator/bg_operator_4_star.png";
+    private static final String OPERTOR_5_STAR_BG_IMAGE = IMAGES_FOLDER + "/512/operator/bg_operator_5_star.png";
+    
+    public static final String GAIN_SP_ON_USE_ICON_PATH = IMAGES_FOLDER + "sp/gain_sp_on_use.png"; 
+    public static final String GAIN_SP_ON_DRAW_ICON_PATH = IMAGES_FOLDER + "sp/gain_sp_on_draw.png"; 
+
+    public static Texture GAIN_SP_ON_USE_TEXTURE;
+    public static Texture GAIN_SP_ON_DRAW_TEXTURE;
+    public static AtlasRegion GAIN_SP_ON_USE_ATLAS;
+    public static AtlasRegion GAIN_SP_ON_DRAW_ATLAS;
     // Character assets
     private static final String THE_DEFAULT_BUTTON = IMAGES_FOLDER + "/charSelect/DefaultCharacterButton.png";
     private static final String THE_DEFAULT_PORTRAIT = IMAGES_FOLDER + "/charSelect/DefaultCharacterPortraitBG.png";
@@ -244,29 +268,38 @@ public class ArknightsMod implements
         
         logger.info("Done subscribing");
         
-        logger.info("Creating the color " + ArknightsPlayer.Enums.ARKNIGHTS_CARD_COLOR.toString());
+        logger.info("Creating the colors");
+        
         BaseMod.addColor(ArknightsPlayer.Enums.ARKNIGHTS_CARD_COLOR, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
                 DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY, DEFAULT_GRAY,
-                ATTACK_DEFAULT_GRAY, SKILL_DEFAULT_GRAY, POWER_DEFAULT_GRAY, ENERGY_ORB_DEFAULT_GRAY,
+                ATTACK_DEFAULT_BG_IMAGE, SKILL_DEFAULT_BG_IMAGE, POWER_DEFAULT_BG_IMAGE, ENERGY_ORB_DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
                 ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
         
-        logger.info("Creating the color " + ArknightsPlayer.Enums.ARKNIGHTS_CARD_COLOR.toString());
-        BaseMod.addColor(ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, STARLIGHT, STARLIGHT, STARLIGHT,
+        BaseMod.addColor(ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_3_STAR_CARD_COLOR, STARLIGHT, STARLIGHT, STARLIGHT,
                 STARLIGHT, STARLIGHT, STARLIGHT, STARLIGHT,
-                ATTACK_DEFAULT_GRAY, SKILL_DEFAULT_GRAY, POWER_DEFAULT_GRAY, ENERGY_ORB_DEFAULT_GRAY,
+                OPERTOR_3_STAR_BG_IMAGE, OPERTOR_3_STAR_BG_IMAGE, OPERTOR_3_STAR_BG_IMAGE, ENERGY_ORB_DEFAULT_GRAY,
                 ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
                 ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
-        
+        BaseMod.addColor(ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_4_STAR_CARD_COLOR, STARLIGHT, STARLIGHT, STARLIGHT,
+                STARLIGHT, STARLIGHT, STARLIGHT, STARLIGHT,
+                OPERTOR_4_STAR_BG_IMAGE, OPERTOR_4_STAR_BG_IMAGE, OPERTOR_4_STAR_BG_IMAGE, ENERGY_ORB_DEFAULT_GRAY,
+                ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
+                ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
+        BaseMod.addColor(ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_5_STAR_CARD_COLOR, STARLIGHT, STARLIGHT, STARLIGHT,
+                STARLIGHT, STARLIGHT, STARLIGHT, STARLIGHT,
+                OPERTOR_5_STAR_BG_IMAGE, OPERTOR_5_STAR_BG_IMAGE, OPERTOR_5_STAR_BG_IMAGE, ENERGY_ORB_DEFAULT_GRAY,
+                ATTACK_DEFAULT_GRAY_PORTRAIT, SKILL_DEFAULT_GRAY_PORTRAIT, POWER_DEFAULT_GRAY_PORTRAIT,
+                ENERGY_ORB_DEFAULT_GRAY_PORTRAIT, CARD_ENERGY_ORB);
         logger.info("Done creating the color");
         
         
         logger.info("Adding mod settings");
         // This loads the mod settings.
         // The actual mod Button is added below in receivePostInitialize()
-        theDefaultDefaultSettings.setProperty(ENABLE_PLACEHOLDER_SETTINGS, "FALSE"); // This is the default setting. It's actually set...
+         // This is the default setting. It's actually set...
         try {
-            SpireConfig config = new SpireConfig(MODNAME, MODNAME + "Config", theDefaultDefaultSettings); // ...right here
+            SpireConfig config = new SpireConfig(MODNAME, CUSTOM_SETTINGS_FILE_NAME, defaultCustomSettings); // ...right here
             // the "fileName" parameter is the name of the file MTS will create where it will save our setting.
             config.load(); // Load the setting and set the boolean to equal it
             enablePlaceholder = config.getBool(ENABLE_PLACEHOLDER_SETTINGS);
@@ -275,6 +308,11 @@ public class ArknightsMod implements
         }
         logger.info("Done adding mod settings");
         
+        
+        GAIN_SP_ON_DRAW_TEXTURE = TextureLoader.getTexture(GAIN_SP_ON_DRAW_ICON_PATH);
+        GAIN_SP_ON_USE_TEXTURE = TextureLoader.getTexture(GAIN_SP_ON_USE_ICON_PATH);
+        GAIN_SP_ON_DRAW_ATLAS = new TextureAtlas.AtlasRegion(GAIN_SP_ON_DRAW_TEXTURE, 0, 0, 32, 32);
+        GAIN_SP_ON_USE_ATLAS = new TextureAtlas.AtlasRegion(GAIN_SP_ON_USE_TEXTURE, 0, 0, 32, 32);
     }
     
     // ====== NO EDIT AREA ======
@@ -348,7 +386,7 @@ public class ArknightsMod implements
         ModPanel settingsPanel = new ModPanel();
         
         // Create the on/off button:
-        ModLabeledToggleButton enableNormalsButton = new ModLabeledToggleButton("This is the text which goes next to the checkbox.",
+        ModLabeledToggleButton enableNormalsButton = new ModLabeledToggleButton("save custom settings",
                 350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont, // Position (trial and error it), color, font
                 enablePlaceholder, // Boolean it uses
                 settingsPanel, // The mod panel in which this button will be in
@@ -358,7 +396,7 @@ public class ArknightsMod implements
             enablePlaceholder = button.enabled; // The boolean true/false will be whether the button is enabled or not
             try {
                 // And based on that boolean, set the settings and save them
-                SpireConfig config = new SpireConfig("defaultMod", "theDefaultConfig", theDefaultDefaultSettings);
+                SpireConfig config = new SpireConfig(MODNAME, CUSTOM_SETTINGS_FILE_NAME, defaultCustomSettings);
                 config.setBool(ENABLE_PLACEHOLDER_SETTINGS, enablePlaceholder);
                 config.save();
             } catch (Exception e) {

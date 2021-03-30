@@ -57,15 +57,23 @@ public abstract class ArknightsPlayer extends CustomPlayer {
         public static AbstractPlayer.PlayerClass ARKNIGHTS_PLAYER_CLASS;
         @SpireEnum(name = "ARKNIGHTS_CARD_COLOR")
         public static AbstractCard.CardColor ARKNIGHTS_CARD_COLOR;
-        @SpireEnum(name = "ARKNIGHTS_OPERATOR_CARD_COLOR")
-        public static AbstractCard.CardColor ARKNIGHTS_OPERATOR_CARD_COLOR;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_3_STAR_CARD_COLOR")
+        public static AbstractCard.CardColor ARKNIGHTS_OPERATOR_3_STAR_CARD_COLOR;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_4_STAR_CARD_COLOR")
+        public static AbstractCard.CardColor ARKNIGHTS_OPERATOR_4_STAR_CARD_COLOR;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_5_STAR_CARD_COLOR")
+        public static AbstractCard.CardColor ARKNIGHTS_OPERATOR_5_STAR_CARD_COLOR;
     }
     
     public static class LibraryTypeEnums {
         @SpireEnum(name = "ARKNIGHTS_CARD_COLOR")  
         public static CardLibrary.LibraryType ARKNIGHTS_CARD_LIBRARY_TYPE;
-        @SpireEnum(name = "ARKNIGHTS_OPERATOR_CARD_COLOR")  
-        public static CardLibrary.LibraryType ARKNIGHTS_OPERATOR_CARD_LIBRARY_TYPE;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_3_STAR_CARD_COLOR")  
+        public static CardLibrary.LibraryType ARKNIGHTS_OPERATOR_3_STAR_CARD_LIBRARY_TYPE;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_4_STAR_CARD_COLOR")  
+        public static CardLibrary.LibraryType ARKNIGHTS_OPERATOR_4_STAR_CARD_LIBRARY_TYPE;
+        @SpireEnum(name = "ARKNIGHTS_OPERATOR_5_STAR_CARD_COLOR")  
+        public static CardLibrary.LibraryType ARKNIGHTS_OPERATOR_5_STAR_CARD_LIBRARY_TYPE;
     }
     
     public static final Color MOVING_CARDS_TRAIL_COLOR = ArknightsMod.DEFAULT_GRAY;

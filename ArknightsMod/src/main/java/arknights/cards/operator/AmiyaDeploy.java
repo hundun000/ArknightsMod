@@ -24,7 +24,7 @@ public class AmiyaDeploy extends BaseDeployCard {
     public AmiyaDeploy() { 
         super(ID, IMG);
         initGiveCardsSetting(Arrays.asList(new AmiyaStrike(), new AmiyaSpiritBurst(), new AmiyaChimera()));
-        
+        initStar(5);
     }
     
     @Override

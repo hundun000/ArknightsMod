@@ -46,11 +46,5 @@ public abstract class SimpleRegainBlock extends ArknightsModCard {
         super.triggerWhenFirstTimeDrawn();
     }
 
-   
-    public void onMoveToDiscard() {
-        super.onMoveToDiscard();
-        
-        updateRawDescriptionByStateAndInitializeDescription(RawDescriptionState.BASE);
-    }
 
 }

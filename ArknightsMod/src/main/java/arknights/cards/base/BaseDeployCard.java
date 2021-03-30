@@ -34,7 +34,7 @@ public abstract class BaseDeployCard extends ArknightsModCard {
     protected int timesUpgradeLimit;
     
     public BaseDeployCard(String id, String img) {
-        super(id, img, 0, CardType.SKILL, ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
+        super(id, img, 0, CardType.SKILL, ArknightsPlayer.Enums.ARKNIGHTS_CARD_COLOR, CardRarity.SPECIAL, CardTarget.NONE);
         
         this.tags.add(ArknightsCardTag.DEPLOY);
         
@@ -44,14 +44,30 @@ public abstract class BaseDeployCard extends ArknightsModCard {
         
     }
     
+    protected void initStar(int star) {
+        switch (star) {
+            case 3:
+                this.color = ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_3_STAR_CARD_COLOR;
+                break;
+            case 4:
+                this.color = ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_4_STAR_CARD_COLOR;
+                break;
+            case 5:
+                this.color = ArknightsPlayer.Enums.ARKNIGHTS_OPERATOR_5_STAR_CARD_COLOR;
+                break;
+            default:
+                break;
+        }
+    }
+    
     protected void initGiveCardsSetting(List<AbstractCard> baseGiveCards) {
-        this.baseGiveCards.clear();;
+        this.baseGiveCards.clear();
         appendGiveCardsSetting(baseGiveCards);
     }
     
     protected void appendGiveCardsSetting(List<AbstractCard> baseGiveCards) {
         this.baseGiveCards.addAll(baseGiveCards);
-        this.timesUpgradeLimit = giveCardsSizeToTimesUpgradeLimit(baseGiveCards.size());
+        this.timesUpgradeLimit = calculateUpgradeLimit(baseGiveCards.size());
         updateCurrentGiveCards();
     }
     
@@ -107,6 +123,10 @@ public abstract class BaseDeployCard extends ArknightsModCard {
             currentGiveCards.get(2).upgrade();
         }
         
+        if (currentGiveCards.size() > 0) {
+            this.cardsToPreview = baseGiveCards.get(0);
+            this.moreCardsToPreview = baseGiveCards.subList(1, baseGiveCards.size());
+        } 
     }
 
 
@@ -131,7 +151,7 @@ public abstract class BaseDeployCard extends ArknightsModCard {
 
     
     
-    private int giveCardsSizeToTimesUpgradeLimit(int giveCardsSize) {
+    private int calculateUpgradeLimit(int giveCardsSize) {
         switch (giveCardsSize) {
             case 0:
             case 1:
