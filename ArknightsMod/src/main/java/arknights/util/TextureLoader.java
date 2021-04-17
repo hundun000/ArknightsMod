@@ -23,7 +23,7 @@ public class TextureLoader {
 
     /**
      * @param textureString - String path to the texture you want to load relative to resources,
-     *                      Example: "DefaultMod.IMAGES_FOLDER + "/ui/missing_texture.png"
+     *                      Example: "DefaultMod.IMAGES_FOLDER + "/core/missing_texture.png"
      * @return <b>com.badlogic.gdx.graphics.Texture</b> - The texture from the path provided
      */
     public static Texture getTexture(final String textureString) {
@@ -32,7 +32,7 @@ public class TextureLoader {
                 loadTexture(textureString);
             } catch (GdxRuntimeException e) {
                 logger.error("Could not find texture: " + textureString);
-                return getTexture(ArknightsMod.IMAGES_FOLDER + "/ui/missing_texture.png");
+                return getTexture(ArknightsMod.IMAGES_FOLDER + "/core/missing_texture.png");
             }
         }
         return textures.get(textureString);

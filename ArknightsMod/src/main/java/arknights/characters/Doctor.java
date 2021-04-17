@@ -107,7 +107,7 @@ public class Doctor extends ArknightsPlayer implements OnStartBattleSubscriber {
                 BeehunterSoaringFists.ID, BeehunterFlexibility.ID, MousseScratch.ID, FrostleafFrostTomahawk.ID,
                 UtageDescendingStrikeEarthSplitter.ID
         };
-        String[] testing = new String[]{DobermannStarterInstructor.ID};
+        String[] testing = new String[]{DobermannStarterInstructor.ID, KroosStrike.ID, AdnachielStrike.ID};
         
         retVal.add(AmiyaDeploy.ID);
         retVal.addAll(Arrays.asList(starter));

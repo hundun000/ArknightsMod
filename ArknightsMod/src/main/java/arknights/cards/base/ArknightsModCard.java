@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -32,7 +34,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import arknights.ArknightsMod;
 import arknights.cards.base.component.BasicSetting;
 import arknights.cards.base.component.UpgradeSetting;
-import arknights.cards.operator.PromotionState;
 import arknights.characters.ArknightsPlayer;
 import arknights.manager.MoreGameActionManager;
 import arknights.powers.IModifyRegainBlockPower;
@@ -271,37 +272,39 @@ public abstract class ArknightsModCard extends CustomCard {
     
     @Override
     public void upgrade() {
-        if (!upgraded) {
-            upgradeName();
-            if (upgradeSetting.getPlusDamage() != null) {
-                upgradeDamage(upgradeSetting.getPlusDamage());
-            }
-            if (upgradeSetting.getNewCost() != null) {
-                upgradeBaseCost(upgradeSetting.getNewCost());
-            }
-            if (upgradeSetting.getPlusBlock() != null) {
-                upgradeBlock(upgradeSetting.getPlusBlock());
-            }
-            if (upgradeSetting.getPlusMagicNumber() != null) {
-                upgradeMagicNumber(upgradeSetting.getPlusMagicNumber());
-            }
-            
-            for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
-                if (upgradeSetting.getPlusExtraMagicNumber(i) != null) {
-                    upgradeExtraMagicNumber(i, upgradeSetting.getPlusExtraMagicNumber(i));
-                }
-            }
-            
-            if (cardStrings.UPGRADE_DESCRIPTION != null) {
-                this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-            }
-            
-            if (upgradeSetting.isUpgradeCardToPreview()) {
-                this.cardsToPreview.update();
-            }
-            
-            updateRawDescriptionByStateAndInitializeDescription();
+    	if (!canUpgrade()) {
+    		return;
+    	}
+    	
+        upgradeName();
+        if (upgradeSetting.getPlusDamage() != null) {
+            upgradeDamage(upgradeSetting.getPlusDamage());
         }
+        if (upgradeSetting.getNewCost() != null) {
+            upgradeBaseCost(upgradeSetting.getNewCost());
+        }
+        if (upgradeSetting.getPlusBlock() != null) {
+            upgradeBlock(upgradeSetting.getPlusBlock());
+        }
+        if (upgradeSetting.getPlusMagicNumber() != null) {
+            upgradeMagicNumber(upgradeSetting.getPlusMagicNumber());
+        }
+        
+        for (int i = 0; i < ExtraVariable.EXTRA_MAGIC_NUMBER_SIZE; i++) {
+            if (upgradeSetting.getPlusExtraMagicNumber(i) != null) {
+                upgradeExtraMagicNumber(i, upgradeSetting.getPlusExtraMagicNumber(i));
+            }
+        }
+        
+        if (cardStrings.UPGRADE_DESCRIPTION != null) {
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        }
+        
+        if (upgradeSetting.isUpgradeCardToPreview()) {
+            this.cardsToPreview.update();
+        }
+        
+        updateRawDescriptionByStateAndInitializeDescription();
     }
 
     
@@ -448,7 +451,10 @@ public abstract class ArknightsModCard extends CustomCard {
         return copy;
     }
     
-    protected void customPostMakeCopy(ArknightsModCard from) {}
+    protected void customPostMakeCopy(ArknightsModCard from) {
+    	this.spCount = from.spCount;
+    	this.spThreshold = from.spThreshold;
+    }
     
     protected void updateNameWithPromotionLevel() {
 
@@ -539,49 +545,96 @@ public abstract class ArknightsModCard extends CustomCard {
 
 
     
-    private Color hbTextColor = new Color(1.0F, 1.0F, 1.0F, 0.0F);
+    private Color renderSpGainTypeColor = Color.WHITE.cpy();
+    
     
     /**
      * call by patch
      * @param sb
      */
-    public void renderSp(SpriteBatch sb) {
+    public void renderSpForSingleCardViewPopup(SpriteBatch sb, boolean forceRender) {
         boolean darken = (boolean) ReflectionHacks.getPrivate(this, AbstractCard.class, "darken");
-        if (this.spThreshold > 0 && !darken && !this.isLocked && this.isSeen) {
-            
-            Color spColor = SP_TEXT_COLOR; 
-            spColor.a = this.transparency;
-            String text = "";
-            TextureRegion gainSpTypeIcon = null;
-            
-            if (this.gainSpType == GainSpType.ON_USE) {
-                text = "U ";
-                gainSpTypeIcon = ArknightsMod.GAIN_SP_ON_USE_ATLAS;
-                
-            } else if (this.gainSpType == GainSpType.ON_DRAWN) {
-                text = "D ";
-                gainSpTypeIcon = ArknightsMod.GAIN_SP_ON_DRAW_ATLAS;
-            }
-            if (gainSpTypeIcon != null) {
-                sb.setColor(hbTextColor);
-                sb.draw(this.img, x - 12.0F, y - 12.0F, 16.0F, 16.0F, 32.0F, 32.0F, Settings.scale * 1.5F, Settings.scale * 1.5F, 0.0F, 0, 0, 32, 32, false, false);
-            }
-            
-            if (this.rawDescriptionState.hasSpHint) {
-                text += this.spCount + "/" + this.spThreshold;
-            } else {
-                text += "" + this.spThreshold;
-            }
-            if (text.length() > 0) {
-                BitmapFont font = this.getSpFont();
-                FontHelper.renderRotatedText(sb, font, text, this.current_x, this.current_y, 125.0F * this.drawScale * Settings.scale, 180.0F * this.drawScale * Settings.scale, this.angle, false, spColor);
-            }
+        boolean renderCondition = this.spThreshold > 0 && !darken && !this.isLocked && this.isSeen;
+        if (forceRender || renderCondition) {
+        	float baseX = Settings.WIDTH / 2.0F;
+        	float baseY = Settings.HEIGHT / 2.0F;
+        	float gainSpTypeXOffset = (280.0F  - 2.0F * 32.0F) * Settings.scale;
+        	float gainSpTypeYOffset = (380.0F + 2.0F * 32.0F) * Settings.scale;
+        	float gainSpCountXOffset = (280.0F) * Settings.scale;
+        	float gainSpCountYOffset = (380.0F) * Settings.scale;
+        	float rotatedTextAngle = 0.0F;
+        	BitmapFont spTypeFont = FontHelper.SCP_cardDescFont;
+        	spTypeFont.getData().setScale(1.0F);
+        	BitmapFont spCountFont = FontHelper.SCP_cardEnergyFont;
+        	spTypeFont.getData().setScale(1.0F);
+        	float spTypeBackImageScale = 3.0F * Settings.scale;
+            renderSp(sb, baseX, baseY, gainSpTypeXOffset, gainSpTypeYOffset, rotatedTextAngle, gainSpCountXOffset, gainSpCountYOffset, spTypeFont, spCountFont, spTypeBackImageScale);
         }
     }
     
-    private BitmapFont getSpFont() {
-        FontHelper.cardEnergyFont_L.getData().setScale(this.drawScale*8/7);
-        return FontHelper.cardEnergyFont_L;
+    /**
+     * call by patch
+     * @param sb
+     */
+    public void renderSpForCard(SpriteBatch sb, boolean forceRender) {
+        boolean darken = (boolean) ReflectionHacks.getPrivate(this, AbstractCard.class, "darken");
+        boolean renderCondition = this.spThreshold > 0 && !darken && !this.isLocked && this.isSeen;
+        if (forceRender || renderCondition) {
+        	float baseX = this.current_x;
+        	float baseY = this.current_y;
+        	float gainSpTypeXOffset = (125.0F  - 32.0F) * this.drawScale * Settings.scale;
+        	float gainSpTypeYOffset = (180.0F + 32.0F) * this.drawScale * Settings.scale;
+        	float rotatedTextAngle = this.angle;
+        	float gainSpCountXOffset = (125.0F) * this.drawScale * Settings.scale;
+        	float gainSpCountYOffset = (180.0F) * this.drawScale * Settings.scale;
+        	BitmapFont spTypeFont = FontHelper.cardDescFont_N;
+        	spTypeFont.getData().setScale(this.drawScale);
+        	BitmapFont spCountFont = FontHelper.cardEnergyFont_L;
+        	spCountFont.getData().setScale(this.drawScale);
+        	float spTypeBackImageScale = 1.5F * this.drawScale * Settings.scale;
+			renderSp(sb, baseX, baseY, gainSpTypeXOffset, gainSpTypeYOffset, rotatedTextAngle, gainSpCountXOffset, gainSpCountYOffset, spTypeFont, spCountFont, spTypeBackImageScale);
+        }
+    }
+    
+    /**
+     * call by patch
+     * @param sb
+     * @param spCountFont 
+     * @param spTypeFont 
+     */
+    private void renderSp(SpriteBatch sb, float baseX, float baseY, float gainSpTypeXOffset, float gainSpTypeYOffset, float rotatedTextAngle,
+    		float gainSpCountXOffset, float gainSpCountYOffset, BitmapFont spTypeFont, BitmapFont spCountFont, float spTypeBackImageScale) {
+
+    		
+    		
+    	
+            AtlasRegion gainSpTypeIcon = null;
+            String gainSpTypeText = null;
+            if (this.gainSpType == GainSpType.ON_USE) {
+            	gainSpTypeText = "抽牌回复";
+                gainSpTypeIcon = ArknightsMod.GAIN_SP_ON_USE_ATLAS;
+                
+            } else if (this.gainSpType == GainSpType.ON_DRAWN) {
+            	gainSpTypeText = "出牌回复";
+                gainSpTypeIcon = ArknightsMod.GAIN_SP_ON_DRAW_ATLAS;
+            }
+            if (gainSpTypeIcon != null && gainSpTypeText != null) {
+            	renderHelper(sb, this.renderSpGainTypeColor, gainSpTypeIcon, baseX + gainSpTypeXOffset, baseY + gainSpTypeYOffset, spTypeBackImageScale);
+                FontHelper.renderRotatedText(sb, spTypeFont, gainSpTypeText, baseX, baseY, gainSpTypeXOffset, gainSpTypeYOffset, rotatedTextAngle, false, renderSpGainTypeColor);
+            }
+            
+            
+            Color spColor = SP_TEXT_COLOR; 
+            String spCountText = "";
+            
+            if (this.rawDescriptionState.hasSpHint) {
+                spCountText += this.spCount + "/" + this.spThreshold;
+            } else {
+                spCountText += "" + this.spThreshold;
+            }
+            if (spCountText.length() > 0) {
+                FontHelper.renderRotatedText(sb, spCountFont, spCountText, baseX, baseY, gainSpCountXOffset, gainSpCountYOffset, rotatedTextAngle, false, spColor);
+            }
     }
     
     
@@ -623,5 +676,24 @@ public abstract class ArknightsModCard extends CustomCard {
             cardToPreview.render(sb);
         }
     }
+    
+    private void renderHelper(SpriteBatch sb, Color color, TextureAtlas.AtlasRegion img, float drawX, float drawY, float scale) {
+    	/* 1427 */     sb.setColor(color);
+    	/* 1428 */     sb.draw((TextureRegion)img, drawX + img.offsetX - img.originalWidth / 2.0F, drawY + img.offsetY - img.originalHeight / 2.0F, img.originalWidth / 2.0F - img.offsetX, img.originalHeight / 2.0F - img.offsetY, img.packedWidth, img.packedHeight, scale, scale, this.angle);
+    	/*      */   }
+    
+    
+    private BitmapFont getDescFont() {
+    	/* 2554 */     BitmapFont font = null;
+    	/*      */     
+    	/* 2556 */     if (this.angle == 0.0F && this.drawScale == 1.0F) {
+    	/* 2557 */       font = FontHelper.cardDescFont_N;
+    	/*      */     } else {
+    	/* 2559 */       font = FontHelper.cardDescFont_L;
+    	/*      */     } 
+    	/*      */     
+    	/* 2562 */     font.getData().setScale(this.drawScale);
+    	/* 2563 */     return font;
+    	/*      */   }
 
 }

@@ -158,8 +158,8 @@ public class ArknightsMod implements
     private static final String OPERTOR_4_STAR_BG_IMAGE = IMAGES_FOLDER + "/512/operator/bg_operator_4_star.png";
     private static final String OPERTOR_5_STAR_BG_IMAGE = IMAGES_FOLDER + "/512/operator/bg_operator_5_star.png";
     
-    public static final String GAIN_SP_ON_USE_ICON_PATH = IMAGES_FOLDER + "sp/gain_sp_on_use.png"; 
-    public static final String GAIN_SP_ON_DRAW_ICON_PATH = IMAGES_FOLDER + "sp/gain_sp_on_draw.png"; 
+    public static final String GAIN_SP_ON_USE_ICON_PATH = IMAGES_FOLDER + "/sp/gain_sp_on_use.png"; 
+    public static final String GAIN_SP_ON_DRAW_ICON_PATH = IMAGES_FOLDER + "/sp/gain_sp_on_draw.png"; 
 
     public static Texture GAIN_SP_ON_USE_TEXTURE;
     public static Texture GAIN_SP_ON_DRAW_TEXTURE;
@@ -309,10 +309,7 @@ public class ArknightsMod implements
         logger.info("Done adding mod settings");
         
         
-        GAIN_SP_ON_DRAW_TEXTURE = TextureLoader.getTexture(GAIN_SP_ON_DRAW_ICON_PATH);
-        GAIN_SP_ON_USE_TEXTURE = TextureLoader.getTexture(GAIN_SP_ON_USE_ICON_PATH);
-        GAIN_SP_ON_DRAW_ATLAS = new TextureAtlas.AtlasRegion(GAIN_SP_ON_DRAW_TEXTURE, 0, 0, 32, 32);
-        GAIN_SP_ON_USE_ATLAS = new TextureAtlas.AtlasRegion(GAIN_SP_ON_USE_TEXTURE, 0, 0, 32, 32);
+        
     }
     
     // ====== NO EDIT AREA ======
@@ -435,6 +432,13 @@ public class ArknightsMod implements
         BaseMod.addMonsterEncounter(Exordium.ID, new MonsterInfo(Puncturer.ID + "x2", 10.0F));
         
         AbstractDungeonHelper.addOperatorCards();
+        
+        // =============== custom images =================
+        GAIN_SP_ON_DRAW_TEXTURE = TextureLoader.getTexture(GAIN_SP_ON_DRAW_ICON_PATH);
+        GAIN_SP_ON_USE_TEXTURE = TextureLoader.getTexture(GAIN_SP_ON_USE_ICON_PATH);
+        GAIN_SP_ON_DRAW_ATLAS = new TextureAtlas.AtlasRegion(GAIN_SP_ON_DRAW_TEXTURE, 0, 0, 64, 16);
+        GAIN_SP_ON_USE_ATLAS = new TextureAtlas.AtlasRegion(GAIN_SP_ON_USE_TEXTURE, 0, 0, 64, 16);
+        
         
         logger.info("Done loading badge Image and mod options");
     }

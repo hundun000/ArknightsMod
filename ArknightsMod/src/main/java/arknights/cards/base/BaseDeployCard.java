@@ -79,6 +79,10 @@ public abstract class BaseDeployCard extends ArknightsModCard {
     
     @Override
     public void upgrade() {
+    	if (!canUpgrade()) {
+    		return;
+    	}
+    	
         this.timesUpgraded++;
         ArknightsMod.logger.info("{} upgrade to timesUpgraded = {}", this.toIdString(), this.timesUpgraded);
         this.upgraded = true;
@@ -104,6 +108,7 @@ public abstract class BaseDeployCard extends ArknightsModCard {
     
     @Override
     protected void customPostMakeCopy(ArknightsModCard from) {
+    	super.customPostMakeCopy(from);
         updateForTimesUpgradedChange();
     }
     
